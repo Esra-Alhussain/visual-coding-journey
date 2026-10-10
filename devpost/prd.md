@@ -121,6 +121,10 @@ Platform remains undecided: responsive web app was recommended; Android was an e
 
 ## Playful Adventure Experience
 
+Fourth design exploration authorized 2026-10-10: immersive scene with floating readable code/guidance panels, connected skill path, concept-specific visual HUDs and reversible mini-show theater presentation. Preserve phone readability, exact error explanations, learner-authored code and existing activities. Prototype demos are labeled and do not assess code. This authorization does not select the final design or add waking/property, power-bar, shield/key or obstacle lessons.
+
+Opening direction accepted for design exploration 2026-10-10: Mochi actively welcomes and introduces programming through a short interactive demonstration before the first name/greeting mission. Clearly explain that learner-written code controls the scene. Introduction demonstrations are separate from learner code and never populate the editor. The map follows the first interaction as previously agreed. Website brand/name remains open.
+
 Approved 2026-10-08: each lesson feels like helping Mochi accomplish something through code, rather than completing a worksheet. Use small story missions such as “Mochi’s tower needs your help!” Mochi reacts expressively to actual outcomes, including funny harmless mistakes; reactions must not hide errors, misrepresent code behavior, or correct code automatically. Completed adventure-map stops visibly come to life. After passing, learners can stay and experiment with their code rather than being forced onward. The finale presents the learner-authored mini show as a showtime performance, followed by the earned level title. Exact animations, map treatment and reaction presentation belong in the key-screen design review. This is presentation supporting the existing learning journey, not additional levels or reward-unlocked reactions.
 
 ## Repeatable Code Testing

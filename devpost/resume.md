@@ -1,5 +1,19 @@
 # Resume here
 
+## Latest checkpoint — cosmic live-coding experiment, 2026-10-10
+Latest user refinement: glowing HUD headers/numbers and seamless stage/editor transition implemented via radial shading and glass edge fade; sharp central border removed.
+User requested transparent IDE with stars bleeding through. Implemented shared full-viewport star field and lower IDE/terminal opacity; retained 12px glass blur and code behavior.
+User explicitly requested a standalone HTML/CSS/vanilla JS vertical 45/55 stage/editor prototype. Added prototype-cosmic-live.html: midnight/purple cosmic stage, code-native iridescent blob design proposal, live speed gauge, frosted IDE, synchronized syntax overlay and line numbers, expandable beginner terminal. RegExp accepts numeric mochi.speed assignments 0–100 without executing code; live input updates, target-100 celebration, error preservation, reduced motion and responsive sizing included. Blank learner editor with separate example; no automatic code insertion. This requested speed/property concept and new blob appearance are experimental, not approved changes to curriculum/character/language. Other options preserved. Parser checks saved in check-cosmic-prototype.cjs; browser visual QA pending. No publishing.
+
+## Latest checkpoint — immersive fourth option, 2026-10-10
+User explicitly approved fourth immersive adventure prototype based on proposed HUD/stage/constellation/theater ideas adapted to existing activities. Added prototype-immersive-adventure.html and comparison card in prototype-options.html. Full-scene environment, floating guidance/editor panel, lesson path, identity/inventory/action-order/branch/repeat concept HUDs, expressive sample feedback and reversible theater view with replayable scripted show demo. Demo never executes/assesses learner code or claims completion. No waking/property task, power bar, shield/key inventory or obstacle curriculum added. Previous three files preserved. Scripts parse; browser visual QA pending. Next user compares fourth direction and refines/approves design; name/logo, full PRD approval and technical planning remain open. No publishing.
+
+## Latest checkpoint — three design options, 2026-10-10
+User authorized finishing the prototype review package and offering different design ideas. Open prototype-options.html to compare Mission control, Adventure trail, and Creator studio. Each contains full existing review flow plus interactive welcome/three-jump demo, working Home and a generated transparent Mochi greeting asset (mochi-transparent.png). Styles apply across all screens; same approved lessons preserved. Website name and simple typographic logo marks are proposals, not approved branding. Existing prototype remains preserved. Scripts parse and targets checked; rendered browser QA remains pending. No publishing or functional app implementation performed. Next learner reviews options and selects/refines direction. Full design/PRD not approved.
+
+## Latest design checkpoint — 2026-10-10
+User rejected the passive/childish opening and explicitly authorized an interactive coding-adventure introduction first. Updated design-prototype.html with a three-step Mochi welcome, visible illustrative loop demo with three animated jumps, clear programming purpose, first-mission entry and functional Home control. Earlier prototype preserved as design-prototype-before-welcome.html. Approved lesson order and learner-authored code remain unchanged. This demonstration does not execute learner code. Website name/logo remain open; transparent character asset still pending. Local design review only; no publishing performed. Next review this opening with learner, then refine the rest of the experience. Design and full revised PRD are not marked approved.
+
 ## Latest session checkpoint — 2026-10-07
 
 The learner ended the session to sleep. Continue tomorrow without restarting discovery.
