@@ -1,0 +1,18 @@
+const fs=require('fs'),assert=require('assert'),vm=require('vm');
+const html=fs.readFileSync(__dirname+'/prototype-cosmic-before-diorama.html','utf8');
+const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];new Function(script);
+const parser=script.slice(script.indexOf('function parse('),script.indexOf('function position('));const context={};vm.createContext(context);vm.runInContext(parser,context);
+assert.equal(context.parse('mochi.speed = 80').value,80);
+assert.equal(context.parse('mochi.speed = 100').value,100);
+assert.equal(context.parse('mochi.speed = 0').value,0);
+assert.equal(context.parse('# comment\nmochi.speed = 42.5').value,42.5);
+assert.equal(context.parse('mochi.speed = 10\nmochi.speed = 90').value,90);
+assert.ok(context.parse('mochi.speed = 101').error);
+assert.ok(context.parse('mochi.speed = "80"').error);
+assert.ok(context.parse('mochi.speed = -4').error);
+assert.ok(context.parse('mochi.speed =').pending);
+assert.ok(context.parse('mochi.sp').pending);
+assert.ok(context.parse('alert(1)').error);
+assert.equal(context.parse('').value,0);
+assert.ok(html.includes("editor.addEventListener('input',update)"));
+console.log('Script parses; 12 parser cases and live input binding checked.');

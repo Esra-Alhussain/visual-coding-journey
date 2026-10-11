@@ -80,3 +80,93 @@ Learners type all their project code themselves. Guided lessons show separate sm
 ## Latest toy update — 2026-10-08
 
 Approved toys now include ball, hoop, drum and blocks, superseding the two-toy limit. Blocks teach sequence: learner-written large → medium → small placement instructions build a tower. Exact drum mechanics and consequences for choices/list checks/final mission remain draft; preserve existing agreed checks until their affected details are reconciled. Shop-building remains after Level 1.
+
+### Design experiment update — 2026-10-11
+The learner requested a separate additive house-building diorama prototype (prototype-cosmic-live.html), covering values, lists, sequences, conditions and loops. This replaces the cosmic speed UI experiment only; it is not approval to replace the product curriculum. See design-notes.md for the render workflow and limitations. Technical spec/checklist remain pending product/design review.
+
+## Current interface revision — six house lessons, 2026-10-11
+User explicitly requested replacing the prototype interface with the six-lesson plan discussed immediately beforehand. This supersedes the experimental five-line automatic-house interface. It also proposes a new curriculum boundary relative to the older five-lesson Mochi play-space plan; do not silently treat the historical PRD as reconciled or fully approved.
+
+1. Meet my Mochi: learner-written name, greeting and supported color; completed 3D character, nameplate and greeting bubble. Tap the character/button to repeat the greeting; browser speech is attempted when available.
+2. Plan my Mochi’s home: choose brick/timber/stone, width 3–6 and height 2–4. Foundation scales to width and one block appears.
+3. One brick isn’t a wall: teach numeric counting and a for loop; width × height blocks stack into the first wall.
+4. Give the house its shape: a sides list and for…of count create the remaining walls; front doorway and chosen window sides leave openings.
+5. A roof over my head: variables select tiles/thatch/metal and coral/sage/cream; an if check gates the roof on four completed walls.
+6. Make it feel like home: a list selects/reorders 2–3 supported furnishings; cutaway allows inspection.
+Finale: independently build a second guest home using guest_ variables, both taught loops, a condition and a furniture list on the existing terrain. First home stays visible.
+
+Learning loop: guided reference → live authored-code result → independent variation → accomplishment/next lesson. Each lesson requires a demonstrated change after guided practice; the first also requires tapping the current greeting. Optional progressive hints do not remove completion. A natural-language chat reply is a thinking step and cannot pass a coding check. Learner code remains cumulative and is never inserted/repaired/completed by the interface.
+
+No learner-facing function calls or custom functions. Defining reusable functions/shortcuts belongs to a later level revisiting the learner’s repeated basic code. The prototype recognizes a narrow subset of JavaScript assignments, arrays, the two shown loops and the shown condition; it executes no learner code. This is not a general interpreter or completed production assessment engine.
+
+Persistent during the open page session: deleting code retains already drawn creations; valid edits can change materials, sizes and arrangements. Reload starts fresh. Browser/WebGL/internet testing remains pending; supported syntax and scene adapter tests pass. Full PRD reconciliation, technical spec and build checklist remain later work.
+
+### Latest interface constraint — frozen cosmic frame, 2026-10-11
+User directed restoring/freezing the dark cosmic frame and implementing only the first three home-building steps through JavaScript: appearance variables; one brick and interactive Mochi question; sequential lines stacking a 4 × 3 wall. This supersedes the light-diorama presentation, not automatic full approval of the earlier six-lesson product proposal. Existing CSS, stage/editor and terminal frame are unchanged from the saved dark reference. brick is a provided preview command, not learner-defined function code; brick() is accepted as an alias. Repetition shortcuts and later lessons remain future teaching work. Spec/build checklist have not been started. See design-notes.md and resume.md for current implementation/verification.
+
+### Cozy cosmic interaction update — 2026-10-11
+Confirmed interface request: upper scene adds suspended oak floor; first-lesson greeting stays visible with exact learner text; first brick/block command intercepts the flow with one small floor brick, a read-only editor and native bubble reply field. Nonempty answer resumes authored code without inserting code or grading the natural-language answer. Cosmic background stylesheet and terminal/editor structure remain frozen. See design-notes.md for current implementation, checks and browser-review limitation.
+
+### Upper-stage visual refinement — 2026-10-11
+Cottage enclosure now includes decorative translucent left/right wall silhouettes attached to the floor’s perspective. HTML/CSS-only refinement; learning logic and frozen cosmic/terminal frame unchanged. See design-notes.md for verification.
+
+
+### Cosmos window and warm floor light — 2026-10-11
+
+Added a transparent arched vector window behind Mochi and a golden radial-gradient overlay on the wooden floor perspective plane in `prototype-cosmic-live.html`. The original stars shine through the open window panes. Changes are scoped to upper-stage HTML/CSS; the frozen cosmic stylesheet, terminal markup, all script elements and `cosmic-visuals.js` remain unchanged. Existing lesson interaction checks and decorative-asset checks pass. Browser visual review is pending. No new layout files or publishing; the project remains in prototype design review.
+
+
+### Floating cosmic terminal restoration — 2026-10-11
+
+User approved a full-page #0c0c1e sky and floating terminal override with the exact 12px blur, 2px teal border, 16px radius, requested glow, 40px auto margin and 900px maximum width. Added COSMIC_TERMINAL.EXE and three colored control dots. Removed visible analytical speed/status rows; hidden DOM hooks preserve existing scripts. The original stylesheet is retained beneath explicit overrides; code input markup and functional scripts are unchanged. Lesson regression checks pass. Browser visual review and reference-image matching remain pending (no reference image supplied in this turn). No publishing.
+
+
+### Enclosed storybook cottage — 2026-10-11
+
+Upper stage now has opaque warm ivory SVG walls (#f5ebd5), an arched masked opening revealing the existing cosmic sky/stars, wood window framing and golden overhead/floor lighting. The terminal HTML/CSS and functional script elements are unchanged from the preceding approved terminal layout. Scoped stage overrides retain the wooden floor and lesson event logic. Automated structure and lesson checks pass; rendered browser review remains pending. No publishing.
+
+
+### Live Lesson 1 renderer repair — 2026-10-11
+
+Made optional GSAP CDN asynchronous so local deferred visual renderer is not held behind network loading. Home renderer now obtains its editor directly and attaches a native input listener for safe, immediate form/color and incomplete greeting-string previews. Persistent chat uses warm light-mode component colors; user text is assigned through textContent. No stylesheet or terminal layout changes. Existing brick prompt/queue regressions plus live furry and partial/completed greeting tests pass without GSAP. Rendered browser review pending.
+
+
+### Dark-lofi cosmic sandbox — 2026-10-11
+
+User authorized visual overhaul of the active prototype: midnight-purple starfield and drifting ambient clouds, enclosed plum room with transparent arched sky window, translucent glowing oak floor, default pink organic Mochi with cyan vector headphones and blinking eyes. Floating COSMIC_TERMINAL.EXE retains real synchronized line numbers and now uses rgba(10,10,20,0.75), 12px backdrop blur and pulsing 2px #00ffc8 border. Live form/color/greeting and brick prompt logic preserved; default character palette changed to pink. Lesson regression and structural checks pass. Rendered browser review remains pending. No new layout files or publishing.
+
+
+### Five additive lessons and finale — 2026-10-11
+
+Added cosmic-lessons.js: accepted safe parser state drives persistent foundation, 4-column/3-row brick wall, roof, armchair, rug and 12 perimeter trees. Commands: foundation; three wall lines; roof; furniture = []; furniture.append("armchair"); furniture.append("rug"); for tree_index in range(12): followed by an indented tree(). Existing brick/block aliases and live appearance/greeting remain. First foundation pauses editing for the exact new Mochi question and native answer input. Foundation counts as the first block of the initial wall row. Assets remain through deletion, errors and progression; stable state prevents duplicates. Roof requires a complete wall; furniture requires roof; trees require both furnishings. Completion of greeting plus household assets automatically launches a reversible cinematic with Return to coding. GSAP motion has native-animation and reduced-motion fallbacks. Existing visual styles untouched. Automated parser, additive progression, prompt, bounded loop, finale/return and cumulative-script checks pass; rendered browser review pending. No publishing.
+
+
+### Self-contained local interactivity repair — 2026-10-11
+
+Embedded the visual and additive lesson runtimes directly in the active HTML after the editor bootstrap, removing reliance on separate local deferred scripts and their cached versions. GSAP remains optional. All CSS blocks retained byte-for-byte. Tested the actual HTML scripts together in DOM simulation with native input dispatch: furry form and H → Hello! greeting updates pass without GSAP. Prior five-lesson regressions also pass. Root cause of the user’s browser failure is not directly confirmed; rendered browser verification remains pending. External JS sources remain available but are no longer loaded by the active HTML. Future runtime changes must update the embedded active copy.
+
+
+### Three-lesson custom dark-lofi flow — 2026-10-11
+
+Latest user request supersedes the five-lesson prototype flow. Active self-contained HTML now guides only variables/greeting, oak floor with exactly one first brick and the exact native-input question, then manual brick lines building a 4x3 wall plus roof. Lists, loops and cinematic finale removed from active parser/renderer. Floor appears with first brick and persists; bricks/roof remain through subsequent edits without duplicates. Pink headphone Mochi, room/window and frosted cyan terminal retained; added subtle ambient dust motion. Native full-HTML typing and three-lesson tests pass. Browser visual review remains pending. No publishing.
+
+
+### CSS game polish — 2026-10-11
+
+Added scoped styling override with exact #20174a → #0b091a radial cosmic backdrop, slowly shifting nebula light, cooler plum room walls, golden upper-corner illumination, a broad translucent textured oak platform, grounded Mochi drop-shadow, brighter cyan terminal glow and base-anchored elastic-style CSS gel breathing. Reduced-motion overrides retained. All JavaScript/script elements unchanged byte-for-byte. CSS structure and existing live three-lesson regressions pass; rendered browser visual verification pending. No publishing.
+
+
+### User-supplied container CSS — 2026-10-11
+
+Installed the exact supplied six-part CSS block and bound its class names to the existing stage, floor, character, console and code layers. Removed the conflicting recent game-polish/dust override blocks; added viewport sizing integration so the terminal fits without body scrolling. Room silhouette is softened rather than opaque. Syntax-highlight layer displays the requested code glow while transparent textarea retains caret/input behavior. All script elements remain byte-for-byte unchanged. Existing typing and three-lesson regressions plus new CSS-hook checks pass; browser visual verification pending. No publishing.
+
+
+### Sharp cosmic console with hardware pane — 2026-10-11
+
+Latest approved direction replaces the prior room-led appearance with a midnight-violet starfield, SYSTEM: ACTIVE / LOFI BOUNCE header accents, circular pink Mochi with thick cyan glowing headphones, centered console title/control dots, thin glowing teal terminal border and Fira Code-preferred syntax palette. Added dark grey 3-column metadata and responsive range controls, initialized at 40 Hz and 56%. Speed slider changes idle animation duration; intensity slider changes nebula opacity. Metadata values are fixed display values, not measured hardware metrics. Underlying safe parser and additive three-lesson scripts remain active and unchanged; room silhouette hidden in latest visual override. All lesson and slider checks pass. Browser visual review pending. No publishing.
+
+
+### Lesson 1: Egg Awakening — 2026-10-11
+
+Read frozen UI reference (spec.md remains an empty directory). Added scene-only JavaScript state machine: egg shakes/hatches on document readiness/window load; blank pink Mochi hides eyes/mouth; valid eyes happy/cute/starry reveals eyes with bounce; valid mouth smile/cat_face reveals mouth with flip; name and greeting complete the character and lock exact greeting in persistent bubble. Safe parser accepts DNA choices; no arbitrary code execution. Reduced motion skips animation; GSAP uses native keyframe fallback. DOM readiness prevents optional CDN from delaying hatch. All non-script HTML and CSS unchanged byte-for-byte. Automated state order, partial greeting, completion lock and existing lesson/slider checks pass. Browser visual verification pending.
+
