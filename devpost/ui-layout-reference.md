@@ -11,3 +11,7 @@
 - Do not change the CSS properties or container layouts listed here. Only modify underlying JavaScript logic to connect the game lessons.
 
 Active interface: prototype-cosmic-live.html. This reference freezes the existing approved visual frame; it does not authorize further visual edits.
+
+
+## Authorized Home Lab replacement — 2026-10-12
+The latest explicit user request authorizes replacing the prior frozen appearance with their cozy Home Lab layout, three themes and soft teal SVG. Active prototype remains prototype-cosmic-live.html. Five-command design demonstration; full product requirements remain subject to reconciliation.

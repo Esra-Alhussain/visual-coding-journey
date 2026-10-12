@@ -1,0 +1,45 @@
+category,filename,trigger,text_or_sound_prompt,recording_notes
+dialogue,01_welcome_outside.wav,After the egg fully opens,"Finally, I’m out! Hi, my new coding friend! We’re going on an adventure together. What would you like to name me?",Warm and delighted; clear pauses.
+dialogue,02_name_success.wav,After name assignment,A name of my own! I’m so glad we’re friends.,
+dialogue,03_ask_for_eyes.wav,"After naming, before eyes","I can hear you, but I can’t see you yet. Could you give me eyes?",
+dialogue,04_eyes_success.wav,After eyes appear,Yay! I can see you now!,
+dialogue,05_ask_for_nose.wav,Before nose assignment,The meadow looks lovely. Could you give me a little nose?,
+dialogue,06_nose_success.wav,After nose appears,"A little nose, just for me. Thank you!",
+dialogue,07_ask_for_mouth.wav,Before mouth assignment,You’ve made me so happy! Could you give me a mouth so I can show you?,
+dialogue,08_mouth_success.wav,After mouth appears,Look! Now you can see my smile!,
+dialogue,09_ask_for_greeting.wav,Before greeting assignment,What should I say when someone meets me? Write your own greeting!,
+dialogue,10_custom_greeting_DYNAMIC.wav,If learner writes their own greeting,DYNAMIC: learner-authored mochi.greeting value.,One recording cannot speak arbitrary text. Keep custom greeting visible as text unless connecting approved live speech or limiting it to a recorded choice.
+dialogue,11_greeting_success.wav,After greeting is saved,We did it together! I’m ready for our adventure!,
+dialogue,12_chapter1_complete.wav,After Mochi lesson completes,"You brought your companion to life! Next, let’s build a little home together.",Generic; does not assume the learner chose Mochi as the name.
+dialogue,13_ask_build_walls.wav,Start of house chapter,This sunny meadow can be our home. Let’s build the walls! Choose a color and store it in house.walls.,
+dialogue,14_walls_success.wav,After walls appear,Our first walls! You made a home appear with a variable.,
+dialogue,15_ask_build_roof.wav,Before roof assignment,"Our walls need a roof. Pick its color, then add a new assignment.",
+dialogue,16_roof_success.wav,After roof appears,A roof over our heads. It feels like home!,
+dialogue,17_ask_add_door.wav,Before door assignment,Let’s give our home a door. Which shape would you choose?,
+dialogue,18_house_complete.wav,After door appears,Our home is ready! We made every piece together.,
+dialogue,19_ask_condition.wav,Start of condition chapter,What if it is night? First set the time. Then indent the light command beneath the condition. The lights turn on only when the condition is true.,Speak the multi-sentence instruction clearly.
+dialogue,20_condition_success.wav,When the night condition turns lights on,Our world reacted to your code!,
+dialogue,21_condition_chapter_complete.wav,After condition lesson,"Your condition lit up the night! You wrote a rule: if it is night, turn on the lights. Try day too, and see the difference.",
+dialogue,22_ask_grow_garden.wav,Start of loop chapter,Let’s grow a garden! A loop repeats an action. Write these two lines: each spot gets one flower. Indent the planting action with four spaces.,Clearly speak the indentation tip.
+dialogue,23_garden_success_DYNAMIC_COUNT.wav,After planting loop,DYNAMIC: Look! One loop planted [Number] flowers!,"Either generate number variants for 3 through 8, or keep the flower count as on-screen text."
+dialogue,24_loop_chapter_complete.wav,After loop lesson,Your loop grew a whole garden! One repeated instruction planted flowers in different spots. Now combine everything in your own project.,
+dialogue,25_ask_final_project.wav,Start of final project,"This is your world now! Choose a new roof color, make a working night-time condition, and plant a garden of 3 to 8 flowers. Combine the ideas you learned.",
+dialogue,26_final_project_complete.wav,After final project goals,"Your little world is alive! A companion, a home, a working condition and a garden loop. You combined the basics in a world of your own.",
+dialogue,27_continue_exploring.wav,After learner chooses keep experimenting,This is our world! Keep changing the code and exploring.,
+ambience,meadow_breeze_loop.wav,"After hatch, quiet continuous outdoor bed","Gentle warm breeze through a grassy meadow, quiet soft grass rustle, smooth and natural, seamless 20-second stereo loop. No voices, music or harsh gusts.",Continuous loop; fade in and out.
+ambience,distant_birds_loop.wav,"Daytime, beneath dialogue","A few soft distant songbird chirps, irregular and sparse in an open meadow. Seamless 30-second stereo ambience; no loud close birds, repetitive alarm calls, speech or music.",Very low in mix; pause/mute with ambience.
+effects,egg_tap.wav,First egg tap,"One light fingertip tap on eggshell, followed by a tiny inviting rustle.","One-shot, about 0.3 s."
+effects,egg_crack_top.wav,First top crack appears,"A delicate dry eggshell tick, small and gentle.","One-shot, about 0.4 s."
+effects,egg_crack_side.wav,Side crack spreads,A few quiet fine eggshell cracks spreading across a thin shell.,"One-shot, about 0.6 s."
+effects,egg_crack_rim.wav,Cracks reach sides and bottom,Connected fine shell cracks and a gentle eggshell creak.,"One-shot, about 0.8 s."
+effects,egg_shells_open.wav,Shell halves open and Mochi appears,"Two light hollow shell pieces settle into soft grass, followed by a warm reveal shimmer.","One-shot, about 1.2 s."
+effects,feature_appears.wav,"Eyes, nose or mouth is added",Tiny warm twinkle-pop with a soft tactile felt pluck.,Reusable; slight pitch variation is okay.
+effects,name_badge.wav,Nameplate appears,One gentle bright bell sparkle to celebrate a name.,
+effects,code_success.wav,Valid code changes the scene,Satisfying soft wooden click followed by a tiny glassy sparkle.,Short and quieter than speech.
+effects,chapter_complete.wav,Any chapter completion,"Gentle joyful three-note shimmer with a warm soft landing; celebratory, never loud or arcade-like.",
+effects,wall_piece.wav,Each wall is built,Padded wooden block settles softly into place on grass.,
+effects,roof_piece.wav,Roof appears,Soft roof piece settles with a little cushioned thunk.,
+effects,door_piece.wav,Door appears,Gentle wood click and warm latch as a small house door appears.,
+effects,night_lights.wav,Lights switch on through condition,Subtle switch click followed by a warm short light chime.,
+effects,garden_plant.wav,Each flower is planted in the loop,Soft seed-in-soil puff followed by delicate leaf pop.,Reusable; avoid a loud cartoon boing.
+effects,project_complete.wav,Final project success,"Slightly fuller gentle celebratory flourish, several bright notes with a soft sparkle tail.","One-shot, about 1.5 s."
