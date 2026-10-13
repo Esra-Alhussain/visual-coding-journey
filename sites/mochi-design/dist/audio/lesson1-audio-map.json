@@ -1,0 +1,155 @@
+{
+  "status": "17 local recordings integrated and structurally checked. Actual listening approval pending. Only crowd-clapping-.wav exists as external SFX; tap/success/hint and dry shell effects synthesized locally.",
+  "rows": [
+    {
+      "line": "Hi! I’m Mochi. Let’s build something wonderful together!",
+      "voice": "Hi sound.mp3",
+      "effect": "Explainer video pops whoosh light pop",
+      "url": "https://mixkit.co/free-sound-effects/whoosh/",
+      "action": "Appear and wave",
+      "delay": 0,
+      "voiceDelay": 0.7
+    },
+    {
+      "line": "You can call me Mochi—or give me a name you like!",
+      "voice": "01_name_choice.wav",
+      "effect": "Bubble pop up alert notification",
+      "url": "https://mixkit.co/free-sound-effects/pop/",
+      "action": "Head tilt; show choices",
+      "delay": 0
+    },
+    {
+      "line": "Let’s try it together. Put my new name between the quotes.",
+      "voice": "02_rename_prompt.wav",
+      "effect": "Select click",
+      "url": "https://mixkit.co/free-sound-effects/click/",
+      "action": "Gesture toward highlighted quotes",
+      "delay": 0
+    },
+    {
+      "line": "I love it! Look—you just changed something with code!",
+      "voice": "03_rename_success.wav",
+      "effect": "Quick win video game notification",
+      "url": "https://mixkit.co/free-sound-effects/click/",
+      "action": "Happy bounce",
+      "delay": 0,
+      "voiceDelay": 0.6
+    },
+    {
+      "line": "Want a little hint?",
+      "voice": "04_offer_hint.wav",
+      "effect": "Bubble pop up alert notification",
+      "url": "https://mixkit.co/free-sound-effects/pop/",
+      "action": "Head tilt; effect only when hint opens in game",
+      "delay": 0
+    },
+    {
+      "line": "We did it! Our first little creation.",
+      "voice": "05_first_creation_complete.wav",
+      "effect": "One man clapping",
+      "url": "https://mixkit.co/free-sound-effects/applause/",
+      "action": "Clap or bounce",
+      "delay": 1.2,
+      "effectFile": "audio/effects/crowd-clapping-.wav"
+    },
+    {
+      "key": "greetingChoice",
+      "voice": "01_greeting_choices.wav",
+      "line": "How should we say hello? Pick your favorite!",
+      "trigger": "Greeting step begins",
+      "effect": "None",
+      "action": "Gentle body bounce (retry uses text reassurance)",
+      "effectFile": null
+    },
+    {
+      "key": "eyesChoice",
+      "voice": "02_eyes_choices.wav",
+      "line": "Let’s try a new look. Which one do you like?",
+      "trigger": "Eyes step begins",
+      "effect": "None",
+      "action": "Blink",
+      "effectFile": null
+    },
+    {
+      "key": "eyesExplore",
+      "voice": "03_eyes_exploring.wav",
+      "line": "Take your time. We can try a few!",
+      "trigger": "First eye-choice selection",
+      "effect": "Existing synthesized tap when selecting option",
+      "action": "Blink",
+      "effectFile": null
+    },
+    {
+      "key": "noseChoice",
+      "voice": "04_nose_choices.wav",
+      "line": "Want to help me choose this little detail?",
+      "trigger": "Nose step begins",
+      "effect": "None",
+      "action": "Small turn",
+      "effectFile": null
+    },
+    {
+      "key": "noseExplore",
+      "voice": "05_nose_exploring.wav",
+      "line": "Pick one you like. We can always change it again.",
+      "trigger": "First nose-choice selection",
+      "effect": "Existing synthesized tap when selecting option",
+      "action": "Small turn",
+      "effectFile": null
+    },
+    {
+      "key": "noseSuccess",
+      "voice": "06_nose_success.wav",
+      "line": "A little change makes such a difference!",
+      "trigger": "Applied nose value changes",
+      "effect": "Existing synthesized success chime on application",
+      "action": "Small turn",
+      "effectFile": null
+    },
+    {
+      "key": "smileChoice",
+      "voice": "07_smile_choices.wav",
+      "line": "Let’s find a smile you like!",
+      "trigger": "Mouth/smile step begins",
+      "effect": "None",
+      "action": "Gentle body bounce (retry uses text reassurance)",
+      "effectFile": null
+    },
+    {
+      "key": "smilePrepare",
+      "voice": "08_smile_preparing.wav",
+      "line": "Let’s try it together and see what happens.",
+      "trigger": "First mouth-choice selection",
+      "effect": "Existing synthesized tap when selecting option",
+      "action": "Gentle body bounce (retry uses text reassurance)",
+      "effectFile": null
+    },
+    {
+      "key": "smileSuccess",
+      "voice": "09_smile_success.wav",
+      "line": "You made me smile!",
+      "trigger": "Applied mouth value changes",
+      "effect": "Existing synthesized success chime on application",
+      "action": "Gentle body bounce (retry uses text reassurance)",
+      "effectFile": null
+    },
+    {
+      "key": "helpHint",
+      "voice": "10_help_hint.wav",
+      "line": "Want a little hint? Let’s take a peek together.",
+      "trigger": "Every second Help opening (alternates with existing short hint)",
+      "effect": "Existing synthesized hint-open chime",
+      "action": "Gentle body bounce (retry uses text reassurance)",
+      "effectFile": null
+    },
+    {
+      "key": "retry",
+      "voice": "11_retry.wav",
+      "line": "We’re close. Let’s give it another try.",
+      "trigger": "Invalid code submission",
+      "effect": "None",
+      "action": "Gentle body bounce (retry uses text reassurance)",
+      "effectFile": null
+    }
+  ]
+}
