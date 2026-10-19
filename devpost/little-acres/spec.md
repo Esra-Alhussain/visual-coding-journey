@@ -7,7 +7,26 @@ Approved teaching direction: Arabic explanations, English-only lesson code/examp
 
 Validation: island JavaScript syntax and existing check.cjs regression suite pass. Browser inventory returned no available browsers/apps; rendered desktop/mobile and actual map interaction review remain pending. No publishing or BubblyCue work.
 
+## Modern presentation layer — 2026-10-19
+
+Owner rejected the previous chapter look as dated and authorized a modern visual redesign. `modern.css` is loaded after the existing stylesheets and is presentation-only: it changes type, color, spacing, surfaces, header, activity rail, stage caption, code editor and dialog styling, but no DOM IDs, lesson text, parser rules, audio, progression or saved state. `build-chapter-i18n.cjs` injects the link so a regenerated page keeps the theme; removing that one link restores the previous look.
+
+The theme uses a warm cream/forest/sage palette with a terracotta accent, Segoe UI Variable for text and Cascadia/Consolas for code, a compact five-step rail with the existing illustrated badges and Mochi marker, a larger 3:2 art stage with a HUD caption, and a dark editor with a light-on-dark output panel. The page scrolls normally rather than trapping the lesson panel in a nested scroller. English and Arabic layouts were checked at 1440x1000, 430x932 and 390x844; `scrollWidth === clientWidth` at each width.
+
+Two functional repairs landed with the visual pass. The English copy catalog had 105 entries but lacked placeholders for six template literals, shifting every later UI and tour translation; the catalog was rebuilt from the committed correct mapping with six `null` template slots and regenerated (170 bilingual entries). The in-tour language pill moved below the header, and `lockTourScroll` now refuses to lock after the tour has closed, preventing a fast Skip from leaving the body fixed.
+
+Verification: `node devpost/little-acres/check.cjs` passes the farm, language and five-activity suites; `check-colorful.cjs` passes. Local Chrome/CDP screenshots cover default, tour, error, journey, completion, 390px English and 390px Arabic. Review images: `review-modern-before.png`, `review-modern-desktop.png`, `review-modern-phone.png`, `review-modern-arabic-phone.png`, `review-modern-tour.png`. Owner visual approval and larger game-feel review remain pending; no new lesson content, chapter, persistence or publishing.
+
+## Playable modern-game prototype — 2026-10-19
+
+Owner clarified that the earlier modern theme still read as a lesson page and asked for a modern game-like playable prototype. `game-prototype.html` is a separate, intentionally unapproved experiment: a full-screen illustrated farm, a compact mission HUD, click/tap movement for Mochi, a seed selector, contextual Plant/Water/Harvest actions, SVG crop growth, a three-step mission, a completion card, and a Python console that runs a bounded `go_to`, `plant`, `water`, `harvest` command subset with line errors and Stop.
+
+The screen uses the selected farm art and transparent Mochi sprite. A fixed 3:2 world is scaled to cover the viewport, with the mobile camera shifted to keep the planting beds visible. The full loop was verified in local Chrome at 1440x1000 and 390x844; the mobile document has no horizontal overflow. This is a design-direction prototype, not a replacement for `colorful-scene.html`: lesson copy, the safe parser, progression, map, persistence and chapter structure are unchanged. No learner testing, recording or publication.
+
 # Little Acres — authorized playable farm study
+
+## Beginner lesson clarity and error feedback — 2026-10-19
+Keep the idea/concept and learner task in visibly separate cards. The idea card teaches one concept; the task card gives the concrete action, with expected result labeled separately. Keep worked examples collapsed by default. On invalid Run, show an assertive, high-contrast warning directly below Run with line number, plain-language description and a specific next step; hide it as soon as the learner edits or changes activity. Preserve safe text rendering and bilingual display. This updates the current Chapter 1 prototype; the frozen main PRD remains unchanged.
 
 ## Current override — 2026-10-18: owner-directed code-only, bilingual guidance
 
@@ -68,7 +87,7 @@ Validation: check-chapter-flow.cjs tests five successful activities and negative
 
 Owner authorized English as primary/default language for hackathon presentation, with Arabic available from a top switch; requested colorful dimensional activity icons and a miniature Mochi showing the current activity. This supersedes Arabic-default presentation for the current colorful chapter slice. Wider legacy map/previews are separate historical prototypes and have not all been localized.
 
-colorful-scene.html now starts lang=en/dir=ltr with English headings, tour, lessons, examples guidance, hints, feedback, errors, buttons, references, chapter overview and accessibility labels. Top Arabic/English switch plus accessible tour-time top switch changes presentation in place; preserves current activity/progress, drafts/editor, run state, output, learner-authored greeting/sign/variable text and sound state. Code/examples stay LTR. 164 bilingual entries, with dynamic progress/hint/tour/error templates. No server/fetch/external translation dependency.
+colorful-scene.html now starts lang=en/dir=ltr with English headings, tour, lessons, examples guidance, hints, feedback, errors, buttons, references, chapter overview and accessibility labels. Top Arabic/English switch plus accessible tour-time top switch changes presentation in place; preserves current activity/progress, drafts/editor, run state, output, learner-authored greeting/sign/variable text and sound state. Code/examples stay LTR. 167 bilingual entries, with dynamic progress/hint/tour/error templates. No server/fetch/external translation dependency.
 
 Activity trail replaced text-symbol circles with five original shaded SVG badge objects (greeting envelope, variable box, farm sign, planting bed, comment notebook), colored raised surfaces/shadows, hover/press response, current ring, completion ticks and locked state. Reuses exact approved transparent Mochi sprite as miniature current-activity marker; smoothly changes its logical position on manual next/review and mirrors for RTL. This is dimensional 2D UI, not actual 3D geometry. Reduced-motion fallback.
 
@@ -78,3 +97,15 @@ Validation: check.cjs passes legacy farm, five-activity flow in English, and rea
 
 ### Unfinished cottage shell - 2026-10-19
 Owner explicitly requested removing door, lights, windows and finished brick/stone steps because the cottage still looked complete. Reference-edited art/restoration-shell.png now has empty doorway/window openings, no light fixtures, no neat doorstep/bench, keeping the worn roof/shell and selected farm style. Image visually inspected. Current colorful-scene.html and the bilingual build base now reference this new asset; previous art/restoration-start.png retained. Exact built-in generation prompt saved in art/house-shell-prompt.json. No lesson/runtime changes. Owner visual review pending; no publication.
+
+### Chapter completion moment and interactive progress - 2026-10-19
+After owner feedback that completing the first lesson felt flat and the progress bar looked dated, the current Chapter 1 slice now opens a compact celebration dialog on each activity's first completion. It plays the supplied local applause asset (`art/crowd-clapping-.wav`) once, shows Mochi celebrating, and presents exactly two choices: more practice or the next activity. Those are the existing progression actions moved into the dialog; practice prompts and manual next-step gating remain unchanged. The last activity's next action opens the journey overview.
+
+Replaced the thin native meter with five colorful, raised clickable activity segments. Only the current and completed activities can be opened; the Mochi marker travels to the current step, completion fills each segment, and the active lesson icons remain available for navigation. Added narrow-screen and reduced-motion styling. No sound download, network dependency, progress persistence, or course expansion. Bilingual static copy catalog and generated English-default page rebuilt (170 text entries). Browser rendering, pointer review and audio listening remain unverified; no tests run in this edit. Open `devpost/little-acres/colorful-scene.html` and refresh with Ctrl+F5 to review.
+### Simpler Chapter 1 task instructions - 2026-10-19
+Owner asked for the code instructions to be as simple as the existing index experience. The five activity task prompts are now short action statements: write a greeting; assign and print it; name and print the farm; calculate and print bed area; add/remove a comment and compare. Identifier rules stay in the separate Idea card. Expected results and optional hints still supply explanation when needed; no starter code was inserted. Restored the six English UI strings needed for the bilingual authoring count and rebuilt the English-default page. Browser review remains pending.
+### Walkthrough visibility on short laptop viewports - 2026-10-19
+Owner reported that the tour bubble and spotlight could fall outside the laptop viewport while page scrolling was locked, leaving no way to bring them back into view. Replaced side/below placement with viewport-clamped positioning: keep bubble beside the target when space permits, otherwise place it above/below, and constrain the bubble to the visible height so its text scrolls inside it. Raised explicit spotlight and card stacking order and repositions on browser and visual-viewport resize. Page scrolling remains locked only during the walkthrough. Build regenerated successfully; laptop/browser visual review remains pending.
+
+### Progress trail correction - 2026-10-19
+The five illustrated activity icons already were the chapter progress control. A duplicate numbered control row was mistakenly added and has now been removed. The original icon trail is the sole interactive progress navigation: its current Mochi marker, clickable unlocked icons, completion checks, connected fill and activity count are being polished in place. Browser review remains pending.

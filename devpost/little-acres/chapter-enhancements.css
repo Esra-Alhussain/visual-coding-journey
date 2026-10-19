@@ -1,0 +1,49 @@
+.continue-actions{display:none!important}
+#activity-complete{position:fixed;width:min(390px,calc(100vw - 30px));padding:25px 23px 21px;overflow:visible;border:2px solid #e5c77f;border-radius:26px;background:radial-gradient(ellipse at 50% 0,#fff5ce 0,transparent 54%),linear-gradient(155deg,#fffdf2,#f5edda);color:#38513b;box-shadow:0 22px 65px #17251e66,0 5px 0 #c9a75f; text-align:center}
+#activity-complete::backdrop{background:#1b3028a8;backdrop-filter:blur(4px)}
+#activity-complete:before,#activity-complete:after{content:"✦  ·  ✧  ·  ✦";position:absolute;top:12px;color:#e3af47;font-size:15px;letter-spacing:7px;animation:celebration-sparkle 1.8s ease-in-out infinite}
+#activity-complete:before{left:14px}#activity-complete:after{right:14px;animation-delay:.5s}
+#activity-complete .completion-mochi{display:block;width:95px;height:104px;object-fit:contain;margin:3px auto 4px;filter:drop-shadow(0 7px 4px #5b472c35);animation:completion-hop .75s ease-in-out infinite alternate}
+#completion-kicker{margin:0 0 5px;color:#9a7130;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+#completion-title{margin:0;color:#35563b;font-size:25px;line-height:1.2}
+#completion-copy{max-width:300px;margin:10px auto 19px;color:#66745c;font-size:14px;line-height:1.65}
+#completion-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+#completion-actions button{min-height:45px;padding:9px 11px;border-radius:14px;font-size:12px;line-height:1.45}
+#completion-actions #practice-more{background:#fffdf4;border:1px solid #c9bd9c;color:#536144}
+#completion-actions #next-activity{background:linear-gradient(145deg,#8bbd68,#5d8e4f);border:1px solid #4b7944;color:white;box-shadow:0 3px 0 #41683c}
+#completion-actions [hidden]{display:none!important}
+@keyframes completion-hop{to{transform:translateY(-7px) rotate(-3deg)}}
+@keyframes celebration-sparkle{50%{transform:rotate(14deg) scale(1.13);opacity:.65}}
+@media(max-width:450px){#activity-complete{padding:23px 16px 18px}#completion-actions{grid-template-columns:1fr}#completion-actions button{min-height:43px}}
+@media(prefers-reduced-motion:reduce){#activity-complete:before,#activity-complete:after,#activity-complete .completion-mochi{animation:none!important;transition:none!important}}
+
+#tour-layer{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;z-index:1000;overflow:hidden}
+#tour-spotlight{z-index:1}
+#tour-card{z-index:2;box-sizing:border-box;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+#tour-card button:focus-visible{outline:3px solid #5d8db0;outline-offset:2px}
+#tour-language{position:fixed;z-index:3}
+
+/* One polished, illustrated activity trail: these are the original lesson controls. */
+.stage-wrap{position:relative}
+.activity-path{box-sizing:border-box;min-height:112px;margin:34px 0 0;padding:19px 10px 12px;border:1px solid #fffdf0;border-radius:24px;background:linear-gradient(150deg,#fffdf0 0%,#f4efd9 60%,#ebe8cf 100%);box-shadow:0 10px 22px #455a3820,inset 0 1px 0 #fff;isolation:isolate}
+.activity-path:before{content:"";position:absolute;inset:4px;border:1px solid #e5dfc6;border-radius:19px;pointer-events:none;z-index:-1}
+.activity-path button{width:19%;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:0 2px;color:#52694e;transition:transform .2s,color .2s}
+.activity-path button>.activity-badge{width:58px;height:58px;border:2px solid #fff;border-radius:19px;box-shadow:inset 0 2px 2px #ffffffd9,inset 0 -4px 6px #435d3426,0 4px 0 #87916d,0 7px 12px #293d2625;filter:saturate(1.12);transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,filter .22s}
+.activity-path button:nth-of-type(3)>.activity-badge{box-shadow:inset 0 2px 2px #ffffffd9,inset 0 -4px 6px #75472b24,0 4px 0 #b78a69,0 7px 12px #293d2625}
+.activity-path button:nth-of-type(4)>.activity-badge{box-shadow:inset 0 2px 2px #ffffffd9,inset 0 -4px 6px #4b643023,0 4px 0 #7b9a58,0 7px 12px #293d2625}
+.activity-path button:nth-of-type(5)>.activity-badge{box-shadow:inset 0 2px 2px #ffffffd9,inset 0 -4px 6px #573b6d24,0 4px 0 #937baa,0 7px 12px #293d2625}
+.activity-path button[aria-current=step]>.activity-badge{outline:3px solid #fff;outline-offset:3px;border-color:#fff9d8;transform:translateY(-5px) scale(1.07);filter:saturate(1.2) drop-shadow(0 5px 9px #56734745);box-shadow:inset 0 2px 3px #fff9ce,0 5px 0 #bd9039,0 9px 16px #5f532c35}
+.activity-path button.done>.activity-badge{filter:saturate(1.2);box-shadow:inset 0 2px 2px #fff,inset 0 -3px 5px #3e78452a,0 4px 0 #648954,0 7px 12px #293d2625}
+.activity-path button small{display:block;max-width:100%;margin-top:8px;padding:4px 8px;border:1px solid #dedbc4;border-radius:999px;background:#fffdf2;color:#53664d;font-size:10px;font-weight:800;line-height:1.15;white-space:nowrap;box-shadow:0 2px 4px #30452b12}
+.activity-path button[aria-current=step] small{border-color:#e8c86e;background:#fff4c7;color:#57451e;box-shadow:0 3px 8px #a8833430}
+.activity-path button:disabled>.activity-badge{filter:saturate(.58);opacity:.72;box-shadow:inset 0 2px 2px #fff,inset 0 -3px 5px #5b604018,0 3px 0 #9da18a,0 5px 8px #293d2617}
+.path-track{top:47px;left:10%;right:10%;height:8px;border:1px solid #fff;border-radius:99px;background:linear-gradient(180deg,#d8d9c1,#e9e8d5);box-shadow:inset 0 2px 3px #5763422c,0 1px 0 #fff;z-index:-1}
+.path-track>div{border-radius:99px;background:linear-gradient(90deg,#f0c15b 0%,#93bd70 65%,#64a987 100%);box-shadow:0 0 10px #7bae6d70;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+#trail-mochi{top:-18px;width:39px;height:41px;filter:drop-shadow(0 4px 3px #4d3f2d45);transition:inset-inline-start .55s cubic-bezier(.2,.7,.3,1),transform .2s}
+#trail-mochi img{animation:trail-idle 2.5s ease-in-out infinite}
+.progress-label{display:flex;justify-content:flex-end;margin:9px 4px 17px;color:#586b4c;font-size:11px;font-weight:800}
+.progress-label span{padding:6px 11px;border:1px solid #e5dfc6;border-radius:999px;background:#fffdf2;box-shadow:0 3px 8px #455a3815}
+.activity-path button:focus-visible{outline:3px solid #4d8cba;outline-offset:4px;border-radius:12px}
+@media(max-width:600px){.activity-path{min-height:100px;margin-top:31px;padding:16px 5px 10px;border-radius:20px}.activity-path:before{inset:3px;border-radius:16px}.activity-path button{min-height:72px}.activity-path button>.activity-badge{width:47px;height:47px;border-radius:16px}.activity-path button small{margin-top:7px;padding:3px 5px;font-size:8px}.path-track{top:39px;height:7px}#trail-mochi{top:-16px;width:34px;height:36px}.activity-path button.done:after{top:33px;inset-inline-end:calc(50% - 27px)}}
+@media(max-width:380px){.activity-path button small{max-width:60px;white-space:normal;min-height:22px}.activity-path button>.activity-badge{width:43px;height:43px}.path-track{top:37px}}
+@media(prefers-reduced-motion:reduce){#trail-mochi,#trail-mochi img,.activity-path button,.activity-path button>.activity-badge,.path-track>div{animation:none!important;transition:none!important}}

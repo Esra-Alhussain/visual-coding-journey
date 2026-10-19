@@ -1,6 +1,6 @@
 # Mochi Marketing Memory
 
-Last updated: 2026-10-17. Local working memory; not public copy or a replacement for devpost plans.
+Last updated: 2026-10-19. Local working memory; not public copy or a replacement for devpost plans.
 
 ## Current working direction
 
@@ -118,3 +118,10 @@ Owner corrected art-study flow: neglected farm, anchored introduction, nearby He
 
 ### 2026-10-19 - English-first current chapter
 Owner changed current game default to English for hackathon, with Arabic switch; English code remains. Existing ENG-004 Arabic narration is a channel choice, not the game default. Current chapter English/localization tests pass; browser review and learner evidence still pending.
+
+### 2026-10-19 - Modern Chapter 1 redesign, ENG-005
+
+- Owner rejected the current chapter look as not modern and asked for a design enhancement. A presentation-only `modern.css` layer now changes typography, palette, app bar, activity rail, stage caption, lesson cards, editor and dialogs; lesson copy, safe parser, progression and IDs are unchanged.
+- Actual before/after renders were captured locally at 1440x1000; phone and Arabic layouts were checked at 390/430 with no horizontal overflow. `check.cjs` and `check-colorful.cjs` pass. This is implementation evidence, not learning evidence.
+- [ENG-005 / CONTENT-012 package](outputs/2026-10-19-checkpoint-modern-redesign.md): complete carousel/20-second Reel script, Saudi Arabic narration, English subtitles, shot list, caption, Story choices and honest limits. Recommendation CAPTURE NOW / POST LATER.
+- No recording, publication, outreach, learner testing or engagement results. Owner approval of the modern direction is still pending; no new chapter or map integration was authorized.

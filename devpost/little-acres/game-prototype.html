@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mochi · First Harvest prototype</title>
+<style>
+:root{
+  --ink:#f9f4e6;
+  --muted:#b9c4b2;
+  --forest:#0c1a13;
+  --glass:rgba(12,26,18,.74);
+  --glass-2:rgba(10,22,16,.9);
+  --line:rgba(255,255,255,.16);
+  --gold:#eab55b;
+  --gold-2:#c98f34;
+  --sage:#93c9a4;
+  --danger:#d87858;
+  --font:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Noto Sans Arabic",sans-serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;overflow:hidden;background:#071009;color:var(--ink);font-family:var(--font);
+  -webkit-font-smoothing:antialiased;user-select:none;
+}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible{outline:2px solid #fff2c9;outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.game{position:fixed;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 40%,#193526,#071009 75%)}
+.world{
+  position:absolute;left:50%;top:50%;width:max(100vw,150vh);aspect-ratio:3/2;
+  transform:translate(-50%,-50%);will-change:transform;
+}
+.world>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none}
+.vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 48%,transparent 34%,rgba(5,12,8,.55) 100%),
+    linear-gradient(180deg,rgba(4,10,7,.72) 0%,transparent 22%,transparent 72%,rgba(4,10,7,.8) 100%);
+}
+.hotspot{
+  position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);padding:0;
+  transform:translate(-50%,-50%);border-radius:20px;cursor:pointer;z-index:4;
+  border:2px solid transparent;transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.hotspot:after{
+  content:"";position:absolute;inset:-6px;border:2px dashed rgba(255,236,178,.8);
+  border-radius:22px;opacity:0;transition:opacity .2s;
+}
+.hotspot.pulse:after{opacity:1;animation:ringPulse 2.2s ease-in-out infinite}
+.hotspot.pulse:before{
+  content:"+";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:36px;height:36px;display:grid;place-items:center;border-radius:50%;
+  background:linear-gradient(180deg,#f7d48b,#e3af50);color:#2b2412;
+  font-size:22px;font-weight:800;line-height:1;
+  box-shadow:0 0 0 7px rgba(234,181,91,.16),0 0 26px rgba(234,181,91,.45);
+  animation:markerPulse 2s ease-in-out infinite;
+}
+.hotspot:hover{background:rgba(255,240,190,.08);border-color:rgba(255,240,190,.45)}
+.hotspot .tag{
+  position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);
+  padding:5px 9px;border-radius:999px;background:rgba(8,18,12,.82);border:1px solid var(--line);
+  color:#f7f0db;font-size:11px;font-weight:600;letter-spacing:.02em;white-space:nowrap;
+  opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.hotspot:hover .tag,.hotspot:focus-visible .tag{opacity:1}
+.crop{
+  position:absolute;left:var(--x);top:var(--y);width:clamp(42px,6vw,82px);z-index:3;
+  transform:translate(-50%,-82%);pointer-events:none;
+  filter:drop-shadow(0 7px 5px rgba(20,20,10,.3));
+  transition:width .45s,opacity .45s,transform .45s;
+}
+.crop svg{display:block;width:100%;height:auto;overflow:visible}
+.crop.sprout{width:clamp(27px,3.6vw,48px);opacity:.82}
+.crop.ready{width:clamp(48px,6.6vw,92px);opacity:1}
+.crop.ready:after{
+  content:"";position:absolute;left:50%;top:48%;width:140%;height:140%;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle,rgba(255,227,142,.5),transparent 66%);
+  z-index:-1;animation:readyGlow 1.8s ease-in-out infinite;
+}
+.crop.watered:before{
+  content:"💧";position:absolute;left:44%;top:-26px;font-size:17px;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));animation:droplet 1.6s ease-in-out infinite;
+}
+.crop.harvested{transform:translate(-50%,-46%) scale(.15);opacity:0}
+.crop.pop{animation:cropPop .45s cubic-bezier(.2,.8,.3,1.2)}
+@keyframes cropPop{0%{transform:translate(-50%,-58%) scale(.2);opacity:0}100%{transform:translate(-50%,-82%) scale(1);opacity:1}}
+@keyframes readyGlow{50%{transform:translate(-50%,-50%) scale(1.12);opacity:.55}}
+@keyframes droplet{0%{transform:translateY(-6px);opacity:0}30%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+.mochi{
+  position:absolute;left:48%;top:72%;width:clamp(90px,12vw,170px);z-index:5;
+  transform:translate(-50%,-100%);transition:left .7s cubic-bezier(.3,.8,.3,1),top .7s cubic-bezier(.3,.8,.3,1);
+  pointer-events:none;
+}
+.mochi-inner{position:relative;display:block;transform-origin:50% 90%;transition:transform .25s}
+.mochi img{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 8px rgba(20,20,10,.35));animation:bob 3.2s ease-in-out infinite}
+.mochi .shadow{
+  position:absolute;left:50%;bottom:-5px;width:62%;height:12px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(8,16,10,.5),transparent 70%);transform:translateX(-50%);
+}
+.mochi.walking img{animation:walk .32s ease-in-out infinite alternate}
+.bubble{
+  position:absolute;left:50%;bottom:calc(100% + 12px);transform:translateX(-50%);
+  width:max-content;max-width:min(290px,68vw);padding:10px 14px;border-radius:16px;
+  background:rgba(255,251,238,.97);color:#27352a;font-size:13px;line-height:1.45;
+  border:1px solid rgba(90,74,45,.18);box-shadow:0 12px 28px rgba(5,12,8,.28);
+  transition:opacity .25s;z-index:6;
+}
+.bubble:after{
+  content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;
+  background:rgba(255,251,238,.97);transform:translateX(-50%) rotate(45deg);
+  border-right:1px solid rgba(90,74,45,.18);border-bottom:1px solid rgba(90,74,45,.18);
+}
+.bubble.hidden{opacity:0}
+.top{
+  position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:18px;padding:clamp(14px,2.2vw,30px);pointer-events:none;
+}
+.top>*{pointer-events:auto}
+.mission{
+  width:min(360px,calc(100vw - 28px));padding:18px 20px 17px;border-radius:20px;
+  background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(1.15);
+  box-shadow:0 18px 40px rgba(3,9,6,.32);
+}
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#f0c073}
+.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.mission h1{margin:8px 0 3px;font-size:clamp(23px,2.4vw,30px);line-height:1.05;letter-spacing:-.03em;color:#fff9e9}
+.objective{margin:0 0 13px;color:var(--muted);font-size:13px;line-height:1.5}
+.steps{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+.steps li{
+  flex:1;display:flex;align-items:center;gap:6px;padding:7px 8px;border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;background:rgba(255,255,255,.045);font-size:11px;font-weight:600;color:#aebbaa;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.steps li i{
+  width:13px;height:13px;border-radius:50%;border:1.5px solid #758475;display:grid;place-items:center;
+  font-style:normal;font-size:8px;flex:none;
+}
+.steps li.done{background:rgba(147,201,164,.14);border-color:rgba(147,201,164,.36);color:#dff3dc}
+.steps li.done i{background:var(--sage);border-color:var(--sage);color:#102017}
+.steps li.done i:after{content:"✓"}
+.top-actions{display:flex;align-items:center;gap:9px}
+.chapter-pill{
+  padding:8px 12px;border-radius:999px;background:rgba(8,18,12,.55);border:1px solid var(--line);
+  backdrop-filter:blur(12px);font-size:11px;font-weight:700;letter-spacing:.08em;color:#e9e3d0;
+}
+.round{
+  width:38px;height:38px;border-radius:50%;background:rgba(8,18,12,.62);border:1px solid var(--line);
+  backdrop-filter:blur(12px);color:#f5edd7;font-size:16px;font-weight:700;
+}
+.round:hover{background:rgba(20,40,28,.85)}
+.bottom{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:flex-end;
+  justify-content:space-between;gap:16px;padding:clamp(14px,2.2vw,28px);
+  background:linear-gradient(180deg,transparent,rgba(3,9,6,.5));pointer-events:none;
+}
+.bottom>*{pointer-events:auto}
+.seedbar{display:flex;gap:6px;padding:5px;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(16px)}
+.seed{
+  display:flex;align-items:center;gap:7px;padding:8px 11px;border-radius:11px;font-size:11.5px;font-weight:650;
+  color:#b8c3b1;transition:background .2s,color .2s,box-shadow .2s;
+}
+.seed span{font-size:17px;line-height:1}
+.seed.active{background:linear-gradient(180deg,#f4d28c,#e3b25c);color:#2b2412;box-shadow:0 4px 12px rgba(234,181,91,.25)}
+.seed:not(.active):hover{background:rgba(255,255,255,.08);color:#fff5df}
+.actionbar{display:flex;gap:9px;align-items:center}
+.action{
+  min-width:104px;min-height:46px;padding:0 18px;border-radius:14px;border:1px solid rgba(255,255,255,.17);
+  background:rgba(15,30,21,.82);backdrop-filter:blur(16px);color:#eef4e5;font-size:13px;font-weight:700;
+  box-shadow:0 8px 22px rgba(3,9,6,.2);transition:transform .18s,background .18s,opacity .18s;
+}
+.action:hover:not(:disabled){background:rgba(27,50,35,.92);transform:translateY(-1px)}
+.action.primary{background:linear-gradient(180deg,#f0c575,#dca84f);border-color:#f7d99a;color:#2b2412;box-shadow:0 8px 24px rgba(234,181,91,.28)}
+.action.primary:hover:not(:disabled){background:linear-gradient(180deg,#f7d28b,#e3b25c)}
+.action:disabled{opacity:.35;cursor:not-allowed}
+.code-dock{
+  position:fixed;right:clamp(14px,2.2vw,28px);bottom:clamp(92px,13vh,118px);z-index:25;
+  width:min(342px,calc(100vw - 28px));border-radius:18px;overflow:hidden;
+  background:rgba(7,18,12,.92);border:1px solid rgba(147,201,164,.26);
+  backdrop-filter:blur(18px);box-shadow:0 20px 45px rgba(3,9,6,.4);
+}
+.dock-head{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.09)}
+.dock-title{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#b8e4c5}
+.dock-title i{width:7px;height:7px;border-radius:50%;background:#8fd6a0;box-shadow:0 0 9px #8fd6a0}
+.dock-min{width:25px;height:25px;border-radius:7px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#cbd8c8;font-size:14px;line-height:1}
+.dock-body{padding:10px 12px 11px}
+.dock-label{display:block;margin:0 0 5px;color:#9fb8a1;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+#codeInput{
+  display:block;width:100%;min-height:86px;max-height:150px;resize:vertical;
+  padding:9px 10px;border:1px solid #2b4536;border-radius:10px;background:#07140d;
+  color:#d9f0d9;font:12px/1.65 var(--mono);outline:none;caret-color:#eab55b;tab-size:2;
+}
+#codeInput:focus{border-color:#6fae89;box-shadow:0 0 0 3px rgba(111,174,137,.14)}
+#codeInput::placeholder{color:#627a68}
+.dock-row{display:flex;align-items:center;gap:6px;margin-top:8px}
+.run-code{
+  min-height:33px;padding:0 13px;border-radius:9px;background:linear-gradient(180deg,#f0c575,#dca84f);
+  color:#2b2412;font-size:11.5px;font-weight:800;border:1px solid #f7d99a;
+}
+.run-code:disabled{opacity:.45}
+#codeStop{min-height:33px;padding:0 11px;border-radius:9px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#c2cdbf;font-size:10.5px}
+#codeStop:disabled{opacity:.35}
+.dock-help{margin-left:auto;color:#849b87;font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock-status{min-height:15px;margin-top:7px;color:#b9c9b7;font-size:10.5px;line-height:1.45}
+.dock-status.error{color:#f0a58d}
+.dock-status.ok{color:#b8e4c5}
+.code-echo{margin-top:4px;color:#8fb79a;font:9.5px/1.4 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.code-echo:before{content:"PY";display:inline-block;margin-right:6px;padding:1px 4px;border-radius:3px;background:rgba(147,201,164,.13);color:#d9f5dd;font:8px var(--font);font-weight:800;letter-spacing:.06em}
+.dock-open{
+  position:fixed;right:clamp(14px,2.2vw,28px);bottom:clamp(92px,13vh,118px);z-index:25;
+  padding:9px 13px;border-radius:11px;background:rgba(7,18,12,.92);border:1px solid rgba(147,201,164,.3);
+  color:#b8e4c5;font:10px var(--mono);font-weight:700;backdrop-filter:blur(14px);
+}
+.dock-open[hidden]{display:none}
+.toast{
+  position:fixed;left:50%;bottom:clamp(92px,14vh,130px);transform:translate(-50%,12px);z-index:30;
+  padding:10px 16px;border-radius:999px;background:rgba(10,24,16,.9);border:1px solid rgba(234,181,91,.32);
+  color:#fff4d8;font-size:12.5px;font-weight:600;box-shadow:0 12px 30px rgba(3,9,6,.35);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.help-card{
+  position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:50;width:min(420px,calc(100vw - 30px));
+  padding:24px;border-radius:22px;background:rgba(12,26,18,.96);border:1px solid var(--line);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);backdrop-filter:blur(20px);
+}
+.help-card h2{margin:0 0 8px;font-size:22px;letter-spacing:-.02em}
+.help-card p{margin:0 0 10px;color:#bdc8b7;font-size:13.5px;line-height:1.6}
+.help-card b{color:#f4d28c}
+.help-card .close{width:100%;margin-top:8px;min-height:42px;border-radius:12px;background:#f0c575;color:#2b2412;font-weight:800}
+.complete{
+  position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;
+  background:rgba(3,9,6,.62);backdrop-filter:blur(10px);
+}
+.complete[hidden]{display:none}
+.complete-card{
+  width:min(400px,calc(100vw - 32px));padding:28px 26px 24px;border-radius:26px;text-align:center;
+  background:linear-gradient(160deg,#173225,#0b1a12);border:1px solid rgba(234,181,91,.34);
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+}
+.complete-card img{width:116px;height:auto;filter:drop-shadow(0 14px 10px rgba(0,0,0,.4));animation:bob 2s ease-in-out infinite}
+.kicker{margin:4px 0 4px;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.complete-card h2{margin:0;font-size:30px;letter-spacing:-.035em;color:#fff8e4}
+.complete-card p{margin:9px auto 18px;max-width:300px;color:#b9c8b7;font-size:13.5px;line-height:1.6}
+.complete-card button{width:100%;min-height:44px;border-radius:13px;background:#f0c575;color:#2b2412;font-weight:800;font-size:13px}
+@keyframes bob{50%{transform:translateY(-5px) rotate(-1.5deg)}}
+@keyframes walk{to{transform:translateY(-4px) rotate(1.5deg)}}
+@keyframes ringPulse{50%{opacity:.45;transform:scale(1.02)}}
+@keyframes markerPulse{50%{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 0 10px rgba(234,181,91,.08),0 0 30px rgba(234,181,91,.55)}}
+@media(max-width:700px){
+  .world{left:74%}
+  .top{padding:12px}
+  .mission{width:calc(100vw - 24px);padding:13px 14px;border-radius:16px}
+  .mission h1{font-size:22px;margin:6px 0 2px}
+  .objective{font-size:11.5px;margin-bottom:9px}
+  .steps{gap:4px}
+  .steps li{padding:6px 6px;font-size:10px}
+  .eyebrow{font-size:9px}
+  .chapter-pill{display:none}
+  .round{width:34px;height:34px}
+  .bottom{flex-direction:column;align-items:stretch;gap:8px;padding:10px 10px 12px}
+  .seedbar{align-self:flex-start}
+  .actionbar{width:100%}
+  .action{flex:1;min-width:0;min-height:44px;font-size:12px;padding:0 8px}
+  .code-echo{display:none}
+  .code-dock{left:10px;right:10px;width:auto;bottom:148px;border-radius:15px}
+  .dock-body{padding:8px 10px 9px}
+  #codeInput{min-height:66px;max-height:110px;font-size:11px}
+  .dock-help{display:none}
+  .dock-open{left:10px;right:auto;bottom:148px}
+  .bubble{font-size:11px;padding:7px 9px;max-width:190px}
+  .mochi{width:clamp(82px,22vw,120px)}
+  .toast{bottom:150px;font-size:11px}
+}
+@media(max-width:390px){
+  .mission{width:calc(100vw - 20px)}
+  .steps li span{display:none}
+  .steps li{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="game" id="game">
+  <div class="world" id="world">
+    <img class="bg" src="art/restoration-shell.png" alt="A neglected farm waiting to be restored">
+    <div class="vignette"></div>
+
+    <button class="hotspot pulse" id="bed1" style="--x:33%;--y:29%;--w:21%;--h:15%" aria-label="Planting bed one"><span class="tag">Plant here</span></button>
+    <button class="hotspot pulse" id="bed2" style="--x:37%;--y:43%;--w:25%;--h:17%" aria-label="Planting bed two"><span class="tag">Plant here</span></button>
+
+    <div class="crop" id="crop1" style="--x:33%;--y:30%" hidden></div>
+    <div class="crop" id="crop2" style="--x:37%;--y:44%" hidden></div>
+
+    <div class="mochi" id="mochi">
+      <div class="bubble" id="bubble">Tap a bed… or anywhere, and I’ll walk over.</div>
+      <div class="mochi-inner" id="mochiInner"><img src="art/play-mochi.png" alt="Mochi, a small round companion in a straw hat"></div>
+      <span class="shadow"></span>
+    </div>
+  </div>
+
+  <header class="top">
+    <section class="mission" aria-label="Current mission">
+      <div class="eyebrow">Chapter 01 · Morning chores</div>
+      <h1>Wake the farm</h1>
+      <p class="objective">Plant a carrot, water it, then harvest it.</p>
+      <ol class="steps" id="steps">
+        <li data-step="plant"><i></i><span>Plant</span></li>
+        <li data-step="water"><i></i><span>Water</span></li>
+        <li data-step="harvest"><i></i><span>Harvest</span></li>
+      </ol>
+    </section>
+    <div class="top-actions">
+      <span class="chapter-pill">CHAPTER 1 / 5</span>
+      <button class="round" id="help" aria-label="How to play">?</button>
+    </div>
+  </header>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="bottom">
+    <div class="seedbar" id="seedbar" aria-label="Choose a seed">
+      <button class="seed active" data-seed="carrot"><span>🥕</span>Carrot</button>
+      <button class="seed" data-seed="strawberry"><span>🍓</span>Strawberry</button>
+    </div>
+    <div class="actionbar">
+      <button class="action primary" id="plantBtn" disabled>Plant</button>
+      <button class="action" id="waterBtn" disabled>Water</button>
+      <button class="action" id="harvestBtn" disabled>Harvest</button>
+    </div>
+  </div>
+
+  <section class="code-dock" id="codeDock" aria-label="Python console">
+    <div class="dock-head">
+      <span class="dock-title"><i></i>Python console</span>
+      <button class="dock-min" id="dockMin" aria-label="Minimize code console">–</button>
+    </div>
+    <div class="dock-body" id="dockBody">
+      <label class="dock-label" for="codeInput">Your code</label>
+      <textarea id="codeInput" spellcheck="false" placeholder='# type a command — e.g. plant(1, "carrot")'></textarea>
+      <div class="dock-row">
+        <button class="run-code" id="codeRun">Run ▶</button>
+        <button id="codeStop" disabled>Stop</button>
+        <span class="dock-help">go_to · plant · water · harvest</span>
+      </div>
+      <div class="dock-status" id="codeStatus">Type a command, then press Run.</div>
+      <div class="code-echo" id="codeEcho">&gt; waiting for a command…</div>
+    </div>
+  </section>
+  <button class="dock-open" id="dockOpen" hidden>Python ▶</button>
+
+  <section class="help-card" id="helpCard" hidden aria-label="How to play">
+    <h2>How to play</h2>
+    <p><b>Tap a glowing bed</b> (or anywhere on the farm) and Mochi walks there.</p>
+    <p>Pick a seed, then use <b>Plant</b>, <b>Water</b>, and <b>Harvest</b> when the crop is ready.</p>
+    <p>The little Python line at the bottom shows the command behind your action.</p>
+    <p>You can also write the whole sequence in the <b>Python console</b>: <code>go_to(1)</code>, <code>plant(1, "carrot")</code>, <code>water(1)</code>, <code>harvest(1)</code>.</p>
+    <button class="close" id="helpClose">Got it</button>
+  </section>
+
+  <section class="complete" id="complete" hidden>
+    <div class="complete-card">
+      <img src="art/play-mochi.png" alt="Mochi celebrates">
+      <p class="kicker">First harvest</p>
+      <h2>The farm is waking up</h2>
+      <p>You planted, watered, and harvested your first carrot. This is the playable prototype of the new game direction.</p>
+      <button id="playAgain">Play again</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const world = $('#world'), mochi = $('#mochi'), inner = $('#mochiInner');
+  const bubble = $('#bubble'), toast = $('#toast'), codeEcho = $('#codeEcho');
+  const codeInput = $('#codeInput'), codeRun = $('#codeRun'), codeStop = $('#codeStop');
+  const codeStatus = $('#codeStatus'), codeDock = $('#codeDock'), dockOpen = $('#dockOpen');
+  const complete = $('#complete'), helpCard = $('#helpCard');
+  const steps = { plant: $('[data-step="plant"]'), water: $('[data-step="water"]'), harvest: $('[data-step="harvest"]') };
+  const buttons = { plant: $('#plantBtn'), water: $('#waterBtn'), harvest: $('#harvestBtn') };
+  const beds = { 1: $('#bed1'), 2: $('#bed2') };
+  const crops = { 1: $('#crop1'), 2: $('#crop2') };
+  let seed = 'carrot', near = null, active = null, mission = { plant: false, water: false, harvest: false };
+  let running = false, runToken = 0;
+  const plots = {
+    1: { planted: false, watered: false, ready: false, harvested: false, seed: null, timer: null },
+    2: { planted: false, watered: false, ready: false, harvested: false, seed: null, timer: null }
+  };
+  const stand = {
+    1: { x: 43, y: 34 },
+    2: { x: 47, y: 47 }
+  };
+  const cropArt = {
+    carrot: '<svg viewBox="0 0 80 100" aria-hidden="true"><path d="M40 44c-12 0-20 20-23 45 6 5 12 7 23 7s17-2 23-7C60 64 52 44 40 44Z" fill="#e98b3f"/><path d="M27 62c8 4 18 4 26 0M31 75c6 3 12 3 18 0" fill="none" stroke="#c9662d" stroke-width="2.5" stroke-linecap="round"/><path d="M40 46C27 41 16 25 24 19c6-5 13 4 16 12 0-12 6-22 13-18 8 4 3 18-4 24 11-8 20-4 18 4-2 9-16 12-27 5Z" fill="#74a957"/><path d="M38 43c0-13 2-24 5-31" fill="none" stroke="#9bc879" stroke-width="2.5" stroke-linecap="round"/></svg>',
+    strawberry: '<svg viewBox="0 0 80 100" aria-hidden="true"><path d="M40 35C21 35 10 50 19 70c5 11 13 20 21 20s16-9 21-20c9-20-2-35-21-35Z" fill="#d95f5f"/><path d="M22 57c5 2 11 2 16 0M38 68c4 2 9 2 13 0" fill="none" stroke="#b44444" stroke-width="2" stroke-linecap="round"/><path d="M24 34c8-3 12-9 16-16 4 7 8 13 16 16-9 5-23 5-32 0Z" fill="#6ba352"/><path d="M40 31c-6-1-10-5-11-10 6 1 10 4 11 10Zm1 0c6-1 10-5 11-10-6 1-10 4-11 10Z" fill="#86bd67"/></svg>'
+  };
+
+  function say(text, ms = 4200) {
+    bubble.textContent = text;
+    bubble.classList.remove('hidden');
+    clearTimeout(say.timer);
+    if (ms) say.timer = setTimeout(() => bubble.classList.add('hidden'), ms);
+  }
+  function showToast(text, ms = 2200) {
+    toast.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => toast.classList.remove('show'), ms);
+  }
+  function command(text) {
+    codeEcho.textContent = '> ' + text;
+  }
+  function updateSteps() {
+    for (const key of ['plant', 'water', 'harvest']) {
+      steps[key].classList.toggle('done', mission[key]);
+    }
+  }
+  function updateButtons() {
+    const p = near ? plots[near] : null;
+    buttons.plant.disabled = !p || p.planted;
+    buttons.water.disabled = !p || !p.planted || p.watered;
+    buttons.harvest.disabled = !p || !p.ready;
+    buttons.plant.textContent = 'Plant ' + (seed === 'carrot' ? 'carrot' : 'strawberry');
+    const next = !buttons.plant.disabled ? 'plant' : !buttons.water.disabled ? 'water' : !buttons.harvest.disabled ? 'harvest' : null;
+    for (const key of ['plant', 'water', 'harvest']) buttons[key].classList.toggle('primary', key === next);
+  }
+  function moveTo(x, y, plot = null) {
+    mochi.classList.add('walking');
+    const current = parseFloat(mochi.style.left || '48');
+    inner.style.transform = x < current ? 'scaleX(-1)' : 'scaleX(1)';
+    mochi.style.left = x + '%';
+    mochi.style.top = y + '%';
+    near = null;
+    active = plot;
+    updateButtons();
+    setTimeout(() => {
+      mochi.classList.remove('walking');
+      if (plot) {
+        near = plot;
+        const p = plots[plot];
+        if (!p.planted) say('This bed is ready. Let’s plant something.');
+        else if (p.planted && !p.watered) say('It needs water before it can grow.');
+        else if (p.ready) say('It looks ready. Harvest it!');
+        updateButtons();
+      }
+    }, 730);
+  }
+  function selectBed(id) {
+    beds[id].classList.remove('pulse');
+    moveTo(stand[id].x, stand[id].y, id);
+  }
+  function addCrop(id) {
+    const p = plots[id];
+    const el = crops[id];
+    el.innerHTML = cropArt[p.seed] || cropArt.carrot;
+    el.className = 'crop sprout';
+    el.hidden = false;
+    requestAnimationFrame(() => el.classList.add('pop'));
+  }
+  function waterCrop(id) {
+    const el = crops[id];
+    el.classList.add('watered');
+    const p = plots[id];
+    p.watered = true;
+    mission.water = true;
+    updateSteps();
+    command(`farm.water(${id})`);
+    say('Nice. Now we wait for the sun and water to do their work…');
+    showToast('Watered — growing');
+    clearTimeout(p.timer);
+    p.timer = setTimeout(() => {
+      if (!p.planted || p.harvested) return;
+      p.ready = true;
+      el.classList.remove('sprout');
+      el.classList.add('ready');
+      say('It’s ready! Tap Harvest.');
+      showToast('Ready to harvest');
+      updateButtons();
+    }, 3000);
+    updateButtons();
+  }
+  function plant() {
+    if (!near) return;
+    const p = plots[near];
+    if (p.planted) return;
+    p.planted = true;
+    p.seed = seed;
+    clearTimeout(p.timer);
+    mission.plant = true;
+    addCrop(near);
+    updateSteps();
+    command(`farm.plant(${near}, "${seed}")`);
+    showToast('Planted — now water it');
+    say('There we go. Water it next.');
+    updateButtons();
+  }
+  function water() {
+    if (!near) return;
+    const p = plots[near];
+    if (!p.planted || p.watered) return;
+    waterCrop(near);
+  }
+  function harvest() {
+    if (!near) return;
+    const p = plots[near];
+    if (!p.ready) return;
+    p.ready = false;
+    p.harvested = true;
+    clearTimeout(p.timer);
+    mission.harvest = true;
+    updateSteps();
+    const el = crops[near];
+    el.classList.add('harvested');
+    setTimeout(() => { el.hidden = true; el.innerHTML = ''; }, 350);
+    command(`farm.harvest(${near})`);
+    showToast('Harvested +1');
+    say('Our first harvest! The farm is waking up.');
+    updateButtons();
+    setTimeout(() => { complete.hidden = false; }, 700);
+  }
+  function reset() {
+    for (const id of [1, 2]) {
+      const p = plots[id];
+      clearTimeout(p.timer);
+      p.planted = p.watered = p.ready = p.harvested = false;
+      p.seed = null;
+      p.timer = null;
+      crops[id].hidden = true;
+      crops[id].innerHTML = '';
+      crops[id].className = 'crop';
+    }
+    mission = { plant: false, water: false, harvest: false };
+    near = null;
+    active = null;
+    complete.hidden = true;
+    updateSteps();
+    updateButtons();
+    command('waiting for a command…');
+    mochi.style.left = '48%';
+    mochi.style.top = '72%';
+    inner.style.transform = 'scaleX(1)';
+    beds[1].classList.add('pulse');
+    beds[2].classList.add('pulse');
+    say('A fresh start. Tap a bed to walk over.');
+  }
+
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+  function setStatus(text, kind = '') {
+    codeStatus.textContent = text;
+    codeStatus.className = 'dock-status' + (kind ? ' ' + kind : '');
+  }
+  async function ensureNear(n) {
+    if (!plots[n]) throw new Error('Use bed 1 or bed 2.');
+    if (near !== n) {
+      selectBed(n);
+      await wait(820);
+    }
+    if (near !== n) throw new Error('Mochi could not reach that bed.');
+  }
+  async function codePlant(n, type) {
+    await ensureNear(n);
+    const p = plots[n];
+    if (p.planted) throw new Error('That bed already has a crop.');
+    seed = type;
+    document.querySelectorAll('.seed').forEach(b => b.classList.toggle('active', b.dataset.seed === type));
+    plant();
+    await wait(280);
+  }
+  async function codeWater(n) {
+    await ensureNear(n);
+    const p = plots[n];
+    if (!p.planted) throw new Error('Plant something in that bed first.');
+    if (p.watered) throw new Error('That bed is already watered.');
+    water();
+    setStatus('Watered. Growing for 3 seconds…');
+    await wait(3300);
+  }
+  async function codeHarvest(n) {
+    await ensureNear(n);
+    const p = plots[n];
+    if (!p.ready) throw new Error('Not ready yet. Water it first, then wait for it to grow.');
+    harvest();
+    await wait(700);
+  }
+  async function runCode() {
+    if (running) return;
+    const source = codeInput.value.trim();
+    if (!source) {
+      setStatus('Write a command first, for example plant(1, "carrot").', 'error');
+      codeInput.focus();
+      return;
+    }
+    const token = ++runToken;
+    running = true;
+    codeRun.disabled = true;
+    codeStop.disabled = false;
+    codeInput.readOnly = true;
+    setStatus('Running your commands…');
+    let ok = true;
+    const lines = codeInput.value.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (token !== runToken) break;
+      const line = lines[i].trim();
+      if (!line || line.startsWith('#')) continue;
+      setStatus(`Line ${i + 1}: ${line}`);
+      try {
+        let m;
+        if ((m = line.match(/^(?:go_to|walk_to)\((\d+)\)$/))) {
+          await ensureNear(+m[1]);
+        } else if ((m = line.match(/^(?:farm\.)?plant\((\d+)\s*,\s*["'](carrot|strawberry)["']\)$/))) {
+          await codePlant(+m[1], m[2]);
+        } else if ((m = line.match(/^(?:farm\.)?water\((\d+)\)$/))) {
+          await codeWater(+m[1]);
+        } else if ((m = line.match(/^(?:farm\.)?harvest\((\d+)\)$/))) {
+          await codeHarvest(+m[1]);
+        } else if ((m = line.match(/^help\(\)$/))) {
+          setStatus('Commands: go_to(1), plant(1, "carrot"), water(1), harvest(1).', 'ok');
+        } else {
+          throw new Error('Unknown command. Try plant(1, "carrot").');
+        }
+      } catch (e) {
+        setStatus(`Line ${i + 1}: ${e.message}`, 'error');
+        ok = false;
+        break;
+      }
+      await wait(120);
+    }
+    if (token !== runToken) return;
+    running = false;
+    codeRun.disabled = false;
+    codeStop.disabled = true;
+    codeInput.readOnly = false;
+    if (ok) setStatus('Finished. Try harvesting, replanting, or a new command.', 'ok');
+  }
+
+  codeRun.addEventListener('click', runCode);
+  codeStop.addEventListener('click', () => {
+    runToken++;
+    running = false;
+    codeRun.disabled = false;
+    codeStop.disabled = true;
+    codeInput.readOnly = false;
+    setStatus('Stopped. Completed actions stay in the world.');
+  });
+  codeInput.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      runCode();
+    }
+  });
+  $('#dockMin').addEventListener('click', () => {
+    codeDock.hidden = true;
+    dockOpen.hidden = false;
+  });
+  dockOpen.addEventListener('click', () => {
+    codeDock.hidden = false;
+    dockOpen.hidden = true;
+    codeInput.focus();
+  });
+
+  beds[1].addEventListener('click', e => { e.stopPropagation(); selectBed(1); });
+  beds[2].addEventListener('click', e => { e.stopPropagation(); selectBed(2); });
+  world.addEventListener('click', e => {
+    if (e.target.closest('.hotspot') || e.target.closest('.mochi')) return;
+    const r = world.getBoundingClientRect();
+    const x = Math.max(6, Math.min(94, ((e.clientX - r.left) / r.width) * 100));
+    const y = Math.max(38, Math.min(88, ((e.clientY - r.top) / r.height) * 100));
+    moveTo(x, y, null);
+    say('Let’s take a look.');
+  });
+  buttons.plant.addEventListener('click', plant);
+  buttons.water.addEventListener('click', water);
+  buttons.harvest.addEventListener('click', harvest);
+  document.querySelectorAll('.seed').forEach(b => b.addEventListener('click', () => {
+    seed = b.dataset.seed;
+    document.querySelectorAll('.seed').forEach(x => x.classList.toggle('active', x === b));
+    updateButtons();
+  }));
+  $('#help').addEventListener('click', () => helpCard.hidden = false);
+  $('#helpClose').addEventListener('click', () => helpCard.hidden = true);
+  $('#playAgain').addEventListener('click', reset);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { helpCard.hidden = true; }
+    if (e.key === 'p' && !buttons.plant.disabled) plant();
+    if (e.key === 'w' && !buttons.water.disabled) water();
+    if (e.key === 'h' && !buttons.harvest.disabled) harvest();
+  });
+
+  updateSteps();
+  updateButtons();
+  command('waiting for a command…');
+  setTimeout(() => say('Tap a bed… or anywhere, and I’ll walk over.', 5200), 500);
+})();
+</script>
+</body>
+</html>

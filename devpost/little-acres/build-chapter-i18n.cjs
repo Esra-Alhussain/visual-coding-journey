@@ -19,7 +19,7 @@ js=js.replace("$('#chapter-progress').value=n;","$('#chapter-progress').value=n;
 js=js.replace('loadActivity(0);beginTour();\n','document.addEventListener(\'chapterlanguage\',()=>{progress();if(tourIndex>=0)requestAnimationFrame(positionTour);});loadActivity(0);beginTour();\n');
 js=js.replace("[$('#tour-back'),$('#tour-next'),$('#tour-skip')]","[$('#tour-back'),$('#tour-next'),$('#tour-skip'),$('#tour-language')]");
 fs.writeFileSync(p('chapter.js'),js);
-html=html.replace('<html lang="ar" dir="rtl">','<html lang="en" dir="ltr">').replace('</head>','<link rel="stylesheet" href="activity-art.css"></head>');
+html=html.replace('<html lang="ar" dir="rtl">','<html lang="en" dir="ltr">').replace('</head>','<link rel="stylesheet" href="activity-art.css"><link rel="stylesheet" href="modern.css"></head>');
 html=html.replace(/>([^<>]+)</g,(all,text)=>/[\u0600-\u06ff]/.test(text)?'>'+text.replace(text.trim(),pairs[text.trim()]||text.trim())+'<':all).replace(/(aria-label|alt)="([^"]+)"/g,(_,k,v)=>k+'="'+(pairs[v]||v).replaceAll('"','&quot;')+'"');
 html=html.replace('<div class="header-actions">','<div class="header-actions"><button id="chapter-language" lang="ar" dir="rtl" aria-label="Switch to Arabic">العربية</button>');
 html=html.replace('<div id="tour-spotlight">','<button id="tour-language" lang="ar" dir="rtl" aria-label="Switch to Arabic">'+String.fromCharCode(1575,1604,1593,1585,1576,1610,1577)+'</button><div id="tour-spotlight">');

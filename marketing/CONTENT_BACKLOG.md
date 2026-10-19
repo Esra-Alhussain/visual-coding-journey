@@ -59,3 +59,6 @@ Four art-direction comparison; complete local package: [draft](outputs/2026-10-1
 
 ### CONTENT-011 / ENG-004 - 2026-10-19
 Guided first-greeting builder lesson: [complete local package](outputs/2026-10-19-checkpoint-guided-first-greeting.md). CAPTURE NOW / POST LATER; browser review/owner acceptance/recording/publication pending. No learner results.
+
+### CONTENT-012 / ENG-005 - 2026-10-19
+Modern Chapter 1 before/after: [complete local package](outputs/2026-10-19-checkpoint-modern-redesign.md). Same lesson and parser, cleaner visual hierarchy; actual before/after renders exist. CAPTURE NOW / POST LATER; owner design approval, optional recording and publication remain pending. No learner evidence or learning claim.

@@ -87,4 +87,46 @@ Local only. Launch index.html directly; no build/install/server required. Full P
 - [ ] Browser desktop/mobile visual and pointer review.
 
 - [x] Owner-directed unfinished cottage: remove door/windows/lights/front steps; inspect asset and update current/build-base references.
-- [x] Keep the walkthrough speech card fixed during page scrolling; let only its highlighted target follow the viewport. Rebuild generated chapter files; browser review pending.
+- [x] Lock page scrolling only during the walkthrough; Next/Back repositions the callout, and Skip/finish/Escape restores scrolling. Rebuild generated chapter files; browser review pending.
+- [x] Separate concept, task and expected result into labeled cards; show line-specific actionable error warning under Run and clear it on edit/activity change. Bilingual fragments remain switchable; browser review pending.
+
+## Completion and progress feedback - 2026-10-19
+- [x] First-time activity completion opens a compact Mochi celebration with the supplied applause sound.
+- [x] Dialog offers only Practice more or Next activity, reusing the existing progression controls.
+- [x] Improve the original five-icon activity trail in place; keep Mochi marking the current activity.
+- [x] Rebuild bilingual generated page and keep catalog/source references current.
+- [ ] Review dialog, progress interaction, responsive layout and supplied sound in the browser.
+## Concise task wording - 2026-10-19
+- [x] Reduce each code task to a direct action with required steps only.
+- [x] Keep identifier rules in the concept section and preserve expected-result guidance.
+- [x] Rebuild English-default page and fill missing bilingual UI copy entries.
+- [ ] Review the wording and layout in-browser with the owner.
+## Tour placement on laptop viewports - 2026-10-19
+- [x] Clamp tour bubble to visible viewport and keep it beside spotlight when space allows.
+- [x] Let long bubble content scroll within the bubble while keeping page locked.
+- [x] Reposition when browser/visual viewport size changes; set overlay stacking order.
+- [ ] Owner review on laptop and short-height viewport.
+
+### Progress trail correction - 2026-10-19
+The five illustrated activity icons already were the chapter progress control. A duplicate numbered control row was mistakenly added and has now been removed. The original icon trail is the sole interactive progress navigation: its current Mochi marker, clickable unlocked icons, completion checks, connected fill and activity count are being polished in place. Browser review remains pending.
+
+## Modern visual redesign - 2026-10-19
+- [x] Add a presentation-only modern theme layer without changing IDs, lesson copy, parser, rules, audio or progression.
+- [x] Modern app bar, type scale, compact activity rail, stage HUD caption, dark code editor and softer lesson cards.
+- [x] Restyle tour, journey and completion dialogs; keep reduced-motion behavior.
+- [x] Check English/Arabic layouts at 1440, 430 and 390 widths with no horizontal overflow.
+- [x] Reposition the in-tour language pill and stop scroll-lock from re-applying after the tour ends.
+- [x] Repair the English catalog (six missing template placeholders) and regenerate all 170 bilingual entries.
+- [x] Update the stale regression harnesses and pass `check.cjs` plus `check-colorful.cjs`.
+- [x] Save before/after, desktop, phone, Arabic and tour review images.
+- [ ] Owner reviews whether the modern direction feels right; refine palette/density if needed.
+- [ ] Then connect this chapter to the island or start Chapter 2.
+
+## Playable modern-game prototype - 2026-10-19
+- [x] Build a separate full-screen game screen without altering the Chapter 1 lesson.
+- [x] Add mission HUD, Mochi movement, seed choice, contextual actions and a crop-growth loop.
+- [x] Add plant → water → harvest states, completion card and a Python console with `go_to`, `plant`, `water`, `harvest`, line errors and Stop.
+- [x] Verify the full loop and responsive layout in local Chrome at desktop and phone widths.
+- [x] Save desktop, growing, mobile and completion screenshots.
+- [ ] Owner plays it and confirms whether this game direction is right.
+- [ ] If approved, integrate the direction into the chapter/island instead of keeping a separate experiment.
