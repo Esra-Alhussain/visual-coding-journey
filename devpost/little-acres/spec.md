@@ -17,11 +17,25 @@ Two functional repairs landed with the visual pass. The English copy catalog had
 
 Verification: `node devpost/little-acres/check.cjs` passes the farm, language and five-activity suites; `check-colorful.cjs` passes. Local Chrome/CDP screenshots cover default, tour, error, journey, completion, 390px English and 390px Arabic. Review images: `review-modern-before.png`, `review-modern-desktop.png`, `review-modern-phone.png`, `review-modern-arabic-phone.png`, `review-modern-tour.png`. Owner visual approval and larger game-feel review remain pending; no new lesson content, chapter, persistence or publishing.
 
+## Beginner Lesson 1 from Topic 1 — 2026-10-19
+
+Owner asked for the first lesson to come from the supplied Topic 1 PDF and to teach from zero rather than jumping into `farm.harvest(1)`. `first-lesson.html` is a separate five-step lesson in the game visual style: print and strings, variables and assignment, numbers and arithmetic, comments, then a combined mini-program. Each step has one explanation, a collapsed example (never inserted), a learner-written code area, a concept-based validator and friendly line errors. The page reuses `chapter-engine.js`, so it supports only the bounded print/assignment/arithmetic/comment subset and is not a general Python runtime.
+
+No farm actions are taught in Lesson 1; they remain a later game mission. Installation, IDEs, interactive/script modes and object identity are reference material rather than forced first-screen content. All five steps were exercised to the completion card in local Chrome. Owner review of sequence, wording and depth is pending; this is not yet integrated into the chapter/island.
+
 ## Playable modern-game prototype — 2026-10-19
 
 Owner clarified that the earlier modern theme still read as a lesson page and asked for a modern game-like playable prototype. `game-prototype.html` is a separate, intentionally unapproved experiment: a full-screen illustrated farm, a compact mission HUD, click/tap movement for Mochi, a seed selector, contextual Plant/Water/Harvest actions, SVG crop growth, a three-step mission, a completion card, and a Python console that runs a bounded `go_to`, `plant`, `water`, `harvest` command subset with line errors and Stop.
 
 The screen uses the selected farm art and transparent Mochi sprite. A fixed 3:2 world is scaled to cover the viewport, with the mobile camera shifted to keep the planting beds visible. The full loop was verified in local Chrome at 1440x1000 and 390x844; the mobile document has no horizontal overflow. This is a design-direction prototype, not a replacement for `colorful-scene.html`: lesson copy, the safe parser, progression, map, persistence and chapter structure are unchanged. No learner testing, recording or publication.
+
+## Chapter select — 2026-10-19
+
+`chapters.html` is the visible chapter list: five chapter cards, with Chapter 1 linked to `first-lesson.html` and Chapters 2–5 marked “Coming soon” and non-clickable. It is an availability view, not an unlock system or progress store. The lesson has a **Chapters** link back to it, and the island map’s primary action opens Chapter 1. Later chapters remain visibly part of the journey without pretending they are implemented.
+
+## Sign-in window — 2026-10-19
+
+`chapters.html` exposes an optional account window through a **Sign in** button and `#signin` hash. The modal contains email/password and optional name fields, Email/Google tabs, Create account, Forgot password and Continue without an account, with full English/Arabic labels. It is deliberately a front-end prototype: submitting or selecting Google/Create/Forgot only displays a preview message; no account is created, no credentials are transmitted or stored, and there is no backend or cross-device progress. Real authentication would require a chosen identity service, security/privacy review and explicit authorization.
 
 # Little Acres — authorized playable farm study
 

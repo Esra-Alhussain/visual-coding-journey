@@ -279,3 +279,12 @@ Status: implemented and locally reviewed at 1440, 430 and 390 widths in English 
 
 ### Playable modern-game prototype - 2026-10-19
 Owner clarified that the modern theme still read as a lesson page and asked for a modern game-like playable prototype. A separate `game-prototype.html` now demonstrates a full-screen farm, mission HUD, Mochi movement, seed choice, plant/water/harvest actions, crop growth and a completion card, with a small Python command echo. The current Chapter 1 page is untouched. The loop and mobile layout were verified locally; this is an unapproved direction for feedback, not a replacement or a new curriculum decision.
+
+### Beginner Lesson 1 from Topic 1 - 2026-10-19
+Owner asked for the first lesson to follow the supplied Topic 1 PDF from zero and not jump to farm commands. A separate `first-lesson.html` now teaches print/strings, variables, numbers/arithmetic, comments and a combined mini-program in five manual steps, using the safe bounded engine and concept-based validation. No farm actions appear in Lesson 1. All five steps reached the completion card in local Chrome. Owner review of sequence and depth remains pending; this is not yet integrated into the chapter or island.
+
+### Chapter select - 2026-10-19
+Added `chapters.html` showing all five planned chapters. Chapter 1 opens `first-lesson.html`; Chapters 2–5 are visibly marked coming soon and are non-clickable. The lesson links back to the chapter list, and the island map’s primary action opens the chapter list. No unlock, persistence or fake progress was added. Owner review of chapter names, availability and entry flow is pending.
+
+### Sign-in window - 2026-10-19
+The chapter-select page now has a bilingual sign-in window with email/password, optional name, Email/Google tabs, Create account, Forgot password and guest continuation. It is a UI prototype only: no account is created, no credentials are sent or stored, and there is no backend or cross-device progress. Real authentication remains out of scope until the owner selects a service and approves security/privacy handling.

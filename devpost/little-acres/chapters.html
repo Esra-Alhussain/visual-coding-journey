@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mochi · Choose a chapter</title>
+<style>
+:root{
+  --ink:#fbf6e8;
+  --muted:#b9c5b4;
+  --gold:#eab55b;
+  --sage:#9bd0a8;
+  --line:rgba(255,255,255,.15);
+  --glass:rgba(10,24,16,.82);
+  --font:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Noto Sans Arabic",sans-serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:#071009;color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,a{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid #ffe6a6;outline-offset:3px}
+.world{position:fixed;inset:0;z-index:0;overflow:hidden}
+.world img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.world:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,9,6,.86),rgba(3,9,6,.5) 55%,rgba(3,9,6,.72)),linear-gradient(180deg,rgba(3,9,6,.7),transparent 26%,transparent 75%,rgba(3,9,6,.8))}
+.bar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(14px,2.2vw,26px) clamp(16px,4vw,54px)}
+.brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:750;letter-spacing:-.02em}
+.brand img{width:36px;height:36px;object-fit:contain;border-radius:50%;background:#f4e7c9;border:2px solid #fffdf7;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.brand span{font-size:11.5px;font-weight:500;color:var(--muted);letter-spacing:0}
+.back{padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(8,18,12,.55);backdrop-filter:blur(10px);font-size:11px;font-weight:650;color:#d9e3d5}
+.back:hover{background:rgba(255,255,255,.08);color:#fff8e6}
+.bar-actions{display:flex;align-items:center;gap:7px}
+.signin-btn{padding:8px 12px;border:1px solid rgba(234,181,91,.45);border-radius:999px;background:rgba(234,181,91,.14);color:#ffe2a0;font-size:10.5px;font-weight:800}
+.signin-btn:hover{background:rgba(234,181,91,.24)}
+.lang-btn{padding:8px 11px;border:1px solid rgba(155,208,168,.32);border-radius:999px;background:rgba(155,208,168,.1);color:#d8eed8;font-size:10.5px;font-weight:700;min-width:64px}
+.lang-btn:hover{background:rgba(155,208,168,.18)}
+.auth-layer{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;background:rgba(3,9,6,.7);backdrop-filter:blur(10px)}
+.auth-layer[hidden]{display:none}
+.auth-card{position:relative;width:min(430px,calc(100vw - 28px));max-height:calc(100vh - 30px);overflow:auto;padding:24px 24px 20px;border-radius:22px;background:linear-gradient(160deg,#173225,#0b1a12);border:1px solid rgba(234,181,91,.34);box-shadow:0 30px 80px rgba(0,0,0,.55);color:#f8f2e1}
+.auth-close{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#dce6d7;font-size:18px;line-height:1}
+.auth-kicker{margin:0 0 4px;color:var(--gold);font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.auth-card h2{margin:0;font-size:27px;letter-spacing:-.03em;color:#fff8e6}
+.auth-copy{margin:8px 0 15px;color:#b9c8b7;font-size:12px;line-height:1.55}
+.auth-tabs{display:flex;gap:5px;padding:4px;margin-bottom:13px;border:1px solid rgba(255,255,255,.1);border-radius:11px;background:rgba(255,255,255,.03)}
+.auth-tabs button{flex:1;min-height:32px;border:0;border-radius:8px;background:transparent;color:#aebea9;font-size:10.5px;font-weight:700}
+.auth-tabs button.active{background:rgba(234,181,91,.16);color:#ffe4a8;box-shadow:inset 0 0 0 1px rgba(234,181,91,.3)}
+.auth-card label{display:block;margin:0 0 10px;color:#c4d0bf;font-size:10.5px;font-weight:650}
+.auth-card label span{color:#879b86;font-weight:400;margin-left:4px}
+.auth-card input{display:block;width:100%;margin-top:4px;min-height:37px;padding:0 10px;border:1px solid rgba(255,255,255,.14);border-radius:9px;background:rgba(5,14,9,.7);color:#f4f8ee;font:12.5px var(--font);outline:none}
+.auth-card input:focus{border-color:#6fae89;box-shadow:0 0 0 3px rgba(111,174,137,.14)}
+html[dir=rtl] .auth-card input{direction:ltr;text-align:left}
+html[dir=rtl] .auth-close{right:auto;left:12px}
+.auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:13px}
+.auth-actions button{min-height:39px;border-radius:9px;font-size:11.5px;font-weight:800}
+#authSubmit{background:linear-gradient(180deg,#f0c575,#dca84f);border:1px solid #f7d99a;color:#2b2412}
+#authCreate{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#e0e9da}
+.auth-link{display:block;margin:10px auto 0;padding:0;border:0;background:transparent;color:#a9c9ac;font-size:10.5px;text-decoration:underline;text-underline-offset:2px}
+.auth-link:hover{color:#d8eed8}
+.auth-guest:hover{color:#e3f2de}
+.auth-google{padding:4px 0}
+.auth-google button{width:100%;min-height:40px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:#f8f5ea;color:#24352a;font-size:12px;font-weight:800}
+.auth-note{margin:13px 0 8px;padding:9px 10px;border:1px solid rgba(234,181,91,.22);border-radius:9px;background:rgba(234,181,91,.07);color:#d9c797;font-size:10px;line-height:1.5}
+.auth-status{margin:7px 0 0;color:#b8e4c5;font-size:10.5px;line-height:1.45;min-height:14px}
+.auth-status.error{color:#ffd1c2}
+.auth-guest{width:100%;margin-top:3px;padding:8px;border:0;background:transparent;color:#aebea9;font-size:10.5px;text-decoration:underline;text-underline-offset:2px}
+
+html[dir=rtl] .chapter{text-align:right}
+html[dir=rtl] .arrow{transform:scaleX(-1)}
+html[dir=rtl] .foot{text-align:right}
+main{position:relative;z-index:2;width:min(1120px,calc(100% - 32px));margin:0 auto;padding:clamp(8px,2vw,24px) 0 80px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:9.5px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:#f0c073}
+.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+h1{margin:9px 0 6px;font-size:clamp(30px,4.5vw,46px);line-height:1.03;letter-spacing:-.045em;color:#fff9e8}
+.intro p{margin:0;max-width:620px;color:var(--muted);font-size:13.5px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:26px}
+.chapter{position:relative;display:flex;align-items:flex-start;gap:14px;padding:18px 19px;border:1px solid var(--line);border-radius:18px;background:var(--glass);backdrop-filter:blur(16px);min-height:150px;box-shadow:0 18px 38px rgba(3,9,6,.24);transition:transform .2s,border-color .2s,background .2s}
+.chapter:first-child{grid-column:1/-1;min-height:180px;border-color:rgba(234,181,91,.42);background:linear-gradient(120deg,rgba(24,52,36,.94),rgba(9,22,14,.9))}
+a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);background:rgba(16,36,24,.92)}
+.num{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(234,181,91,.14);border:1px solid rgba(234,181,91,.32);color:#f4d28c;font:13px var(--mono);font-weight:700}
+.chapter:first-child .num{width:48px;height:48px;border-radius:15px;font-size:17px;background:linear-gradient(180deg,#f0c575,#dca84f);border-color:#f7d99a;color:#2b2412;box-shadow:0 6px 16px rgba(234,181,91,.2)}
+.chapter h2{margin:4px 0 5px;font-size:16px;line-height:1.2;letter-spacing:-.01em;color:#fff8e7}
+.chapter:first-child h2{font-size:clamp(20px,2.4vw,26px);letter-spacing:-.025em}
+.chapter p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;max-width:520px}
+.chapter:first-child p{font-size:13px;max-width:650px}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:8.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b8e4c5}
+.status:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--sage);box-shadow:0 0 8px var(--sage)}
+.locked .status{color:#a9a991}
+.locked .status:before{background:#8d927c;box-shadow:none}
+.meta{display:block;margin-top:9px;color:#8fa58f;font:10px var(--mono)}
+.arrow{margin-left:auto;align-self:center;font-size:22px;color:#f0c575}
+.locked{opacity:.72}
+.locked .arrow{display:none}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding:9px 2px;color:#8fa58f;font-size:10.5px}
+.foot a{color:#cfe0c8;font-weight:650}
+.foot a:hover{color:#fff6dc}
+.mochi{position:fixed;right:clamp(18px,4vw,64px);bottom:clamp(14px,3vh,34px);z-index:3;width:clamp(92px,10vw,142px);pointer-events:none;filter:drop-shadow(0 16px 12px rgba(0,0,0,.35))}
+.mochi img{width:100%;height:auto;animation:bob 3.4s ease-in-out infinite}
+.mochi .bubble{position:absolute;right:calc(100% - 12px);bottom:54%;width:max-content;max-width:220px;padding:8px 11px;border-radius:12px;background:rgba(255,251,238,.97);color:#27352a;font-size:11px;line-height:1.4;border:1px solid rgba(90,74,45,.18);box-shadow:0 8px 20px rgba(5,12,8,.25)}
+@keyframes bob{50%{transform:translateY(-5px) rotate(-1.5deg)}}
+@media(max-width:760px){
+  .bar{padding:12px 14px}
+  .brand span{display:none}
+  main{width:calc(100% - 24px);padding-bottom:110px}
+  .grid{grid-template-columns:1fr;margin-top:18px}
+  .chapter:first-child{grid-column:auto;min-height:0}
+  .chapter{padding:15px;min-height:0}
+  .mochi{width:84px;right:12px;bottom:10px}
+  .mochi .bubble{display:none}
+  .foot{flex-direction:column;align-items:flex-start;gap:5px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="world" aria-hidden="true"><img src="art/restoration-shell.png" alt=""></div>
+
+<header class="bar">
+  <a class="brand" href="index.html"><img src="art/play-mochi.png" alt=""><span>Mochi · Restore the island</span></a>
+  <div class="bar-actions"><button class="signin-btn" id="signinBtn" type="button">Sign in</button><a class="back" href="index.html">← Back to the island</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="eyebrow">Your journey</div>
+    <h1>Choose a chapter</h1>
+    <p>Five small chapters. Start with the Python basics; later chapters will open the rest of the island. Only Chapter 1 is playable in this prototype.</p>
+  </div>
+
+  <section class="grid" aria-label="Chapters">
+    <a class="chapter playable" href="first-lesson.html">
+      <span class="num">01</span>
+      <div>
+        <span class="status">Playable now</span>
+        <h2>Getting started with Python</h2>
+        <p>Print messages, store values in variables, calculate numbers and write comments. Built from the Topic 1 material, one small step at a time.</p>
+        <span class="meta">5 steps · beginner · no farm commands yet</span>
+      </div>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+
+    <article class="chapter locked" aria-disabled="true">
+      <span class="num">02</span>
+      <div>
+        <span class="status">Coming soon</span>
+        <h2>How programs work</h2>
+        <p>Instruction order, input and output, and reading an error without panicking.</p>
+        <span class="meta">Planned</span>
+      </div>
+    </article>
+
+    <article class="chapter locked" aria-disabled="true">
+      <span class="num">03</span>
+      <div>
+        <span class="status">Coming soon</span>
+        <h2>Variables and expressions</h2>
+        <p>More practice with values, names, types and arithmetic in a small farm task.</p>
+        <span class="meta">Planned</span>
+      </div>
+    </article>
+
+    <article class="chapter locked" aria-disabled="true">
+      <span class="num">04</span>
+      <div>
+        <span class="status">Coming soon</span>
+        <h2>Conditions and decisions</h2>
+        <p>Make the farm respond differently with if and else.</p>
+        <span class="meta">Planned</span>
+      </div>
+    </article>
+
+    <article class="chapter locked" aria-disabled="true">
+      <span class="num">05</span>
+      <div>
+        <span class="status">Coming soon</span>
+        <h2>Loops and repetition</h2>
+        <p>Repeat a small action to bring the orchard back to life.</p>
+        <span class="meta">Planned</span>
+      </div>
+    </article>
+  </section>
+
+  <div class="foot">
+    <a href="index.html">← Back to the island map</a>
+    <span>Later chapters are visible for the journey, not playable yet.</span>
+  </div>
+</main>
+
+<div class="mochi" aria-hidden="true">
+  <div class="bubble">Start with Chapter 1 — I’ll guide you step by step.</div>
+  <img src="art/play-mochi.png" alt="">
+</div>
+
+<div class="auth-layer" id="authLayer" hidden>
+  <section class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="auth-close" id="authClose" type="button" aria-label="Close sign in">×</button>
+    <p class="auth-kicker" id="authKicker">Your progress</p>
+    <h2 id="authTitle">Save your progress</h2>
+    <p class="auth-copy" id="authCopy">Sign in to keep your code and chapter progress. This is a local preview, so no real account is created yet.</p>
+    <div class="auth-tabs" role="tablist">
+      <button class="active" id="authTabEmail" type="button" data-auth-tab="email">Email</button>
+      <button id="authTabGoogle" type="button" data-auth-tab="google">Google</button>
+    </div>
+    <form id="authForm">
+      <label id="authNameLabel">Name <span id="authNameOptional">optional</span><input id="authName" autocomplete="name" maxlength="60"></label>
+      <label id="authEmailLabel">Email<input id="authEmail" type="email" autocomplete="email" required maxlength="120"></label>
+      <label id="authPasswordLabel">Password<input id="authPassword" type="password" autocomplete="current-password" required minlength="6" maxlength="80"></label>
+      <div class="auth-actions"><button id="authSubmit" type="submit">Sign in</button><button id="authCreate" type="button">Create account</button></div>
+      <button class="auth-link" id="authForgot" type="button">Forgot password?</button>
+    </form>
+    <div class="auth-google" id="authGooglePanel" hidden>
+      <button id="authGoogle" type="button">Continue with Google</button>
+    </div>
+    <p class="auth-note" id="authNote">Local preview only: accounts are not connected. Nothing is sent or stored as an account. Your work stays in this browser.</p>
+    <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
+    <button class="auth-guest" id="authGuest" type="button">Continue without an account</button>
+  </section>
+</div>
+
+<script>
+(() => {
+  const cards = [...document.querySelectorAll('.chapter')];
+  const en = cards.map(card => ({
+    status: card.querySelector('.status').textContent.trim(),
+    title: card.querySelector('h2').textContent.trim(),
+    desc: card.querySelector('p').textContent.trim(),
+    meta: card.querySelector('.meta').textContent.trim()
+  }));
+  const ar = [
+    { status: 'متاح الآن', title: 'البداية مع بايثون', desc: 'اطبع رسائل، واحفظ القيم في متغيرات، واحسب الأرقام، واكتب التعليقات. مبني من مادة الموضوع الأول، خطوة صغيرة في كل مرة.', meta: '٥ خطوات · مبتدئ · بدون أوامر مزرعة بعد' },
+    { status: 'قادم قريبًا', title: 'كيف تعمل البرامج', desc: 'ترتيب التعليمات، المدخلات والمخرجات، وقراءة الخطأ بهدوء.', meta: 'مخطط' },
+    { status: 'قادم قريبًا', title: 'المتغيرات والتعبيرات', desc: 'مزيد من التدريب على القيم والأسماء والأنواع والحساب في مهمة مزرعة صغيرة.', meta: 'مخطط' },
+    { status: 'قادم قريبًا', title: 'الشروط والقرارات', desc: 'اجعل المزرعة تستجيب بشكل مختلف باستخدام if وelse.', meta: 'مخطط' },
+    { status: 'قادم قريبًا', title: 'الحلقات والتكرار', desc: 'كرّر عملًا صغيرًا لإعادة البستان إلى الحياة.', meta: 'مخطط' }
+  ];
+  const statics = [
+    ['.brand span', 'Mochi · Restore the island', 'موشي · إحياء الجزيرة'],
+    ['.back', '← Back to the island', '← العودة إلى الجزيرة'],
+    ['.eyebrow', 'Your journey', 'رحلتك'],
+    ['h1', 'Choose a chapter', 'اختر فصلًا'],
+    ['.intro p', 'Five small chapters. Start with the Python basics; later chapters will open the rest of the island. Only Chapter 1 is playable in this prototype.', 'خمسة فصول صغيرة. ابدأ بأساسيات بايثون؛ الفصول اللاحقة ستفتح بقية الجزيرة. الفصل الأول فقط قابل للعب في هذا النموذج.'],
+    ['.foot a', '← Back to the island map', '← العودة إلى خريطة الجزيرة'],
+    ['.foot span', 'Later chapters are visible for the journey, not playable yet.', 'الفصول اللاحقة ظاهرة لرؤية الرحلة، وليست قابلة للعب بعد.'],
+    ['.mochi .bubble', 'Start with Chapter 1 — I’ll guide you step by step.', 'ابدأ بالفصل الأول — سأرشدك خطوة بخطوة.']
+  ];
+  let lang = 'en';
+  const auth = {
+    en: {
+      signin: 'Sign in', kicker: 'Your progress', title: 'Save your progress',
+      copy: 'Sign in to keep your code and chapter progress. This is a local preview, so no real account is created yet.',
+      email: 'Email', google: 'Google', name: 'Name', optional: 'optional', password: 'Password',
+      signinAction: 'Sign in', create: 'Create account', forgot: 'Forgot password?',
+      note: 'Local preview only: accounts are not connected. Use a demo password, not a real one; nothing is sent or stored as an account.',
+      guest: 'Continue without an account', googleCta: 'Continue with Google',
+      preview: 'Preview only — no real account was created.',
+      createNote: 'Account creation is not connected yet. This is a UI preview.',
+      forgotNote: 'Password recovery needs the account service, which is not connected yet.',
+      googleNote: 'Google sign-in is not connected in this local prototype.',
+      close: 'Close sign in'
+    },
+    ar: {
+      signin: 'تسجيل الدخول', kicker: 'تقدمك', title: 'احفظ تقدمك',
+      copy: 'سجّل الدخول لتحفظ كودك وتقدمك. هذه نافذة تجريبية محلية؛ لا يُنشأ حساب حقيقي بعد.',
+      email: 'البريد الإلكتروني', google: 'Google', name: 'الاسم', optional: 'اختياري', password: 'كلمة المرور',
+      signinAction: 'تسجيل الدخول', create: 'إنشاء حساب', forgot: 'نسيت كلمة المرور؟',
+      note: 'نسخة محلية تجريبية: الحسابات غير متصلة. استخدم كلمة مرور تجريبية فقط، وليس كلمة حقيقية؛ لا يتم إرسال أو حفظ حساب.',
+      guest: 'المتابعة بدون حساب', googleCta: 'المتابعة باستخدام Google',
+      preview: 'واجهة تجريبية فقط — لم يتم إنشاء حساب حقيقي.',
+      createNote: 'إنشاء الحساب غير متصل بعد. هذه نافذة عرض فقط.',
+      forgotNote: 'استعادة كلمة المرور تحتاج خدمة الحسابات، وهي غير متصلة بعد.',
+      googleNote: 'تسجيل الدخول عبر Google غير متصل في هذه النسخة المحلية.',
+      close: 'إغلاق نافذة الدخول'
+    }
+  };
+  const langBtn = document.querySelector('#langBtn');
+  const signinBtn = document.querySelector('#signinBtn');
+  const authLayer = document.querySelector('#authLayer');
+  const authForm = document.querySelector('#authForm');
+  const authGooglePanel = document.querySelector('#authGooglePanel');
+  const authStatus = document.querySelector('#authStatus');
+  const authEmail = document.querySelector('#authEmail');
+  function setAuthStatus(text) {
+    authStatus.textContent = text || '';
+  }
+  function renderAuth() {
+    const a = auth[lang];
+    signinBtn.textContent = a.signin;
+    document.querySelector('#authKicker').textContent = a.kicker;
+    document.querySelector('#authTitle').textContent = a.title;
+    document.querySelector('#authCopy').textContent = a.copy;
+    document.querySelector('#authTabEmail').textContent = a.email;
+    document.querySelector('#authTabGoogle').textContent = a.google;
+    document.querySelector('#authNameLabel').firstChild.nodeValue = a.name + ' ';
+    document.querySelector('#authNameOptional').textContent = a.optional;
+    document.querySelector('#authEmailLabel').firstChild.nodeValue = a.email;
+    document.querySelector('#authPasswordLabel').firstChild.nodeValue = a.password;
+    document.querySelector('#authSubmit').textContent = a.signinAction;
+    document.querySelector('#authCreate').textContent = a.create;
+    document.querySelector('#authForgot').textContent = a.forgot;
+    document.querySelector('#authNote').textContent = a.note;
+    document.querySelector('#authGuest').textContent = a.guest;
+    document.querySelector('#authGoogle').textContent = a.googleCta;
+    document.querySelector('#authClose').setAttribute('aria-label', a.close);
+    if (authStatus.textContent) authStatus.textContent = a.preview;
+  }
+  function openAuth() {
+    authLayer.hidden = false;
+    setAuthStatus('');
+    setAuthTab('email');
+    setTimeout(() => authEmail.focus(), 30);
+  }
+  function closeAuth() {
+    authLayer.hidden = true;
+    signinBtn.focus();
+  }
+  function setAuthTab(tab) {
+    document.querySelectorAll('[data-auth-tab]').forEach(b => b.classList.toggle('active', b.dataset.authTab === tab));
+    authForm.hidden = tab !== 'email';
+    authGooglePanel.hidden = tab !== 'google';
+  }
+  signinBtn.addEventListener('click', openAuth);
+  document.querySelector('#authClose').addEventListener('click', closeAuth);
+  document.querySelector('#authGuest').addEventListener('click', closeAuth);
+  authLayer.addEventListener('click', e => { if (e.target === authLayer) closeAuth(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authLayer.hidden) closeAuth(); });
+  document.querySelectorAll('[data-auth-tab]').forEach(b => b.addEventListener('click', () => setAuthTab(b.dataset.authTab)));
+  authForm.addEventListener('submit', e => {
+    e.preventDefault();
+    setAuthStatus(auth[lang].preview);
+  });
+  document.querySelector('#authCreate').addEventListener('click', () => setAuthStatus(auth[lang].createNote));
+  document.querySelector('#authForgot').addEventListener('click', () => setAuthStatus(auth[lang].forgotNote));
+  document.querySelector('#authGoogle').addEventListener('click', () => setAuthStatus(auth[lang].googleNote));
+
+  function apply(next) {
+    lang = next;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    statics.forEach(([sel, textEn, textAr]) => {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = lang === 'en' ? textEn : textAr;
+    });
+    cards.forEach((card, i) => {
+      const data = lang === 'en' ? en[i] : ar[i];
+      card.querySelector('.status').textContent = data.status;
+      card.querySelector('h2').textContent = data.title;
+      card.querySelector('p').textContent = data.desc;
+      card.querySelector('.meta').textContent = data.meta;
+    });
+    langBtn.textContent = lang === 'en' ? 'العربية' : 'English';
+    langBtn.setAttribute('aria-label', lang === 'en' ? 'Switch to Arabic' : 'Switch to English');
+    renderAuth();
+  }
+  langBtn.addEventListener('click', () => apply(lang === 'en' ? 'ar' : 'en'));
+  if (location.hash === '#signin') setTimeout(openAuth, 350);
+})();
+</script>
+</body>
+</html>

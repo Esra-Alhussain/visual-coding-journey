@@ -130,3 +130,39 @@ The five illustrated activity icons already were the chapter progress control. A
 - [x] Save desktop, growing, mobile and completion screenshots.
 - [ ] Owner plays it and confirms whether this game direction is right.
 - [ ] If approved, integrate the direction into the chapter/island instead of keeping a separate experiment.
+
+## Beginner Lesson 1 from Topic 1 - 2026-10-19
+- [x] Build a separate five-step beginner lesson from the supplied PDF: print/string, variable, numbers/arithmetic, comments, combined program.
+- [x] Explain each concept before asking for code; keep examples collapsed and never auto-inserted.
+- [x] Reuse the safe bounded engine and validate the concept rather than an exact memorized answer.
+- [x] Add friendly line errors, hints, manual progression and a completion card.
+- [x] Run all five steps to completion in local Chrome.
+- [ ] Owner reviews the sequence, wording and depth; adjust if setup/IDE material should become an explicit reference.
+- [ ] Integrate the approved lesson into the actual chapter/island.
+
+## Chapter select and entry wiring - 2026-10-19
+- [x] Add `chapters.html` with all five planned chapters and clear availability status.
+- [x] Link Chapter 1 to `first-lesson.html`; mark Chapters 2–5 as coming soon and non-clickable.
+- [x] Add a Chapters link back from the lesson.
+- [x] Wire the island map’s primary action to Chapter 1.
+- [x] Save the chapter-select screenshot.
+- [ ] Owner reviews chapter names, availability and entry flow.
+- [ ] Add real unlock/progress only after the flow is approved.
+
+## Spotlight tour and Arabic - 2026-10-19
+- [x] Keep the existing chapter’s spotlight tour and Arabic switch.
+- [x] Add a four-step intro spotlight tour to Lesson 1 with Back, Next, Skip and Escape.
+- [x] Add a full English/Arabic switch to Lesson 1 (instructions, steps, hints, errors, feedback, completion, labels).
+- [x] Keep Python code/examples LTR and preserve learner code, drafts and output across language changes.
+- [x] Add English/Arabic switching to the chapter-select page.
+- [x] Review English and Arabic tour layouts and rerun all five lesson steps to completion.
+- [ ] Owner reviews tour order and bilingual wording; adjust if needed.
+
+## Sign-in window - 2026-10-19
+- [x] Add a Sign in entry on the chapter-select page.
+- [x] Build the email/password/name window with Email and Google tabs, Create account, Forgot password and guest continuation.
+- [x] Add English/Arabic translations for the whole window.
+- [x] Make clear that no account is created, no data is sent and no backend exists.
+- [x] Verify opening the window directly with `chapters.html#signin`.
+- [ ] Owner reviews wording and chooses whether real authentication (and which service) is in scope.
+- [ ] Implement real auth only after service/security/privacy approval.
