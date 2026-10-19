@@ -83,3 +83,38 @@ Read latest devpost context and marketing files. Complete the requested content/
 - Next step: user reviews/selects a package and adjusts voice/language before recording. Draft status does not authorize publication. Product plans remain unchanged.
 
 For future entries record: date; category (confirmed fact / approved plan / unapproved idea / hypothesis); statement; source and limits; decision or next step; related output/insight/experiment IDs. Preserve changes in direction rather than silently overwriting approval history.
+
+### 2026-10-18 — Movement-game correction, ENG-002
+
+- Owner explicitly rejected the static-feeling comparison and uninteresting character; wanted direction/step-count instructions followed by the character to accomplish a mission. This is owner design feedback, not student research.
+- Owner approved one separate garden movement design study. Local implementation: [garden mission](../devpost/garden-mission/index.html), safe five-command sequence, obstacles, animated leaf-hood character/world, watering payoff. Final art/world/curriculum remains unapproved. Original comparison is historical evidence, not the current recommended experience.
+- Actual Edge desktop route completed in ten steps; automated parser/controller/cancellation checks pass. No learner or public results. Owner acceptance pending.
+- [ENG-002 / CONTENT-009 package](outputs/2026-10-18-checkpoint-program-mochi.md): complete honest-builder lesson with Saudi Arabic narration, English subtitles, shots, caption, Story version and learner-check proposal. CAPTURE NOW / POST LATER after owner visual review. No footage, voice recording, video, outreach, posting or publication approval.
+
+### 2026-10-18 — Little Acres playable crop-cycle continuation
+
+- New authorized local game at devpost/little-acres/index.html: three isometric farm settings, direct and code planting/watering/harvesting, distinct bridge/delivery goals. Actual browser tests and grown-crop render verified, not learner outcomes. Owner acceptance pending; main prototype preserved.
+- Updated same ENG-002 / CONTENT-009 package with complete 25-second farm alternative, narration/subtitles/capture/overlays/caption/Story/next-check. Avoid duplicate content opportunity. Current footage source is Little Acres, earlier route-only scene historical alternative. CAPTURE NOW / POST LATER after owner review; no actual video or publication.
+
+### 2026-10-18 — Code-only / Arabic-first correction
+
+- Owner rejected click-to-move, direct farming/implicit walking and English text overload. Current Little Acres clicks inspect only; explicit code performs movement/actions. Arabic default with English switch and single next-step guidance. Desktop/narrow actual browser checks pass; owner/learner usability remains unmeasured.
+- Updated same ENG-002 / CONTENT-009 package with complete current Arabic-first code-only narration/subtitles/capture/caption/Story and follow-through. Supersedes older click-to-plant recording plan. CAPTURE NOW / POST LATER, no footage, outreach or publication. Separate original bridge/café games remain unresolved, not completed by current farm variants.
+### 2026-10-18 — Playable comparison and public-feedback question
+
+- Owner authorized all three local testable concepts; [comparison](../devpost/world-comparison/index.html) prepared. No final world choice.
+- Owner asked about content opportunity. Updated [ENG-001 / CONTENT-008](outputs/2026-10-17-checkpoint-first-world.md) in place with actual prototype recording plan, narration/subtitles/caption/Story prompts. Sharing optional; CAPTURE NOW / POST LATER after browser visual review. No publication/outreach authorized or done.
+- Functional simulation passes; browser visuals pending, footage and responses absent. Preference and comprehension remain separate. No new product requirements approved.
+
+
+### 2026-10-19 ? Restoration story and art comparison
+Owner selected island restoration; rejected flat map and requested four richer art concepts. Selection pending. Arabic teaching/English code requested. ENG-003 local comparison draft saved; generated concepts are not playable footage. Nothing published.
+
+### 2026-10-19 - Selected art direction
+Owner selected Colorful Farm option 1 and Mochi appearance; initial interactive art study prepared, review pending. ENG-003 no longer describes a binding undecided owner vote. No audience results or publication.
+
+### 2026-10-19 - Explain before asking
+Owner corrected art-study flow: neglected farm, anchored introduction, nearby Help, printing practice before variables, five manual activities with own code. Current chapter implemented/tested in Node, browser/learning review pending. ENG-004 draft saved; no publication or student evidence.
+
+### 2026-10-19 - English-first current chapter
+Owner changed current game default to English for hackathon, with Arabic switch; English code remains. Existing ENG-004 Arabic narration is a channel choice, not the game default. Current chapter English/localization tests pass; browser review and learner evidence still pending.

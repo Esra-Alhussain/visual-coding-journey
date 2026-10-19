@@ -206,3 +206,27 @@ User requested a gentle breeze, soft birdsong, open sky and sunshine for Mochi�
 ### Audio generation pack — 2026-10-12
 
 Organized upcoming character audio as 27 individual spoken dialogue files, 2 outdoor ambience beds and 15 triggered effects. Exact per-file names, triggers, dialogue and generation prompts are in sites/mochi-design/dist/audio/audio-manifest.csv. Drop completed assets into its dialogue/, ambience/ or effects/ folder respectively. Root guidance is sites/mochi-design/AUDIO-PACK.md and dist/audio/README.md; these explain 48 kHz WAV targets, level guidance, consistency and filenames. Dialog includes DYNAMIC placeholders for learner-authored greeting and flower counts, which fixed prerecorded clips cannot express. Audio files have not been generated or integrated yet. Prototype audio continues its current behavior until those files are installed and mapped.
+### 2026-10-18 — Separate world-comparison review
+
+Authorized three local interactive concepts at world-comparison/index.html: garden, bridge, café; equal assignment puzzle and target 3, guided retries, hint and replay. Generated scenery with simplified animated overlays, not final art/curriculum approval. Existing prototype preserved. Functional simulation passes; actual rendered/mobile review pending (browser runtime unavailable). No publication. See latest resume checkpoint and world-comparison/README.md.
+
+### 2026-10-18 — Owner rejection and movement redesign
+
+Owner rejected static world/boring character and clarified movement instructions with step counts as the core expected play. Authorized one separate garden movement experiment. garden-mission/index.html now has a redesigned leaf-hood animated character, route commands, obstacles, middle-row bridge and watering/bloom payoff. Clear goal and partial starter, per-line/per-step execution, hints and safe retry/cancellation. Code-native animated scene; no static generated background or emoji rewards. Automated engine/controller checks and actual Edge full mission at desktop/narrow viewports pass. Desktop/narrow screenshots reviewed; physical-phone/audio and owner acceptance pending. See garden-mission/spec.md and checklist.md. Do not treat old comparison, new art or proposed curriculum as final approved design. No publication.
+
+### 2026-10-18 — Little Acres: playable original isometric farm comparison
+
+User requested a farm game with working crop actions rather than another concept screen. little-acres/index.html is the new local entry: six interactive plots, original carrot/strawberry art, planting/watering/timed growth/harvest, animated walking Mochi and safe code actions. Three playable saved directions become meadow, river-repair farm and café-delivery garden. Depth-sorted native isometric SVG with original house, trees, crops, bridge, chickens, windmill and farmer, no commercial assets. Direct tools and code share engine/controller state. All three missions passed actual Edge page tests at desktop/narrow sizes; grown crop art reviewed in an additional real-browser screenshot. README/spec/checklist and latest resume describe launch, results and limits. Older entries preserved; owner visual and gameplay review pending.
+
+### 2026-10-18 — Inspection-only scene, Arabic-first step guidance
+
+Owner clarified click-to-move and direct farm actions undermine intended learning. Removed them and implicit auto-walking. Now code moves character and performs actions after explicit approach; scene inspection highlights numbered route and explains next command without writing learner code. Farm artwork retained. Arabic default/RTL with English switch and LTR Python; one task panel, concise goal, collapsed help/details, translated dynamic guidance/errors/controls. Actual Edge desktop 28 checks; final 570px 30 after correcting SVG RTL clipping; reviewed screenshots. Earlier click-based instructions superseded. Original bridge/café standalone gameplay still unresolved; current tabs remain farm variants. See latest resume and Little Acres spec/checklist.
+
+### 2026-10-18 — Supplied Python Topic 1 -> proposed opening lesson
+
+Read supplied 30-page PDF and inspected its print/variable/arithmetic/comment example screenshots. Saved concrete proposal at little-acres/lesson-1-proposal.md: Arabic-first greeting/output mission, then variables tied to movement and later naming/bed planning. Current literal-command parser needs new support for print/assignment before implementation. Proposed first lesson remains unapproved; no game/UI code changed or final curriculum rewritten. Latest resume records source, review scope, runtime gap and next decision.
+
+### 2026-10-18 — Chapter preview saved for tomorrow
+
+User wanted the five activities explained visually as one introductory chapter, then requested saving for tomorrow. Standalone interactive preview: little-acres/chapter-preview.html; inline source: output/visuals/mochi-first-chapter.html. Intro/print, greeting variable, farm name, bed area, comments. Main farm remains unchanged and lacks the preview's print/variable/calculation support. Chapter integration/order/explanations await owner review. Resume's latest "Saved for tomorrow" checkpoint contains links, evidence and exact next step. Do not restart broad redesign or assume a final curriculum choice.
+

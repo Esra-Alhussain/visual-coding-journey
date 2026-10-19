@@ -1,5 +1,36 @@
 # First-world comparison — a real choice before artwork investment
 
+## 2026-10-18 revision — playable concepts authorized and prepared
+
+This dated revision supersedes the earlier production/status wording below. ENG-001 / CONTENT-008 remains the same opportunity. Owner explicitly requested three comparable, testable visuals and asked about inviting public opinions. Created local [interactive comparison](../../devpost/world-comparison/index.html): generated illustrated scenery, simplified animated characters/objects, one equally sized numeric-assignment mission per setting, hint, retry, replay and private browser notes. Functional DOM checks pass; rendered visual/mobile review remains pending after browser runtime failure. No footage, voice recording, rendered video, publication, outreach, public feedback or learning evidence exists. No final world selected. Earlier examples of loops/conditions below remain historical proposals; the actual comparison uses one numeric assignment with target 3 in every scene.
+
+Recommendation: **CAPTURE NOW / POST LATER**. Owner first tries all three and checks visual alignment. Then record equal time on each, using clean browser windows and no private tabs. Sharing is optional. The concepts make a useful public preference question; publication is not authorized by asking whether it is a good content opportunity.
+
+### Revised ready-to-record video (about 35 seconds, timing unmeasured)
+
+| Time | Natural Saudi Arabic narration | English subtitle | Shot and exact overlay |
+| --- | --- | --- | --- |
+| 0–5s | لو كودكم يغيّر عالم صغير، بأي مكان ودّكم تبدأون؟ | If your code changed a little world, where would you start? | Equal three-card overview. «ثلاث بدايات لـ Mochi» |
+| 5–10s | جهّزت ثلاث تجارب مبدئية لـ Mochi، وكل وحدة فيها مهمة بايثون بسيطة. | I made three early Mochi concepts, each with a simple Python mission. | Open first scene; persistent «نموذج تفاعلي مبدئي — مو الشكل النهائي» / Interactive concept, not final gameplay. |
+| 10–16s | حديقة نرجّع لها الحياة، ونشوف الزهور تتفتّح. | A garden we bring back to life, watching flowers bloom. | Garden: enter 3, run, full payoff. «A · حديقة» |
+| 16–22s | أو جسر نصلّحه، عشان Mochi توصل لصديقتها. | Or a bridge we repair so Mochi can reach her friend. | Bridge: same action and recording length. «B · جسر ولقاء» |
+| 22–28s | أو كافيه نجهّز فيه طاولة لأول ضيفة. | Or a café where we prepare a table for the first guest. | Café: same action and recording length. «C · أول ضيفة» |
+| 28–35s | وش يشدّكم أكثر، وليه؟ وإذا ولا وحدة، قولوا لي وش ناقص. | Which draws you in most, and why? If none does, tell me what is missing. | Equal three-card overview. «A أو B أو C؟ وليه؟» |
+
+Full narration is the Arabic column read in order. Record only after owner browser review; these are capture instructions, not existing footage. Keep subtitles clear of puzzle input. No finished-game, popularity or improved-learning claims.
+
+Caption: «أنا قاعدة أبني Mochi لتعلّم بايثون، وجهّزت ثلاث بدايات تفاعلية مبدئية 🌱 حديقة ترجع للحياة، جسر يجمع الأصدقاء، أو كافيه يستقبل أول ضيفة. هذي نماذج للتجربة، مو الشكل النهائي للعبة. أي بداية تشدّكم أكثر، وليه؟ وإذا ولا وحدة، وش ناقص؟ ردودكم بتساعدني أراجع الاختيار، والقرار لسه مفتوح.»
+
+Carousel: use five slides from the original package below, but replace every historical “not gameplay” label with «نموذج تفاعلي مبدئي — مو الشكل النهائي» and use actual reviewed concept screenshots, with identical dimensions. Before/after shots must come from the same scene and camera. No invented user comments or vote totals.
+
+Story sequence: introduction «أجرّب ثلاث بدايات لـ Mochi، ولسه ما اخترت»; equal-length Garden A, Bridge B, Café C clips; final «أي بداية ودّكم تجرّبون؟ A حديقة / B جسر / C كافيه»; follow-up «وش حمّسكم فيها؟ وإذا ولا وحدة، وش ناقص؟». Use letter replies if three-option polling is unavailable; no platform feature claims.
+
+What this teaches us: self-selected story preference and reasons, influenced by art and order. It does not establish Python comprehension. For a separate usability check, ask a willing beginner to predict the number’s effect, try a mission without supplying the answer, and explain what changed and why. Participation/outreach remains unapproved. No observations recorded.
+
+Next decision: owner reviews the three local concepts, compares specific reasons and production constraints, and chooses whether to refine one. Public votes never automatically select the curriculum. If no responses arrive, continue owner review with no automatic winner. Keep existing prototype and approved requirements intact pending a selected direction.
+
+Readiness: interactive local comparison and complete script prepared; browser visual/mobile QA, voice, footage, edit and timing remain pending; owner reviews truthful concept labels before separately approving any publication. Sources: owner transcript and local comparison/check.cjs on 2026-10-18. No external research performed.
+
 Checkpoint: ENG-001. Content: CONTENT-008. Date: 2026-10-17.
 Stage: product/story exploration. Sources: user's current brief; devpost/resume.md 2026-10-17 story checkpoint; plush-prototype-spec.md; Marketing Memory and engagement guide. No external conversations researched; no current-demand or trend claim is made.
 Status: complete local content/production package; visuals and recording not produced; not approved for publication. No world selected, product decision approved, learner evidence received or game code changed.

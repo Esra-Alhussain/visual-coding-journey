@@ -1,0 +1,329 @@
+=== PAGE 1 (object 4) ===
+Imam Abdulrahman Bin Faisal University
+Deanship of Preparatory  Year and  Supporting Studies
+Computer  Department
+Basics of Programming through Python
+Getting  started with Python
+Introduction to  Programming
+COMP106
+Term 1  | 2026 - 2027
+
+=== PAGE 2 (object 16) ===
+Learning outcomes
+▪ Describe the features of Python programming language.
+▪ List  Python IDEs .
+▪ Differentiate between Python  script mode  and  interactive mode .
+▪ Explain how to  install Python  and  Jupyter Notebook. 
+▪ Use Jupyter Notebook as the programming environment.
+▪ Write a first Python program. 
+2
+
+=== PAGE 3 (object 27) ===
+Features of Python (1)
+▪ Python language is founded in the year 1991 by the developer
+Guido Van Rossum .
+▪ Its most popular implementation is called CPython and is written
+in C programming language .
+▪ Python is a high level language .
+▪ It is a free and open source software that works on Linux, Mac,
+Windows, and various other platforms .
+➔ Python is portable and platform independent , means it can run on
+various operating systems and hardware platforms .
+3
+
+=== PAGE 4 (object 34) ===
+Features of Python (2) 
+▪ It is an interpreted language, as Python programs are
+executed by an interpreter .
+▪ Python programs are easy to understand as they
+have a clearly defined syntax and relatively simple
+structure .
+▪ Python is case - sensitive .
+➔ For example, NUMBER and number are not same
+in Python . 4
+
+=== PAGE 5 (object 36) ===
+Features of Python (3) 
+▪ Python has a rich library of predefined functions .
+▪ Python is also helpful in Web development .
+➔ Many popular Web services and applications are
+built using Python .
+▪ Python uses indentation for blocks and nested
+blocks .
+5
+
+=== PAGE 6 (object 38) ===
+Python Interpreter
+▪ The  Python interpreter  is a program that can read Python 
+programming statements and execute them.
+▪ When you install the Python language on your computer, one of 
+the items that is installed is the  Python interpreter .
+▪ The Python interpreter can run Python programs that are saved
+in files or interactively execute Python statements that are
+typed at the keyboard .
+▪ Python comes with a program named IDLE that simplifies the
+process of writing, executing, and testing programs .
+6
+
+=== PAGE 7 (object 40) ===
+Python IDE / IDLE
+▪ Python IDLE (stands for Integrated Development and Learning
+Environment ) : an integrated development environment for Python,
+which has been bundled with the default implementation of the
+language .
+▪ What is an IDE (stands for Integrated Development Environment )?
+➔ An IDE is a software application that provides
+comprehensive facilities to computer programmers for
+software development .
+▪ Most modern IDEs have intelligent code completion .
+7
+
+=== PAGE 8 (object 42) ===
+Popular Python IDEs
+8
+
+=== PAGE 9 (object 60) ===
+Installing Python and Jupyter Notebook IDE (1)
+Installing  Jupyter Notebook on Windows
+• Go to the official Anaconda website and open the download page. 
+https://www.anaconda.com/
+9
+
+=== PAGE 10 (object 72) ===
+Installing Python and  Jupyter Notebook IDE ( 1 )
+Installing Python on Windows
+• Download the latest Python 3 version (64 - bit graphical installer for most modern systems) , 
+from the official website:   https://www.python.org/
+10
+
+=== PAGE 11 (object 76) ===
+Running Python
+Working with default Python distribution
+▪ Now the Python interpreter is installed on your computer to run
+and execute python programs . You can use also any online Python
+interpreter (i . e . https : //www . online - python . com/ ) .
+▪ The interpreter is also called Python shell .
+▪ A sample screen of Python interpreter (or shell) is shown in the
+following figure .
+11
+
+=== PAGE 12 (object 88) ===
+▪ The symbol >>> is the Python
+>>>
+prompt , which indicates that the
+“
+interpreter is ready to take
+instructions .
+▪ We can type commands or
+statements on this prompt to
+execute them using a Python
+interpreter .
+12
+
+=== PAGE 13 (object 90) ===
+Execution modes
+▪ There are  two ways to use the Python 
+interpreter: 
+1) Interactive mode : allows execution of 
+individual statement instantaneously
+2) Script mode : allows us to write more than one 
+instruction in a file called Python source code 
+file that can be executed. 
+13
+
+=== PAGE 14 (object 92) ===
+Interactive mode (1)
+▪ To work in the  interactive mode , we 
+can simply type a Python 
+statement on the  >>> prompt 
+directly . 
+▪ As soon as we press enter, the 
+interpreter executes the statement 
+and displays the result(s), as shown 
+in the figure.
+14
+
+=== PAGE 15 (object 95) ===
+Interactive mode (2)
+▪ Working in the interactive mode is convenient for testing a  single 
+line code for  instant execution . 
+▪ But in the interactive mode, we  cannot save  the statements for 
+future use and we have to retype the statements to run them again.
+15
+
+=== PAGE 16 (object 97) ===
+Script mode (1)
+▪ In the script mode, we can write a Python program in a  file , save it 
+and then use the interpreter to execute it. 
+▪ Python scripts are saved as files where file name has extension 
+“ . py ” . 
+▪ By default, the Python scripts are saved in the Python installation 
+folder.
+16
+
+=== PAGE 17 (object 104) ===
+1
+Script mode (2)
+▪ To create a  script file , we can 
+either: 
+1 ) Create a python file ( . py ) from IDLE
+a
+(“ File ” ➔ ” New File ”) , and save it .
+2)   a)  Create your Python file (. py ) using 
+editor like  Notepad++ ,     
+b
+2
+b) save it an  . py file, then         
+c) open it directly from IDLE (“ File ” 
+➔ ” Open ”) as shown in the figure.
+c
+17
+
+=== PAGE 18 (object 110) ===
+Script mode (3)
+3)  While working in the 
+script mode, after opening 
+the file, click on 
+“ Run ” ➔ ” Run Module ” from 
+the menu as shown in the 
+figure.
+18
+
+=== PAGE 19 (object 116) ===
+Launching Jupyter Notebook Jupyter Notebook (1)
+▪ Open Anaconda Navigator.
+Find Jupyter Notebook in the list 
+of applications.
+Click Launch to open Jupyter 
+Notebook in your web browser.
+19
+To download it visit anaconda navigator: https://www.anaconda.com/
+
+=== PAGE 20 (object 119) ===
+Python Keywords
+▪ Keywords are  reserved words . 
+▪ Each keyword has a specific  False class finally is return
+meaning to the Python interpreter, 
+None continue for lambda try
+and we can use a keyword in our 
+True def from nonlocal while
+program only for the purpose for 
+and del global not with
+which it has been defined. 
+as elif if or yield
+▪ As Python is  case sensitive , 
+assert else import pass
+keywords must be written exactly 
+break except in raise
+as given in the table.
+20
+
+=== PAGE 21 (object 124) ===
+Identifiers  (1)
+▪ In programming languages,  identifiers are names used to identify a 
+variable, function, or other entities in a program. 
+▪ The  rules for naming an identifier in Python  are as follows: 
+1) The name should begin with an  uppercase or a  lowercase
+alphabet or  an underscore sign  (_). This may be followed by 
+any combination of characters  a – z ,  A – Z ,  0 – 9 or 
+underscore ( _ ). 
+➔ An identifier  CANNOT start with a digit.
+21
+
+=== PAGE 22 (object 126) ===
+Identifiers (2)
+2) It can be of any length. (However, it is 
+preferred to keep it short and meaningful). 
+3) It should not be a keyword or reserved word 
+given in previous table.
+4) We cannot use special symbols like  ! ,  @ ,  # ,  $ , 
+% , etc., in identifiers.
+22
+
+=== PAGE 23 (object 128) ===
+Variables
+▪ A  variable in a program is uniquely identified by a name (identifier).
+▪ Variable in Python refers to  an object  — an item or element that is 
+stored in the memory. 
+▪ Value of a variable can be a  string (e�g�� ‘b’� ‘Global Citizen’)�  numeric
+(e.g., 345) or any  combination of alphanumeric characters (CD67). 
+▪ In Python we can use an assignment statement to create new 
+variables and assign specific values to them. 
+23
+
+=== PAGE 24 (object 130) ===
+Variables in Python
+▪ Variable declaration is  implicit in Python, means variables are 
+automatically declared  and  defined when they are assigned a value 
+the first time . 
+▪ Variables  must always be assigned values  before they are used in 
+expressions as otherwise it will lead to an error in the program. 
+▪ Wherever a variable name occurs in an expression, the  interpreter
+replaces it with the value of that particular variable .
+24
+
+=== PAGE 25 (object 132) ===
+Variables:  Try out (1)
+▪ Write a program to display 
+“ keep smiling ” assigned to a 
+variable in Python.
+▪ Write a program to display 
+“ The user number is 101 ”� 
+with  101 is assigned to a 
+variable in Python.
+25
+
+=== PAGE 26 (object 136) ===
+Variables: Try out (2)
+▪ Write a Python program to  find the area of a rectangle 
+given that its length is 10 units and breadth is 20 units .
+26
+
+=== PAGE 27 (object 139) ===
+Comments in Python
+▪ Comments are used to add a remark 
+or a note in the source code.
+▪ Comments are not executed by 
+interpreter. 
+▪ In Python, a comment starts with  #
+(hash sign). 
+▪ Everything  following the # till the end 
+of that line is treated as a comment 
+and the interpreter simply  ignores it 
+while executing the statement.
+27
+
+=== PAGE 28 (object 142) ===
+Everything is an Object
+▪ Python treats every value or data item 
+whether numeric, string, or other type 
+(discussed in the next topic)  as an object  in 
+the sense that it can be assigned to some 
+variable or can be passed to a function as an 
+argument.
+▪ Every object in Python is assigned a  unique 
+identity (ID) which remains the same for the 
+lifetime of that object. This ID is akin to the 
+memory address of the object. 
+➔ The function  id()  returns the 
+identity of an object.
+28
+
+=== PAGE 29 (object 145) ===
+1) List any four Python IDEs.
+2) What are the basic modes of python? 
+3) What is Python Shell or Python Interactive 
+“
+Shell? 
+4) What is script mode? 
+5) Differentiate between script mode and 
+interactive mode.
+6) What is Jupyter Notebook?
+7) What is the extension of Python 
+program/script? 
+29
+
+=== PAGE 30 (object 147) ===
+Any Questions?
+Thank you for listening  ☺
+30

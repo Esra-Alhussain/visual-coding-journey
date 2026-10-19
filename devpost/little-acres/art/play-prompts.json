@@ -1,0 +1,14 @@
+{
+  "mode": "Built-in image_gen reference edits",
+  "reference": "farm-cartoon.png",
+  "prompts": [
+    {
+      "id": "environment",
+      "prompt": "Edit this exact image for a playable scene background. Preserve the composition, camera, dimensions, all buildings, gate, bridge, river, textures, colors and light EXACTLY as closely as possible. Only remove the small cream Mochi character standing at the gate, naturally filling its former location with matching dirt path. Keep all other artwork including crops unchanged. No text or UI. This is a background layer; do not redesign or reinterpret."
+    },
+    {
+      "id": "mochi",
+      "prompt": "Extract the exact small cream Mochi character wearing its straw farm hat from this reference into a standalone full-body game sprite on a truly transparent background. Preserve this character's identity: cream rounded mochi body, tiny orange feet, tiny rounded arms, dark dot eyes, small w-shaped friendly mouth, blush, woven straw hat with teal band. Match premium colorful farm cartoon rendering, warm light, volumetric painterly shading and proportions. Facing front slightly three quarter as in reference. Only ONE character centered, occupying image, no scenery, no pedestal, no words, no extra props, no opaque background. Minimal soft contact shadow only."
+    }
+  ]
+}

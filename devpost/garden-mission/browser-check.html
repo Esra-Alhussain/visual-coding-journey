@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mochi · A little help for Fern</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><a href="../world-comparison/index.html" class="brand"><span class="brandmark">m</span> mochi <span class="brand-sub">a little world, brought to life</span></a><span class="prototype">PLAYABLE DESIGN STUDY</span><button id="sound" class="quiet" aria-pressed="false">Sound off</button></header>
+<main>
+<section class="world-panel" aria-label="Interactive garden world">
+<div class="world-heading"><div><span class="eyebrow">CHAPTER 01 / THE OVERGROWN GARDEN</span><h1>A little help for Fern.</h1></div><div class="goal-badge"><span class="seed-icon">✿</span><span id="goalLabel">Reach Fern<br><small>then give her a drink</small></span></div></div>
+<div class="scene-wrap">
+<svg id="scene" viewBox="0 0 1040 770" role="img" aria-labelledby="worldTitle worldDesc"><title id="worldTitle">Mochi’s living garden</title><desc id="worldDesc">An eight-column, five-row garden. Mochi starts at the bottom left. A thirsty plant is at the top right. Cross the stream on the middle-row bridge. Rocks block the direct route. Movement commands use screen directions.</desc>
+<defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#c6dfd5"/><stop offset="1" stop-color="#f2e7b9"/></linearGradient>
+<linearGradient id="earth" x2="0" y2="1"><stop stop-color="#b5bd72"/><stop offset="1" stop-color="#799c65"/></linearGradient>
+<linearGradient id="water" x2="1" y2="1"><stop stop-color="#8bd6d1"/><stop offset=".5" stop-color="#5baaa8"/><stop offset="1" stop-color="#a1ded0"/></linearGradient>
+<linearGradient id="leaf" x2=".8" y2="1"><stop stop-color="#c2e6aa"/><stop offset=".5" stop-color="#74b591"/><stop offset="1" stop-color="#398c77"/></linearGradient>
+<linearGradient id="cream" x2=".8" y2="1"><stop stop-color="#fff8de"/><stop offset="1" stop-color="#efcfa1"/></linearGradient>
+<linearGradient id="wood" x2="0" y2="1"><stop stop-color="#d9ab74"/><stop offset="1" stop-color="#a47849"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff6be" stop-opacity=".8"/><stop offset="1" stop-color="#fff6be" stop-opacity="0"/></radialGradient>
+<filter id="shadow" x="-40%" y="-40%" width="180%" height="190%"><feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#325344" flood-opacity=".16"/></filter>
+<symbol id="tree" viewBox="0 0 180 240"><ellipse cx="92" cy="224" rx="66" ry="12" fill="#476b45" opacity=".17"/><path d="M78 211 85 108 102 108 110 211Q94 225 78 211" fill="#927248"/><path d="m89 159-30-31m40 9 25-31" fill="none" stroke="#927248" stroke-width="9" stroke-linecap="round"/><g class="tree-crown"><path d="M35 143C-4 111 21 61 45 62 20 10 93-7 113 28 160-2 192 71 156 94 197 131 137 175 109 150 82 180 54 161 35 143" fill="#568d66"/><path d="M35 120C14 85 47 79 59 73 43 43 86 20 110 46 147 22 160 69 141 85 164 107 133 131 109 113 86 144 67 131 58 122Z" fill="#83ad70"/><path d="M60 72Q76 41 105 52M113 74Q135 55 142 71" fill="none" stroke="#b3c886" stroke-width="7" stroke-linecap="round" opacity=".6"/></g></symbol>
+<symbol id="rock" viewBox="0 0 80 70"><ellipse cx="40" cy="57" rx="33" ry="9" fill="#45634e" opacity=".18"/><path d="m9 48 11-28 25-9 21 17 7 24-27 9-31-3Z" fill="#8d9b91"/><path d="m20 20 25-9 21 17-28 5Z" fill="#b5bfb0"/><path d="m9 48 17-13 19 4 21-11 7 24-27 9-31-3Z" fill="#83958a"/><path d="m19 31 9-11 18-5 10 11-19 3-5 9Z" fill="#8ca76d"/><path d="m46 48 5-8 9 2" fill="none" stroke="#657f74" stroke-width="2"/></symbol>
+<symbol id="flower" viewBox="0 0 55 90"><path d="M28 83Q35 53 26 32M30 62Q8 68 9 48Q26 46 30 62M30 70Q48 71 47 54Q31 54 30 70" stroke="#4e9465" stroke-width="4" fill="#81b780" stroke-linecap="round"/><g fill="currentColor"><ellipse cx="27" cy="21" rx="9" ry="15"/><ellipse cx="27" cy="21" rx="9" ry="15" transform="rotate(72 27 31)"/><ellipse cx="27" cy="21" rx="9" ry="15" transform="rotate(144 27 31)"/><ellipse cx="27" cy="21" rx="9" ry="15" transform="rotate(216 27 31)"/><ellipse cx="27" cy="21" rx="9" ry="15" transform="rotate(288 27 31)"/></g><circle cx="27" cy="31" r="8" fill="#f4ca6a"/></symbol>
+<symbol id="grass" viewBox="0 0 40 35"><path d="m8 30-5-15 12 10 3-22 6 22 11-10-5 15" fill="#65966a" opacity=".7"/></symbol>
+</defs>
+<rect width="1040" height="770" fill="url(#sky)"/>
+<g class="clouds" fill="#fff9e4" opacity=".65"><path d="M80 86Q65 54 104 55 114 24 146 48 185 28 195 68 229 69 218 89Z"/><path d="M540 58Q530 30 560 28 581-8 610 23 648 10 657 44 688 47 679 62Z"/></g>
+<path d="M0 170Q111 75 216 137T430 144Q596 45 770 137T1040 107V346H0Z" fill="#91b697"/><path d="M0 210Q161 130 300 198T592 190Q837 105 1040 192V366H0Z" fill="#7ca58b"/>
+<g id="cottage" filter="url(#shadow)"><path d="M660 117 775 66 891 122V250H660Z" fill="#e4d7aa"/><path d="m635 125 140-77 143 78-28 15-115-60-115 60Z" fill="#a87f63"/><path d="m653 120 122-66 125 66" fill="none" stroke="#c39b75" stroke-width="8" stroke-linecap="round"/><path d="M746 248V180Q775 139 804 180V248" fill="#658c75"/><path d="M755 243V183Q776 156 795 183V243" fill="#4b7566"/><circle cx="786" cy="210" r="4" fill="#efd48d"/><rect x="683" y="160" width="36" height="40" rx="16" fill="#b4cfbd" stroke="#a68157" stroke-width="7"/><path d="M701 147v56m-20-24h41" stroke="#a68157" stroke-width="4"/><path d="M830 161h35v38h-35Z" fill="#b4cfbd" stroke="#a68157" stroke-width="6"/><path d="M848 162v36" stroke="#a68157" stroke-width="4"/></g>
+<path d="M0 295Q180 218 349 249Q570 205 769 253T1040 270V770H0Z" fill="url(#earth)"/>
+<path d="M169 639Q138 719 34 770H295Q241 706 251 640" fill="#d9c49a"/>
+<g id="fence" stroke="#a98b60" stroke-width="9" stroke-linecap="round"><path d="M108 256 904 256M110 280 914 280"/><path d="M120 238v58m64-64v60m66-65v65m65-67v66m66-65v65m65-65v65m66-65v65m66-65v65m66-65v65m66-65v65m66-65v65m66-65v65m66-65v65"/></g>
+<path d="M506 237Q556 310 515 382Q484 442 532 493T529 646Q507 725 553 770H643Q596 701 615 641Q647 540 607 487T600 372Q639 293 592 237Z" fill="#739968"/><path d="M523 237Q573 310 532 382Q501 442 549 493T546 646Q524 725 570 770H624Q577 701 596 641Q628 540 588 487T581 372Q620 293 573 237Z" fill="url(#water)"/>
+<g class="ripples" stroke="#d7f4dc" stroke-width="4" stroke-linecap="round" fill="none" opacity=".6"><path d="m548 310 17 1m-20 40 22 1m-31 181 31 1m-15 62 24 1m-20 79 25 1m-20 47 27 1m-5 41 21 1"/></g>
+<g id="tiles"></g><g id="decor"></g><g id="trails" opacity=".65"></g>
+<g id="plant" transform="translate(815 305)"><ellipse cx="0" cy="15" rx="39" ry="17" fill="#6e7150" opacity=".28"/><path d="m-35-12 8 36q27 15 54 0l8-36Z" fill="#ba7859"/><ellipse cy="-12" rx="36" ry="13" fill="#dba078"/><ellipse cy="-14" rx="29" ry="8" fill="#795d44"/><g id="fernStem" class="plant-sway"><path d="M0-13Q12-38 0-66Q-17-94-33-64" fill="none" stroke="#6b9c64" stroke-width="7" stroke-linecap="round"/><path d="M4-33Q-26-27-20-51Q-1-55 4-33M5-47Q31-36 30-62Q11-67 5-47" fill="#8bac74"/><g id="droopyFlower" transform="translate(-34 -62) rotate(-35)"><path d="M0 0Q-28-19-16-35Q-1-34 0-16Q2-39 17-35Q29-19 0 0" fill="#c9b49a"/><circle cy="-10" r="7" fill="#cbb06a"/></g></g><g id="blooms" opacity="0"><use href="#flower" x="-43" y="-105" width="55" height="100" style="color:#f2af95"/><use href="#flower" x="-8" y="-124" width="55" height="115" style="color:#f6d686"/></g></g>
+<g id="actor" transform="translate(215 594)"><ellipse id="actorShadow" cy="9" rx="31" ry="9" fill="#294f40" opacity=".2"/><g id="mochiBody"><g class="feet" fill="#e9c795"><ellipse class="foot left-foot" cx="-16" cy="1" rx="12" ry="8"/><ellipse class="foot right-foot" cx="16" cy="1" rx="12" ry="8"/></g><path d="M-29-15Q-57-25-43-39Q-33-45-24-27" fill="#e9cf9e" class="arm left-arm"/><path d="M29-15Q57-25 43-39Q33-45 24-27" fill="#e9cf9e" class="arm right-arm"/><g id="face-body"><path d="M-38-33Q-43-82-1-88Q44-86 39-34L33-8Q0 13-33-8Z" fill="url(#leaf)" stroke="#398572" stroke-width="2"/><path d="M-18-80Q-29-111-6-119Q-4-94 4-86Q24-112 39-95Q26-76 6-78" fill="#7cb786" stroke="#4a9576" stroke-width="2"/><path d="M-31-36Q-33-68 0-69Q35-68 32-35Q34-3 0-3Q-34-3-31-36" fill="url(#cream)"/><ellipse cx="-20" cy="-28" rx="8" ry="5" fill="#eaa49a" opacity=".65"/><ellipse cx="20" cy="-28" rx="8" ry="5" fill="#eaa49a" opacity=".65"/><g class="eyes" fill="#354b42"><ellipse cx="-12" cy="-39" rx="4.5" ry="7"/><ellipse cx="12" cy="-39" rx="4.5" ry="7"/><circle cx="-13" cy="-42" r="1.5" fill="white"/><circle cx="11" cy="-42" r="1.5" fill="white"/></g><path id="mouth" d="M-5-24Q0-18 5-24" fill="none" stroke="#6a5547" stroke-width="2.5" stroke-linecap="round"/><path d="m-10-5 10 12 10-12" fill="#e3b66b"/><circle cy="1" r="3" fill="#fff0b5"/></g><g id="can" transform="translate(32 -28)" opacity="0"><path d="M0 0h24v23Q12 31 0 23Z" fill="#c4d8c2" stroke="#668f85" stroke-width="2"/><path d="m23 8 19-10 3 7-22 15M0 4Q-14-1-10 13l10 4" fill="none" stroke="#668f85" stroke-width="5"/><path d="m40 13 4 10m2-7 6 9m-16-5 2 10" stroke="#a4e3df" stroke-width="3" stroke-linecap="round" class="pour"/></g></g></g>
+<g id="front-decor"><use href="#tree" x="-65" y="60" width="255" height="340"/><use href="#tree" x="895" y="105" width="225" height="300"/><use href="#tree" x="-85" y="484" width="235" height="313"/><use href="#tree" x="920" y="490" width="225" height="300"/><g class="butterfly" transform="translate(340 180)"><path d="M0 0Q-21-24-25-2Q-25 14 0 3Q25 14 25-2Q21-24 0 0" fill="#f4d28e"/><path d="M0-5v16" stroke="#96754d" stroke-width="3"/></g><g class="butterfly second" transform="translate(840 550)"><path d="M0 0Q-17-20-20-2Q-20 12 0 3Q20 12 20-2Q17-20 0 0" fill="#e8afa0"/><path d="M0-4v13" stroke="#96754d" stroke-width="3"/></g></g>
+<ellipse cx="933" cy="80" rx="260" ry="250" fill="url(#sun)" pointer-events="none"/>
+<g id="celebration" pointer-events="none"></g>
+</svg>
+<div class="scene-controls"><label><input id="gridToggle" type="checkbox" checked> Path grid</label><div class="compass" aria-label="Screen directions"><span>↑ up</span><span>← left · right →</span><span>↓ down</span></div></div>
+<div class="speech" id="speech"><span class="speaker">MOCHI</span><p id="dialogue">Fern’s looking a little sleepy. Can you help me find a way to her?</p></div>
+<div id="success" class="success" hidden><span class="eyebrow">A SMALL ACT OF KINDNESS</span><h2>A little water.<br>A whole lot of life.</h2><p>You wrote the route. Mochi followed it.<br>And Fern has a friend again.</p><button id="again">Play again</button><button id="experiment" class="quiet">Keep exploring</button></div>
+</div>
+<div class="world-footer"><span><i></i> A living little garden</span><span id="position">Mochi · column 1, row 5</span></div>
+</section>
+<aside class="coding-panel">
+<div class="mission-title"><span class="eyebrow">YOUR FIRST ADVENTURE</span><h2>Give Mochi<br>a way forward.</h2><p>Write a route to the <strong>golden tile</strong> beside Fern. Then call <code>water_plant()</code>.</p></div>
+<ol class="goals"><li id="reachGoal">Reach the golden tile</li><li id="waterGoal">Water Fern and watch her bloom</li></ol>
+<div class="editor-head"><label for="code">your_route.py</label><span>PYTHON COMMANDS</span></div>
+<div class="editor"><div id="lineNumbers" aria-hidden="true">1</div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="editorHelp"># Every number is a walking step.
+move_right(1)
+move_up(1)</textarea></div>
+<div class="execution" id="execution" aria-live="polite">Ready when you are.</div>
+<div class="run-controls"><button id="run" class="primary"><span>▶</span> Run my route <kbd>Ctrl ↵</kbd></button><button id="stop" class="quiet" disabled>Stop</button><button id="reset" class="quiet">Reset</button></div>
+<p id="editorHelp" class="editor-help">Each run begins at the gate. Up means toward the cottage. One step = one tile.</p>
+<details class="commands" open><summary>Build your instructions <span>＋</span></summary><div class="step-picker"><label for="steps">Steps per command</label><input id="steps" type="number" min="1" max="8" value="1"></div><div class="command-buttons"><button data-command="move_up">↑ Up</button><button data-command="move_left">← Left</button><button data-command="move_right">Right →</button><button data-command="move_down">↓ Down</button><button data-command="water_plant" class="water-command">Water plant</button></div><p>Tap to add a command, or type it yourself. Use parentheses: <code>move_right(3)</code>.</p></details>
+<div class="feedback" role="status" id="feedback">Try the short starter route. Watch what happens, then add your next instructions.</div>
+<button id="hintButton" class="hint-button">A little nudge?</button><div id="hint" class="hint" hidden></div>
+<div class="speed"><label for="speed">Walking pace</label><input id="speed" type="range" min="250" max="800" value="550" aria-label="Step duration, lower is faster"><span>slow</span></div>
+<p class="scope-note">A local movement-game prototype. These five Python-style commands are simulated safely; this is not a full Python interpreter.</p>
+</aside></main><script src="engine.js"></script><script src="app.js"></script><script>
+(async()=>{try{
+document.getElementById('code').value='move_right(1)\nmove_up(2)\nmove_right(5)\nmove_up(2)\nwater_plant()';
+document.getElementById('code').dispatchEvent(new Event('input'));
+document.getElementById('speed').value='250';
+await window.MochiGarden.run();
+const s=window.MochiGarden.state;
+const report={watered:s.watered,steps:s.steps,position:s.position,running:s.running,successVisible:!document.getElementById('success').hidden,bodyWidth:document.body.scrollWidth,viewport:innerWidth};
+const p=document.createElement('pre');p.id='browser-check-result';p.textContent=JSON.stringify(report);p.hidden=true;document.body.appendChild(p);
+}catch(e){document.body.setAttribute('data-qa-error',e.message);}})();
+</script></body></html>

@@ -19,3 +19,4 @@ Initialization created no content packages, public posts or experiment results. 
 ## Saved packages
 
 - [2026-10-17: Three first TikTok options](2026-10-17-first-tiktok-options.md) — complete script/production packages ready for review; not recorded or approved for publication.
+- [2026-10-18: Program Mochi’s journey](2026-10-18-checkpoint-program-mochi.md) — ENG-002 / CONTENT-009; complete local honest-builder lesson package. Actual recordings, video edit and publication pending.

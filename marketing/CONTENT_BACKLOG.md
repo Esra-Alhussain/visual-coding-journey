@@ -37,3 +37,25 @@ Historical alternatives for the original first-post brief. Superseded for the cu
 Public audience: beginners and anyone struggling to understand and apply Python. University students remain an initial group to learn from, not the exclusive public audience. Natural, inclusive Saudi Arabic narration / English subtitles, per the user's later voice instruction. Exact owner-supplied script is saved in the revised package. [Final production checklist](outputs/2026-10-17-first-tiktok-production-checklist.md) includes clips, required screen recordings/visuals, exact overlays, subtitle chunks and caption. Recording and actual duration verification remain pending. This is a marketing clarification only; no product decision changed. Four response categories are prompts, not findings. No student feedback or results exist for this draft. Nothing is published or approved for publication.
 
 Add actual requested deliverables with a stable ID, date, language/channel assumptions, learning goal, evidence, dependency and saved output path. Suggested statuses: idea, drafting, ready for review, approved for publication, published, paused. Record publication approval and actual publication evidence separately. No publication or engagement is established by this initial backlog.
+
+### 2026-10-18 — CONTENT-009 / ENG-002: programming the route
+
+[Complete package](outputs/2026-10-18-checkpoint-program-mochi.md): honest builder lesson on moving from static reward to a character following instructions. Saudi Arabic narration, English subtitles, real capture plan, caption and Story prompt. CAPTURE NOW / POST LATER; script prepared, owner review/footage/edit/publication pending. No audience results. CONTENT-008’s comparison remains historical; owner rejected its game feel, not an audience vote result.
+### 2026-10-18 — CONTENT-008 revision
+
+ENG-001 comparison package updated in place: three local playable concepts prepared; browser visual review/recording/publication pending. Complete revised narration, subtitles, shots, caption and Story prompts in [existing package](outputs/2026-10-17-checkpoint-first-world.md). No final world chosen or audience results. Recommendation CAPTURE NOW / POST LATER.
+
+### 2026-10-18 — CONTENT-009 Little Acres continuation
+
+Same ENG-002 package updated with complete 25-second playable farm crop-cycle alternative. Actual Little Acres code/click crop interactions verified in Edge; footage/voice/video/edit/owner acceptance still pending. CAPTURE NOW / POST LATER. No posting, outreach, final curriculum approval or learner evidence.
+
+### 2026-10-18 — CONTENT-009 current correction
+
+Current ready-to-record alternative is Arabic-first/code-only: inspect by clicking, move/act by code, one next instruction. Full package revised in place; prior direct-click capture directions superseded. Browser functional evidence exists, owner/learner clarity review and recording/publication do not. CAPTURE NOW / POST LATER.
+
+
+### 2026-10-19 ? CONTENT-010 / ENG-003
+Four art-direction comparison; complete local package: [draft](outputs/2026-10-19-checkpoint-art-directions.md). Generated concept art, no implemented animation. Art selection/recording/publication pending; no audience evidence. CAPTURE NOW / POST LATER.
+
+### CONTENT-011 / ENG-004 - 2026-10-19
+Guided first-greeting builder lesson: [complete local package](outputs/2026-10-19-checkpoint-guided-first-greeting.md). CAPTURE NOW / POST LATER; browser review/owner acceptance/recording/publication pending. No learner results.

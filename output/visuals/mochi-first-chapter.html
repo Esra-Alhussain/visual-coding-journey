@@ -1,0 +1,81 @@
+<div id="mochi-chapter-preview" dir="rtl">
+  <style>
+    #mochi-chapter-preview{--mp-paper:light-dark(#fbf8ed,#25342c);--mp-ink:light-dark(#38563f,#e0ead8);--mp-soft:light-dark(#edf1dd,#344b37);--mp-line:light-dark(#d5dfc0,#4c654d);--mp-green:light-dark(#6c9058,#a7c78c);--mp-code:light-dark(#f0f2e5,#1c2d24);--mp-sky:light-dark(#d4e9d9,#243d38);--mp-soil:light-dark(#b48658,#8b6a48);--mp-grass:light-dark(#adc987,#527b48);--mp-face:light-dark(#f5dfb4,#e0c69c);--mp-text-soft:light-dark(#6d7f62,#b4c7a6);font:14px/1.7 'Segoe UI',Tahoma,Arial,sans-serif;color:var(--mp-ink);background:var(--mp-paper);border:1px solid var(--mp-line);border-radius:20px;overflow:hidden;color-scheme:light dark}
+    #mochi-chapter-preview *{box-sizing:border-box}
+    #mochi-chapter-preview .mp-head{padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid var(--mp-line)}
+    #mochi-chapter-preview .mp-head small{display:block;color:var(--mp-text-soft);font-size:12px}
+    #mochi-chapter-preview h2{font-size:21px;font-weight:500;margin:0}
+    #mochi-chapter-preview .mp-stops{display:flex;gap:7px;padding:13px 18px;flex-wrap:wrap;border-bottom:1px solid var(--mp-line)}
+    #mochi-chapter-preview button{font:inherit;cursor:var(--cursor-interaction,pointer)}
+    #mochi-chapter-preview .mp-stop{padding:6px 12px;border:1px solid var(--mp-line);border-radius:20px;background:var(--mp-paper);color:var(--mp-ink)}
+    #mochi-chapter-preview .mp-stop[aria-pressed=true]{background:var(--mp-ink);color:var(--mp-paper);border-color:var(--mp-ink)}
+    #mochi-chapter-preview .mp-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    #mochi-chapter-preview .mp-play{position:relative;min-height:355px;background:var(--mp-sky);overflow:hidden;border-inline-end:1px solid var(--mp-line)}
+    #mochi-chapter-preview .mp-sign{position:absolute;top:19px;right:20px;max-width:65%;padding:7px 17px;background:var(--mp-paper);border:2px solid var(--mp-line);border-radius:10px;overflow-wrap:anywhere}
+    #mochi-chapter-preview .mp-ground{position:absolute;inset:115px -30px -20px;background:var(--mp-grass);border-radius:45% 45% 0 0}
+    #mochi-chapter-preview .mp-bed{position:absolute;top:146px;left:24px;width:58%;height:112px;display:grid;gap:5px;transform:skewY(-15deg);transform-origin:center;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}
+    #mochi-chapter-preview .mp-cell{background:var(--mp-soil);border-radius:5px;display:grid;place-items:center;color:var(--mp-paper);box-shadow:0 4px 0 color-mix(in srgb,var(--mp-soil) 75%,var(--mp-ink));font-size:12px}
+    #mochi-chapter-preview .mp-character{position:absolute;right:27px;top:169px;width:76px;height:78px;border-radius:46% 46% 38% 38%;background:var(--mp-green);border:1px solid var(--mp-line);box-shadow:0 8px 0 color-mix(in srgb,var(--mp-ink) 15%,transparent)}
+    #mochi-chapter-preview .mp-character:before{content:'';position:absolute;left:9px;right:9px;top:18px;bottom:8px;border-radius:45%;background:var(--mp-face)}
+    #mochi-chapter-preview .mp-eyes{position:absolute;inset:26px 0 0;text-align:center;color:var(--mp-ink);direction:ltr;font-size:25px}
+    #mochi-chapter-preview .mp-hat{position:absolute;left:-10px;right:-10px;top:4px;height:13px;border-radius:50%;background:var(--mp-face);border:1px solid var(--mp-soil)}
+    #mochi-chapter-preview .mp-hat:before{content:'';position:absolute;left:23px;right:23px;bottom:6px;height:24px;background:var(--mp-face);border-radius:50% 50% 10% 10%;border-bottom:6px solid var(--mp-green)}
+    #mochi-chapter-preview .mp-bubble{position:absolute;left:17px;right:17px;bottom:17px;background:var(--mp-paper);border:1px solid var(--mp-line);border-radius:16px 16px 4px 16px;padding:11px 15px;min-height:62px;overflow-wrap:anywhere}
+    #mochi-chapter-preview .mp-bubble small{font-size:11px;color:var(--mp-text-soft);display:block}
+    #mochi-chapter-preview .mp-tag{position:absolute;top:76px;left:18px;right:18px;color:var(--mp-ink);background:var(--mp-paper);padding:5px 10px;border-radius:8px;border:1px solid var(--mp-line);font-size:12px;overflow-wrap:anywhere}
+    #mochi-chapter-preview .mp-lesson{padding:20px;min-width:0}
+    #mochi-chapter-preview .mp-lesson h3{font-size:18px;font-weight:500;margin:0 0 8px}
+    #mochi-chapter-preview .mp-copy{margin:0 0 14px;color:var(--mp-text-soft);font-size:14px}
+    #mochi-chapter-preview label{display:block;font-size:12px;margin-bottom:5px}
+    #mochi-chapter-preview textarea{font:13px/1.8 ui-monospace,Consolas,monospace;display:block;width:100%;min-height:130px;resize:vertical;direction:ltr;text-align:left;unicode-bidi:isolate;border:1px solid var(--mp-line);border-radius:10px;background:var(--mp-code);color:var(--mp-ink);padding:10px}
+    #mochi-chapter-preview .mp-run{background:var(--mp-ink);color:var(--mp-paper);border:0;border-radius:10px;padding:9px 18px;margin-top:12px}
+    #mochi-chapter-preview .mp-output{margin-top:14px;border-top:1px solid var(--mp-line);padding-top:10px;min-height:62px}
+    #mochi-chapter-preview .mp-output small{font-size:11px;color:var(--mp-text-soft);display:block}
+    #mochi-chapter-preview .mp-result{white-space:pre-wrap;overflow-wrap:anywhere;unicode-bidi:plaintext;min-height:22px}
+    #mochi-chapter-preview .mp-foot{padding:12px 20px;border-top:1px solid var(--mp-line);display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:var(--mp-text-soft)}
+    #mochi-chapter-preview .mp-next{padding:6px 13px;border:1px solid var(--mp-line);border-radius:9px;background:var(--mp-soft);color:var(--mp-ink)}
+    #mochi-chapter-preview .mp-react{animation:mp-react .5s ease-in-out 2}
+    @keyframes mp-react{50%{translate:0 -9px;rotate:4deg}}
+    @media(max-width:620px){#mochi-chapter-preview .mp-main{grid-template-columns:1fr}#mochi-chapter-preview .mp-play{min-height:315px;border-inline-end:0;border-bottom:1px solid var(--mp-line)}#mochi-chapter-preview .mp-bed{top:131px;height:100px}#mochi-chapter-preview .mp-character{top:149px}#mochi-chapter-preview .mp-head{align-items:flex-start}#mochi-chapter-preview .mp-head small{max-width:170px}#mochi-chapter-preview .mp-stops{gap:5px;padding:10px}#mochi-chapter-preview .mp-stop{padding:5px 9px}#mochi-chapter-preview .mp-foot{align-items:flex-start}}
+    @media(prefers-reduced-motion:reduce){#mochi-chapter-preview *{animation:none!important}}
+  </style>
+  <div class="mp-head"><div><h2>أول يوم في المزرعة</h2><small>فصل واحد · خمس محطات قصيرة</small></div><small>معاينة لطريقة الدرس<br>ليست إضافة إلى اللعبة الحالية</small></div>
+  <div class="mp-stops" role="group" aria-label="محطات الفصل">
+    <button class="mp-stop" type="button" data-step="0" aria-pressed="true">1 · البداية</button>
+    <button class="mp-stop" type="button" data-step="1" aria-pressed="false">2 · الرسالة</button>
+    <button class="mp-stop" type="button" data-step="2" aria-pressed="false">3 · اسم المزرعة</button>
+    <button class="mp-stop" type="button" data-step="3" aria-pressed="false">4 · الحوض</button>
+    <button class="mp-stop" type="button" data-step="4" aria-pressed="false">5 · ملاحظة</button>
+  </div>
+  <div class="mp-main">
+    <div class="mp-play" role="img" aria-label="مشهد مصغر لموشي ومزرعة: النتيجة تظهر بعد تشغيل المثال فقط">
+      <div class="mp-ground"></div><div class="mp-sign" data-view="sign">مزرعتنا الصغيرة</div><div class="mp-tag" data-view="tag" hidden></div><div class="mp-bed" data-view="bed"></div>
+      <div class="mp-character" data-view="character"><span class="mp-eyes">• ω •</span><span class="mp-hat"></span></div>
+      <div class="mp-bubble"><small>موشي</small><span data-view="bubble">أهلًا! اكتب لي رسالة، ثم شغّلها.</span></div>
+    </div>
+    <section class="mp-lesson"><h3 data-view="title">1 · خلّنا نجرب أول أمر</h3><p class="mp-copy" data-view="copy">أنت تكتب التعليمات، ومفسّر بايثون ينفّذها. هذا الأمر يعرض رسالة.</p><label for="mochi-preview-code">الكود الذي يكتبه المتعلّم</label><textarea id="mochi-preview-code" data-view="code" dir="ltr" spellcheck="false" aria-label="جرّب تعديل المثال">print("مرحبًا يا موشي!")</textarea><button class="mp-run" type="button" data-view="run">شغّل المثال</button><div class="mp-output" aria-live="polite"><small>المخرجات · ما تعرضه print</small><div class="mp-result" data-view="result">بانتظار تشغيل المثال…</div></div></section>
+  </div>
+  <div class="mp-foot"><span data-view="takeaway">رسالة قصيرة، أمر واحد، ونتيجة واضحة.</span><button class="mp-next" type="button" data-view="next">المحطة التالية ←</button></div>
+  <script>
+    (function(){
+      const root=document.getElementById('mochi-chapter-preview'),q=name=>root.querySelector('[data-view="'+name+'"]');
+      const tasks=[
+        {title:'1 · خلّنا نجرب أول أمر',copy:'أنت تكتب التعليمات، ومفسّر بايثون ينفّذها. هذا الأمر يعرض رسالة.',code:'print("مرحبًا يا موشي!")',bubble:'أهلًا! اكتب لي رسالة، ثم شغّلها.',take:'تعلّمنا: كتابة أمر وتشغيله ورؤية المخرجات.'},
+        {title:'2 · نعطي الرسالة اسمًا',copy:'greeting اسم يشير إلى رسالتك. غيّر النص، ثم شاهد ما تعرضه print.',code:'greeting = "صباح الخير يا موشي!"\nprint(greeting)',bubble:'خلّنا نحفظ رسالتك باسم، ونستخدمه.',take:'تعلّمنا: متغيّر يشير إلى قيمة، ثم استخدام اسمه.'},
+        {title:'3 · وش اسم مزرعتك؟',copy:'اختر اسمًا للمزرعة، ثم اعرضه. اللافتة هنا تصوّر المخرجات داخل اللعبة.',code:'farm_name = "مزرعة الأصدقاء"\nprint(farm_name)',bubble:'مزرعتنا تحتاج اسمًا! وش تختار؟',take:'تعلّمنا: اسم متغيّر واضح، ونص داخل علامتي تنصيص.'},
+        {title:'4 · كم مربعًا يحتاج الحوض؟',copy:'حوض طوله 2 وعرضه 3. احسب مساحته، ثم عدّ المربعات في المشهد.',code:'length = 2\nwidth = 3\narea = length * width\nprint(area)',bubble:'نخطط لحوض صغير. كم مربعًا نحتاج؟',take:'تعلّمنا: أرقام ومتغيّرات وضرب، مع نتيجة يمكن عدّها.'},
+        {title:'5 · اترك ملاحظة لنفسك',copy:'السطر الذي يبدأ بـ # ملاحظة لا ينفّذها بايثون. جرّب حذفه: تبقى النتيجة نفسها.',code:'# احسب مساحة حوض الزراعة\nlength = 2\nwidth = 3\narea = length * width\nprint(area)',bubble:'خلّنا نكتب ملاحظة توضّح فكرتنا.',take:'تعلّمنا: التعليق يشرح الكود ولا يغيّر تنفيذه.'}
+      ];
+      let current=0;
+      function bed(w=3,h=2,numbered=false){q('bed').replaceChildren();q('bed').style.gridTemplateColumns='repeat('+w+',1fr)';q('bed').style.gridTemplateRows='repeat('+h+',1fr)';for(let i=0;i<w*h;i++){const cell=document.createElement('div');cell.className='mp-cell';cell.textContent=numbered?String(i+1):'';q('bed').append(cell);}}
+      function remember(){if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{preview:'five-activity introductory chapter',selectedActivity:tasks[current].title},privateContent:{step:current,code:q('code').value}}).catch(()=>{});}
+      function select(n,savedCode){current=n;const task=tasks[n];q('title').textContent=task.title;q('copy').textContent=task.copy;q('code').value=savedCode??task.code;q('bubble').textContent=task.bubble;q('result').textContent='بانتظار تشغيل المثال…';q('takeaway').textContent=task.take;q('sign').textContent='مزرعتنا الصغيرة';q('tag').hidden=true;q('next').textContent=n===4?'العودة للبداية ↶':'المحطة التالية ←';root.querySelectorAll('[data-step]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.step)===n)));bed();}
+      function uncomment(line){let quote=null,escaped=false;for(let i=0;i<line.length;i++){const c=line[i];if(escaped){escaped=false;continue;}if(c==='\\'&&quote){escaped=true;continue;}if(quote){if(c===quote)quote=null;}else if(c==='"'||c==="'")quote=c;else if(c==='#')return line.slice(0,i);}return line;}
+      function interpret(source){const env=Object.create(null),out=[];let hasComment=false;function expr(s){s=s.trim();if(/^"(?:[^"\\]|\\.)*"$/.test(s))return JSON.parse(s);if(/^'(?:[^'\\]|\\.)*'$/.test(s))return s.slice(1,-1);if(/^\d+$/.test(s))return Number(s);if(/^[a-zA-Z_]\w*$/.test(s)){if(!Object.hasOwn(env,s))throw Error('الاسم '+s+' لم يأخذ قيمة بعد. اكتب سطر الإسناد أولًا.');return env[s];}const product=s.match(/^([a-zA-Z_]\w*|\d+)\s*\*\s*([a-zA-Z_]\w*|\d+)$/);if(product){const a=expr(product[1]),b=expr(product[2]);if(typeof a!=='number'||typeof b!=='number')throw Error('استخدم رقمين لحساب مساحة الحوض.');return a*b;}throw Error('راجع الأقواس وعلامات التنصيص. هذه المعاينة تدعم أمثلة الدرس البسيطة فقط.');}
+      for(const original of source.split(/\r?\n/)){const clean=uncomment(original);if(clean!==original)hasComment=true;const s=clean.trim();if(!s)continue;let m;if(m=s.match(/^print\((.*)\)$/)){out.push(expr(m[1]));continue;}if(m=s.match(/^([a-zA-Z_]\w*)\s*=\s*(.+)$/)){if(['print','for','if','class','def','True','False','None'].includes(m[1]))throw Error('اختر اسم متغيّر مثل greeting أو area.');env[m[1]]=expr(m[2]);continue;}if(/^Print\(/.test(s))throw Error('اكتب print بحرف p صغير. بايثون تفرّق بين الحروف الكبيرة والصغيرة.');throw Error('جرّب تعديل النص أو الأرقام داخل المثال المعروض.');}if(!out.length)throw Error('أضف print لعرض النتيجة.');return{env,out,hasComment};}
+      function run(){try{const r=interpret(q('code').value),last=r.out.at(-1),e=r.env;if(current===0&&(typeof last!=='string'||!last.trim()))throw Error('اكتب رسالة بين علامتي تنصيص داخل print.');if(current===1&&(typeof e.greeting!=='string'||last!==e.greeting))throw Error('أعط greeting رسالة، ثم اكتب print(greeting).');if(current===2&&(typeof e.farm_name!=='string'||last!==e.farm_name))throw Error('أعط farm_name اسمًا للمزرعة، ثم اعرضه باستخدام print.');if(current>=3){if(!Number.isInteger(e.width)||!Number.isInteger(e.length)||e.width<1||e.length<1||e.width>6||e.length>6||e.area!==e.width*e.length||last!==e.area)throw Error('اختر طولًا وعرضًا من 1 إلى 6، واحسب area ثم اعرضها.');bed(e.width,e.length,true);q('bubble').textContent='نحتاج '+e.area+' مربعات. نقدر نعدّها هنا!';}else q('bubble').textContent=String(last);q('result').textContent=r.out.map(String).join('\n');if(current===1){q('tag').hidden=false;q('tag').textContent='greeting ← '+e.greeting;}if(current===2)q('sign').textContent=e.farm_name;if(current===4)q('bubble').textContent=r.hasComment?'الملاحظة موجودة، والنتيجة ما تغيّرت: '+e.area:'حذفت التعليق، والنتيجة نفسها: '+e.area;q('character').classList.remove('mp-react');void q('character').offsetWidth;q('character').classList.add('mp-react');remember();}catch(e){q('result').textContent=e.message;}}
+      root.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{select(Number(b.dataset.step));remember();}));q('run').addEventListener('click',run);q('next').addEventListener('click',()=>{select((current+1)%5);remember();});q('code').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();run();}});
+      const saved=window.openai?.widgetState?.privateContent;select(Number.isInteger(saved?.step)&&saved.step>=0&&saved.step<5?saved.step:0,saved?.code);window.addEventListener('openai:set_globals',e=>{const v=e.detail?.globals?.widgetState?.privateContent;if(Number.isInteger(v?.step)&&v.step>=0&&v.step<5)select(v.step,v.code);});
+    })();
+  </script>
+</div>
