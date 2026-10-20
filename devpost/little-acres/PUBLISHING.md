@@ -4,10 +4,10 @@ Date: 2026-10-20. This file records the current preview and the steps for a perm
 
 ## Current temporary public preview
 
-- URL: https://86a8f6ad3715f7.lhr.life/
-- Chapter list: https://86a8f6ad3715f7.lhr.life/chapters.html
-- Lesson 1: https://86a8f6ad3715f7.lhr.life/first-lesson.html
-- Farm prototype: https://86a8f6ad3715f7.lhr.life/write-code.html
+- URL: https://e7bcc9a3453a3e.lhr.life/
+- Chapter list: https://e7bcc9a3453a3e.lhr.life/chapters.html
+- Lesson 1: https://e7bcc9a3453a3e.lhr.life/first-lesson.html
+- Farm prototype: https://e7bcc9a3453a3e.lhr.life/write-code.html
 
 This is a **temporary** localhost.run tunnel to the local static server on port 8081. It works only while:
 

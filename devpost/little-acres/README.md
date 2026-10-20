@@ -147,3 +147,6 @@ The existing chapter keeps its original spotlight tour and Arabic switch. The ne
 
 ### Sign-in window - 2026-10-19
 The chapter-select page has a **Sign in** button opening a bilingual account window: email/password, optional name, Email/Google tabs, Create account, Forgot password and Continue without an account. It is a UI prototype only. No account is created, no credentials are sent or stored, and there is no backend. Opening `chapters.html#signin` opens the window directly. Screenshots: `review-signin.png`, `review-signin-arabic.png`. Real authentication requires a chosen service, security review and explicit approval.
+
+### Temporary public preview - 2026-10-20
+A clean `public/` static build is live at https://e7bcc9a3453a3e.lhr.life/ (chapter list: `/chapters.html`, lesson: `/first-lesson.html`, farm prototype: `/write-code.html`). This is a temporary localhost.run tunnel to the local server on port 8081; it works only while this computer, `tmp/serve-public.cjs` and the SSH tunnel stay running, and the free hostname may expire. It serves only the site files, not planning documents or review screenshots. The sign-in is still UI-only — do not enter a real password. Permanent hosting requires a provider/account; see `PUBLISHING.md`.
