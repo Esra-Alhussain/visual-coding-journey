@@ -166,3 +166,12 @@ The five illustrated activity icons already were the chapter progress control. A
 - [x] Verify opening the window directly with `chapters.html#signin`.
 - [ ] Owner reviews wording and chooses whether real authentication (and which service) is in scope.
 - [ ] Implement real auth only after service/security/privacy approval.
+
+## Unified home and mobile lesson - 2026-10-20
+- [x] Make one home: `index.html` redirects to `chapters.html`, the island-map chapter list.
+- [x] Match the map, lesson and farm visual system (farm art, dark glass, gold).
+- [x] Open sign-in at the beginning with a guest option.
+- [x] Link Chapter 1 to the lesson, the lesson back to the map, and the farm prototype back to the map.
+- [x] Keep the farm background and a Mochi avatar visible on narrow lesson screens.
+- [x] Update the public build and review screenshots.
+- [ ] Owner enables GitHub Pages (Source: GitHub Actions) and pushes this commit for the stable link.

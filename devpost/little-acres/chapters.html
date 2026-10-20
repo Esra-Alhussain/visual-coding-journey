@@ -94,6 +94,8 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
 .foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding:9px 2px;color:#8fa58f;font-size:10.5px}
 .foot a{color:#cfe0c8;font-weight:650}
 .foot a:hover{color:#fff6dc}
+.foot #farmLink{color:#f0c575}
+.foot #farmLink:hover{color:#ffe4a8}
 .mochi{position:fixed;right:clamp(18px,4vw,64px);bottom:clamp(14px,3vh,34px);z-index:3;width:clamp(92px,10vw,142px);pointer-events:none;filter:drop-shadow(0 16px 12px rgba(0,0,0,.35))}
 .mochi img{width:100%;height:auto;animation:bob 3.4s ease-in-out infinite}
 .mochi .bubble{position:absolute;right:calc(100% - 12px);bottom:54%;width:max-content;max-width:220px;padding:8px 11px;border-radius:12px;background:rgba(255,251,238,.97);color:#27352a;font-size:11px;line-height:1.4;border:1px solid rgba(90,74,45,.18);box-shadow:0 8px 20px rgba(5,12,8,.25)}
@@ -116,15 +118,15 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
 <div class="world" aria-hidden="true"><img src="art/restoration-shell.png" alt=""></div>
 
 <header class="bar">
-  <a class="brand" href="index.html"><img src="art/play-mochi.png" alt=""><span>Mochi · Restore the island</span></a>
-  <div class="bar-actions"><button class="signin-btn" id="signinBtn" type="button">Sign in</button><a class="back" href="index.html">← Back to the island</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div>
+  <a class="brand" href="chapters.html"><img src="art/play-mochi.png" alt=""><span>Mochi · Restore the island</span></a>
+  <div class="bar-actions"><button class="signin-btn" id="signinBtn" type="button">Sign in</button><a class="back" href="chapters.html">← Home</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div>
 </header>
 
 <main>
   <div class="intro">
     <div class="eyebrow">Your journey</div>
-    <h1>Choose a chapter</h1>
-    <p>Five small chapters. Start with the Python basics; later chapters will open the rest of the island. Only Chapter 1 is playable in this prototype.</p>
+    <h1>The island map</h1>
+    <p>Choose a chapter. Start with the Python basics; later chapters will open the rest of the island. Only Chapter 1 is playable in this prototype.</p>
   </div>
 
   <section class="grid" aria-label="Chapters">
@@ -181,8 +183,9 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
   </section>
 
   <div class="foot">
-    <a href="index.html">← Back to the island map</a>
+    <a id="homeLink" href="chapters.html">← Home</a>
     <span>Later chapters are visible for the journey, not playable yet.</span>
+    <a id="farmLink" href="write-code.html">Farm prototype →</a>
   </div>
 </main>
 
@@ -211,7 +214,7 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
     <div class="auth-google" id="authGooglePanel" hidden>
       <button id="authGoogle" type="button">Continue with Google</button>
     </div>
-    <p class="auth-note" id="authNote">Local preview only: accounts are not connected. Nothing is sent or stored as an account. Your work stays in this browser.</p>
+    <p class="auth-note" id="authNote">Local preview only: accounts are not connected. Use a demo password, not a real one; nothing is sent or stored as an account.</p>
     <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
     <button class="auth-guest" id="authGuest" type="button">Continue without an account</button>
   </section>
@@ -235,11 +238,12 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
   ];
   const statics = [
     ['.brand span', 'Mochi · Restore the island', 'موشي · إحياء الجزيرة'],
-    ['.back', '← Back to the island', '← العودة إلى الجزيرة'],
+    ['.back', '← Home', '← الرئيسية'],
     ['.eyebrow', 'Your journey', 'رحلتك'],
-    ['h1', 'Choose a chapter', 'اختر فصلًا'],
-    ['.intro p', 'Five small chapters. Start with the Python basics; later chapters will open the rest of the island. Only Chapter 1 is playable in this prototype.', 'خمسة فصول صغيرة. ابدأ بأساسيات بايثون؛ الفصول اللاحقة ستفتح بقية الجزيرة. الفصل الأول فقط قابل للعب في هذا النموذج.'],
-    ['.foot a', '← Back to the island map', '← العودة إلى خريطة الجزيرة'],
+    ['h1', 'The island map', 'خريطة الجزيرة'],
+    ['.intro p', 'Choose a chapter. Start with the Python basics; later chapters will open the rest of the island. Only Chapter 1 is playable in this prototype.', 'اختر فصلًا. ابدأ بأساسيات بايثون؛ الفصول اللاحقة ستفتح بقية الجزيرة. الفصل الأول فقط قابل للعب في هذا النموذج.'],
+    ['#homeLink', '← Home', '← الرئيسية'],
+    ['#farmLink', 'Farm prototype →', 'نموذج المزرعة ←'],
     ['.foot span', 'Later chapters are visible for the journey, not playable yet.', 'الفصول اللاحقة ظاهرة لرؤية الرحلة، وليست قابلة للعب بعد.'],
     ['.mochi .bubble', 'Start with Chapter 1 — I’ll guide you step by step.', 'ابدأ بالفصل الأول — سأرشدك خطوة بخطوة.']
   ];
@@ -352,7 +356,7 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
     renderAuth();
   }
   langBtn.addEventListener('click', () => apply(lang === 'en' ? 'ar' : 'en'));
-  if (location.hash === '#signin') setTimeout(openAuth, 350);
+  setTimeout(openAuth, 450);
 })();
 </script>
 </body>

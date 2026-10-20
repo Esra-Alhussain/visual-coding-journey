@@ -131,13 +131,15 @@ html[dir=rtl] #tour-card{text-align:right}
 html[dir=rtl] #tour-card .tour-lang{right:auto;left:12px}
 html[dir=rtl] #tour-card small{padding-right:0;padding-left:70px}
 html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
+.mini-mochi{display:none}
 @media(max-width:1100px){
   body{overflow:auto}
   .hud{position:relative;display:block;min-height:100vh;padding:12px;pointer-events:auto}
   .lesson-panel,.code-panel{width:100%;max-width:none;max-height:none;margin-bottom:12px}
   .mochi{display:none}
-  .world{opacity:.42}
+  .world{opacity:.82}
   .variable-tag,.area-card{display:none!important}
+  .mini-mochi{display:block;width:44px;height:44px;object-fit:contain;border-radius:50%;background:#f4e7c9;border:2px solid #fffdf7;margin:0 0 8px;box-shadow:0 3px 10px rgba(0,0,0,.3)}
 }
 @media(max-width:600px){
   .hud{padding:10px}
@@ -162,6 +164,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 
 <div class="hud">
   <section class="panel lesson-panel" aria-label="Lesson instructions">
+    <img class="mini-mochi" src="art/play-mochi.png" alt="Mochi">
     <div class="lesson-top"><div class="eyebrow" id="lessonEyebrow">Lesson 1 · Getting started</div><div class="lesson-tools"><a class="chapters-link" id="chaptersLink" href="chapters.html">Chapters</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div></div>
     <div class="step-line">
       <span class="step-badge" id="stepBadge">Step 1 of 5</span>
@@ -401,7 +404,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 
   const ui = {
     en: {
-      eyebrow: 'Lesson 1 · Getting started', chapters: 'Chapters', task: 'Your task', example: 'Show an example',
+      eyebrow: 'Lesson 1 · Getting started', chapters: 'Map', task: 'Your task', example: 'Show an example',
       hint: 'Hint', hideHint: 'Hide hint', restart: 'Restart lesson', codeLabel: 'Write your code', run: 'Run ▶',
       clear: 'Clear', output: 'Output', pressRun: 'press Run', next: 'Next step →', finish: 'Finish lesson',
       codeFoot: 'Small practice editor · real Python also runs in IDLE, Jupyter or a .py file.',
@@ -414,7 +417,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
       tour: { back: 'Back', next: 'Next', skip: 'Skip tour', start: 'Start lesson' }
     },
     ar: {
-      eyebrow: 'الدرس ١ · البداية', chapters: 'الفصول', task: 'مهمتك', example: 'اعرض مثالًا',
+      eyebrow: 'الدرس ١ · البداية', chapters: 'الخريطة', task: 'مهمتك', example: 'اعرض مثالًا',
       hint: 'تلميح', hideHint: 'إخفاء التلميح', restart: 'إعادة الدرس', codeLabel: 'اكتب الكود', run: 'شغّل ▶',
       clear: 'مسح', output: 'الناتج', pressRun: 'اضغط تشغيل', next: 'الخطوة التالية ←', finish: 'إنهاء الدرس',
       codeFoot: 'محرر تدريبي صغير · بايثون الحقيقية تعمل أيضًا في IDLE أو Jupyter أو ملف .py.',
