@@ -132,12 +132,16 @@ html[dir=rtl] #tour-card .tour-lang{right:auto;left:12px}
 html[dir=rtl] #tour-card small{padding-right:0;padding-left:70px}
 html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 .mini-mochi{display:none}
+.phone-hero{display:none}
 @media(max-width:1100px){
   body{overflow:auto}
   .hud{position:relative;display:block;min-height:100vh;padding:12px;pointer-events:auto}
+  .phone-hero{display:flex;align-items:flex-end;justify-content:center;gap:12px;height:clamp(210px,31vh,300px);padding:0 12px 12px}
+  .phone-hero img{width:104px;height:auto;filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));animation:bob 3.4s ease-in-out infinite}
+  .phone-hero span{padding:7px 11px;border-radius:999px;background:rgba(8,18,12,.72);border:1px solid rgba(255,255,255,.16);color:#f7edd4;font-size:10px;font-weight:650;backdrop-filter:blur(10px);margin-bottom:10px}
   .lesson-panel,.code-panel{width:100%;max-width:none;max-height:none;margin-bottom:12px}
   .mochi{display:none}
-  .world{opacity:.82}
+  .world{opacity:1}
   .variable-tag,.area-card{display:none!important}
   .mini-mochi{display:block;width:44px;height:44px;object-fit:contain;border-radius:50%;background:#f4e7c9;border:2px solid #fffdf7;margin:0 0 8px;box-shadow:0 3px 10px rgba(0,0,0,.3)}
 }
@@ -163,6 +167,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 </div>
 
 <div class="hud">
+  <div class="phone-hero" aria-hidden="true"><img src="art/play-mochi.png" alt=""><span>Lesson 1 · The farm</span></div>
   <section class="panel lesson-panel" aria-label="Lesson instructions">
     <img class="mini-mochi" src="art/play-mochi.png" alt="Mochi">
     <div class="lesson-top"><div class="eyebrow" id="lessonEyebrow">Lesson 1 · Getting started</div><div class="lesson-tools"><a class="chapters-link" id="chaptersLink" href="chapters.html">Chapters</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div></div>
@@ -634,7 +639,8 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 
   function positionTour() {
     if (tourIndex < 0) return;
-    const target = document.querySelector(tourSteps[tourIndex].target);
+    const targetSelector = tourIndex === 0 && innerWidth <= 1100 ? '.phone-hero' : tourSteps[tourIndex].target;
+    const target = document.querySelector(targetSelector);
     if (!target) return;
     const r = target.getBoundingClientRect();
     const w = Math.min(342, innerWidth - 24);

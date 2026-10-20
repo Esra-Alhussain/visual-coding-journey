@@ -97,18 +97,21 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
 .foot #farmLink{color:#f0c575}
 .foot #farmLink:hover{color:#ffe4a8}
 .mochi{position:fixed;right:clamp(18px,4vw,64px);bottom:clamp(14px,3vh,34px);z-index:3;width:clamp(92px,10vw,142px);pointer-events:none;filter:drop-shadow(0 16px 12px rgba(0,0,0,.35))}
+.phone-hero{display:none}
 .mochi img{width:100%;height:auto;animation:bob 3.4s ease-in-out infinite}
 .mochi .bubble{position:absolute;right:calc(100% - 12px);bottom:54%;width:max-content;max-width:220px;padding:8px 11px;border-radius:12px;background:rgba(255,251,238,.97);color:#27352a;font-size:11px;line-height:1.4;border:1px solid rgba(90,74,45,.18);box-shadow:0 8px 20px rgba(5,12,8,.25)}
 @keyframes bob{50%{transform:translateY(-5px) rotate(-1.5deg)}}
 @media(max-width:760px){
   .bar{padding:12px 14px}
   .brand span{display:none}
+  .phone-hero{display:flex;align-items:flex-end;justify-content:center;gap:12px;height:clamp(210px,32vh,300px);padding:0 16px 14px;position:relative;z-index:2}
+  .phone-hero img{width:100px;height:auto;filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));animation:bob 3.4s ease-in-out infinite}
+  .phone-hero span{padding:7px 11px;border-radius:999px;background:rgba(8,18,12,.72);border:1px solid rgba(255,255,255,.16);color:#f7edd4;font-size:10px;font-weight:650;backdrop-filter:blur(10px);margin-bottom:10px}
+  .mochi{display:none}
   main{width:calc(100% - 24px);padding-bottom:110px}
   .grid{grid-template-columns:1fr;margin-top:18px}
   .chapter:first-child{grid-column:auto;min-height:0}
   .chapter{padding:15px;min-height:0}
-  .mochi{width:84px;right:12px;bottom:10px}
-  .mochi .bubble{display:none}
   .foot{flex-direction:column;align-items:flex-start;gap:5px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
@@ -121,6 +124,8 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
   <a class="brand" href="chapters.html"><img src="art/play-mochi.png" alt=""><span>Mochi · Restore the island</span></a>
   <div class="bar-actions"><button class="signin-btn" id="signinBtn" type="button">Sign in</button><a class="back" href="chapters.html">← Home</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div>
 </header>
+
+<div class="phone-hero" aria-hidden="true"><img src="art/play-mochi.png" alt=""><span>The island is waiting</span></div>
 
 <main>
   <div class="intro">

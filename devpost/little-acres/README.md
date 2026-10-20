@@ -153,3 +153,6 @@ A clean `public/` static build is live at https://e7bcc9a3453a3e.lhr.life/ (chap
 
 ### Unified home and mobile lesson - 2026-10-20
 The flow now starts at one home: `index.html` redirects to `chapters.html`, which is the island-map chapter list with the same farm/dark-glass styling as the lesson and farm prototype. The sign-in window opens at the start with a guest option; Chapter 1 opens `first-lesson.html`; the footer opens `write-code.html`; the lesson has a Map link and the farm has a MAP link. On narrow screens the lesson keeps the farm background at 82% opacity and shows a Mochi avatar in the lesson panel. The retired island entry is preserved as `index-before-unified.html`. Screenshots: `review-home-signin.png`, `review-home-map.png`, `review-lesson-mobile.png`.
+
+### Phone scene-first layout - 2026-10-20
+Phone screens now lead with the farm: the map and Lesson 1 show a dedicated Mochi/farm hero before the content cards, with the background at full strength. The farm prototype shows the complete 3:2 scene at the top, with mission, controls and the Python console below instead of a cropped camera slice. Desktop is unchanged. Screenshots: `review-phone-home.png`, `review-phone-lesson.png`, `review-phone-farm.png`.

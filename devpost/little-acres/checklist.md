@@ -175,3 +175,12 @@ The five illustrated activity icons already were the chapter progress control. A
 - [x] Keep the farm background and a Mochi avatar visible on narrow lesson screens.
 - [x] Update the public build and review screenshots.
 - [ ] Owner enables GitHub Pages (Source: GitHub Actions) and pushes this commit for the stable link.
+
+## Phone scene-first layout - 2026-10-20
+- [x] Add a farm-and-Mochi hero before the chapter cards on phones.
+- [x] Add the same scene-first hero to Lesson 1, with the background at full strength.
+- [x] Keep a small Mochi in the lesson panel when the hero scrolls away.
+- [x] Show the complete 3:2 farm scene on the phone farm prototype instead of a cropped slice.
+- [x] Flow mission, controls and the Python console below the farm scene.
+- [x] Capture phone review screenshots at 500x900.
+- [ ] Owner reviews on an actual phone and confirms text sizing, scroll and touch targets.
