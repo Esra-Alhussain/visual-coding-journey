@@ -94,6 +94,7 @@ html[dir=rtl] #output:empty:before{content:"سيظهر الناتج هنا بع�
 #output{min-height:70px;max-height:130px;margin:0;padding:10px 11px;border:1px solid #243a2c;border-radius:10px;background:#0a1710;color:#d7e7ce;font:12px/1.6 var(--mono);white-space:pre-wrap;overflow:auto}
 #output:empty:before{content:"Output appears here after Run.";color:#6e8576;font-style:italic;font-family:var(--font)}
 .code-foot{margin-top:9px;color:#7d937f;font-size:9.5px;line-height:1.45}
+.save-state{margin-top:5px;color:#b8e4c5;font-size:9.5px;line-height:1.45}
 
 .variable-tag{position:fixed;left:50%;top:52%;transform:translate(-50%,-50%);z-index:3;padding:7px 11px;border:1px solid rgba(234,181,91,.45);border-radius:10px;background:rgba(8,20,13,.88);color:#fff4d6;font-size:11px;text-align:center;backdrop-filter:blur(10px);box-shadow:0 8px 22px rgba(3,9,6,.3)}
 .variable-tag code{display:block;color:#f0c575;font:11px var(--mono);margin-bottom:2px}
@@ -195,6 +196,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
       <div class="output-head"><span id="outputLabel">Output</span><span id="outputHint">press Run</span></div>
       <pre id="output" aria-live="polite" dir="auto"></pre>
       <div class="code-foot" id="codeFoot">Small practice editor · real Python also runs in IDLE, Jupyter or a .py file.</div>
+    <div class="save-state" id="saveState"></div>
     </div>
   </section>
 </div>
@@ -227,6 +229,8 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   </section>
 </div>
 
+<script src="supabase-js.js"></script>
+<script src="auth-client.js"></script>
 <script src="chapter-engine.js"></script>
 <script>
 (() => {
@@ -252,6 +256,55 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   let lastError = null;
   let outputCount = 0;
   const drafts = ['', '', '', '', ''];
+  const STORAGE_KEY = 'mochi.lesson1.progress.v1';
+  let initialized = false;
+  let saveTimer = null;
+  let restoring = false;
+
+  function captureState() {
+    return { current, completed: [...completed], drafts: [...drafts], savedAt: Date.now() };
+  }
+  function persist() {
+    if (!initialized) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async () => {
+      const state = captureState();
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+      if (window.MochiAuth && window.MochiAuth.user) {
+        try { await window.MochiAuth.saveProgress(state); } catch (e) { console.warn('Progress save failed', e); }
+      }
+    }, 350);
+  }
+  function applyState(state) {
+    if (!state || typeof state !== 'object') return;
+    if (Array.isArray(state.completed)) completed = new Set(state.completed.filter(n => Number.isInteger(n)));
+    if (Array.isArray(state.drafts)) {
+      for (let i = 0; i < drafts.length; i++) drafts[i] = typeof state.drafts[i] === 'string' ? state.drafts[i] : '';
+    }
+    const next = Number.isInteger(state.current) ? Math.max(0, Math.min(steps.length - 1, state.current)) : 0;
+    restoring = true;
+    loadStep(next);
+    restoring = false;
+  }
+  async function restoreProgress() {
+    let remote = null;
+    let local = null;
+    try {
+      if (window.MochiAuth) await window.MochiAuth.ready;
+      if (window.MochiAuth && window.MochiAuth.user) remote = await window.MochiAuth.loadProgress();
+    } catch (e) { console.warn('Progress load failed', e); }
+    renderSaveState();
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) local = JSON.parse(raw);
+    } catch (e) {}
+    if (remote) applyState(remote);
+    else if (local) applyState(local);
+    initialized = true;
+    if (window.MochiAuth && window.MochiAuth.user && !remote && local) {
+      try { await window.MochiAuth.saveProgress(local); } catch (e) { console.warn('Progress upload failed', e); }
+    }
+  }
 
   const steps = [
     {
@@ -413,6 +466,8 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
       hint: 'Hint', hideHint: 'Hide hint', restart: 'Restart lesson', codeLabel: 'Write your code', run: 'Run ▶',
       clear: 'Clear', output: 'Output', pressRun: 'press Run', next: 'Next step →', finish: 'Finish lesson',
       codeFoot: 'Small practice editor · real Python also runs in IDLE, Jupyter or a .py file.',
+      saveLocal: 'Progress is saved in this browser. Sign in on the map to sync it.',
+      saveSynced: 'Progress is synced to your account.',
       kicker: 'Lesson 1 complete', title: 'You can write a program',
       copy: 'You used <b>print</b>, a <b>string</b>, a <b>variable</b>, <b>numbers</b>, <b>arithmetic</b> and a <b>comment</b>. That is the foundation for the rest of the course.',
       review: 'Review the lesson', lang: 'العربية', langAria: 'Switch to Arabic',
@@ -426,6 +481,8 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
       hint: 'تلميح', hideHint: 'إخفاء التلميح', restart: 'إعادة الدرس', codeLabel: 'اكتب الكود', run: 'شغّل ▶',
       clear: 'مسح', output: 'الناتج', pressRun: 'اضغط تشغيل', next: 'الخطوة التالية ←', finish: 'إنهاء الدرس',
       codeFoot: 'محرر تدريبي صغير · بايثون الحقيقية تعمل أيضًا في IDLE أو Jupyter أو ملف .py.',
+      saveLocal: 'يُحفظ تقدمك في هذا المتصفح. سجّل الدخول من الخريطة للمزامنة.',
+      saveSynced: 'تقدمك متزامن مع حسابك.',
       kicker: 'اكتمل الدرس الأول', title: 'تستطيع كتابة برنامج',
       copy: 'استخدمت <b>print</b> و<b>النص</b> و<b>المتغير</b> و<b>الأرقام</b> و<b>الحساب</b> و<b>التعليق</b>. هذه أساس بقية الدورة.',
       review: 'راجع الدرس', lang: 'English', langAria: 'Switch to English',
@@ -495,6 +552,12 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
     'The code ran, but we still need name assigned, name printed, a number calculation printed, and a comment.'
   ];
 
+  function renderSaveState() {
+    const el = $('#saveState');
+    if (!el) return;
+    const u = ui[lang];
+    el.textContent = window.MochiAuth && window.MochiAuth.user ? u.saveSynced : u.saveLocal;
+  }
   function renderChrome() {
     const u = ui[lang];
     $('#lessonEyebrow').textContent = u.eyebrow;
@@ -507,6 +570,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
     $('#outputLabel').textContent = u.output;
     $('#outputHint').textContent = outputCount ? u.lines(outputCount) : u.pressRun;
     $('#codeFoot').textContent = u.codeFoot;
+    renderSaveState();
     $('#restart').textContent = u.restart;
     code.placeholder = lang === 'ar' ? 'اكتب كود بايثون هنا…' : 'Type your Python here…';
     $('#completionKicker').textContent = u.kicker;
@@ -569,7 +633,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   }
 
   function loadStep(i) {
-    drafts[current] = code.value;
+    if (!restoring) drafts[current] = code.value;
     current = i;
     const u = ui[lang];
     code.value = drafts[i] || '';
@@ -586,6 +650,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
     updateDots();
     renderChrome();
     code.focus();
+    persist();
   }
   function markComplete() {
     completed.add(current);
@@ -594,6 +659,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
     successMsg.innerHTML = L.success;
     success.hidden = false;
     nextBtn.textContent = current === steps.length - 1 ? ui[lang].finish : ui[lang].next;
+    persist();
   }
   function run() {
     setError('');
@@ -692,6 +758,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   code.addEventListener('input', () => {
     drafts[current] = code.value;
     setError('');
+    persist();
   });
   hintBtn.addEventListener('click', () => {
     hint.hidden = !hint.hidden;
@@ -710,6 +777,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
     variableTag.hidden = true;
     areaCard.hidden = true;
     code.focus();
+    persist();
   });
   nextBtn.addEventListener('click', () => {
     if (current < steps.length - 1) {
@@ -745,9 +813,23 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   window.addEventListener('resize', () => { if (tourIndex >= 0) positionTour(); });
   window.addEventListener('scroll', () => { if (tourIndex >= 0) positionTour(); }, { passive: true });
 
+  if (window.MochiAuth) {
+    window.MochiAuth.onChange(async user => {
+      renderSaveState();
+      if (!initialized || !user) return;
+      try {
+        const remote = await window.MochiAuth.loadProgress();
+        if (remote) applyState(remote);
+        else await window.MochiAuth.saveProgress(captureState());
+      } catch (e) { console.warn('Progress sync failed', e); }
+    });
+  }
+
   renderChrome();
   loadStep(0);
-  setTimeout(beginTour, 500);
+  restoreProgress()
+    .catch(err => console.warn('Progress restore failed', err))
+    .finally(() => setTimeout(beginTour, 500));
 })();
 </script>
 </body>

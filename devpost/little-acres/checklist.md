@@ -184,3 +184,15 @@ The five illustrated activity icons already were the chapter progress control. A
 - [x] Flow mission, controls and the Python console below the farm scene.
 - [x] Capture phone review screenshots at 500x900.
 - [ ] Owner reviews on an actual phone and confirms text sizing, scroll and touch targets.
+
+## Real authentication and progress - 2026-10-20
+- [x] Add the Supabase browser client and a shared auth/progress bridge.
+- [x] Replace the preview sign-in with real email/password sign-in, account creation, reset email and sign-out.
+- [x] Persist sessions and sync lesson progress for signed-in users.
+- [x] Keep local progress for guests and show whether progress is local or synced.
+- [x] Add Google OAuth initiation; provider still requires Google Cloud setup in Supabase.
+- [x] Test a real invalid-credentials response and a local progress restore.
+- [ ] Owner sets Supabase Site URL/redirect URLs and confirms the progress SQL/RLS.
+- [ ] Owner enables Google provider and verifies Google sign-in.
+- [ ] Owner creates a real account and confirms cross-device progress.
+- [ ] Push the new commit so GitHub Pages serves this build.

@@ -60,6 +60,9 @@ html[dir=rtl] .auth-close{right:auto;left:12px}
 .auth-guest:hover{color:#e3f2de}
 .auth-google{padding:4px 0}
 .auth-google button{width:100%;min-height:40px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:#f8f5ea;color:#24352a;font-size:12px;font-weight:800}
+.auth-account{padding:6px 0 2px}
+.auth-account p{margin:0 0 12px;padding:10px 11px;border:1px solid rgba(147,201,164,.22);border-radius:10px;background:rgba(5,14,9,.45);color:#e8f2e2;font-size:12px;overflow-wrap:anywhere}
+.auth-account button{width:100%;min-height:39px;border-radius:9px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#f4ead2;font-size:11.5px;font-weight:750}
 .auth-note{margin:13px 0 8px;padding:9px 10px;border:1px solid rgba(234,181,91,.22);border-radius:9px;background:rgba(234,181,91,.07);color:#d9c797;font-size:10px;line-height:1.5}
 .auth-status{margin:7px 0 0;color:#b8e4c5;font-size:10.5px;line-height:1.45;min-height:14px}
 .auth-status.error{color:#ffd1c2}
@@ -204,8 +207,8 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
     <button class="auth-close" id="authClose" type="button" aria-label="Close sign in">×</button>
     <p class="auth-kicker" id="authKicker">Your progress</p>
     <h2 id="authTitle">Save your progress</h2>
-    <p class="auth-copy" id="authCopy">Sign in to keep your code and chapter progress. This is a local preview, so no real account is created yet.</p>
-    <div class="auth-tabs" role="tablist">
+    <p class="auth-copy" id="authCopy">Sign in to save your code and lesson progress across devices.</p>
+    <div class="auth-tabs" id="authTabs" role="tablist">
       <button class="active" id="authTabEmail" type="button" data-auth-tab="email">Email</button>
       <button id="authTabGoogle" type="button" data-auth-tab="google">Google</button>
     </div>
@@ -219,12 +222,18 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
     <div class="auth-google" id="authGooglePanel" hidden>
       <button id="authGoogle" type="button">Continue with Google</button>
     </div>
-    <p class="auth-note" id="authNote">Local preview only: accounts are not connected. Use a demo password, not a real one; nothing is sent or stored as an account.</p>
+    <div class="auth-account" id="authAccount" hidden>
+      <p id="authAccountEmail"></p>
+      <button id="authSignOut" type="button">Sign out</button>
+    </div>
+    <p class="auth-note" id="authNote">Your password is handled securely by Supabase. This app never stores your password.</p>
     <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
     <button class="auth-guest" id="authGuest" type="button">Continue without an account</button>
   </section>
 </div>
 
+<script src="supabase-js.js"></script>
+<script src="auth-client.js"></script>
 <script>
 (() => {
   const cards = [...document.querySelectorAll('.chapter')];
@@ -255,29 +264,41 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
   let lang = 'en';
   const auth = {
     en: {
-      signin: 'Sign in', kicker: 'Your progress', title: 'Save your progress',
-      copy: 'Sign in to keep your code and chapter progress. This is a local preview, so no real account is created yet.',
+      signin: 'Sign in', account: 'Account', kicker: 'Your progress', title: 'Save your progress',
+      copy: 'Sign in to save your code and lesson progress across devices.',
       email: 'Email', google: 'Google', name: 'Name', optional: 'optional', password: 'Password',
       signinAction: 'Sign in', create: 'Create account', forgot: 'Forgot password?',
-      note: 'Local preview only: accounts are not connected. Use a demo password, not a real one; nothing is sent or stored as an account.',
+      note: 'Your password is handled securely by Supabase. This app never stores your password.',
       guest: 'Continue without an account', googleCta: 'Continue with Google',
-      preview: 'Preview only — no real account was created.',
-      createNote: 'Account creation is not connected yet. This is a UI preview.',
-      forgotNote: 'Password recovery needs the account service, which is not connected yet.',
-      googleNote: 'Google sign-in is not connected in this local prototype.',
+      signedInCopy: 'You are signed in. Your lesson progress will sync to this account.',
+      signedInAs: 'Signed in as', signOut: 'Sign out',
+      checkEmail: 'Account created. Check your email to confirm it, then sign in.',
+      resetSent: 'Password reset email sent. Check your inbox.',
+      invalid: 'Email or password is incorrect.',
+      notConfirmed: 'Please confirm your email before signing in.',
+      exists: 'An account with this email already exists. Sign in or reset your password.',
+      googleDisabled: 'Google sign-in is not enabled yet. Enable the Google provider in Supabase, then try again.',
+      signedOut: 'Signed out.',
+      error: 'Something went wrong. Please try again.',
       close: 'Close sign in'
     },
     ar: {
-      signin: 'تسجيل الدخول', kicker: 'تقدمك', title: 'احفظ تقدمك',
-      copy: 'سجّل الدخول لتحفظ كودك وتقدمك. هذه نافذة تجريبية محلية؛ لا يُنشأ حساب حقيقي بعد.',
+      signin: 'تسجيل الدخول', account: 'الحساب', kicker: 'تقدمك', title: 'احفظ تقدمك',
+      copy: 'سجّل الدخول لحفظ كودك وتقدمك عبر الأجهزة.',
       email: 'البريد الإلكتروني', google: 'Google', name: 'الاسم', optional: 'اختياري', password: 'كلمة المرور',
       signinAction: 'تسجيل الدخول', create: 'إنشاء حساب', forgot: 'نسيت كلمة المرور؟',
-      note: 'نسخة محلية تجريبية: الحسابات غير متصلة. استخدم كلمة مرور تجريبية فقط، وليس كلمة حقيقية؛ لا يتم إرسال أو حفظ حساب.',
+      note: 'تتم معالجة كلمة المرور بأمان عبر Supabase. لا يحفظ هذا التطبيق كلمة مرورك.',
       guest: 'المتابعة بدون حساب', googleCta: 'المتابعة باستخدام Google',
-      preview: 'واجهة تجريبية فقط — لم يتم إنشاء حساب حقيقي.',
-      createNote: 'إنشاء الحساب غير متصل بعد. هذه نافذة عرض فقط.',
-      forgotNote: 'استعادة كلمة المرور تحتاج خدمة الحسابات، وهي غير متصلة بعد.',
-      googleNote: 'تسجيل الدخول عبر Google غير متصل في هذه النسخة المحلية.',
+      signedInCopy: 'أنت مسجّل الدخول. سيتم مزامنة تقدمك مع هذا الحساب.',
+      signedInAs: 'مسجّل الدخول باسم', signOut: 'تسجيل الخروج',
+      checkEmail: 'تم إنشاء الحساب. تحقق من بريدك لتأكيده ثم سجّل الدخول.',
+      resetSent: 'تم إرسال بريد إعادة تعيين كلمة المرور. تحقق من صندوق الوارد.',
+      invalid: 'البريد الإلكتروني أو كلمة المرور غير صحيحة.',
+      notConfirmed: 'أكّد بريدك الإلكتروني قبل تسجيل الدخول.',
+      exists: 'يوجد حساب بهذا البريد. سجّل الدخول أو أعد تعيين كلمة المرور.',
+      googleDisabled: 'تسجيل الدخول عبر Google غير مفعّل بعد. فعّل مزوّد Google في Supabase ثم أعد المحاولة.',
+      signedOut: 'تم تسجيل الخروج.',
+      error: 'حدث خطأ. حاول مرة أخرى.',
       close: 'إغلاق نافذة الدخول'
     }
   };
@@ -288,12 +309,54 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
   const authGooglePanel = document.querySelector('#authGooglePanel');
   const authStatus = document.querySelector('#authStatus');
   const authEmail = document.querySelector('#authEmail');
-  function setAuthStatus(text) {
+  const authName = document.querySelector('#authName');
+  const authPassword = document.querySelector('#authPassword');
+  const authSubmit = document.querySelector('#authSubmit');
+  const authCreate = document.querySelector('#authCreate');
+  const authForgot = document.querySelector('#authForgot');
+  const authGoogle = document.querySelector('#authGoogle');
+  const authTabs = document.querySelector('#authTabs');
+  const authAccount = document.querySelector('#authAccount');
+  const authAccountEmail = document.querySelector('#authAccountEmail');
+  const authSignOut = document.querySelector('#authSignOut');
+  let authBusy = false;
+
+  function setAuthStatus(text, isError) {
     authStatus.textContent = text || '';
+    authStatus.classList.toggle('error', Boolean(isError));
+  }
+  function mapAuthError(err) {
+    const a = auth[lang];
+    const raw = String((err && err.message) || '').toLowerCase();
+    if (raw.includes('invalid login')) return a.invalid;
+    if (raw.includes('email not confirmed')) return a.notConfirmed;
+    if (raw.includes('already registered')) return a.exists;
+    if (raw.includes('provider is not enabled') || raw.includes('unsupported provider')) return a.googleDisabled;
+    return (err && err.message) || a.error;
+  }
+  function showAuthState() {
+    const a = auth[lang];
+    const current = window.MochiAuth && window.MochiAuth.user;
+    const signedIn = Boolean(current);
+    signinBtn.textContent = signedIn ? a.account : a.signin;
+    authTabs.hidden = signedIn;
+    authTabs.style.display = signedIn ? 'none' : 'flex';
+    authForm.hidden = signedIn;
+    authGooglePanel.hidden = signedIn || authForm.dataset.google === '1';
+    authGooglePanel.style.display = authGooglePanel.hidden ? 'none' : 'block';
+    authAccount.hidden = !signedIn;
+    authAccountEmail.hidden = !signedIn;
+    authGuest.hidden = signedIn;
+    authNote.hidden = signedIn;
+    document.querySelector('#authTitle').textContent = signedIn ? a.account : a.title;
+    document.querySelector('#authCopy').textContent = signedIn ? a.signedInCopy : a.copy;
+    if (signedIn) {
+      authAccountEmail.textContent = a.signedInAs + ' ' + (current.email || current.user_metadata?.name || '');
+    }
+    if (!signedIn) setAuthTab('email');
   }
   function renderAuth() {
     const a = auth[lang];
-    signinBtn.textContent = a.signin;
     document.querySelector('#authKicker').textContent = a.kicker;
     document.querySelector('#authTitle').textContent = a.title;
     document.querySelector('#authCopy').textContent = a.copy;
@@ -309,37 +372,131 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
     document.querySelector('#authNote').textContent = a.note;
     document.querySelector('#authGuest').textContent = a.guest;
     document.querySelector('#authGoogle').textContent = a.googleCta;
+    document.querySelector('#authSignOut').textContent = a.signOut;
     document.querySelector('#authClose').setAttribute('aria-label', a.close);
-    if (authStatus.textContent) authStatus.textContent = a.preview;
+    showAuthState();
   }
   function openAuth() {
     authLayer.hidden = false;
     setAuthStatus('');
-    setAuthTab('email');
-    setTimeout(() => authEmail.focus(), 30);
+    showAuthState();
+    if (window.MochiAuth && window.MochiAuth.user) {
+      setTimeout(() => authSignOut.focus(), 30);
+    } else {
+      setAuthTab('email');
+      setTimeout(() => authEmail.focus(), 30);
+    }
   }
   function closeAuth() {
     authLayer.hidden = true;
     signinBtn.focus();
   }
   function setAuthTab(tab) {
+    authForm.dataset.google = '0';
     document.querySelectorAll('[data-auth-tab]').forEach(b => b.classList.toggle('active', b.dataset.authTab === tab));
     authForm.hidden = tab !== 'email';
     authGooglePanel.hidden = tab !== 'google';
+    authGooglePanel.style.display = tab === 'google' ? 'block' : 'none';
+    if (tab === 'google') authForm.dataset.google = '1';
   }
+  function setAuthBusy(busy) {
+    authBusy = busy;
+    [authSubmit, authCreate, authForgot, authGoogle, authSignOut].forEach(btn => { if (btn) btn.disabled = busy; });
+  }
+
   signinBtn.addEventListener('click', openAuth);
   document.querySelector('#authClose').addEventListener('click', closeAuth);
   document.querySelector('#authGuest').addEventListener('click', closeAuth);
   authLayer.addEventListener('click', e => { if (e.target === authLayer) closeAuth(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authLayer.hidden) closeAuth(); });
   document.querySelectorAll('[data-auth-tab]').forEach(b => b.addEventListener('click', () => setAuthTab(b.dataset.authTab)));
-  authForm.addEventListener('submit', e => {
+
+  authForm.addEventListener('submit', async e => {
     e.preventDefault();
-    setAuthStatus(auth[lang].preview);
+    if (authBusy) return;
+    if (!window.MochiAuth) { setAuthStatus(auth[lang].error, true); return; }
+    const email = authEmail.value.trim();
+    const password = authPassword.value;
+    if (!email || !password) { setAuthStatus(auth[lang].invalid, true); return; }
+    setAuthBusy(true);
+    setAuthStatus(lang === 'en' ? 'Signing in…' : 'جارٍ تسجيل الدخول…');
+    try {
+      await window.MochiAuth.signIn(email, password);
+      setAuthStatus('');
+      closeAuth();
+    } catch (err) {
+      setAuthStatus(mapAuthError(err), true);
+    } finally {
+      setAuthBusy(false);
+    }
   });
-  document.querySelector('#authCreate').addEventListener('click', () => setAuthStatus(auth[lang].createNote));
-  document.querySelector('#authForgot').addEventListener('click', () => setAuthStatus(auth[lang].forgotNote));
-  document.querySelector('#authGoogle').addEventListener('click', () => setAuthStatus(auth[lang].googleNote));
+
+  authCreate.addEventListener('click', async () => {
+    if (authBusy) return;
+    if (!window.MochiAuth) { setAuthStatus(auth[lang].error, true); return; }
+    const email = authEmail.value.trim();
+    const password = authPassword.value;
+    if (!email || !password) { setAuthStatus(auth[lang].invalid, true); return; }
+    if (password.length < 6) { setAuthStatus(lang === 'en' ? 'Use at least 6 characters.' : 'استخدم ٦ أحرف على الأقل.', true); return; }
+    setAuthBusy(true);
+    setAuthStatus(lang === 'en' ? 'Creating account…' : 'جارٍ إنشاء الحساب…');
+    try {
+      const data = await window.MochiAuth.signUp(email, password, authName.value.trim());
+      if (data && data.session) {
+        setAuthStatus('');
+        closeAuth();
+      } else {
+        setAuthStatus(auth[lang].checkEmail);
+        authPassword.value = '';
+      }
+    } catch (err) {
+      setAuthStatus(mapAuthError(err), true);
+    } finally {
+      setAuthBusy(false);
+    }
+  });
+
+  authForgot.addEventListener('click', async () => {
+    if (authBusy) return;
+    if (!window.MochiAuth) { setAuthStatus(auth[lang].error, true); return; }
+    const email = authEmail.value.trim();
+    if (!email) { setAuthStatus(lang === 'en' ? 'Enter your email first.' : 'أدخل بريدك أولًا.', true); return; }
+    setAuthBusy(true);
+    try {
+      await window.MochiAuth.resetPassword(email);
+      setAuthStatus(auth[lang].resetSent);
+    } catch (err) {
+      setAuthStatus(mapAuthError(err), true);
+    } finally {
+      setAuthBusy(false);
+    }
+  });
+
+  authGoogle.addEventListener('click', async () => {
+    if (authBusy) return;
+    if (!window.MochiAuth) { setAuthStatus(auth[lang].error, true); return; }
+    setAuthBusy(true);
+    try {
+      await window.MochiAuth.signInWithGoogle();
+    } catch (err) {
+      setAuthStatus(mapAuthError(err), true);
+      setAuthBusy(false);
+    }
+  });
+
+  authSignOut.addEventListener('click', async () => {
+    if (authBusy || !window.MochiAuth) return;
+    setAuthBusy(true);
+    try {
+      await window.MochiAuth.signOut();
+      setAuthStatus(auth[lang].signedOut);
+      showAuthState();
+    } catch (err) {
+      setAuthStatus(mapAuthError(err), true);
+    } finally {
+      setAuthBusy(false);
+    }
+  });
 
   function apply(next) {
     lang = next;
@@ -361,7 +518,18 @@ a.chapter:hover{transform:translateY(-2px);border-color:rgba(234,181,91,.6);back
     renderAuth();
   }
   langBtn.addEventListener('click', () => apply(lang === 'en' ? 'ar' : 'en'));
-  setTimeout(openAuth, 450);
+  if (window.MochiAuth) {
+    window.MochiAuth.onChange(() => {
+      showAuthState();
+      if (window.MochiAuth.user && !authLayer.hidden) setAuthStatus('');
+    });
+    window.MochiAuth.ready.then(() => {
+      showAuthState();
+      if (!window.MochiAuth.user) setTimeout(openAuth, 450);
+    }).catch(() => setTimeout(openAuth, 450));
+  } else {
+    setTimeout(openAuth, 450);
+  }
 })();
 </script>
 </body>
