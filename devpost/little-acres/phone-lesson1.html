@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mochi · Lesson 1 · Wake the Seed Nursery</title>
+<style>
+  :root{
+    --ink:#1f2d1d; --muted:#6d7863; --green:#2f5e3d; --green-deep:#173a27;
+    --cream:#fbf3df; --paper:#fff9eb; --gold:#e0a63f; --line:#e5d8bd;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+    --font:"Avenir Next","Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0;min-height:100%}
+  body{background:radial-gradient(120% 80% at 50% 0%,#29301f 0%,#11140d 58%,#090b07 100%);font-family:var(--font);color:var(--ink);display:grid;place-items:center;padding:20px}
+  button,textarea{font-family:inherit}
+  button{cursor:pointer}
+  .stage{width:390px;height:844px;max-height:calc(100vh - 40px)}
+  .app{position:relative;width:100%;height:100%;overflow:hidden;border-radius:38px;background:#0d140d;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 90px rgba(0,0,0,.62),0 0 0 8px rgba(255,255,255,.03);isolation:isolate}
+  .scene{position:absolute;inset:0 0 auto;height:49%;overflow:hidden;background:#1b2416}
+  .scene .bg{width:100%;height:100%;object-fit:cover;object-position:50% 47%;display:block}
+  .scene:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,7,.55) 0%,rgba(8,12,7,.02) 28%,rgba(8,12,7,.04) 54%,rgba(8,12,7,.74) 100%);pointer-events:none}
+  .scene-top{position:absolute;z-index:5;top:13px;left:14px;right:14px;display:flex;align-items:center;justify-content:space-between;gap:8px;color:#fff7e5;font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .scene-top .chapter{display:flex;align-items:center;gap:6px;text-shadow:0 1px 8px #000}
+  .scene-top .chapter i{width:5px;height:5px;border-radius:50%;background:var(--gold);display:block}
+  .scene-top .tools{display:flex;align-items:center;gap:5px}
+  .count{padding:5px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(8,14,8,.46);backdrop-filter:blur(8px);font-size:7.5px;letter-spacing:.06em}
+  .sound{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(8,14,8,.46);color:#fff4d8;font-size:12px;display:grid;place-items:center;padding:0;backdrop-filter:blur(8px)}
+  .gate{position:absolute;z-index:2;left:46%;top:57%;width:60px;height:72px;transform:translate(-50%,-50%);border:2px dashed rgba(255,222,156,.78);border-radius:46% 46% 4px 4px;pointer-events:none}
+  .gate span{position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);padding:2px 6px;border-radius:4px;background:var(--gold);color:#2d230f;font-size:7px;font-weight:900;letter-spacing:.12em}
+  .sign{position:absolute;z-index:3;left:60%;top:34%;transform:translate(-50%,-50%);min-width:80px;max-width:120px;padding:6px 7px;border-radius:5px;border:1px solid #94774c;background:#f7e5bd;color:#342a1b;font-size:8px;font-weight:800;text-align:center;box-shadow:0 5px 10px rgba(0,0,0,.3);transition:.4s}
+  .sign.lit{background:#fff3c9;box-shadow:0 0 0 4px rgba(255,222,156,.16),0 0 28px rgba(255,207,105,.48)}
+  .seedbag{position:absolute;z-index:3;left:30%;top:73%;transform:translate(-50%,-50%);text-align:center;transition:.3s}
+  .bag{width:34px;height:40px;margin:0 auto;border-radius:6px 6px 9px 9px;background:linear-gradient(160deg,#d9b87b,#a98752);border:1px solid #76603d;position:relative;box-shadow:0 5px 12px rgba(0,0,0,.3)}
+  .bag:before{content:"";position:absolute;left:6px;right:6px;top:-4px;height:9px;border-radius:50%;background:#c5a469;border:1px solid #76603d}
+  .bag:after{content:"carrot";position:absolute;inset:13px 3px auto;color:#4b3821;font-size:5.5px;font-weight:900;letter-spacing:.03em}
+  .seedbag .label{display:inline-block;margin-top:4px;padding:2px 6px;border-radius:4px;background:rgba(255,248,232,.9);color:#3f4c36;font:700 7px var(--mono)}
+  .bed{position:absolute;z-index:2;left:70%;top:72%;width:108px;height:56px;transform:translate(-50%,-50%);border:1px solid #624a2e;border-radius:6px;background:linear-gradient(180deg,#705b3a,#4d3d27);box-shadow:0 7px 14px rgba(0,0,0,.3);overflow:hidden;transition:.4s}
+  .bed .soil{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 12px)}
+  .bed .grid{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 14px)}
+  .bed .area-badge{position:absolute;right:3px;bottom:3px;padding:2px 4px;border-radius:3px;background:rgba(255,246,222,.9);color:#4f432e;font:700 5.5px var(--mono)}
+  .seeds{position:absolute;left:8px;right:8px;top:14px;bottom:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;opacity:0;transition:.3s}
+  .bed.seeded .seeds{opacity:1}
+  .seeds i{width:6px;height:6px;border-radius:50%;background:#f0cf8d;box-shadow:0 1px 2px rgba(0,0,0,.5);justify-self:center}
+  .sprouts{position:absolute;left:8px;right:8px;top:4px;bottom:4px;display:flex;align-items:flex-end;justify-content:space-around;opacity:0;transition:.6s}
+  .sprouts i{width:5px;height:14px;border-radius:50% 50% 0 0;background:#5d9a4c;box-shadow:0 2px 3px rgba(0,0,0,.35);transform:scaleY(.2);transform-origin:bottom;transition:.6s}
+  .bed.grown .sprouts{opacity:1}
+  .bed.grown .sprouts i{transform:scaleY(1)}
+  .water-meter{position:absolute;left:3px;top:3px;bottom:3px;width:3px;border-radius:4px;background:rgba(0,0,0,.35);overflow:hidden}
+  .water-meter b{display:block;position:absolute;left:0;right:0;bottom:0;height:0;background:#67b8d8;transition:.35s}
+  .weed{position:absolute;z-index:3;width:33px;height:37px;transform:translate(-50%,-50%);transition:.3s}
+  .weed i{position:absolute;left:10px;bottom:0;width:3px;height:16px;background:#4e793d;border-radius:3px;transform:rotate(-20deg)}
+  .weed i:nth-child(2){transform:rotate(18deg);height:19px}
+  .weed i:nth-child(3){left:13px;transform:rotate(0);height:13px}
+  .weed i:before,.weed i:after{content:"";position:absolute;top:2px;width:10px;height:6px;border-radius:50% 0;background:#6e9c4c}
+  .weed i:before{left:-9px;transform:rotate(24deg)}
+  .weed i:after{right:-9px;transform:rotate(-24deg)}
+  .weed.cleared{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+  .weed.next:after{content:"CLEAR";position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);padding:2px 4px;border-radius:3px;background:#e0a63f;color:#2b220e;font-size:5px;font-weight:900;letter-spacing:.08em}
+  .weed.next i{filter:drop-shadow(0 0 5px rgba(255,220,150,.9))}
+  .mochi{position:absolute;z-index:4;left:20%;top:62%;width:74px;transform:translate(-50%,-50%);transition:left .45s ease,top .45s ease;filter:drop-shadow(0 10px 8px rgba(0,0,0,.38));animation:bob 3.6s ease-in-out infinite}
+  .mochi img{width:100%;display:block}
+  .bubble{position:absolute;left:70%;bottom:83%;width:max-content;max-width:160px;padding:6px 8px;border-radius:10px 10px 10px 3px;background:#fff8e8;color:#26351f;font-size:9px;font-weight:750;line-height:1.35;box-shadow:0 7px 18px rgba(0,0,0,.25);opacity:0;transform:translateY(5px);transition:.3s;pointer-events:none}
+  .bubble.show{opacity:1;transform:none}
+  .bubble:after{content:"";position:absolute;left:9px;bottom:-5px;border:5px solid transparent;border-top-color:#fff8e8;border-left:0}
+  .scene-bottom{position:absolute;z-index:3;left:14px;right:14px;bottom:10px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+  .mission-tag{padding:5px 8px;border-radius:5px;background:rgba(224,166,63,.96);color:#2b220e;font-size:7px;font-weight:900;letter-spacing:.1em;box-shadow:0 4px 14px rgba(0,0,0,.22);white-space:nowrap}
+  .scene-hint{color:rgba(255,248,231,.82);font-size:8px;font-weight:650;text-shadow:0 1px 6px #000;text-align:right;line-height:1.3}
+  .sky{position:absolute;inset:0;z-index:3;background:transparent;pointer-events:none;opacity:0;transition:opacity .8s;mix-blend-mode:soft-light}
+  .app.grow-day1 .sky{background:linear-gradient(180deg,rgba(255,205,116,.45),rgba(255,153,74,.08));opacity:1}
+  .app.grow-day2 .sky{background:linear-gradient(180deg,rgba(26,40,65,.65),rgba(90,70,80,.12));opacity:1}
+  .app.grow-day3 .sky{background:linear-gradient(180deg,rgba(255,221,154,.38),rgba(255,180,92,.08));opacity:1}
+  .sheet{position:absolute;z-index:6;left:0;right:0;bottom:0;min-height:54%;max-height:68%;overflow:auto;padding:9px 16px max(15px,env(safe-area-inset-bottom));border-radius:26px 26px 0 0;background:var(--cream);box-shadow:0 -18px 45px rgba(0,0,0,.3);scrollbar-width:none}
+  .sheet::-webkit-scrollbar{display:none}
+  .drag{width:32px;height:4px;border-radius:99px;background:#cdbfa5;margin:1px auto 9px}
+  .chapter-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+  .chapter-row .label{font-size:8px;font-weight:900;letter-spacing:.12em;color:#8b7857}
+  .chapter-row .count{font-size:8px;font-weight:750;color:#8b7857}
+  .rail{display:flex;gap:4px;margin:0 0 10px}
+  .dot{flex:1;height:5px;border-radius:99px;background:#e3d7c1;transition:.3s}
+  .dot.current{background:var(--green)}
+  .dot.done{background:var(--gold)}
+  .eyebrow{margin:0 0 3px;font-size:7px;font-weight:900;letter-spacing:.13em;color:#a07d3f;text-transform:uppercase}
+  h1{margin:0;font-size:23px;line-height:1.05;letter-spacing:-.035em;color:#1c2c1a}
+  .lead{margin:4px 0 8px;color:var(--muted);font-size:10.5px;line-height:1.4;max-width:310px}
+  .recipe{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:0 0 9px;padding:7px 8px;border-radius:9px;background:rgba(47,94,61,.055);border:1px solid rgba(47,94,61,.08)}
+  .recipe code{font:700 9px var(--mono);color:var(--green);background:rgba(47,94,61,.07);padding:2px 4px;border-radius:3px}
+  .recipe .arrow{color:#9a8a6d;font-size:9px}
+  .recipe small{color:#7c876f;font-size:7.5px;line-height:1.3}
+  .code-label{display:block;font-size:7px;font-weight:900;letter-spacing:.12em;color:#8b7857;margin:0 0 4px}
+  .code-wrap{display:flex;gap:6px;align-items:stretch}
+  .editor-shell{position:relative;flex:1;min-width:0;height:92px;border:1px solid #c9b996;border-radius:10px;background:#17281a;overflow:hidden}
+  .editor-shell:focus-within{border-color:#7fae7d;box-shadow:0 0 0 3px rgba(127,174,125,.12)}
+  .editor-shell.bad{border-color:#c77c5d;box-shadow:0 0 0 3px rgba(199,124,93,.15)}
+  .ghost-code{position:absolute;inset:0;z-index:1;margin:0;padding:8px 9px;color:#93aa8d;opacity:.5;font:600 10.5px/1.55 var(--mono);white-space:pre;pointer-events:none;overflow:hidden}
+  textarea#code{position:relative;z-index:2;width:100%;height:100%;resize:none;border:0;border-radius:0;background:transparent;color:#ecf6df;font:600 10.5px/1.55 var(--mono);padding:8px 9px;outline:none;caret-color:#f0c36f;tab-size:2;white-space:pre;overflow:auto}
+  .run-col{display:flex;flex-direction:column;gap:4px;width:64px;flex:none}
+  .run{min-height:35px;border:0;border-radius:8px;background:linear-gradient(180deg,#f2c574,#dfa640);color:#2b220e;font-size:9.5px;font-weight:900;box-shadow:0 4px 12px rgba(224,166,63,.25)}
+  .run:active{transform:translateY(1px)}
+  .run:disabled{opacity:.5}
+  .mini{min-height:25px;border:1px solid #d8c8a9;border-radius:7px;background:transparent;color:#5a6c50;font-size:8px;font-weight:800}
+  .status{margin:5px 0 0;min-height:14px;color:#7d8a73;font-size:8px;line-height:1.35}
+  .status.error{color:#a45b41}
+  .status.running{color:#5c7c4c}
+  .chips{display:flex;gap:4px;margin:6px 0 0}
+  .chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 2px;border-radius:6px;background:rgba(47,94,61,.055);color:#7d8a73;font-size:6.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+  .chip b{font-size:10px;color:#2f5e3d}
+  .cause{margin:7px 0 0;padding:8px 9px;border-radius:9px;background:#fff4e5;border:1px solid #e9c9a9;animation:pop .3s}
+  .cause-head{font-size:6.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#a56d3c;margin-bottom:4px}
+  .cause-code{display:flex;align-items:center;gap:5px;min-width:0}
+  .cause-code span{font-size:6px;font-weight:900;color:#b0815a;letter-spacing:.08em}
+  .cause-code code{font:700 8px var(--mono);color:#70421f;background:#f4dfc4;border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+  .cause-state{margin-top:4px;color:#8b5a35;font-size:8px;font-weight:800}
+  .cause p{margin:3px 0 0;color:#79563d;font-size:8px;line-height:1.4}
+  .success-strip{margin:8px 0 0;padding:8px 9px;border-radius:9px;background:#e5f0d8;border:1px solid #b9d3a3;display:flex;align-items:center;gap:7px;animation:pop .35s}
+  .success-strip .ok{width:19px;height:19px;border-radius:50%;background:var(--green);color:#fff6dc;display:grid;place-items:center;font-size:10px;font-weight:900;flex:none}
+  .success-strip div{min-width:0;flex:1}
+  .success-strip b{display:block;font-size:9px;color:#2d4c2c}
+  .success-strip small{display:block;font-size:7.5px;color:#63745b;line-height:1.3}
+  .success-strip button{min-height:28px;padding:0 8px;border:0;border-radius:6px;background:var(--green);color:#fff8e8;font-size:8px;font-weight:900;flex:none}
+  .hint-panel{margin:7px 0 0;padding:8px 9px;border-radius:8px;background:#fffaf0;border:1px solid #e0d3ba;color:#657155;font-size:8.5px;line-height:1.4}
+  .hint-panel b{display:block;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:#9a7b46;margin-bottom:3px}
+  .hint-panel button{margin-top:5px;min-height:25px;padding:0 7px;border:1px solid #d4c3a3;border-radius:6px;background:transparent;color:#5b6b51;font-size:8px;font-weight:800}
+  .growth{padding:4px 0 8px}
+  .growth h2{margin:0 0 4px;font-size:21px;letter-spacing:-.03em}
+  .growth .lead{margin-bottom:9px}
+  .days{display:flex;gap:5px;margin:8px 0 10px}
+  .day{flex:1;padding:7px 5px;border-radius:8px;background:rgba(47,94,61,.055);border:1px solid transparent;text-align:center;color:#8a927c;font-size:7px;font-weight:800;transition:.3s}
+  .day b{display:block;font-size:12px;margin-bottom:2px;color:#b6aa91}
+  .day.active{background:#e4f0d7;border-color:#b9d3a3;color:#3e6337}
+  .day.active b{color:var(--green)}
+  .grow-btn{width:100%;min-height:38px;border:0;border-radius:9px;background:linear-gradient(180deg,#f2c574,#dfa640);color:#2b220e;font-size:10px;font-weight:900}
+  .grow-status{margin:7px 0 0;color:#6f7d62;font-size:8.5px;line-height:1.4;min-height:14px}
+  .final{margin:8px 0 0;padding:14px;border-radius:12px;background:#173a27;color:#fff8e8;text-align:center}
+  .final .big{width:42px;height:42px;border-radius:50%;background:var(--gold);color:#2b220e;display:grid;place-items:center;font-size:20px;font-weight:900;margin:0 auto 8px}
+  .final .eyebrow{color:#e9c47b}
+  .final h2{margin:0;font-size:20px;letter-spacing:-.02em}
+  .final p{margin:5px 0 0;color:#cbd8c2;font-size:9px;line-height:1.5}
+  .final .reward{display:inline-block;margin:9px 0 0;padding:5px 8px;border-radius:999px;background:rgba(255,248,232,.08);border:1px solid rgba(255,248,232,.16);font-size:8px;color:#e8ddc6}
+  .final .next{width:100%;min-height:34px;margin-top:9px;border:0;border-radius:8px;background:var(--gold);color:#2a220f;font-size:9.5px;font-weight:900}
+  .intro{position:absolute;z-index:20;inset:0;display:grid;place-items:center;padding:20px;background:rgba(8,14,9,.64);backdrop-filter:blur(6px);transition:.3s}
+  .intro.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .intro-card{width:100%;max-width:330px;padding:18px;border-radius:18px;background:var(--paper);box-shadow:0 24px 60px rgba(0,0,0,.4);border:1px solid #ddceb0}
+  .intro-card h2{margin:0;font-size:25px;letter-spacing:-.03em;line-height:1.1;color:#1e2e1b}
+  .intro-card p{margin:6px 0 0;color:#66725a;font-size:10.5px;line-height:1.5}
+  .command-card{display:flex;align-items:center;gap:6px;margin:12px 0 8px;padding:8px;border-radius:8px;background:#14261b;color:#eee8d6;font:600 10px var(--mono);flex-wrap:wrap}
+  .command-card span{color:#91ad85;font:700 7px var(--font);letter-spacing:.08em;text-transform:uppercase}
+  .intro-card .small{font-size:8px;color:#8b927e;line-height:1.4}
+  .start{width:100%;min-height:40px;margin-top:12px;border:0;border-radius:9px;background:var(--green);color:#fff8e8;font-size:10.5px;font-weight:900;letter-spacing:.02em}
+  @keyframes bob{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-4px)}}
+  @keyframes pop{0%{transform:scale(.96);opacity:.4}100%{transform:scale(1);opacity:1}}
+  @media(max-width:500px){body{display:block;padding:0;background:#0d140d}.stage{width:100vw;height:100svh;max-height:none}.app{border-radius:0;border:0;box-shadow:none}.sheet{max-height:70%}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="app" id="app" data-task="1">
+    <div class="scene" id="scene">
+      <img class="bg" src="art/restoration-shell.png" alt="Little Acres farm">
+      <div class="sky" id="sky"></div>
+      <div class="scene-top">
+        <span class="chapter"><i></i>Lesson 1 · Seed nursery</span>
+        <span class="tools"><span class="count" id="sceneCount">Task 1 / 7</span><button class="sound" id="soundBtn" type="button" aria-label="Turn sound off">🔊</button></span>
+      </div>
+      <div class="gate" id="gate"><span>GATE</span></div>
+      <div class="sign" id="sign"><span id="signText">Little Acres</span></div>
+      <div class="seedbag" id="seedbag"><div class="bag"></div><span class="label" id="bagLabel">?</span></div>
+      <div class="bed" id="bed">
+        <div class="soil"></div><div class="grid"></div>
+        <div class="seeds" id="seeds"><i></i><i></i><i></i></div>
+        <div class="sprouts" id="sprouts"><i></i><i></i><i></i></div>
+        <div class="water-meter"><b id="waterFill"></b></div>
+        <span class="area-badge" id="areaBadge">—</span>
+      </div>
+      <div class="weed" id="weed0" style="left:30%;top:54%"><i></i><i></i><i></i></div>
+      <div class="weed" id="weed1" style="left:42%;top:54%"><i></i><i></i><i></i></div>
+      <div class="weed" id="weed2" style="left:54%;top:54%"><i></i><i></i><i></i></div>
+      <div class="mochi" id="mochi"><div class="bubble" id="bubble"></div><img src="art/play-mochi.png" alt="Mochi"></div>
+      <div class="scene-bottom"><span class="mission-tag" id="sceneTag">Task 1</span><span class="scene-hint" id="sceneHint">Reach the gate</span></div>
+    </div>
+
+    <section class="sheet" id="sheet">
+      <div class="drag"></div>
+      <div class="chapter-row"><span class="label">Lesson 1 · Wake the seed nursery</span><span class="count" id="taskCount">Task 1 of 7</span></div>
+      <div class="rail" id="rail"></div>
+
+      <div id="taskArea">
+        <p class="eyebrow" id="taskEyebrow">Task 1 · Enter</p>
+        <h1 id="taskTitle">Walk to the gate</h1>
+        <p class="lead" id="taskLead"></p>
+        <div class="recipe" id="recipe"></div>
+        <label class="code-label" for="code">YOUR CODE</label>
+        <div class="code-wrap">
+          <div class="editor-shell" id="editorShell"><pre class="ghost-code" id="ghostCode" aria-hidden="true"></pre><textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Your Python code"></textarea></div>
+          <div class="run-col"><button class="run" id="run" type="button">Run ▶</button><button class="mini" id="clearCode" type="button">Clear</button><button class="mini" id="hintBtn" type="button">Hint</button></div>
+        </div>
+        <p class="status" id="status"></p>
+        <div class="chips">
+          <span class="chip">Weeds <b id="weedChip">3</b></span>
+          <span class="chip">Seeds <b id="seedChip">—</b></span>
+          <span class="chip">Water <b id="waterChip">0/3</b></span>
+        </div>
+        <div class="cause" id="cause" hidden>
+          <div class="cause-head">What happened</div>
+          <div class="cause-code"><span>CODE</span><code id="causeCode"></code></div>
+          <div class="cause-state" id="causeState"></div>
+          <p id="causeText"></p>
+        </div>
+        <div class="success-strip" id="successStrip" hidden><span class="ok">✓</span><div><b id="successTitle">Task complete</b><small id="successText"></small></div><button id="nextTask" type="button">Next</button></div>
+        <div class="hint-panel" id="hintPanel" hidden><b>Hint</b><span id="hintText"></span><br><button id="fillExample" type="button">Put the example in the editor</button></div>
+      </div>
+
+      <div class="growth" id="growth" hidden>
+        <p class="eyebrow">Final step · Day 1 to Day 3</p>
+        <h2>See what your code grew</h2>
+        <p class="lead">Your seeds are planted and watered. Watch the farm wake up.</p>
+        <div class="days"><div class="day" id="day1"><b>1</b>planted</div><div class="day" id="day2"><b>2</b>sprout</div><div class="day" id="day3"><b>3</b>leaves</div></div>
+        <button class="grow-btn" id="growBtn" type="button">See it grow ▶</button>
+        <p class="grow-status" id="growStatus">The sun will do the rest.</p>
+        <div class="final" id="final" hidden>
+          <div class="big">✓</div>
+          <p class="eyebrow">Lesson complete</p>
+          <h2>You woke the seed nursery!</h2>
+          <p>You used <code>print()</code>, variables, arithmetic, comments and built-in farm commands. Mochi is proud of you.</p>
+          <div class="reward">+1 Seed nursery restored</div>
+          <button class="next" id="nextLesson" type="button">Next lesson: Repair the workshop →</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const app = $('#app'), codeEl = $('#code'), statusEl = $('#status'), sheet = $('#sheet');
+  const ghostCode = $('#ghostCode'), editorShell = $('#editorShell');
+  const mochiEl = $('#mochi'), bubbleEl = $('#bubble'), signEl = $('#sign'), signText = $('#signText');
+  const bagEl = $('#seedbag'), bagLabel = $('#bagLabel'), bedEl = $('#bed'), areaBadge = $('#areaBadge');
+  const weedsEl = [$('#weed0'), $('#weed1'), $('#weed2')];
+  const waterFill = $('#waterFill'), seedsEl = $('#seeds'), sproutsEl = $('#sprouts');
+  const weedChip = $('#weedChip'), seedChip = $('#seedChip'), waterChip = $('#waterChip');
+  const successStrip = $('#successStrip'), successTitle = $('#successTitle'), successText = $('#successText');
+  const hintPanel = $('#hintPanel'), hintText = $('#hintText');
+  const growth = $('#growth'), taskArea = $('#taskArea'), finalCard = $('#final');
+  const cause = $('#cause'), causeCode = $('#causeCode'), causeState = $('#causeState'), causeText = $('#causeText');
+  const sceneTag = $('#sceneTag'), sceneHint = $('#sceneHint'), taskCount = $('#taskCount'), sceneCount = $('#sceneCount');
+  const rail = $('#rail');
+  let currentTask = 1;
+  let running = false;
+  let completed = new Set();
+  let vars = {};
+  let output = [];
+  let lastPrint = '';
+  let area = null;
+  let seeds = 0;
+  let water = 0;
+  let weedsCleared = 0;
+  let mochi = {x: 20, y: 62};
+  let growthDay = 0;
+  let soundOn = true;
+  let audioCtx = null;
+  let ambienceGain = null;
+  let birdTimer = null;
+  let voice = null;
+  let applause = null;
+  let bubbleTimer = null;
+
+  const TASKS = {
+    1: {
+      eyebrow: 'Task 1 · Enter', title: 'Walk to the gate',
+      lead: 'Mochi moves when you press Run. move_right(1) is a built-in command — you use it now; later you’ll build your own.',
+      recipe: '<code>move_right(1)</code> ×3 <span class="arrow">then</span> <code>move_up(1)</code> <small>→ reach the gate</small>',
+      code: 'move_right(1)\nmove_right(1)\nmove_right(1)\nmove_up(1)',
+      hint: 'Start with move_right(1). Repeat it three times, then add move_up(1).',
+      scene: 'Reach the gate',
+      start: {x: 20, y: 62}
+    },
+    2: {
+      eyebrow: 'Task 2 · Speak', title: 'Wake the gate sign',
+      lead: 'Use print to show a message on the gate sign.',
+      recipe: '<code>print("…")</code> <small>→ the words in quotes appear on the sign</small>',
+      code: 'print("Good morning, Little Acres!")',
+      hint: 'Keep print lowercase. Put the words inside the quotes.',
+      scene: 'Make the sign speak',
+      start: {x: 44, y: 54}
+    },
+    3: {
+      eyebrow: 'Task 3 · Name', title: 'Label the seed bag',
+      lead: 'Store the seed name in a variable, then print it.',
+      recipe: '<code>seed = "carrot"</code> <span class="arrow">then</span> <code>print(seed)</code>',
+      code: 'seed = "carrot"\nprint(seed)',
+      hint: 'The variable name is seed. The value is the word carrot in quotes.',
+      scene: 'Label the seed bag',
+      start: {x: 34, y: 70}
+    },
+    4: {
+      eyebrow: 'Task 4 · Measure', title: 'Measure the bed',
+      lead: 'Give length and width values, calculate area, and print it.',
+      recipe: '<code>length = 4</code> <code>width = 2</code> <code>area = length * width</code> <code>print(area)</code>',
+      code: 'length = 4\nwidth = 2\narea = length * width\nprint(area)',
+      hint: 'Use * for multiplication. area should be 8.',
+      scene: 'Measure the seed bed',
+      start: {x: 36, y: 72}
+    },
+    5: {
+      eyebrow: 'Task 5 · Clear', title: 'Clear the weeds',
+      lead: 'Clear only the weed in front of Mochi. Then step to the next one.',
+      recipe: '<code>clear()</code> <span class="arrow">→</span> <code>move_right(1)</code> <span class="arrow">→</span> repeat',
+      code: 'clear()\nmove_right(1)\nclear()\nmove_right(1)\nclear()',
+      hint: 'clear() only works when a weed is directly in front of Mochi. Clear, step, clear, step, clear.',
+      scene: 'Clear the weeds in front of you',
+      start: {x: 18, y: 62}
+    },
+    6: {
+      eyebrow: 'Task 6 · Plant', title: 'Plant and water',
+      lead: 'Plant carrot seeds, then water the bed three times.',
+      recipe: '<code>plant("carrot")</code> <span class="arrow">then</span> <code>water()</code> ×3',
+      code: 'plant("carrot")\nwater()\nwater()\nwater()',
+      hint: 'Plant first. Then add one water() line three times. Watch the water meter.',
+      scene: 'Plant, then water three times',
+      start: {x: 36, y: 72}
+    },
+    7: {
+      eyebrow: 'Final step', title: 'See it grow',
+      lead: 'Your code planted and watered the seeds. Now watch the farm respond.',
+      recipe: '<small>No more code — press “See it grow”.</small>',
+      code: '',
+      hint: '',
+      scene: 'Watch the seed nursery wake up',
+      start: {x: 36, y: 72}
+    }
+  };
+
+  function makeRail() {
+    rail.innerHTML = '';
+    for (let i = 1; i <= 7; i++) {
+      const d = document.createElement('span');
+      d.className = 'dot' + (i === currentTask ? ' current' : completed.has(i) ? ' done' : '');
+      rail.appendChild(d);
+    }
+  }
+  function showBubble(text, ms = 3600) {
+    clearTimeout(bubbleTimer);
+    bubbleEl.textContent = text;
+    bubbleEl.classList.add('show');
+    bubbleTimer = setTimeout(() => bubbleEl.classList.remove('show'), ms);
+  }
+  function setStatus(text, kind) {
+    statusEl.textContent = text || '';
+    statusEl.className = 'status' + (kind ? ' ' + kind : '');
+  }
+  function updateGhost() {
+    if (!ghostCode) return;
+    ghostCode.hidden = codeEl.value.length > 0 || currentTask === 7;
+  }
+  function stateSummary() {
+    return 'Seeds: ' + (seeds ? 'planted' : 'none') + ' · Water: ' + water + '/3 · Weeds left: ' + Math.max(0, 3 - weedsCleared);
+  }
+  function hideCause() {
+    cause.hidden = true;
+  }
+  function showCause(line, text) {
+    causeCode.textContent = line ? line.trim() : 'your code';
+    causeState.textContent = stateSummary();
+    causeText.textContent = text;
+    cause.hidden = false;
+  }
+  function setTaskObjects() {
+    const t = currentTask;
+    signEl.hidden = !(t === 1 || t === 2 || t === 3 || t === 4 || t === 5 || t === 6);
+    bagEl.hidden = t !== 3;
+    bedEl.hidden = !(t === 4 || t === 5 || t === 6 || t === 7);
+    weedsEl.forEach(w => { w.hidden = t !== 5; });
+    if (t !== 2) signText.textContent = 'Little Acres';
+    if (t !== 3) bagLabel.textContent = '?';
+  }
+  function updateScene() {
+    mochiEl.style.left = mochi.x + '%';
+    mochiEl.style.top = mochi.y + '%';
+    weedsEl.forEach((w, i) => {
+      w.classList.toggle('cleared', i < weedsCleared);
+      w.classList.toggle('next', i === weedsCleared);
+    });
+    bedEl.classList.toggle('seeded', seeds > 0);
+    bedEl.classList.toggle('grown', growthDay >= 3);
+    waterFill.style.height = Math.min(water, 3) / 3 * 100 + '%';
+    areaBadge.textContent = area === null ? '—' : area + ' m²';
+    weedChip.textContent = String(Math.max(0, 3 - weedsCleared));
+    seedChip.textContent = seeds ? 'planted' : '—';
+    waterChip.textContent = water + '/3';
+    sceneTag.textContent = 'Task ' + currentTask;
+    sceneHint.textContent = TASKS[currentTask].scene;
+    taskCount.textContent = 'Task ' + currentTask + ' of 7';
+    sceneCount.textContent = 'Task ' + currentTask + ' / 7';
+  }
+  function resetScene() {
+    vars = {};
+    output = [];
+    lastPrint = '';
+    area = null;
+    seeds = 0;
+    water = 0;
+    weedsCleared = 0;
+    growthDay = 0;
+    mochi = { ...TASKS[currentTask].start };
+    app.classList.remove('grow-day1', 'grow-day2', 'grow-day3');
+    signEl.classList.remove('lit');
+    bagLabel.textContent = '?';
+    setTaskObjects();
+    updateScene();
+  }
+  function renderTask() {
+    const t = TASKS[currentTask];
+    taskArea.hidden = currentTask === 7;
+    growth.hidden = currentTask !== 7;
+    finalCard.hidden = true;
+    successStrip.hidden = true;
+    hintPanel.hidden = true;
+    hideCause();
+    setStatus('');
+    $('#taskEyebrow').textContent = t.eyebrow;
+    $('#taskTitle').textContent = t.title;
+    $('#taskLead').textContent = t.lead;
+    $('#recipe').innerHTML = t.recipe;
+    hintText.textContent = t.hint;
+    codeEl.value = '';
+    ghostCode.textContent = t.code;
+    updateGhost();
+    codeEl.classList.remove('bad');
+    editorShell.classList.remove('bad');
+    makeRail();
+    resetScene();
+    if (currentTask === 7) {
+      growth.hidden = false;
+      taskArea.hidden = true;
+    }
+  }
+  function showSuccess(title, text, nextLabel) {
+    successTitle.textContent = title;
+    successText.textContent = text;
+    $('#nextTask').textContent = nextLabel;
+    successStrip.hidden = false;
+  }
+  function completeTask() {
+    if (completed.has(currentTask)) return;
+    completed.add(currentTask);
+    hideCause();
+    makeRail();
+    const cheer = currentTask === 6 ? 'The first bed is alive!' : 'That worked — nice job!';
+    showBubble(cheer);
+    playEffect('chime');
+    if (currentTask === 1) playVoice('success');
+    else if (currentTask === 6) playVoice('cheer');
+    const next = currentTask < 6 ? 'Next task' : 'See it grow';
+    showSuccess('Task ' + currentTask + ' complete', cheer, next);
+  }
+
+  // ---------- safe mini interpreter for this prototype ----------
+  function stripComment(line) {
+    let q = null;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (q) { if (c === q) q = null; }
+      else if (c === '"' || c === "'") q = c;
+      else if (c === '#') return line.slice(0, i);
+    }
+    return line;
+  }
+  function evalExpr(expr) {
+    const s = String(expr).trim();
+    let i = 0;
+    const fail = msg => { throw new Error(msg || 'I could not read that value.'); };
+    const ws = () => { while (i < s.length && /\s/.test(s[i])) i++; };
+    function factor() {
+      ws();
+      if (s[i] === '(') { i++; const v = expression(); ws(); if (s[i] !== ')') fail('Missing a closing parenthesis.'); i++; return v; }
+      if (s[i] === '"' || s[i] === "'") {
+        const q = s[i++]; let out = '';
+        while (i < s.length && s[i] !== q) {
+          if (s[i] === '\\' && i + 1 < s.length) { i++; out += s[i++]; }
+          else out += s[i++];
+        }
+        if (s[i] !== q) fail('Missing a closing quote.');
+        i++; return out;
+      }
+      if (s[i] === '-' || s[i] === '+') { const sign = s[i++]; const v = factor(); return sign === '-' ? -Number(v) : Number(v); }
+      const num = s.slice(i).match(/^\d+(?:\.\d+)?/);
+      if (num) { i += num[0].length; return Number(num[0]); }
+      const name = s.slice(i).match(/^[A-Za-z_][A-Za-z0-9_]*/);
+      if (name) {
+        i += name[0].length;
+        if (!(name[0] in vars)) fail("I don't know the name " + name[0] + ' yet.');
+        return vars[name[0]];
+      }
+      fail('I could not read that value.');
+    }
+    function term() {
+      let v = factor();
+      while (true) {
+        ws();
+        if (s[i] === '*') { i++; v = Number(v) * Number(factor()); }
+        else break;
+      }
+      return v;
+    }
+    function expression() {
+      let v = term();
+      while (true) {
+        ws();
+        if (s[i] === '+') { i++; v = Number(v) + Number(term()); }
+        else if (s[i] === '-') { i++; v = Number(v) - Number(term()); }
+        else break;
+      }
+      return v;
+    }
+    const value = expression();
+    ws();
+    if (i < s.length) fail('I could not read the end of that line.');
+    return value;
+  }
+  function move(dx, dy, count) {
+    const n = Number(count);
+    if (!Number.isInteger(n) || n < 1 || n > 9) throw new Error('Use a whole number of steps from 1 to 9.');
+    mochi.x = Math.max(6, Math.min(94, mochi.x + dx * n * 8));
+    mochi.y = Math.max(20, Math.min(82, mochi.y + dy * n * 8));
+    updateScene();
+    playEffect('step');
+  }
+  function clearWeed() {
+    const front = weedsCleared;
+    const target = [30, 42, 54][front];
+    if (target === undefined) throw new Error('The bed is already clear.');
+    const distance = Math.abs(mochi.x + 7 - target);
+    if (distance > 14 || Math.abs(mochi.y - 54) > 12) {
+      throw new Error("There's no weed directly in front of Mochi.");
+    }
+    weedsCleared++;
+    updateScene();
+    playEffect('weed');
+    showBubble('One weed gone!', 1800);
+  }
+  function plant(arg) {
+    if (seeds) throw new Error('The seeds are already planted.');
+    const value = evalExpr(arg);
+    if (String(value).toLowerCase() !== 'carrot') throw new Error('For this bed, plant "carrot".');
+    seeds = 1;
+    updateScene();
+    playEffect('seed');
+    showBubble('Carrot seeds are in the soil.', 2200);
+  }
+  function waterBed() {
+    if (!seeds) {
+      water++;
+      updateScene();
+      playEffect('water');
+      throw new Error('There are no seeds here yet — plant first.');
+    }
+    if (water >= 3) {
+      water++;
+      updateScene();
+      playEffect('water');
+      throw new Error('Too much water — the seeds need air.');
+    }
+    water++;
+    updateScene();
+    playEffect('water');
+    showBubble(water === 1 ? 'Still dry — the seeds need more water.' : water === 2 ? 'Almost there — one more water().' : 'Just right! The seeds are happy.', 2400);
+  }
+  async function executeLine(raw) {
+    const line = stripComment(raw).trim();
+    if (!line) return;
+    let m;
+    if ((m = line.match(/^move_right\s*\(\s*(.*?)\s*\)$/))) { move(1, 0, evalExpr(m[1])); return; }
+    if ((m = line.match(/^move_left\s*\(\s*(.*?)\s*\)$/))) { move(-1, 0, evalExpr(m[1])); return; }
+    if ((m = line.match(/^move_up\s*\(\s*(.*?)\s*\)$/))) { move(0, -1, evalExpr(m[1])); return; }
+    if ((m = line.match(/^move_down\s*\(\s*(.*?)\s*\)$/))) { move(0, 1, evalExpr(m[1])); return; }
+    if (/^clear\s*\(\s*\)$/.test(line)) { clearWeed(); return; }
+    if ((m = line.match(/^plant\s*\(\s*(.*?)\s*\)$/))) { plant(m[1]); return; }
+    if (/^water\s*\(\s*\)$/.test(line)) { waterBed(); return; }
+    if ((m = line.match(/^print\s*\(\s*(.*?)\s*\)$/))) {
+      const value = evalExpr(m[1]);
+      lastPrint = String(value);
+      output.push(lastPrint);
+      if (currentTask === 2) {
+        signText.textContent = lastPrint;
+        signEl.classList.add('lit');
+      }
+      if (currentTask === 3 && String(vars.seed || '').toLowerCase() === 'carrot') bagLabel.textContent = String(vars.seed);
+      if (currentTask === 4 && area !== null) areaBadge.textContent = area + ' m²';
+      playEffect('print');
+      return;
+    }
+    if ((m = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/))) {
+      const value = evalExpr(m[2]);
+      vars[m[1]] = value;
+      if (m[1] === 'area' && Number.isFinite(Number(value))) area = Number(value);
+      if (m[1] === 'seed' && String(value).toLowerCase() === 'carrot') bagLabel.textContent = String(value);
+      if (currentTask === 4 && area !== null) areaBadge.textContent = area + ' m²';
+      return;
+    }
+    throw new Error("I don't know that command yet.");
+  }
+  function validateTask() {
+    if (currentTask === 1) return mochi.x >= 44 && mochi.y <= 54;
+    if (currentTask === 2) return output.includes('Good morning, Little Acres!');
+    if (currentTask === 3) return String(vars.seed || '').toLowerCase() === 'carrot' && output.some(x => x.toLowerCase() === 'carrot');
+    if (currentTask === 4) return Number(vars.area) === 8 && output.includes('8');
+    if (currentTask === 5) return weedsCleared === 3;
+    if (currentTask === 6) return seeds === 1 && water === 3;
+    return false;
+  }
+  function taskHint() {
+    if (currentTask === 1) return 'The gate is to the right and one step up.';
+    if (currentTask === 2) return 'Put the exact greeting inside print("...").';
+    if (currentTask === 3) return 'Create seed, then print(seed).';
+    if (currentTask === 4) return 'area should be 8. Use length * width.';
+    if (currentTask === 5) return 'Clear, step right, clear, step right, clear.';
+    if (currentTask === 6) {
+      if (!seeds) return 'Plant first with plant("carrot").';
+      if (water < 3) return 'The bed is only ' + water + '/3 watered. Add ' + (3 - water) + ' more water() line' + (3 - water === 1 ? '' : 's') + '.';
+      return 'The bed is ready. Press Run to see it grow.';
+    }
+    return '';
+  }
+  async function runCode() {
+    if (running) return;
+    ensureAudio();
+    running = true;
+    const runBtn = $('#run');
+    runBtn.disabled = true;
+    successStrip.hidden = true;
+    hintPanel.hidden = true;
+    hideCause();
+    setStatus('');
+    resetScene();
+    codeEl.classList.remove('bad');
+    editorShell.classList.remove('bad');
+    updateGhost();
+    const lines = codeEl.value.split('\n');
+    const nonEmpty = lines.map((l, i) => ({l, i})).filter(x => stripComment(x.l).trim());
+    if (!nonEmpty.length) {
+      setStatus('Write a command first, then press Run.', 'error');
+      showBubble('I am ready when you are!');
+      running = false; runBtn.disabled = false; return;
+    }
+    let failed = false;
+    for (const item of nonEmpty) {
+      setStatus('Line ' + (item.i + 1) + ' · ' + item.l.trim(), 'running');
+      await sleep(420);
+      try {
+        await executeLine(item.l);
+      } catch (err) {
+        failed = true;
+        codeEl.classList.add('bad');
+        editorShell.classList.add('bad');
+        setStatus('Line ' + (item.i + 1) + ' · ' + (err.message || 'Something is not right.'), 'error');
+        showCause(item.l, err.message || 'That command did not work.');
+        showBubble(err.message || 'Hmm, that did not work.', 6500);
+        playEffect('error');
+        playVoice('retry');
+        break;
+      }
+    }
+    running = false;
+    runBtn.disabled = false;
+    if (failed) return;
+    await sleep(250);
+    if (validateTask()) {
+      setStatus('The farm changed — look at the scene.', 'running');
+      completeTask();
+    } else {
+      codeEl.classList.add('bad');
+      editorShell.classList.add('bad');
+      setStatus(taskHint(), 'error');
+      showCause('', taskHint());
+      showBubble(taskHint(), 6500);
+      playEffect('error');
+    }
+  }
+
+  // ---------- sound ----------
+  function ensureAudio() {
+    if (!soundOn) return;
+    if (!audioCtx) {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        ambienceGain = audioCtx.createGain();
+        ambienceGain.gain.value = .035;
+        ambienceGain.connect(audioCtx.destination);
+        startAmbience();
+      } catch (e) { audioCtx = null; }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  function startAmbience() {
+    if (!audioCtx || !ambienceGain) return;
+    try {
+      const len = audioCtx.sampleRate * 2;
+      const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+      const data = buf.getChannelData(0);
+      let last = 0;
+      for (let i = 0; i < len; i++) { const white = Math.random() * 2 - 1; last = (last + .02 * white) / 1.02; data[i] = last * 3.5; }
+      const src = audioCtx.createBufferSource(); src.buffer = buf; src.loop = true;
+      const filter = audioCtx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 900;
+      src.connect(filter); filter.connect(ambienceGain); src.start();
+    } catch (e) {}
+    clearInterval(birdTimer);
+    birdTimer = setInterval(() => {
+      if (!soundOn) return;
+      if (Math.random() > .55) return;
+      try {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = 1900 + Math.random() * 900;
+        g.gain.setValueAtTime(0, audioCtx.currentTime);
+        g.gain.linearRampToValueAtTime(.018, audioCtx.currentTime + .02);
+        g.gain.exponentialRampToValueAtTime(.0001, audioCtx.currentTime + .18);
+        o.connect(g); g.connect(ambienceGain); o.start(); o.stop(audioCtx.currentTime + .2);
+      } catch (e) {}
+    }, 8000);
+  }
+  function playEffect(kind) {
+    if (!soundOn || !audioCtx) return;
+    try {
+      const t = audioCtx.currentTime;
+      if (kind === 'step') {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(75, t + .09);
+        g.gain.setValueAtTime(.09, t); g.gain.exponentialRampToValueAtTime(.001, t + .12);
+        o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t + .13);
+      } else if (kind === 'weed') {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'triangle'; o.frequency.setValueAtTime(500, t); o.frequency.exponentialRampToValueAtTime(180, t + .16);
+        g.gain.setValueAtTime(.05, t); g.gain.exponentialRampToValueAtTime(.001, t + .2);
+        o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t + .21);
+      } else if (kind === 'water') {
+        const len = audioCtx.sampleRate * .28, buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate), d = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len) * .5;
+        const s = audioCtx.createBufferSource(); s.buffer = buf;
+        const f = audioCtx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 1400; f.Q.value = .8;
+        const g = audioCtx.createGain(); g.gain.value = .12;
+        s.connect(f); f.connect(g); g.connect(audioCtx.destination); s.start();
+      } else if (kind === 'seed') {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = 600; g.gain.setValueAtTime(.06, t); g.gain.exponentialRampToValueAtTime(.001, t + .1);
+        o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t + .11);
+      } else if (kind === 'print') {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = 880; g.gain.setValueAtTime(.035, t); g.gain.exponentialRampToValueAtTime(.001, t + .14);
+        o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t + .15);
+      } else if (kind === 'chime') {
+        [523, 659, 784].forEach((freq, i) => {
+          const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+          o.type = 'sine'; o.frequency.value = freq; const st = t + i * .1;
+          g.gain.setValueAtTime(.0001, st); g.gain.exponentialRampToValueAtTime(.055, st + .02); g.gain.exponentialRampToValueAtTime(.0001, st + .35);
+          o.connect(g); g.connect(audioCtx.destination); o.start(st); o.stop(st + .38);
+        });
+      } else if (kind === 'error') {
+        [220, 180].forEach((freq, i) => {
+          const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+          o.type = 'triangle'; o.frequency.value = freq; const st = t + i * .12;
+          g.gain.setValueAtTime(.0001, st); g.gain.exponentialRampToValueAtTime(.04, st + .02); g.gain.exponentialRampToValueAtTime(.0001, st + .2);
+          o.connect(g); g.connect(audioCtx.destination); o.start(st); o.stop(st + .22);
+        });
+      }
+    } catch (e) {}
+  }
+  function playVoice(kind) {
+    if (!soundOn) return;
+    const files = { hi: 'mochi-hi.mp3', hint: 'mochi-hint.wav', retry: 'mochi-retry.wav', success: 'mochi-success.wav', cheer: 'mochi-cheer.wav', complete: 'mochi-complete.wav' };
+    if (!files[kind]) return;
+    try {
+      if (voice) { voice.pause(); voice = null; }
+      voice = new Audio('art/audio/' + files[kind]);
+      voice.volume = .78;
+      voice.play().catch(() => {});
+    } catch (e) {}
+  }
+  function playApplause() {
+    if (!soundOn) return;
+    try {
+      if (applause) applause.pause();
+      applause = new Audio('art/audio/mochi-applause.wav');
+      applause.volume = .28;
+      applause.play().catch(() => {});
+      setTimeout(() => { if (applause) { applause.pause(); applause = null; } }, 3200);
+    } catch (e) {}
+  }
+  function setSound(on) {
+    soundOn = on;
+    const b = $('#soundBtn');
+    b.textContent = on ? '🔊' : '🔇';
+    b.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
+    try { localStorage.setItem('mochi.lesson1.sound', on ? '1' : '0'); } catch (e) {}
+    if (!on) {
+      if (voice) { voice.pause(); voice = null; }
+      if (applause) { applause.pause(); applause = null; }
+      if (audioCtx) audioCtx.suspend();
+    } else {
+      ensureAudio();
+    }
+  }
+
+  // ---------- growth ----------
+  async function playGrowth() {
+    if (growthDay) return;
+    const btn = $('#growBtn');
+    btn.disabled = true;
+    const status = $('#growStatus');
+    for (let day = 1; day <= 3; day++) {
+      growthDay = day;
+      app.classList.remove('grow-day1', 'grow-day2', 'grow-day3');
+      app.classList.add('grow-day' + day);
+      $('#day' + day).classList.add('active');
+      updateScene();
+      status.textContent = day === 1 ? 'Day 1 · The seeds are in the soil.' : day === 2 ? 'Day 2 · The first sprout appears.' : 'Day 3 · Leaves reach for the sun.';
+      playEffect(day === 3 ? 'chime' : 'seed');
+      await sleep(1200);
+    }
+    playVoice('complete');
+    playApplause();
+    showBubble('You did it! The seed nursery is awake!', 6000);
+    finalCard.hidden = false;
+    $('#growBtn').hidden = true;
+    status.textContent = 'Lesson complete · +1 Seed nursery restored';
+  }
+
+  // ---------- events ----------
+  $('#run').addEventListener('click', runCode);
+  $('#clearCode').addEventListener('click', () => { codeEl.value = ''; updateGhost(); codeEl.focus(); setStatus(''); });
+  $('#hintBtn').addEventListener('click', () => {
+    ensureAudio();
+    hintPanel.hidden = !hintPanel.hidden;
+    if (!hintPanel.hidden) playVoice('hint');
+  });
+  $('#fillExample').addEventListener('click', () => {
+    codeEl.value = TASKS[currentTask].code;
+    updateGhost();
+    hintPanel.hidden = true;
+    setStatus('Example loaded. Press Run to see what happens.', 'running');
+    codeEl.focus();
+  });
+  $('#nextTask').addEventListener('click', () => {
+    if (currentTask < 7) {
+      currentTask++;
+      renderTask();
+      sheet.scrollTop = 0;
+    }
+  });
+  $('#growBtn').addEventListener('click', playGrowth);
+  $('#soundBtn').addEventListener('click', () => setSound(!soundOn));
+  $('#nextLesson').addEventListener('click', () => {
+    showBubble('Next time: repair the workshop!', 4000);
+  });
+  codeEl.addEventListener('input', () => { codeEl.classList.remove('bad'); editorShell.classList.remove('bad'); updateGhost(); setStatus('Code changed. Press Run to see the farm respond.', 'running'); });
+  document.addEventListener('pointerdown', () => { if (soundOn) ensureAudio(); }, { once: true });
+
+  // Init
+  try { if (localStorage.getItem('mochi.lesson1.sound') === '0') { soundOn = false; setSound(false); } } catch (e) {}
+  const params = new URLSearchParams(location.search);
+  const jump = Number(params.get('task'));
+  if (jump >= 1 && jump <= 7) currentTask = jump;
+  renderTask();
+})();
+</script>
+</body>
+</html>

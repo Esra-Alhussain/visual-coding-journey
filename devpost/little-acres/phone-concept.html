@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mochi · Phone Lesson Concept</title>
+<style>
+  :root{
+    --ink:#1f2d1d; --muted:#6d7863; --green:#2f5e3d; --green-deep:#173a27;
+    --cream:#fbf3df; --paper:#fff9eb; --gold:#e0a63f; --line:#e5d8bd;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+    --font:"Avenir Next","Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{
+    background:radial-gradient(120% 80% at 50% 0%,#29301f 0%,#11140d 58%,#090b07 100%);
+    font-family:var(--font);color:var(--ink);
+    display:grid;place-items:center;padding:24px;
+  }
+  button{font-family:inherit}
+  .stage{width:390px;height:844px;max-height:calc(100vh - 48px)}
+  .phone{
+    position:relative;width:100%;height:100%;overflow:hidden;border-radius:38px;
+    background:#0d140d;border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 40px 90px rgba(0,0,0,.62),0 0 0 8px rgba(255,255,255,.03);
+    isolation:isolate;
+  }
+  .scene{position:absolute;inset:0 0 auto;height:59%}
+  .scene .bg{width:100%;height:100%;object-fit:cover;object-position:50% 47%;display:block}
+  .scene:after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,12,7,.55) 0%,rgba(8,12,7,.02) 30%,rgba(8,12,7,.05) 56%,rgba(8,12,7,.72) 100%);
+  }
+  .scene-top{
+    position:absolute;z-index:3;top:16px;left:16px;right:16px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    color:#fff7e5;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  }
+  .scene-top .chapter{display:flex;align-items:center;gap:7px;text-shadow:0 1px 8px #000}
+  .scene-top .chapter i{width:5px;height:5px;border-radius:50%;background:var(--gold);display:block}
+  .scene-top .count{
+    padding:6px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.2);
+    background:rgba(8,14,8,.46);backdrop-filter:blur(8px);font-size:8.5px;letter-spacing:.08em;
+  }
+  .gate-ring{
+    position:absolute;z-index:2;left:51%;top:58%;width:94px;height:94px;margin:-47px 0 0 -47px;
+    border:1.5px dashed rgba(255,220,150,.9);border-radius:50%;
+    box-shadow:0 0 0 7px rgba(255,220,150,.08),0 0 34px rgba(255,199,92,.22);
+    animation:ring 2.8s ease-in-out infinite;
+  }
+  .gate-ring span{
+    position:absolute;left:50%;bottom:-20px;transform:translateX(-50%);
+    padding:3px 7px;border-radius:5px;background:var(--gold);color:#2d230f;
+    font-size:7.5px;font-weight:900;letter-spacing:.13em;
+  }
+  .mochi{
+    position:absolute;z-index:4;left:27%;top:49%;width:88px;
+    transform:translate(-50%,-50%);transition:left .8s cubic-bezier(.2,.9,.2,1),top .8s cubic-bezier(.2,.9,.2,1);
+    filter:drop-shadow(0 14px 10px rgba(0,0,0,.42));
+    animation:bob 3.6s ease-in-out infinite;
+  }
+  .mochi img{width:100%;display:block}
+  .speech{
+    position:absolute;left:68%;bottom:84%;width:max-content;max-width:150px;
+    padding:7px 9px;border-radius:11px 11px 11px 3px;background:#fff8e8;color:#26351f;
+    font-size:9.5px;font-weight:750;line-height:1.35;box-shadow:0 7px 18px rgba(0,0,0,.25);
+    opacity:0;transform:translateY(5px);transition:.35s;pointer-events:none;
+  }
+  .speech:after{content:"";position:absolute;left:9px;bottom:-5px;border:5px solid transparent;border-top-color:#fff8e8;border-left:0}
+  .scene.done .mochi{left:51%;top:58%}
+  .scene.done .speech{opacity:1;transform:none}
+  .scene-bottom{
+    position:absolute;z-index:3;left:16px;right:16px;bottom:26%;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .mission-tag{
+    padding:6px 9px;border-radius:6px;background:rgba(224,166,63,.96);color:#2b220e;
+    font-size:8px;font-weight:900;letter-spacing:.12em;box-shadow:0 4px 14px rgba(0,0,0,.22);
+  }
+  .scene-hint{color:rgba(255,248,231,.78);font-size:9px;font-weight:650;text-shadow:0 1px 6px #000}
+  .sheet{
+    position:absolute;z-index:6;left:0;right:0;bottom:0;min-height:52%;max-height:67%;
+    overflow:auto;padding:10px 18px max(18px,env(safe-area-inset-bottom));
+    border-radius:28px 28px 0 0;background:var(--cream);
+    box-shadow:0 -18px 45px rgba(0,0,0,.3);scrollbar-width:none;
+  }
+  .sheet::-webkit-scrollbar{display:none}
+  .drag{width:34px;height:4px;border-radius:99px;background:#cdbfa5;margin:1px auto 12px}
+  .chapter-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .chapter-row .label{font-size:8.5px;font-weight:900;letter-spacing:.14em;color:#8b7857}
+  .chapter-row .count{font-size:9px;font-weight:750;color:#8b7857}
+  .mission-rail{display:flex;gap:5px;margin:0 0 13px}
+  .mission{
+    flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:6px 2px 5px;border-radius:9px;background:rgba(47,94,61,.055);color:#929a86;
+    border:1px solid transparent;font-size:7.5px;font-weight:750;line-height:1;
+  }
+  .mission svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .mission.current{background:var(--green);color:#fff8e8;border-color:#244d33;box-shadow:0 4px 10px rgba(47,94,61,.18)}
+  h1{margin:0;font-size:27px;line-height:1.05;letter-spacing:-.035em;color:#1c2c1a}
+  .lead{margin:5px 0 12px;color:var(--muted);font-size:12px;line-height:1.45;max-width:285px}
+  .recipe{
+    display:grid;grid-template-columns:1fr 1.65fr .8fr;gap:5px;margin:0 0 11px;
+  }
+  .recipe-col{
+    display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;
+    padding:8px 8px 7px;border-radius:10px;background:rgba(47,94,61,.055);border:1px solid rgba(47,94,61,.08);
+  }
+  .recipe-col .step{font-size:7px;font-weight:900;color:#9a8a6d;letter-spacing:.1em}
+  .recipe-col code{font:700 11px/1.2 var(--mono);color:var(--green);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .recipe-col small{font-size:7.5px;color:#8a927c;font-weight:650;line-height:1.2}
+  .recipe-col .play{
+    width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff4d7;
+    display:grid;place-items:center;font-size:9px;padding-left:1px;
+  }
+  .code-label{display:block;font-size:7.5px;font-weight:900;letter-spacing:.14em;color:#8b7857;margin-bottom:5px}
+  .code-box{
+    display:flex;align-items:center;gap:7px;min-height:50px;padding:0 7px 0 11px;
+    border:1px solid #c9b996;border-radius:12px;background:#17281a;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:.2s;
+  }
+  .code-box.bad{animation:shake .32s;border-color:#c77c5d;box-shadow:0 0 0 3px rgba(199,124,93,.15)}
+  .code-box .prompt{color:#78976e;font:700 14px var(--mono)}
+  .code-box input{
+    flex:1;min-width:0;border:0;outline:none;background:transparent;color:#ecf6df;
+    font:600 11.5px var(--mono);padding:8px 0;letter-spacing:-.01em;
+  }
+  .code-box input::selection{background:#365c3c;color:#fff}
+  .run{
+    flex:none;min-height:36px;padding:0 14px;border:0;border-radius:8px;
+    background:linear-gradient(180deg,#f2c574,#dfa640);color:#2b220e;
+    font-size:10.5px;font-weight:900;letter-spacing:.03em;box-shadow:0 4px 12px rgba(224,166,63,.25);
+  }
+  .run:active{transform:translateY(1px)}
+  .status{margin:6px 0 0;min-height:13px;color:#8a927c;font-size:8.5px;line-height:1.4}
+  .status.bad{color:#a45b41}
+  .actions{display:flex;align-items:center;gap:9px;margin-top:9px}
+  .showme{
+    min-height:34px;padding:0 12px;border-radius:9px;border:1px solid #d8c8a9;
+    background:transparent;color:#426044;font-size:9.5px;font-weight:800;
+  }
+  .why{border:0;background:transparent;color:#8b7857;font-size:9px;text-decoration:underline;text-underline-offset:2px;padding:0}
+  .tip{margin-left:auto;color:#9a8e78;font-size:8px;text-align:right;line-height:1.3;max-width:110px}
+  .hint-layer{
+    position:absolute;z-index:9;inset:0;background:rgba(20,26,16,.48);
+    display:flex;align-items:flex-end;padding:12px;backdrop-filter:blur(3px);
+  }
+  .hint-layer[hidden]{display:none}
+  .hint-card{
+    width:100%;padding:16px 16px 14px;border-radius:18px;background:var(--paper);
+    border:1px solid #dccdad;box-shadow:0 -18px 50px rgba(0,0,0,.28);position:relative;
+  }
+  .hint-card .close{position:absolute;right:9px;top:7px;border:0;background:transparent;font-size:19px;line-height:1;color:#867758;padding:4px}
+  .eyebrow{margin:0 0 5px;font-size:7.5px;font-weight:900;letter-spacing:.14em;color:#a07d3f;text-transform:uppercase}
+  .hint-card h3{margin:0 0 9px;font-size:18px;letter-spacing:-.02em;color:#22321e}
+  .hint-line{
+    display:flex;align-items:center;gap:2px;flex-wrap:wrap;padding:9px 10px;border-radius:9px;
+    background:#122218;color:#e9f4dc;font:700 12px var(--mono);margin-bottom:9px;
+  }
+  .hint-line .fn{color:#f0c36f}
+  .hint-line .str{color:#b8e4c5}
+  .hint-steps{display:grid;gap:5px;margin-bottom:11px}
+  .hint-steps div{display:flex;gap:7px;align-items:flex-start;color:#5f6c56;font-size:9.5px;line-height:1.4}
+  .hint-steps b{
+    flex:none;width:15px;height:15px;border-radius:50%;background:#e9ddc5;color:#6f5d3d;
+    display:grid;place-items:center;font-size:7.5px;margin-top:1px;
+  }
+  .hint-card .got{
+    width:100%;min-height:38px;border:0;border-radius:9px;background:var(--green);color:#fff8e8;
+    font-size:10px;font-weight:900;
+  }
+  .success{
+    position:absolute;z-index:8;inset:0;background:rgba(20,32,20,.9);color:#fff8e8;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:24px;backdrop-filter:blur(4px);
+  }
+  .success[hidden]{display:none}
+  .check{
+    width:62px;height:62px;border-radius:50%;background:var(--gold);color:#2a220f;
+    display:grid;place-items:center;font-size:29px;font-weight:900;margin-bottom:14px;
+    box-shadow:0 0 0 8px rgba(224,166,63,.14);
+  }
+  .success .eyebrow{color:#e9c47b}
+  .success h2{margin:0;font-size:26px;letter-spacing:-.03em}
+  .success p{margin:8px 0 0;max-width:250px;color:#cbd8c2;font-size:11px;line-height:1.55}
+  .success code{font-family:var(--mono);color:#f3d18d}
+  .output-preview{
+    display:flex;align-items:center;gap:8px;margin-top:12px;padding:7px 9px;border-radius:8px;
+    background:rgba(6,15,9,.55);border:1px solid rgba(255,248,232,.12);font-family:var(--mono);
+  }
+  .output-preview span{font:800 7px var(--font);letter-spacing:.12em;color:#8eaa84}
+  .output-preview code{color:#d6efc7;font-size:10px}
+  .reward{
+    display:flex;align-items:center;gap:7px;margin:16px 0 18px;padding:8px 11px;border-radius:999px;
+    background:rgba(255,248,232,.08);border:1px solid rgba(255,248,232,.16);font-size:9px;color:#e8ddc6;
+  }
+  .reward span{color:#f4c878;font-family:var(--mono);font-weight:800}
+  .success .next{
+    min-height:42px;padding:0 16px;border:0;border-radius:10px;background:var(--gold);
+    color:#2a220f;font-size:10.5px;font-weight:900;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-5px)}}
+  @keyframes ring{0%,100%{transform:scale(.97);opacity:.75}50%{transform:scale(1.04);opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  @media(max-width:500px){
+    body{display:block;padding:0;background:#0d140d}
+    .stage{width:100vw;height:100svh;max-height:none}
+    .phone{border-radius:0;border:0;box-shadow:none}
+    .sheet{max-height:69%}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="phone">
+    <div class="scene" id="scene">
+      <img class="bg" src="art/restoration-shell.png" alt="Mochi's farm at the gate">
+      <div class="scene-top">
+        <span class="chapter"><i></i>Chapter 1 · Morning chores</span>
+        <span class="count">1 / 5</span>
+      </div>
+      <div class="gate-ring"><span>GATE</span></div>
+      <div class="mochi" id="mochi">
+        <div class="speech" id="speech">Hello, farmer!</div>
+        <img src="art/play-mochi.png" alt="Mochi">
+      </div>
+      <div class="scene-bottom">
+        <span class="mission-tag">Mission 01</span>
+        <span class="scene-hint">Show a hello at the gate</span>
+      </div>
+    </div>
+
+    <section class="sheet">
+      <div class="drag"></div>
+      <div class="chapter-row"><span class="label">Chapter 1</span><span class="count">Mission 1 of 5</span></div>
+      <div class="mission-rail" aria-label="Farm missions">
+        <div class="mission current">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z"/></svg>
+          <span>Hello</span>
+        </div>
+        <div class="mission">
+          <svg viewBox="0 0 24 24"><path d="M20.6 13.4 12 22l-9-9 8.6-8.6H20v9z"/><circle cx="16.5" cy="7.5" r="1"/></svg>
+          <span>Label</span>
+        </div>
+        <div class="mission">
+          <svg viewBox="0 0 24 24"><path d="M3 15 15 3l6 6L9 21z"/><path d="m7 15 3-3M10 18l3-3M13 21l3-3"/></svg>
+          <span>Measure</span>
+        </div>
+        <div class="mission">
+          <svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M8 7h8M8 11h6M8 15h4"/></svg>
+          <span>Note</span>
+        </div>
+        <div class="mission">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg>
+          <span>Start</span>
+        </div>
+      </div>
+
+      <h1>Show Mochi a hello</h1>
+      <p class="lead">Use print to show a hello on screen.</p>
+
+      <div class="recipe" aria-label="Code recipe">
+        <div class="recipe-col"><span class="step">1 · PRINT</span><code class="fn">print</code><small>shows text</small></div>
+        <div class="recipe-col"><span class="step">2 · IN QUOTES</span><code class="str">("Hello, Mochi!")</code><small>the message</small></div>
+        <div class="recipe-col"><span class="step">3 · RUN</span><span class="play">▶</span><small>show it</small></div>
+      </div>
+
+      <label class="code-label" for="code">YOUR CODE</label>
+      <div class="code-box" id="codeBox">
+        <span class="prompt">›</span>
+        <input id="code" value='print("Hello, Mochi!")' spellcheck="false" autocapitalize="off" autocorrect="off" aria-label="Your Python code">
+        <button class="run" id="run" type="button">Run</button>
+      </div>
+      <p class="status" id="status">Words need quotes. Everything else is ready.</p>
+
+      <div class="actions">
+        <button class="showme" id="showme" type="button">Show me</button>
+        <button class="why" id="whyBtn" type="button">Why?</button>
+        <span class="tip">print must be lowercase</span>
+      </div>
+
+      <div class="hint-layer" id="hintLayer" hidden>
+        <div class="hint-card">
+          <button class="close" id="closeHint" type="button" aria-label="Close hint">×</button>
+          <p class="eyebrow">Visual hint</p>
+          <h3>Build the line</h3>
+          <div class="hint-line"><span class="fn">print</span><span>(</span><span class="str">"Hello, Mochi!"</span><span>)</span></div>
+          <div class="hint-steps">
+            <div><b>1</b><span><b>print</b> tells the computer to show something.</span></div>
+            <div><b>2</b><span>Quotes wrap the words you want to show.</span></div>
+            <div><b>3</b><span>Parentheses close the command, then tap Run.</span></div>
+          </div>
+          <button class="got" id="gotHint" type="button">Got it — let me try</button>
+        </div>
+      </div>
+
+      <div class="success" id="success" hidden>
+        <div class="check">✓</div>
+        <p class="eyebrow">Mission complete</p>
+        <h2>Mochi saw your message!</h2>
+        <p><code>print()</code> put your words on the screen. Mochi came to the gate to read it.</p>
+        <div class="output-preview"><span>OUTPUT</span><code>Hello, Mochi!</code></div>
+        <div class="reward"><span>+1</span> Mochi met you at the gate</div>
+        <button class="next" id="next" type="button">Next mission: Label the seeds →</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  const code = document.querySelector('#code');
+  const codeBox = document.querySelector('#codeBox');
+  const status = document.querySelector('#status');
+  const scene = document.querySelector('#scene');
+  const success = document.querySelector('#success');
+  const hintLayer = document.querySelector('#hintLayer');
+  const sheet = document.querySelector('.sheet');
+
+  function showHint(){ hintLayer.hidden = false; }
+  function hideHint(){ hintLayer.hidden = true; }
+  function showSuccess(){
+    hideHint();
+    scene.classList.add('done');
+    success.hidden = false;
+    if (sheet) sheet.scrollTop = 0;
+  }
+  function reset(){
+    success.hidden = true;
+    scene.classList.remove('done');
+    status.textContent = 'Words need quotes. Everything else is ready.';
+    status.classList.remove('bad');
+  }
+
+  document.querySelector('#showme').addEventListener('click', showHint);
+  document.querySelector('#closeHint').addEventListener('click', hideHint);
+  document.querySelector('#gotHint').addEventListener('click', () => { hideHint(); code.focus(); });
+  hintLayer.addEventListener('click', e => { if (e.target === hintLayer) hideHint(); });
+  document.querySelector('#whyBtn').addEventListener('click', () => {
+    status.textContent = 'print() is an instruction. The words inside quotes are a string.';
+    status.classList.remove('bad');
+  });
+  document.querySelector('#run').addEventListener('click', () => {
+    const value = code.value.trim();
+    const hasPrint = /^print\s*\(/.test(value);
+    const hasQuotes = /["'][^"']+["']/.test(value);
+    if (hasPrint && hasQuotes) {
+      showSuccess();
+    } else {
+      codeBox.classList.remove('bad');
+      void codeBox.offsetWidth;
+      codeBox.classList.add('bad');
+      status.textContent = 'Not yet. Keep print and put your words in quotes.';
+      status.classList.add('bad');
+      code.focus();
+    }
+  });
+  document.querySelector('#next').addEventListener('click', reset);
+
+  // Concept screenshot states: ?state=hint or ?state=success
+  const state = new URLSearchParams(location.search).get('state');
+  if (state === 'hint') showHint();
+  if (state === 'success') showSuccess();
+</script>
+</body>
+</html>
