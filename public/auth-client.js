@@ -35,7 +35,7 @@
     const clean = location.href.split('#')[0].split('?')[0];
     return clean.replace(/[^/]*$/, '');
   };
-  const redirectTo = () => pageBase() + 'chapters.html';
+  const redirectTo = () => pageBase() + 'index.html';
 
   const auth = {
     client,

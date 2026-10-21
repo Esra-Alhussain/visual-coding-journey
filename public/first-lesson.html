@@ -157,6 +157,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="world-map-home.css">
 </head>
 <body>
 <div class="world" aria-hidden="true">
@@ -171,7 +172,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   <div class="phone-hero" aria-hidden="true"><img src="art/play-mochi.png" alt=""><span>Lesson 1 · The farm</span></div>
   <section class="panel lesson-panel" aria-label="Lesson instructions">
     <img class="mini-mochi" src="art/play-mochi.png" alt="Mochi">
-    <div class="lesson-top"><div class="eyebrow" id="lessonEyebrow">Lesson 1 · Getting started</div><div class="lesson-tools"><a class="chapters-link" id="chaptersLink" href="chapters.html">Chapters</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div></div>
+    <div class="lesson-top"><div class="eyebrow" id="lessonEyebrow">Lesson 1 · Getting started</div><div class="lesson-tools"><a class="chapters-link" id="chaptersLink" href="index.html">Chapters</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div></div>
     <div class="step-line">
       <span class="step-badge" id="stepBadge">Step 1 of 5</span>
       <div class="dots" id="dots" aria-label="Lesson steps"></div>
@@ -211,6 +212,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
     <h2 id="completionTitle">You can write a program</h2>
     <p id="completionCopy">You used <b>print</b>, a <b>string</b>, a <b>variable</b>, <b>numbers</b>, <b>arithmetic</b> and a <b>comment</b>. That is the foundation for the rest of the course.</p>
     <button id="review">Review the lesson</button>
+<a id="returnToMap" class="completion-map-link" href="index.html">Return to your island map →</a>
   </div>
 </div>
 
@@ -275,9 +277,13 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
       }
     }, 350);
   }
+  window.addEventListener('pagehide', () => {
+    clearTimeout(saveTimer);
+    if (initialized) try { localStorage.setItem(STORAGE_KEY, JSON.stringify(captureState())); } catch {}
+  });
   function applyState(state) {
     if (!state || typeof state !== 'object') return;
-    if (Array.isArray(state.completed)) completed = new Set(state.completed.filter(n => Number.isInteger(n)));
+    if (Array.isArray(state.completed)) completed = new Set(state.completed.filter(n => Number.isInteger(n) && n >= 0 && n < 5));
     if (Array.isArray(state.drafts)) {
       for (let i = 0; i < drafts.length; i++) drafts[i] = typeof state.drafts[i] === 'string' ? state.drafts[i] : '';
     }
@@ -561,7 +567,8 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   function renderChrome() {
     const u = ui[lang];
     $('#lessonEyebrow').textContent = u.eyebrow;
-    $('#chaptersLink').textContent = u.chapters;
+    $('#chaptersLink').textContent = lang === 'ar' ? 'الخريطة' : 'Map';
+    $('#returnToMap').textContent = lang === 'ar' ? 'العودة إلى خريطة الجزر ←' : 'Return to your island map →';
     $('#taskLabel').textContent = u.task;
     $('#exampleSummary').textContent = u.example;
     $('#codeLabel').textContent = u.codeLabel;
