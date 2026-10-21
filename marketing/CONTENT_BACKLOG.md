@@ -62,3 +62,10 @@ Guided first-greeting builder lesson: [complete local package](outputs/2026-10-1
 
 ### CONTENT-012 / ENG-005 - 2026-10-19
 Modern Chapter 1 before/after: [complete local package](outputs/2026-10-19-checkpoint-modern-redesign.md). Same lesson and parser, cleaner visual hierarchy; actual before/after renders exist. CAPTURE NOW / POST LATER; owner design approval, optional recording and publication remain pending. No learner evidence or learning claim.
+
+### CONTENT-013 / ENG-006 — 2026-10-21
+Five-island overview reveal: [complete draft](outputs/2026-10-21-checkpoint-world-overview.md). CAPTURE NOW / POST LATER. Standalone design preview; current map intact. Recording, visual approval and publication pending. No audience results.
+
+
+### 2026-10-21 — ENG-006 living-map revision
+Same checkpoint package updated: outputs/2026-10-21-checkpoint-world-overview.md. Working shader motion and optional synthesized coastal audio, separate demo. Desktop/430px renders and real-time controls verified; listening/native performance and owner acceptance pending. CAPTURE NOW / POST LATER; no recording/publication or learner findings.

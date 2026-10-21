@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const els={};for(const id of ['islandNumber','islandStatus','islandTitle','islandDescription','islandTagline','restorationGoal','accessNote','enterIsland','upcoming','worldState'])els[id]={};
+let pressed='false';const listeners=[];els.visionToggle={getAttribute:()=>pressed,setAttribute:(k,v)=>pressed=v,addEventListener:(t,f)=>listeners.push(f)};
+const art={alt:'Starting ruins'},world={classList:{toggle(k,v){this[k]=v;}}};
+const pins=Array.from({length:5},(_,i)=>({dataset:{island:String(i)},classes:[],handlers:[],small:{},classList:{add(){},toggle(){}},querySelector(){return this.small;},setAttribute(){},addEventListener(t,f){this.handlers.push(f);},click(){this.handlers.forEach(f=>f());}}));
+const ctx={document:{querySelectorAll:()=>pins,getElementById:id=>els[id],querySelector:s=>s==='.map-art'?art:world}};
+vm.createContext(ctx);for(const file of ['world-map-restoration.js','world-map-island-details.js'])vm.runInContext(fs.readFileSync('devpost/little-acres/'+file,'utf8'),ctx);
+pins.forEach((p,i)=>{p.click();assert(els.islandDescription.textContent.length>5);assert(els.restorationGoal.textContent.length>5);assert.equal(els.enterIsland.hidden,i!==0);assert.equal(els.upcoming.hidden,i===0);if(i){assert(els.upcoming.textContent.includes('Island '+i));assert(els.accessNote.textContent.includes('still in development'));assert(p.small.textContent.includes('ISLAND '+i));}});
+listeners.forEach(f=>f());assert.equal(world.classList['show-vision'],true);assert.equal(art.src,'art/world-map-preview.png');
+listeners.forEach(f=>f());assert.equal(world.classList['show-vision'],false);assert.equal(art.src,'art/world-map-abandoned.png');
+console.log('PASS: both live scripts together; five learning/restoration summaries, prerequisite labels, entry locks and reversible vision shading');

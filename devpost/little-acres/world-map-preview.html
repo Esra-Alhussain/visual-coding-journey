@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mochi · The island journey — design preview</title>
+<link rel="stylesheet" href="world-map-preview.css">
+</head>
+<body>
+<header><a class="brand" href="chapters.html"><img src="art/play-mochi.png" alt="">MOCHI <span>THE ISLAND JOURNEY</span></a><a class="back" href="chapters.html">Current map ↗</a></header>
+<main>
+<div class="heading"><div><p class="eyebrow">A LITTLE CODE. A WHOLE WORLD.</p><h1>Your adventure starts here.</h1><p>Five islands to discover. One small step at a time.</p></div><div class="count"><strong>05</strong><span>ISLANDS<br>1 AVAILABLE NOW</span></div></div>
+<section class="world" aria-label="Five-island journey map">
+<img class="map-art" src="art/world-map-preview.png" alt="Five painted islands in a turquoise sea: a farm, watermill village, greenhouse garden, lighthouse and orchard ruins.">
+<div class="sunshine" aria-hidden="true"></div>
+<svg class="route" viewBox="0 0 1536 1024" aria-hidden="true"><path d="M350 720 C170 580 110 470 330 300 S620 280 790 470 S1010 500 1190 300 S1400 470 1210 740"/></svg>
+<div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div>
+<nav class="pins" aria-label="Inspect an island">
+<button class="pin active" style="--x:23%;--y:65%" data-island="0" aria-pressed="true"><img class="companion" src="art/play-mochi.png" alt="Mochi is here"><span class="medal">01</span><span class="label">First steps <small>START HERE</small></span></button>
+<button class="pin" style="--x:24%;--y:25%" data-island="1" aria-pressed="false"><span class="medal">02</span><span class="label">The watermill <small>COMING SOON</small></span></button>
+<button class="pin" style="--x:52%;--y:44%" data-island="2" aria-pressed="false"><span class="medal">03</span><span class="label">The glass garden <small>COMING SOON</small></span></button>
+<button class="pin" style="--x:78%;--y:24%" data-island="3" aria-pressed="false"><span class="medal">04</span><span class="label">The lighthouse <small>COMING SOON</small></span></button>
+<button class="pin" style="--x:80%;--y:68%" data-island="4" aria-pressed="false"><span class="medal">05</span><span class="label">The orchard <small>COMING SOON</small></span></button>
+</nav>
+<div class="map-caption"><span class="live-dot"></span> YOUR WORLD, WAITING TO COME ALIVE <span>✧ N</span></div>
+</section>
+<section class="selection" aria-label="Selected island" aria-live="polite"><div class="island-number" id="islandNumber">01</div><div class="detail"><p class="eyebrow" id="islandStatus">ISLAND 01 · AVAILABLE NOW</p><h2 id="islandTitle">Getting started with Python</h2><p id="islandDescription">Meet Mochi. Print your first message, store values, try calculations and write comments.</p></div><a class="enter" id="enterIsland" href="first-lesson.html">Enter island <span>→</span></a><span class="upcoming" id="upcoming" hidden>Coming soon <span aria-hidden="true">♧</span></span></section>
+<footer><span>DESIGN PREVIEW · Island themes are proposed</span><span>Select any island to explore the journey.</span></footer>
+</main>
+<script src="world-map-preview.js"></script>
+</body></html>

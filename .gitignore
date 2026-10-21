@@ -3,3 +3,6 @@
 .env
 .env.*
 !.env.example
+
+/devpost/little-acres/_living-browser-check.html
+/devpost/little-acres/_popup-review.html

@@ -125,3 +125,10 @@ Owner changed current game default to English for hackathon, with Arabic switch;
 - Actual before/after renders were captured locally at 1440x1000; phone and Arabic layouts were checked at 390/430 with no horizontal overflow. `check.cjs` and `check-colorful.cjs` pass. This is implementation evidence, not learning evidence.
 - [ENG-005 / CONTENT-012 package](outputs/2026-10-19-checkpoint-modern-redesign.md): complete carousel/20-second Reel script, Saudi Arabic narration, English subtitles, shot list, caption, Story choices and honest limits. Recommendation CAPTURE NOW / POST LATER.
 - No recording, publication, outreach, learner testing or engagement results. Owner approval of the modern direction is still pending; no new chapter or map integration was authorized.
+
+### 2026-10-21 — ENG-006 world overview
+Owner approved separate world-map preview only. Full journey visibility is the communication benefit; clarity for learners remains untested. Complete local package: outputs/2026-10-21-checkpoint-world-overview.md. No recording or external actions; CAPTURE NOW / POST LATER.
+
+
+### 2026-10-21 — ENG-006 living-map revision
+Same checkpoint package updated: outputs/2026-10-21-checkpoint-world-overview.md. Working shader motion and optional synthesized coastal audio, separate demo. Desktop/430px renders and real-time controls verified; listening/native performance and owner acceptance pending. CAPTURE NOW / POST LATER; no recording/publication or learner findings.
