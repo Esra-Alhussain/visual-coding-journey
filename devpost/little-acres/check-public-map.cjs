@@ -13,9 +13,9 @@ assert(!fs.readFileSync(path.join(root,'index.html'),'utf8').includes('http-equi
 assert(fs.readFileSync(path.join(root,'first-lesson.html'),'utf8').includes('id="returnToMap"'));
 const code=fs.readFileSync(path.join(root,'world-map-home.js'),'utf8');
 function homeTest(completed){
- let selected=0;const elements=Object.fromEntries(['journeyProgress','firstIslandRestored','islandStatus','enterIsland','upcoming','accountLink'].map(id=>[id,{style:{},firstChild:{}}]));
- const labels=Array.from({length:5},()=>({}));const pins=labels.map((label,index)=>({querySelector:()=>label,addEventListener(t,f){this.click=f;}}));
- const context={document:{querySelectorAll:()=>pins,getElementById:id=>elements[id],querySelector:()=>({})},localStorage:{getItem:()=>JSON.stringify({completed})},window:{addEventListener(){}}};
+ let selected=0;const elements=Object.fromEntries(['journeyProgress','firstIslandRestored','islandStatus','enterIsland','upcoming','accountLink','worldState'].map(id=>[id,{style:{},firstChild:{}}]));
+ const labels=Array.from({length:5},()=>({}));const pins=labels.map((label,index)=>({querySelector:()=>label,setAttribute(){},addEventListener(t,f){this.click=f;}}));
+ const context={document:{querySelectorAll:()=>pins,getElementById:id=>elements[id],querySelector:()=>({classList:{contains:()=>false}})},localStorage:{getItem:()=>JSON.stringify({completed})},window:{addEventListener(){}}};
  vm.runInNewContext(code,context);return {elements,pins,labels};
 }
 let result=homeTest([]);assert(result.elements.journeyProgress.textContent.includes('0 of 5'));assert.equal(result.elements.firstIslandRestored.style.opacity,'0');

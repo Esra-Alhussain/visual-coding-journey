@@ -1,5 +1,30 @@
 # ENG-006 / CONTENT-013 · Seeing the whole journey
 
+## Approved public homepage and playable Island 1 — 2026-10-21
+
+Latest revision, superseding preview-only publication status below. Owner approved the map and public homepage release. Public source: https://esra-alhussain.github.io/visual-coding-journey/ . GitHub Pages run 39669907818 succeeded. Agent completed all five Island 1 activities through the public UI, verified wrong-code feedback, a saved mid-lesson return, final completion, restored-map/Revisit state, guest account return and future-island non-entry. This is agent functional verification, not learner evidence or perceived audio-quality validation. Four later islands and beacon finale remain upcoming. Sound now uses licensed real recordings, not synthesized ambience.
+
+Audience benefit: beginners can try one complete small Python journey, see saved progress and return to a visual reward. Type: playable prototype reveal. Format: 25-second Reel. Social publication status: local draft only, no recording or posting. Website publication is separately approved and performed.
+
+Exact narration, English subtitles and timed shot plan (footage not yet recorded):
+- 0–5s: public map, first island selected. «خريطة موشي صارت الصفحة الرئيسية، وتقدرون تجربون الجزيرة الأولى.» / “Mochi’s map is now the homepage, and you can try the first island.”
+- 5–10s: empty learner editor, type and run a greeting. «تكتبون بايثون بأنفسكم، وتبدون برسالة بسيطة.» / “You write Python yourselves, starting with a simple message.”
+- 10–15s: valid variable example, then saved Map return. «خمس أنشطة صغيرة، وتقدمكم ينحفظ في نفس المتصفح.» / “Five small activities, with progress saved in the same browser.”
+- 15–21s: genuine completion followed by restored Island 1/Revisit. «ومع إكمالها، ترجع الحياة لأول جزيرة على الخريطة.» / “As you complete them, the first island comes back to life on the map.”
+- 21–25s: show Island 2 Coming soon. «الباقي لسه قادم. جرّبوا البداية، وقولوا لي وين احتجتوا توضيح.» / “The rest is still coming. Try the beginning and tell me where you needed more explanation.”
+
+On-screen text: «نموذج أولي قابل للتجربة» throughout; «الجزيرة الأولى متاحة» at 0s; «٥ أنشطة بايثون» at 10s; «الحفظ في نفس المتصفح» at 12s; «٤ جزر قادمة لاحقًا» at 21s. Show only genuine user-authored demo code and actual completion; do not edit around invalid answers to imply automatic success.
+
+Caption/CTA: «موشي صار له عالم تدخلونه من الصفحة الرئيسية 🌿 الجزيرة الأولى فيها خمس أنشطة بسيطة لبايثون، وتقدم الضيف ينحفظ في نفس المتصفح. الجزر الأربع الباقية والنهاية لسه قادمة. جرّبوا البداية من الرابط، وقولوا لي وين احتجتوا توضيح.»
+
+Story alternative: panel 1 map + «الجزيرة الأولى متاحة للتجربة» and public URL; panel 2 «بعد التجربة، وش كان أوضح؟» options «الهدف» / «خطوة البداية», followed by free reply «وين احتجتوا توضيح؟». Responses are self-report/preferences, not observed comprehension. Same 25-second narration above supplies the video alternative. No responses/findings yet.
+
+Next step: owner tests public link and listens to recordings on a phone. If invited participants are approved later, ask a beginner to locate and complete the greeting without explanation, observing first action and points of hesitation. Self-selected replies alone cannot establish teaching effectiveness. If no replies, continue owner review of task clarity and mobile experience; do not expand curriculum automatically.
+
+Recommendation: CAPTURE NOW / POST LATER. Actual playable flow verified, but record footage and voice, check comfortable audio/phone performance and obtain final social approval before sharing. Hide account fields and unrelated tabs; use test code without personal names/emails. Do not imply all five islands or the beacon finale are playable.
+
+## Prior design revisions
+
 ## Living-map revision — 2026-10-21
 
 Same overview checkpoint, now with a meaningful motion milestone. Source: `devpost/little-acres/world-map-living.html` and `world-map-living-notes.md`. Audience: beginning coders and curious builders. Benefit: show how code can animate existing art without a video-generation subscription. Type: honest builder lesson / before-and-after; recommended format: 22-second Reel. Local draft only. No video recording, publication, outreach or audience results. Concept restoration and future chapters remain unimplemented.

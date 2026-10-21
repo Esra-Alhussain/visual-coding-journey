@@ -9,6 +9,10 @@
    document.getElementById('journeyProgress').textContent=finished?'1 island restored · more islands coming soon':`Island 1 · ${count} of 5 activities complete`;
    document.getElementById('firstIslandRestored').style.opacity=String(count/5);
    pins[0].querySelector('.label small').textContent=finished?'✓ RESTORED':count?'CONTINUE HERE':'START HERE';
+   pins[0].setAttribute('aria-label',finished?'Island 1 restored. Revisit Python basics.':'Island 1 available. Inspect Python basics.');
+   pins[1].querySelector('.label small').textContent=finished?'COMING SOON':'🔒 FINISH ISLAND 1';
+   pins[1].setAttribute('aria-label',finished?'Island 2 coming soon. Inspect its subject and mission.':'Island 2 locked. Finish Island 1 first. Inspect its subject and mission.');
+   if(!document.querySelector('.world').classList.contains('show-vision'))document.getElementById('worldState').textContent=finished?'YOUR JOURNEY · ISLAND 1 RESTORED':'YOUR JOURNEY · BRING THE ISLANDS TO LIFE';
    const number=document.querySelector('.count span');number.textContent='ISLANDS · 1 PLAYABLE';
    if(selected===0){
      document.getElementById('islandStatus').textContent=finished?'ISLAND 01 · RESTORED':`ISLAND 01 · ${count}/5 COMPLETE`;

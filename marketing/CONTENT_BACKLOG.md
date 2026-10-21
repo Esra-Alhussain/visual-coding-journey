@@ -69,3 +69,6 @@ Five-island overview reveal: [complete draft](outputs/2026-10-21-checkpoint-worl
 
 ### 2026-10-21 — ENG-006 living-map revision
 Same checkpoint package updated: outputs/2026-10-21-checkpoint-world-overview.md. Working shader motion and optional synthesized coastal audio, separate demo. Desktop/430px renders and real-time controls verified; listening/native performance and owner acceptance pending. CAPTURE NOW / POST LATER; no recording/publication or learner findings.
+
+### 2026-10-21 — Approved public release, ENG-006
+Owner approved/publicly deployed living-map homepage with first playable five-activity island. Agent verified full guest flow on HTTPS including persistence and restoration. Four future islands/finale remain upcoming; no learner or audio-quality findings. Existing package updated with 25-second reveal, subtitles, capture plan and limits. Social draft only: CAPTURE NOW / POST LATER. Website publication authorized separately; no social publication.
