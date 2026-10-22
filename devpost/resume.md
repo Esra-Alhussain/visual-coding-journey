@@ -664,3 +664,7 @@ The live phone page was still able to show a half-loaded desktop shell when its 
 
 ### Phone map image weight — 2026-10-22
 Phone map was loading a 197 KB JPEG plus a hidden 206 KB restored overlay. Removed the unused overlay from phone.html, switched the visible map to responsive WebP (480/720/900 px), added a high-priority preload and removed the phone page's external heavy dependency. Phone render at 390px shows the map and HUD at 1.2s locally.
+
+
+### Approved right-rail lesson layout — 2026-10-22
+Owner selected the right-rail option over the bottom dock. Desktop lesson now uses a 380px full-height right workspace with Lesson above Code/Output; the farm fills the remaining area with object-fit: contain, so the stage is not overlaid or cropped. Focus mode expands the farm across the screen. Mobile keeps the stacked layout. Verified at 1862x946 and 1440x900. Source/public first-lesson updated; no lesson logic changes.

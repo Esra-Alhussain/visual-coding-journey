@@ -135,6 +135,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 .mini-mochi{display:none}
 .phone-hero{display:none}
 @media(max-width:1100px){
+  .focus-float{display:none}
   body{overflow:auto}
   .hud{position:relative;display:block;min-height:100vh;padding:12px;pointer-events:auto}
   .phone-hero{display:flex;align-items:flex-end;justify-content:center;gap:12px;height:clamp(210px,31vh,300px);padding:0 12px 12px}
@@ -156,8 +157,105 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   h1{font-size:23px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+.notes{margin:0 0 10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
+.notes summary{display:flex;align-items:center;gap:7px;list-style:none;cursor:pointer;color:#c9d5c5;font-size:11px;font-weight:650}
+.notes summary::-webkit-details-marker{display:none}
+.notes summary:before{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .18s}
+.notes[open] summary:before{transform:rotate(45deg)}
+.notes .idea{margin:8px 0 0}
+.focus-btn{border:1px solid rgba(234,181,91,.36);background:rgba(234,181,91,.1);color:#f2d28e;border-radius:999px;padding:5px 9px;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.focus-btn:hover{background:rgba(234,181,91,.18)}
+.focus-btn[aria-pressed="true"]{background:var(--gold);color:#2a2410;border-color:#ffe1a2}
+.focus-float{position:fixed;z-index:25;top:16px;left:50%;transform:translateX(-50%);background:rgba(8,20,13,.78);backdrop-filter:blur(12px)}
+body.focus-mode .focus-float{display:none}
+.focus-restore{position:fixed;z-index:30;top:16px;left:50%;transform:translateX(-50%);border:1px solid rgba(234,181,91,.5);border-radius:999px;background:rgba(8,20,13,.92);color:#f5d99c;padding:10px 16px;font-size:11px;font-weight:800;box-shadow:0 10px 26px rgba(0,0,0,.35);backdrop-filter:blur(14px)}
+.focus-restore[hidden]{display:none}
+body.focus-mode .lesson-panel,body.focus-mode .code-panel{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px) scale(.985)}
+.lesson-panel,.code-panel{transition:opacity .2s ease,transform .2s ease}
+@media(min-width:1101px){
+  .lesson-panel{width:min(340px,calc(100vw - 28px));padding:14px 15px 15px}
+  .code-panel{width:min(370px,calc(100vw - 28px))}
+  .lesson-panel h1{font-size:25px}
+  .lesson-panel .idea{font-size:12px;line-height:1.55}
+  .lesson-panel .task{padding:9px 11px}
+  .lesson-panel .task p{font-size:12px}
+  #code{min-height:150px;max-height:220px}
+  .code-body{padding:10px 11px 11px}
+  .code-foot{display:none}
+  #output{min-height:56px;max-height:96px}
+}
+
+/* Scene-first lesson workspace: one bottom dock, both necessary panels visible. */
+.lesson-dock{display:contents}
+.dock-resize{display:none}
+.code-main,.code-side{display:contents}
+body.focus-mode .lesson-dock{opacity:0;visibility:hidden;pointer-events:none}
+body.dock-resizing{cursor:ns-resize;user-select:none}
+@media(min-width:1101px){
+  .hud{padding:0;display:block}
+  .lesson-dock{position:fixed;z-index:6;left:12px;right:12px;bottom:12px;height:var(--dock-h,300px);display:flex;align-items:stretch;gap:10px;pointer-events:auto;transition:opacity .2s ease}
+  .dock-resize{display:flex;position:absolute;z-index:9;top:-11px;left:50%;width:92px;height:20px;transform:translateX(-50%);align-items:center;justify-content:center;cursor:ns-resize;touch-action:none;border:1px solid rgba(234,181,91,.4);border-radius:10px;background:rgba(8,20,13,.88);box-shadow:0 3px 12px rgba(0,0,0,.35)}
+  .dock-resize:before{content:"";width:46px;height:5px;border-radius:5px;background:rgba(245,225,180,.5);box-shadow:0 1px 5px rgba(0,0,0,.4)}
+  .dock-resize:hover:before,.dock-resize:focus-visible:before{background:var(--gold)}
+  .lesson-panel{width:340px;height:100%;max-height:none;overflow:auto;padding:12px 14px 13px}
+  .lesson-panel h1{font-size:24px;margin:6px 0 5px}
+  .lesson-panel .step-line{margin-top:8px}
+  .lesson-panel .task{padding:8px 10px}
+  .lesson-panel .task p{font-size:11.5px}
+  .lesson-panel .notes{margin-bottom:8px;padding-top:6px}
+  .lesson-panel .lesson-actions{margin-top:8px}
+  .code-panel{width:auto;flex:1;min-width:0;height:100%;max-height:none}
+  .code-body{display:flex;flex:1;min-height:0;gap:10px;padding:10px 11px 11px;overflow:hidden}
+  .code-main{display:flex;flex:1.15;min-width:0;min-height:0;flex-direction:column;gap:6px}
+  .code-side{display:flex;flex:.85;min-width:230px;min-height:0;flex-direction:column}
+  .code-main label{margin:0}
+  #code{flex:1;min-height:62px;max-height:none;height:auto;resize:none}
+  .output-head{margin:0 0 5px}
+  #output{flex:1;min-height:0;max-height:none;height:auto}
+  .code-foot,.save-state{display:none}
+  .error{max-height:52px;overflow:auto;margin-top:0}
+  .mochi{top:58%}
+}
+@media(max-width:1100px){
+  .lesson-dock{display:contents}
+  .dock-resize{display:none}
+  .code-main,.code-side{display:contents}
+}
+
+@media(min-width:1101px){
+  :root{--dock-h:300px}
+  .world{top:12px;right:12px;bottom:calc(var(--dock-h,300px) + 24px);left:12px;border-radius:18px;overflow:hidden;background:#071009;transition:bottom .2s ease}
+  .world:before{content:"";position:absolute;inset:-24px;z-index:0;background:url("art/restoration-shell.png") center/cover;filter:blur(14px) brightness(.44) saturate(.8);transform:scale(1.04)}
+  .world>img{position:relative;z-index:1;object-fit:contain}
+  .world:after{z-index:2}
+  body.focus-mode .world{bottom:12px}
+  body.focus-mode .mochi{top:calc(50% + 24px)}
+}
 </style>
 <link rel="stylesheet" href="world-map-home.css">
+<style id="lesson-rail-layout">
+@media(min-width:1101px){
+  .world{top:12px;left:12px;right:404px;bottom:12px;border-radius:18px;overflow:hidden}
+  .world>img{object-fit:contain}
+  .world:before{filter:blur(12px) brightness(.45)}
+  .lesson-dock{position:fixed;z-index:6;top:12px;right:12px;bottom:12px;left:auto;width:380px;height:auto;display:flex;flex-direction:column;gap:10px}
+  .dock-resize{display:none}
+  .lesson-panel{width:100%;height:auto;flex:0 0 43%;max-height:43%;overflow:auto;padding:13px 14px}
+  .code-panel{width:100%;height:auto;flex:1;min-height:0}
+  .code-body{display:flex;flex-direction:column;gap:7px;padding:10px;overflow:auto}
+  .code-main{display:flex;flex:1;min-height:0;flex-direction:column;gap:6px}
+  .code-side{display:flex;flex:0 0 92px;min-height:0;flex-direction:column}
+  #code{min-height:120px;max-height:180px;flex:1}
+  #output{min-height:54px;max-height:82px;flex:1}
+  .code-foot,.save-state{display:none}
+  .mochi{left:calc(50% - 190px);top:58%}
+  .focus-float{left:calc(50% - 190px)}
+  .lesson-panel .notes{margin-bottom:8px}
+  body.focus-mode .world{right:12px}
+  body.focus-mode .mochi{left:50%}
+}
+</style>
 </head>
 <body>
 <div class="world" aria-hidden="true">
@@ -169,7 +267,10 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 </div>
 
 <div class="hud">
+  <button class="focus-btn focus-float" id="focusBtn" type="button" aria-pressed="false">Focus on farm</button>
   <div class="phone-hero" aria-hidden="true"><img src="art/play-mochi.png" alt=""><span>Lesson 1 · The farm</span></div>
+  <div class="lesson-dock" id="lessonDock">
+  <div class="dock-resize" id="dockResize" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize lesson and code area"><span></span></div>
   <section class="panel lesson-panel" aria-label="Lesson instructions">
     <img class="mini-mochi" src="art/play-mochi.png" alt="Mochi">
     <div class="lesson-top"><div class="eyebrow" id="lessonEyebrow">Lesson 1 · Getting started</div><div class="lesson-tools"><a class="chapters-link" id="chaptersLink" href="index.html">Chapters</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div></div>
@@ -178,7 +279,7 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
       <div class="dots" id="dots" aria-label="Lesson steps"></div>
     </div>
     <h1 id="stepTitle">Say hello</h1>
-    <p class="idea" id="idea"></p>
+    <details class="notes" id="notesBox"><summary>Lesson notes</summary><p class="idea" id="idea"></p></details>
     <div class="task"><span id="taskLabel">Your task</span><p id="task"></p></div>
     <details class="example" id="exampleBox"><summary id="exampleSummary">Show an example</summary><pre id="exampleCode"></pre><p id="exampleWhy"></p></details>
     <div class="lesson-actions"><button id="hintBtn">Hint</button><button id="restart">Restart lesson</button></div>
@@ -190,17 +291,23 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   <section class="panel code-panel" aria-label="Python editor">
     <div class="code-head"><i></i><b>Python</b><span class="filename">lesson_1.py</span></div>
     <div class="code-body">
-      <label for="code" id="codeLabel">Write your code</label>
-      <textarea id="code" spellcheck="false" placeholder="Type your Python here…" dir="ltr"></textarea>
-      <div class="code-actions"><button id="run">Run ▶</button><button id="clear">Clear</button></div>
-      <div class="error" id="error" hidden></div>
-      <div class="output-head"><span id="outputLabel">Output</span><span id="outputHint">press Run</span></div>
-      <pre id="output" aria-live="polite" dir="auto"></pre>
+      <div class="code-main">
+        <label for="code" id="codeLabel">Write your code</label>
+        <textarea id="code" spellcheck="false" placeholder="Type your Python here…" dir="ltr"></textarea>
+        <div class="code-actions"><button id="run">Run ▶</button><button id="clear">Clear</button></div>
+        <div class="error" id="error" hidden></div>
+      </div>
+      <div class="code-side">
+        <div class="output-head"><span id="outputLabel">Output</span><span id="outputHint">press Run</span></div>
+        <pre id="output" aria-live="polite" dir="auto"></pre>
+      </div>
       <div class="code-foot" id="codeFoot">Small practice editor · real Python also runs in IDLE, Jupyter or a .py file.</div>
-    <div class="save-state" id="saveState"></div>
+      <div class="save-state" id="saveState"></div>
     </div>
   </section>
+  </div>
 </div>
+<button class="focus-restore" id="focusRestore" type="button" hidden>Show lesson</button>
 
 <div class="variable-tag" id="variableTag" hidden><code>greeting</code><span id="variableValue"></span></div>
 <div class="area-card" id="areaCard" hidden><b id="areaValue"></b><span id="areaLabel"></span></div>
@@ -802,6 +909,55 @@ html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
   $('#review').addEventListener('click', () => {
     complete.hidden = true;
     loadStep(0);
+  });
+
+
+
+  // Resizable bottom workspace (desktop). Height is remembered locally.
+  const lessonDock = document.getElementById('lessonDock');
+  const dockResize = document.getElementById('dockResize');
+  if (lessonDock && dockResize) {
+    const minH = 240;
+    const maxH = () => Math.max(minH, window.innerHeight - 230);
+    const saved = Number(localStorage.getItem('mochi.lessonDockHeight'));
+    if (saved >= minH) document.documentElement.style.setProperty('--dock-h', Math.min(saved, maxH()) + 'px');
+    let startY = 0, startH = 0, dragging = false;
+    const apply = h => {
+      const next = Math.max(minH, Math.min(maxH(), h));
+      document.documentElement.style.setProperty('--dock-h', next + 'px');
+      localStorage.setItem('mochi.lessonDockHeight', String(Math.round(next)));
+    };
+    dockResize.addEventListener('pointerdown', event => {
+      if (matchMedia('(max-width:1100px)').matches) return;
+      dragging = true; startY = event.clientY; startH = lessonDock.getBoundingClientRect().height;
+      document.body.classList.add('dock-resizing'); dockResize.setPointerCapture(event.pointerId);
+    });
+    dockResize.addEventListener('pointermove', event => { if (dragging) apply(startH + startY - event.clientY); });
+    const endDrag = () => { dragging = false; document.body.classList.remove('dock-resizing'); };
+    dockResize.addEventListener('pointerup', endDrag);
+    dockResize.addEventListener('pointercancel', endDrag);
+    dockResize.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+      event.preventDefault();
+      apply(lessonDock.getBoundingClientRect().height + (event.key === 'ArrowUp' ? 24 : -24));
+    });
+    window.addEventListener('resize', () => {
+      const h = lessonDock.getBoundingClientRect().height;
+      if (!matchMedia('(max-width:1100px)').matches) apply(h);
+    });
+  }
+
+  const focusBtn = document.getElementById('focusBtn');
+  const focusRestore = document.getElementById('focusRestore');
+  function setFocusMode(on) {
+    document.body.classList.toggle('focus-mode', on);
+    focusRestore.hidden = !on;
+    focusBtn?.setAttribute('aria-pressed', String(on));
+  }
+  focusBtn?.addEventListener('click', () => setFocusMode(true));
+  focusRestore?.addEventListener('click', () => setFocusMode(false));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') setFocusMode(false);
   });
 
   langBtn.addEventListener('click', () => applyLanguage(lang === 'en' ? 'ar' : 'en'));
