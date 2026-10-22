@@ -333,3 +333,7 @@ Live phone testing showed the playable HUD blocked by the 4.6 MB decorative wate
 
 ### Dedicated playable phone page — 2026-10-22 — LATEST
 The live phone page was still able to show a half-loaded desktop shell when its account/media scripts stalled. Phones now redirect from index.html to a separate lean phone.html that loads only the map, pins, HUD, islands sheet, island summary and Start First Steps. No water canvas, nature audio, Supabase or auth scripts are on this page; it enters the existing playable first-lesson.html. Desktop index remains the full living map. Public allowlist includes phone.html and the 900px phone map artwork. Local 390px check passes; live deployment verification is in progress.
+
+
+### Phone map image weight — 2026-10-22
+Phone map was loading a 197 KB JPEG plus a hidden 206 KB restored overlay. Removed the unused overlay from phone.html, switched the visible map to responsive WebP (480/720/900 px), added a high-priority preload and removed the phone page's external heavy dependency. Phone render at 390px shows the map and HUD at 1.2s locally.
