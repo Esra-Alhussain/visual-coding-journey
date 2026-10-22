@@ -186,3 +186,7 @@ Public build and GitHub Pages phone assets are deployed; physical iPhone/Android
 
 ### Phone map loading fix — 2026-10-22
 Live phone testing showed the playable HUD blocked by the 4.6 MB decorative water-texture script loading before it. Source/public index now load the mobile scene, phone HUD and playable start action before water/living/nature payloads; the map uses a 900px phone JPEG via srcset (about 200 KB instead of 3.4 MB). Local 390px render shows the playable map and Start First Steps while heavy decoration finishes in the background. Public build allowlist includes both phone JPEGs. This is a publishing correction for the phone design, not a new design direction.
+
+
+### Dedicated playable phone page — 2026-10-22 — LATEST
+The live phone page was still able to show a half-loaded desktop shell when its account/media scripts stalled. Phones now redirect from index.html to a separate lean phone.html that loads only the map, pins, HUD, islands sheet, island summary and Start First Steps. No water canvas, nature audio, Supabase or auth scripts are on this page; it enters the existing playable first-lesson.html. Desktop index remains the full living map. Public allowlist includes phone.html and the 900px phone map artwork. Local 390px check passes; live deployment verification is in progress.

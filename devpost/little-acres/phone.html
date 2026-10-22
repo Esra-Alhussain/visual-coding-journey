@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mochi · Phone map preview</title>
+<meta name="description" content="Learn Python with Mochi. Explore five islands and play the first beginner coding adventure for free.">
+<link rel="stylesheet" href="world-map-preview.css">
+<link rel="stylesheet" href="world-map-restoration.css">
+<link rel="stylesheet" href="world-map-popup.css">
+<link rel="stylesheet" href="world-map-living.css?v=3">
+<link rel="stylesheet" href="world-map-home.css">
+<link rel="stylesheet" href="world-map-mobile.css">
+<link rel="stylesheet" href="world-map-phone.css"></head>
+<body>
+<header><a class="brand" href="index.html"><img src="art/play-mochi.png" alt="">MOCHI <span>THE ISLAND JOURNEY</span></a><a class="back" id="accountLink" href="chapters.html?from=map#signin">Sign in</a></header>
+<main>
+<div class="heading"><div><p class="eyebrow">A LITTLE CODE. A WHOLE WORLD.</p><h1>Bring the islands back to life.</h1><p>Help Mochi restore five forgotten islands — one small piece of code at a time.</p></div><div class="count"><strong>05</strong><span>ISLANDS<br>1 AVAILABLE NOW</span></div></div>
+<aside class="goal"><span class="goal-icon" aria-hidden="true">✧</span><div><p class="eyebrow">YOUR JOURNEY’S GOAL</p><h2>Restore the islands. Relight the beacon.</h2><p>Bring every island back to life, then light the lighthouse to reconnect Mochi’s home.</p><small>Play Island 1 now · four more islands are on the way.</small></div></aside>
+<div class="view-tools"><span id="worldState">STARTING WORLD · WAITING FOR RESTORATION</span><button id="visionToggle" type="button" aria-pressed="false">See the restoration vision ✧</button></div>
+<div class="living-controls"><button type="button" id="motionToggle" aria-pressed="true">Pause motion</button><button type="button" id="soundToggle" aria-pressed="true">Sound on · mute</button><span id="ambienceStatus" role="status">Sound is on · starts with your first tap.</span></div>
+<p class="journey-progress" id="journeyProgress" role="status">Island 1 · 0 of 5 activities complete</p>
+<section class="world" aria-label="Five-island journey map">
+<img class="map-art" src="art/world-map-abandoned-phone.jpg" alt="Five abandoned islands in a turquoise sea: damaged cottages, a broken mill, an empty greenhouse, an unlit lighthouse and a barren orchard.">
+<canvas class="living-water" id="livingWater" aria-hidden="true" hidden></canvas>
+<img class="restored-first-island" id="firstIslandRestored" src="art/world-map-preview-phone.jpg" alt="">
+<div class="coastal-life" aria-hidden="true"><div class="seabird bird-one" style="--delay:-4s;--bird-scale:1"><svg viewBox="0 0 64 32"><path class="wing-left" d="M32 18 Q18 0 2 11 Q18 7 32 21"/><path class="wing-right" d="M32 18 Q46 0 62 11 Q46 7 32 21"/><ellipse cx="32" cy="19" rx="3" ry="6"/></svg></div><div class="seabird bird-two" style="--delay:-14s;--bird-scale:0.72"><svg viewBox="0 0 64 32"><path class="wing-left" d="M32 18 Q18 0 2 11 Q18 7 32 21"/><path class="wing-right" d="M32 18 Q46 0 62 11 Q46 7 32 21"/><ellipse cx="32" cy="19" rx="3" ry="6"/></svg></div><div class="seabird bird-three" style="--delay:-25s;--bird-scale:0.55"><svg viewBox="0 0 64 32"><path class="wing-left" d="M32 18 Q18 0 2 11 Q18 7 32 21"/><path class="wing-right" d="M32 18 Q46 0 62 11 Q46 7 32 21"/><ellipse cx="32" cy="19" rx="3" ry="6"/></svg></div><span class="wind-leaf leaf-one"></span><span class="wind-leaf leaf-two"></span><span class="wind-leaf leaf-three"></span></div>
+<div class="sunshine" aria-hidden="true"></div>
+<svg class="island-shadows" viewBox="0 0 1536 1024" aria-hidden="true"><defs><filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="9"/></filter></defs><g filter="url(#softShadow)"><path d="M92 198 L135 109 238 42 442 33 555 112 624 206 637 285 545 340 374 353 211 304 109 261Z"/><path d="M551 419 L589 333 701 271 856 273 972 355 1043 432 1060 500 954 559 778 583 644 535 571 485Z"/><path d="M946 217 L999 122 1102 34 1211 22 1337 90 1395 188 1459 238 1496 327 1406 385 1261 407 1115 375 1008 314Z"/><path d="M943 684 L1001 582 1090 521 1243 497 1390 545 1462 649 1514 727 1478 825 1383 913 1214 939 1051 860 965 780Z"/></g></svg>
+<svg class="route" viewBox="0 0 1536 1024" aria-hidden="true"><path d="M350 720 C170 580 110 470 330 300 S620 280 790 470 S1010 500 1190 300 S1400 470 1210 740"/></svg>
+<div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div>
+<nav class="pins" aria-label="Inspect an island">
+<button class="pin active" style="--x:23%;--y:65%" data-island="0" aria-pressed="true"><img class="companion" src="art/play-mochi.png" alt="Mochi is here"><span class="medal">01</span><span class="label">First steps <small>START HERE</small></span></button>
+<button class="pin" style="--x:24%;--y:25%" data-island="1" aria-pressed="false"><span class="medal">02</span><span class="label">The watermill <small>COMING SOON</small></span></button>
+<button class="pin" style="--x:52%;--y:44%" data-island="2" aria-pressed="false"><span class="medal">03</span><span class="label">The glass garden <small>COMING SOON</small></span></button>
+<button class="pin" style="--x:78%;--y:24%" data-island="3" aria-pressed="false"><span class="medal">04</span><span class="label">The lighthouse <small>COMING SOON</small></span></button>
+<button class="pin" style="--x:80%;--y:68%" data-island="4" aria-pressed="false"><span class="medal">05</span><span class="label">The orchard <small>COMING SOON</small></span></button>
+</nav>
+<div class="map-caption"><span class="live-dot"></span> FIVE FORGOTTEN ISLANDS. ONE NEW BEGINNING. <span>✧ N</span></div>
+</section>
+<p class="map-help">Tap an island to discover what you’ll learn and restore.</p>
+<dialog id="islandDialog" class="island-dialog" aria-labelledby="islandTitle"><button class="dialog-close" id="closeIslandDialog" type="button" aria-label="Close island summary">×</button>
+<section class="selection" aria-label="Selected island" aria-live="polite"><div class="island-number" id="islandNumber">01</div><div class="detail"><p class="eyebrow" id="islandStatus">ISLAND 01 · AVAILABLE NOW</p><h2 id="islandTitle">🌱 First Steps</h2><p id="islandTagline">Give Mochi’s farm a fresh start.</p><div class="summary-block"><h3>LEARN</h3><p id="islandDescription">The farm is quiet: dry beds, broken fences and an empty cottage. Start with Python basics in the existing lesson.</p></div><div class="summary-block restoration-task"><h3>YOUR MISSION</h3><p id="restorationGoal"></p></div><p class="access-note" id="accessNote"></p></div><a class="enter" id="enterIsland" href="first-lesson.html">Let’s begin <span>→</span></a><span class="upcoming" id="upcoming" hidden>🔒 Finish Island 1 to unlock</span></section>
+</dialog>
+<footer><a href="world-map-audio-credits.html">Nature audio credits</a><span>MOCHI · A BEGINNER PYTHON ADVENTURE</span><span>Guest progress saves in this browser.</span></footer>
+</main>
+<script src="world-map-restoration.js"></script>
+<script src="world-map-island-details.js"></script>
+<script src="world-map-popup.js"></script>
+<script src="world-map-mobile.js"></script>
+<script src="world-map-phone.js"></script></body></html>
