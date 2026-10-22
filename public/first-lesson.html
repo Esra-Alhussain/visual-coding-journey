@@ -226,7 +226,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 @media(min-width:1101px){
   :root{--dock-h:300px}
   .world{top:12px;right:12px;bottom:calc(var(--dock-h,300px) + 24px);left:12px;border-radius:18px;overflow:hidden;background:#071009;transition:bottom .2s ease}
-  .world:before{content:"";position:absolute;inset:-24px;z-index:0;background:url("art/restoration-shell.png") center/cover;filter:blur(14px) brightness(.44) saturate(.8);transform:scale(1.04)}
+  .world:before{content:"";position:absolute;inset:-24px;z-index:0;background:url("art/restoration-shell-1600.webp") center/cover;filter:blur(14px) brightness(.44) saturate(.8);transform:scale(1.04)}
   .world>img{position:relative;z-index:1;object-fit:contain}
   .world:after{z-index:2}
   body.focus-mode .world{bottom:12px}
@@ -259,20 +259,20 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 </head>
 <body>
 <div class="world" aria-hidden="true">
-  <img src="art/restoration-shell.png" alt="">
+  <img src="art/restoration-shell-1600.webp" alt="">
 </div>
 <div class="mochi" aria-hidden="true">
   <div class="bubble hidden" id="bubble"></div>
-  <img src="art/play-mochi.png" alt="">
+  <img src="art/play-mochi-512.webp" alt="">
 </div>
 
 <div class="hud">
   <button class="focus-btn focus-float" id="focusBtn" type="button" aria-pressed="false">Focus on farm</button>
-  <div class="phone-hero" aria-hidden="true"><img src="art/play-mochi.png" alt=""><span>Lesson 1 · The farm</span></div>
+  <div class="phone-hero" aria-hidden="true"><img src="art/play-mochi-512.webp" alt=""><span>Lesson 1 · The farm</span></div>
   <div class="lesson-dock" id="lessonDock">
   <div class="dock-resize" id="dockResize" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize lesson and code area"><span></span></div>
   <section class="panel lesson-panel" aria-label="Lesson instructions">
-    <img class="mini-mochi" src="art/play-mochi.png" alt="Mochi">
+    <img class="mini-mochi" src="art/play-mochi-512.webp" alt="Mochi">
     <div class="lesson-top"><div class="eyebrow" id="lessonEyebrow">Lesson 1 · Getting started</div><div class="lesson-tools"><a class="chapters-link" id="chaptersLink" href="index.html">Chapters</a><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to Arabic">العربية</button></div></div>
     <div class="step-line">
       <span class="step-badge" id="stepBadge">Step 1 of 5</span>
@@ -314,7 +314,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 
 <div class="complete" id="complete" hidden>
   <div class="complete-card">
-    <img src="art/play-mochi.png" alt="Mochi celebrates">
+    <img src="art/play-mochi-512.webp" alt="Mochi celebrates">
     <p class="kicker" id="completionKicker">Lesson 1 complete</p>
     <h2 id="completionTitle">You can write a program</h2>
     <p id="completionCopy">You used <b>print</b>, a <b>string</b>, a <b>variable</b>, <b>numbers</b>, <b>arithmetic</b> and a <b>comment</b>. That is the foundation for the rest of the course.</p>

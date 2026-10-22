@@ -198,3 +198,7 @@ Phone map was loading a 197 KB JPEG plus a hidden 206 KB restored overlay. Remov
 
 ### Approved right-rail lesson layout — 2026-10-22
 Owner selected the right-rail option over the bottom dock. Desktop lesson now uses a 380px full-height right workspace with Lesson above Code/Output; the farm fills the remaining area with object-fit: contain, so the stage is not overlaid or cropped. Focus mode expands the farm across the screen. Mobile keeps the stacked layout. Verified at 1862x946 and 1440x900. Source/public first-lesson updated; no lesson logic changes.
+
+
+### Lesson scene asset weight — 2026-10-22
+The approved right-rail lesson was still black on a cold live load because the scene used a 3.2 MB background PNG and a 1.4 MB Mochi PNG. Switched the scene to a 321 KB WebP background and 32 KB Mochi WebP; the layout is unchanged and the live lesson can render promptly.
