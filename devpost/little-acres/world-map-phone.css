@@ -1,0 +1,606 @@
+/* Phone-only map experience. Desktop rules stay in the existing stylesheets. */
+.phone-hud,
+.phone-zoom,
+.phone-dock,
+.phone-backdrop,
+.phone-sheet {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  :root { --phone-dock: 92px; }
+
+  html, body {
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: #0a2b33;
+  }
+
+  /* The generated phone controls are replaced by the custom HUD below. */
+  .mobile-controls,
+  .mobile-overview,
+  .mobile-mission,
+  .mobile-preview-badge {
+    display: none !important;
+  }
+
+  header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    height: auto;
+    min-height: 58px;
+    padding: max(9px, env(safe-area-inset-top)) 14px 9px;
+    align-items: center;
+    background: linear-gradient(180deg, #08272dea 0%, #08272dbb 62%, transparent 100%);
+    border: 0;
+    backdrop-filter: none;
+  }
+
+  header .brand {
+    font-size: 16px;
+    letter-spacing: 2.2px;
+    gap: 8px;
+  }
+
+  header .brand img {
+    width: 31px;
+    height: 31px;
+  }
+
+  header .brand span { display: none; }
+
+  header .back {
+    min-height: 36px;
+    padding: 8px 13px;
+    border-radius: 20px;
+    border: 1px solid #ead9a94d;
+    background: #0b302be8;
+    font-size: 11px;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+  }
+
+  main {
+    padding: 0 !important;
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    overflow: hidden;
+  }
+
+  .heading,
+  .goal,
+  .view-tools,
+  .living-controls,
+  .journey-progress,
+  .map-help,
+  footer {
+    display: none !important;
+  }
+
+  .world {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    aspect-ratio: auto !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #0c4e63;
+    touch-action: none;
+  }
+
+  .world::after { display: none; }
+
+  .world .map-caption { display: none; }
+
+  /* The map sits under the header; a soft vignette protects HUD text. */
+  .world::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, #0622298c 0%, transparent 18%, transparent 62%, #042029b3 92%),
+      radial-gradient(ellipse at 50% 45%, transparent 52%, #03212a5c 100%);
+  }
+
+  .mobile-scene {
+    top: 50%;
+    left: 50%;
+  }
+
+  .mobile-scene .pin {
+    z-index: 12;
+  }
+
+  /* ---------- top HUD ---------- */
+  .phone-hud {
+    position: fixed;
+    z-index: 55;
+    top: calc(max(9px, env(safe-area-inset-top)) + 58px);
+    left: 12px;
+    right: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .phone-status,
+  .phone-islands-btn {
+    pointer-events: auto;
+    border: 1px solid #f1dba94a;
+    background: #0a2e2be8;
+    color: #fff2d2;
+    box-shadow: 0 8px 26px #001d2766;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .phone-status {
+    min-width: 0;
+    max-width: 240px;
+    padding: 8px 11px 9px;
+    border-radius: 12px;
+  }
+
+  .phone-status small {
+    display: block;
+    color: #e8c67a;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    margin-bottom: 3px;
+  }
+
+  .phone-status strong {
+    display: block;
+    font-size: 13px;
+    line-height: 1.2;
+    letter-spacing: -.15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .phone-status span {
+    display: block;
+    color: #a9c7ba;
+    font-size: 9px;
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+
+  .phone-islands-btn {
+    flex-shrink: 0;
+    min-height: 42px;
+    padding: 0 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+
+  .phone-islands-btn b {
+    display: grid;
+    place-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 7px;
+    background: #e8c67a;
+    color: #25351e;
+    font-size: 10px;
+  }
+
+  /* ---------- zoom ---------- */
+  .phone-zoom {
+    position: fixed;
+    z-index: 30;
+    right: 12px;
+    bottom: calc(var(--phone-dock) + 18px + env(safe-area-inset-bottom));
+    display: grid;
+    gap: 6px;
+  }
+
+  .phone-zoom button {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid #f1dba94a;
+    background: #0a2e2be8;
+    color: #fff1cd;
+    font-size: 20px;
+    line-height: 1;
+    box-shadow: 0 6px 20px #001d2766;
+    backdrop-filter: blur(10px);
+  }
+
+  /* ---------- bottom dock ---------- */
+  .phone-dock {
+    position: fixed;
+    z-index: 32;
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    gap: 8px;
+    align-items: stretch;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #f0d9a447;
+    background: #082925f2;
+    box-shadow: 0 16px 46px #00162088, inset 0 1px #ffffff12;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .phone-primary {
+    min-width: 0;
+    min-height: 54px;
+    border: 0;
+    border-radius: 13px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+    background: linear-gradient(180deg, #f4d18a, #dca94e);
+    color: #2a2410;
+    box-shadow: inset 0 1px #fff1bd, 0 6px 18px #00000030;
+  }
+
+  .phone-primary span {
+    display: block;
+    min-width: 0;
+  }
+
+  .phone-primary small {
+    display: block;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    opacity: .65;
+    margin-bottom: 1px;
+  }
+
+  .phone-primary strong {
+    display: block;
+    font-size: 16px;
+    line-height: 1.12;
+    letter-spacing: -.25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .phone-primary em {
+    flex-shrink: 0;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .phone-sound {
+    width: 44px;
+    min-height: 54px;
+    border-radius: 13px;
+    border: 1px solid #e9d29a3d;
+    background: #123f37;
+    color: #eed596;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+  }
+
+  .phone-sound[aria-pressed="false"] { opacity: .55; }
+
+  /* ---------- all-islands sheet ---------- */
+  .phone-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: block;
+    background: #00111699;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease;
+  }
+
+  .phone-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .phone-sheet {
+    position: fixed;
+    z-index: 71;
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: min(76dvh, 660px);
+    transform: translateY(105%);
+    transition: transform .26s cubic-bezier(.2,.8,.2,1);
+    border-radius: 24px 24px 0 0;
+    border: 1px solid #efd8a84d;
+    border-bottom: 0;
+    background: linear-gradient(180deg, #173f35 0%, #0a2523 100%);
+    color: #fff3d7;
+    box-shadow: 0 -20px 60px #00101699;
+    padding: 10px 14px max(20px, env(safe-area-inset-bottom));
+    overflow: auto;
+  }
+
+  .phone-sheet.open { transform: translateY(0); }
+
+  .phone-sheet-handle {
+    width: 38px;
+    height: 4px;
+    border-radius: 4px;
+    background: #d6e2ce55;
+    margin: 0 auto 12px;
+  }
+
+  .phone-sheet-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .phone-sheet-head p {
+    margin: 0;
+    color: #e9c777;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+  }
+
+  .phone-sheet-head h2 {
+    margin: 2px 0 0;
+    font-size: 23px;
+    line-height: 1.1;
+    letter-spacing: -.5px;
+  }
+
+  .phone-sheet-close {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid #ffffff28;
+    background: #ffffff0a;
+    color: #f6e9cb;
+    font-size: 20px;
+  }
+
+  .phone-island-list {
+    display: grid;
+    gap: 7px;
+  }
+
+  .phone-island-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 13px;
+    border: 1px solid #ffffff14;
+    background: #ffffff07;
+    color: #fff2d4;
+    text-align: left;
+  }
+
+  .phone-island-row.current {
+    border-color: #e8c27488;
+    background: #e8c27412;
+    box-shadow: inset 0 0 0 1px #e8c27418;
+  }
+
+  .phone-island-row .n {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid #d9bf7d66;
+    font-size: 11px;
+    font-weight: 850;
+    color: #e8c77b;
+  }
+
+  .phone-island-row.current .n {
+    background: linear-gradient(#f4d18a, #dca94e);
+    color: #2a2410;
+    border-color: #fff0bd;
+  }
+
+  .phone-island-row strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: -.1px;
+  }
+
+  .phone-island-row small {
+    display: block;
+    margin-top: 2px;
+    color: #a9c6b8;
+    font-size: 9px;
+    letter-spacing: .25px;
+  }
+
+  .phone-island-row .state {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    color: #e8c77b;
+    text-align: right;
+    max-width: 68px;
+    line-height: 1.35;
+  }
+
+  .phone-island-row.locked .state { color: #9bb5a8; }
+  .phone-island-row.locked .n { opacity: .6; border-style: dashed; }
+  .phone-island-row.locked strong { color: #d9e2d4; }
+
+  /* ---------- island detail bottom sheet ---------- */
+  .island-dialog {
+    position: fixed !important;
+    inset: auto 0 0 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: min(84dvh, 720px) !important;
+    margin: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
+    border: 1px solid #efd8a84d !important;
+    border-bottom: 0 !important;
+    padding: 26px 18px calc(var(--phone-dock) + 26px + env(safe-area-inset-bottom)) !important;
+    background: linear-gradient(180deg, #1a4439 0%, #0a2724 100%) !important;
+    box-shadow: 0 -20px 70px #001016aa !important;
+    z-index: 72 !important;
+    overflow: auto !important;
+    overscroll-behavior: contain;
+  }
+
+  .island-dialog::backdrop {
+    background: #00111699 !important;
+    backdrop-filter: blur(4px) !important;
+  }
+
+  .island-dialog:before {
+    content: "";
+    display: block !important;
+    position: absolute;
+    top: 10px;
+    left: calc(50% - 19px);
+    width: 38px;
+    height: 4px;
+    border-radius: 4px;
+    background: #d6e2ce55;
+  }
+
+  .island-dialog .selection {
+    display: block;
+    padding: 0;
+  }
+
+  .island-dialog .island-number { display: none; }
+
+  .island-dialog .detail {
+    width: 100%;
+  }
+
+  .island-dialog .detail .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.3px;
+    margin-bottom: 7px;
+  }
+
+  .island-dialog .detail h2 {
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -.6px;
+    padding-right: 36px;
+  }
+
+  .island-dialog #islandTagline {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #d3e0cd;
+    margin: 8px 0 15px;
+  }
+
+  .island-dialog .summary-block {
+    margin-top: 15px;
+    padding-top: 13px;
+    border-top: 1px solid #ffffff13;
+  }
+
+  .island-dialog .summary-block h3 {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    color: #e9c777;
+  }
+
+  .island-dialog .summary-block p {
+    font-size: 12px;
+    line-height: 1.55;
+    color: #d7e5d1;
+  }
+
+  .island-dialog .summary-block:not(.restoration-task) p {
+    display: block;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: #d7e5d1;
+    font-size: 12px;
+  }
+
+  .island-dialog .restoration-task {
+    margin: 13px 0 0;
+  }
+
+  .island-dialog .access-note { display: none; }
+
+  .island-dialog .enter,
+  .island-dialog .upcoming {
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .dialog-close {
+    top: 18px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    background: #ffffff0d;
+  }
+
+  /* Keep the map behind the sheet from scrolling on iOS. */
+  body.island-dialog-open { overflow: hidden; }
+
+  body.island-dialog-open .phone-hud,
+  body.island-dialog-open .phone-dock,
+  body.island-dialog-open .phone-zoom,
+  body.phone-sheet-open .phone-hud,
+  body.phone-sheet-open .phone-zoom {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .16s ease;
+  }
+}
+
+@media (max-width: 370px) {
+  .phone-status { max-width: 190px; }
+  .phone-status strong { font-size: 12px; }
+  .phone-primary strong { font-size: 14px; }
+  .phone-islands-btn { padding: 0 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-sheet, .phone-backdrop { transition: none; }
+}

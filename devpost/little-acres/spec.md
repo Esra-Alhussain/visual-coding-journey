@@ -158,3 +158,27 @@ Owner approved the map and explicitly authorized making it the homepage and publ
 
 ### Public homepage verified end to end — 2026-10-21
 Live URL: https://esra-alhussain.github.io/visual-coding-journey/ . Commit 426124f deployed successfully via Pages run 39669907818. In-app HTTPS browser test verified first-island entry, case error, all five successful learner-written programs, mid-lesson Map return with 3/5 saved and resumed code, final completion, return with Restored/Revisit, future island entry blocked, sign-in modal and guest return. No real account created or credentials entered; signed-in cross-device flow and actual audio listening not retested. Fixed completed prerequisite marker/aria text for Island 2 so it says Coming soon rather than telling completed users to finish Island 1 again. Source/public asset and progress tests pass. Marketing ENG-006 package updated with complete honest playable-release script; no social recording/posting. Unrelated tiktok-assets directory remains untouched.
+
+### Separate scene-first phone preview — 2026-10-21
+Owner authorized a quick separate phone-specific preview, not public replacement. Entry world-map-mobile.html; world-map-mobile.css/js only added. <=680px: full-height island art under slim header, larger map centered on first island, pointer drag, pinch/zoom buttons, all-five overview, Find Mochi, compact mission toggle and mirrored sound control. Existing summaries and entry/progress rules retained; desktop base remains as approved. JS parses; actual phone rendering/touch review pending due prior local file browser restriction. Public homepage and deployment files unchanged. This is a continuing design revision, not a new marketing milestone. Review/approve before integration or publication.
+
+### Vertical phone-island trail preview — 2026-10-21 — LATEST
+Owner rejected the zoom/drag phone preview and approved a separate vertical-trail alternative. Entry world-map-trail.html, new world-map-trail.css/js. <=680px: five large individual island views framed from existing approved art using code-native clipping, normal vertical scrolling and a connecting dotted route; no manual zoom or drag controls. First island playable/current or restored according to existing saved progress; future islands dimmed/upcoming. Cards show place/subject with tap-to-open existing compact summary and existing lesson entry rules. Sound control mirrored; long-term beacon goal at bottom. Approved desktop/public homepage unchanged, earlier phone preview preserved. JS syntax and existing island logic tests pass; actual phone render/touch review still pending under the local-file browser restriction. This is a refinement of the same design checkpoint; no new public deployment or marketing package.
+
+
+## Phone-first world map — 2026-10-22 — LATEST
+
+Owner rejected the desktop layout being squeezed into a 418px phone and chose the **full-screen map + bottom sheet** direction over the vertical trail. Source `index.html` now loads `world-map-mobile.css/js` plus the new `world-map-phone.css/js`; all phone rules are scoped to `max-width:680px`, so the approved desktop homepage is unchanged.
+
+Phone composition:
+- full-height pan/zoom island map under a slim Mochi header with Sign in;
+- compact status card: Island 01 · in progress / First Steps / activity count;
+- **Islands 5** button opens a bottom sheet list of all five islands;
+- one primary gold action: **Start First Steps**;
+- floating +/− zoom and a mirrored sound toggle;
+- tapping an island opens the existing compact island summary as a bottom sheet;
+- safe-area padding, no horizontal overflow, desktop HUD hidden with base CSS.
+
+True mobile emulation checks at 360×800, 390×844 and 418×880 show `innerWidth === scrollWidth`, dock and header inside the viewport, Islands sheet and island summary opening. Desktop 1440×1000 remains the existing layout with phone controls hidden. Review images: `review-phone-home-fixed.png`, `review-phone-islands-sheet.png`, `review-phone-island-sheet.png`.
+
+Not yet done: physical iPhone/Android touch and audio check; public/` build and GitHub Pages deployment. Progress, auth and lesson behavior are unchanged. This supersedes the earlier vertical-trail phone preview for the current integration decision, while preserving that file as an alternate concept.
