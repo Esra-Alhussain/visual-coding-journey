@@ -181,4 +181,4 @@ Phone composition:
 
 True mobile emulation checks at 360×800, 390×844 and 418×880 show `innerWidth === scrollWidth`, dock and header inside the viewport, Islands sheet and island summary opening. Desktop 1440×1000 remains the existing layout with phone controls hidden. Review images: `review-phone-home-fixed.png`, `review-phone-islands-sheet.png`, `review-phone-island-sheet.png`.
 
-Not yet done: physical iPhone/Android touch and audio check; public/` build and GitHub Pages deployment. Progress, auth and lesson behavior are unchanged. This supersedes the earlier vertical-trail phone preview for the current integration decision, while preserving that file as an alternate concept.
+Public build and GitHub Pages phone assets are deployed; physical iPhone/Android touch and audio review remains pending. Progress, auth and lesson behavior are unchanged. This supersedes the earlier vertical-trail phone preview for the current integration decision, while preserving that file as an alternate concept.
