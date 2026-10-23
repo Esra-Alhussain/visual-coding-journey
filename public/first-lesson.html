@@ -256,7 +256,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   body.focus-mode .mochi{left:50%}
 }
 </style>
-<link rel="stylesheet" href="lesson-phone.css?v=20261023">
+<link rel="stylesheet" href="lesson-phone.css?v=20261023-door">
 </head>
 <body>
 <div class="world" aria-hidden="true">
@@ -1001,9 +1001,30 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 // Keep the farm visible when the phone keyboard changes the available height.
 (() => {
  const phone = matchMedia('(max-width:680px)');
+ const scene = document.querySelector('.world');
+ const artwork = scene.querySelector('img');
+ function placeMochi() {
+  const root = document.documentElement.style;
+  if (!phone.matches) {
+   ['--mochi-x','--mochi-y','--mochi-size'].forEach(name => root.removeProperty(name));
+   return;
+  }
+  if (!artwork.naturalWidth || !artwork.naturalHeight) return;
+  const r = scene.getBoundingClientRect();
+  const scale = Math.max(r.width / artwork.naturalWidth, r.height / artwork.naturalHeight);
+  const drawnWidth = artwork.naturalWidth * scale;
+  const drawnHeight = artwork.naturalHeight * scale;
+  // Feet on the path immediately in front of the cottage door, in image coordinates.
+  root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .63}px`);
+  root.setProperty('--mochi-y', `${r.top + drawnHeight * .42}px`);
+  root.setProperty('--mochi-size', `${Math.max(52, Math.min(84, r.height * .22))}px`);
+ }
+ artwork.addEventListener('load', placeMochi);
+ new ResizeObserver(placeMochi).observe(scene);
  function fit() {
   if(phone.matches) document.documentElement.style.setProperty('--lesson-height', `${window.visualViewport?.height || innerHeight}px`);
   else document.documentElement.style.removeProperty('--lesson-height');
+  requestAnimationFrame(placeMochi);
  }
  window.visualViewport?.addEventListener('resize', fit);
  window.addEventListener('resize', fit);

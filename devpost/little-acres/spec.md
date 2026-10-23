@@ -205,3 +205,6 @@ The approved right-rail lesson was still black on a cold live load because the s
 
 ### Approved phone Lesson 1 — 2026-10-23
 Phone widths <=680px use a fixed farm/Mochi scene over a separately scrolling task/editor workspace, with visible speech/variable/area results and sticky Run/Clear. Reuses the existing notes disclosure, optimized WebP art and desktop right rail; no lesson/progress/auth changes. VisualViewport height adapts to available screen area. The phone tour targets the visible character and task. Included via lesson-phone.css in the public allowlist.
+
+### Phone Mochi doorway anchor — 2026-10-23
+Phone Mochi is anchored to the path immediately in front of the cottage door using source-art coordinates and the actual object-fit:cover scale/crop, instead of a fixed screen-center/bottom position. Recomputed on image load and scene resize, including visible-viewport changes. Speech appears beside Mochi so it does not cover the top tools. Desktop unchanged.

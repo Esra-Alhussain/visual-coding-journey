@@ -4,9 +4,9 @@
  html,body{height:var(--lesson-height);min-height:0;overflow:hidden}
  body{background:#10261e}
  .world{position:fixed;inset:0 0 auto;height:var(--farm-height);width:100%;min-width:0;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;margin:0;opacity:1}
- .world>img{object-fit:cover;object-position:center 58%}
+ .world>img{object-fit:cover;object-position:center top}
  .world:after{background:linear-gradient(#07170d65,transparent 25%,transparent 80%,#10261e55);box-shadow:none}
- .mochi{display:block;position:fixed;left:52%;top:calc(var(--farm-height) - 14px);width:clamp(86px,25vw,118px);z-index:3}
+ .mochi{display:block;position:fixed;left:var(--mochi-x,65%);top:var(--mochi-y,42%);width:var(--mochi-size,70px);z-index:3}
  .mochi .bubble{max-width:min(280px,78vw);max-height:100px;overflow:auto;padding:9px 12px;font-size:13px;line-height:1.4;bottom:calc(100% + 6px)}
  .variable-tag,.area-card{display:block!important;position:fixed;z-index:4;left:17%;top:calc(var(--farm-height) - 65px);max-width:32vw;font-size:10px;padding:7px 9px;transform:translate(-30%,-50%)}
  .variable-tag[hidden],.area-card[hidden]{display:none!important}
@@ -62,4 +62,10 @@
 @media(max-width:680px){
  .code-panel,.code-body{overflow:visible}
  .code-actions{position:sticky;bottom:0;z-index:2;margin-top:0;padding:8px 0;background:#0a1c15}
+}
+
+@media(max-width:680px){
+ /* Keep the speech beside Mochi so it does not cover the phone header. */
+ .mochi .bubble{left:auto;right:calc(100% + 8px);bottom:15%;transform:none;max-width:min(210px,calc(var(--mochi-x) - var(--mochi-size) / 2 - 18px));max-height:100px}
+ .mochi .bubble:after{left:auto;right:-6px;bottom:20px;transform:rotate(-45deg)}
 }
