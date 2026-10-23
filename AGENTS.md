@@ -30,3 +30,10 @@
 - Commit and push changes while the owner edits Lesson 1. Pushing is not permission to publish.
 - GitHub Pages must remain manual-only (`workflow_dispatch`); do not restore deployment on push.
 - Run the publishing workflow only when the owner explicitly asks to publish.
+
+## Keep planning synchronized
+
+- Whenever owner decisions change scope, lesson behavior, design, validation status or release policy, update the relevant canonical files in the same change: devpost/scope.md, prd.md, spec.md, checklist.md and resume.md.
+- Keep scope.html/prd.html consistent with their Markdown when changing those plans. Point component notes to the canonical plan; do not leave contradictory historical sections labeled as current.
+- Record confirmed, implemented, rejected/superseded and deferred items separately. Do not claim blanket phase approval or completed tests without evidence. Preserve superseded planning in devpost/archive before replacing it.
+- Design editing is paused until the owner resumes; documentation maintenance does not authorize feature changes or publishing.

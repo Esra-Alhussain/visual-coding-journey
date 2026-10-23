@@ -1,3 +1,9 @@
+# Current checkpoint — 2026-10-23
+
+Read scope.md, prd.md, spec.md and checklist.md as the current plan. Current app: natural farm, existing five-activity Lesson 1, visible square grid only; no movement activity. Design editing paused. Same branch commit/push, manual publication only. Practical work is Phase 5 Build; Phase 6 Ship remains outstanding. Formal planning sign-off is not inferred from file presence. The history below includes rejected/superseded experiments and is not a list of current requirements.
+
+---
+
 ### Volumetric egg material — 2026-10-11
 
 Applied egg-only lavender radial shading, asymmetric egg curvature, inset lighting, purple bloom, cyan jagged seam glow and contact shadow. Both shell halves share the same material. Retained absolute positioning and unclipped parent so fragments fly apart without an opaque egg remaining behind. All JavaScript, dimensions and hatch timing unchanged. Regression checks pass; rendered visual review pending. Exact PRD untouched.
@@ -704,3 +710,6 @@ Verified check-phone-walk.cjs (valid/multiline/comments, invalid/unsafe/bounds c
 
 ### Grid only, no new activity — 2026-10-23 — LATEST / RESUME HERE
 Owner rejected the new walking activity. Asked “only a visible square grid across the original farm, keeping the lesson unchanged, so you can later decide how Mochi moves?” and owner answered yes. Removed phone-walk.js (source/public), parser test, arrival panel, movement commands/route, and deferred tour changes. Restored the approved natural-farm phone lesson with a simple noninteractive square-line grid only. No colored paving, highlighted goal, numbering, movement task or movement logic. Mochi remains at the door; existing five Python activities and desktop are unchanged. Browser320×667/390×720/430×844 and desktop1440×1000 all five programs/completion pass; public asset and diff checks pass. Earlier movement/painted-ground specifications are superseded. Commit/push only, no publication. Preview /tmp/mochi-grid-only-preview.png.
+
+### Planning reconciled — 2026-10-23
+Owner correctly identified stale central planning. Archived the previous scope, PRD and visual copies under devpost/archive/planning-before-sync-2026-10-23/. Reconciled canonical scope/PRD, added root technical plan/checklist, synchronized scope.html/prd.html and current component pointers, corrected manual publication instructions and recorded the ongoing synchronization rule in AGENTS.md. Current decisions, deferred movement, rejected experiments, recorded checks and outstanding delivery tasks are explicit. No application behavior changed and no deployment requested.

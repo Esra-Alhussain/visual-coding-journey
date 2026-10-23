@@ -1,9 +1,9 @@
 # Publishing Mochi
 
-Updated October 21, 2026.
+Updated October 23, 2026.
 
 Public URL: https://esra-alhussain.github.io/visual-coding-journey/
-GitHub Pages is enabled with Source: GitHub Actions. The existing workflow deploys the `public/` directory after a push to `main`.
+GitHub Pages is enabled with Source: GitHub Actions. The workflow deploys `public/` only through manual `workflow_dispatch`. Committing or pushing to `main` does not publish. Run the workflow only when the owner explicitly asks to publish.
 
 The owner approved the living world map as homepage and public publication. Only Island 1 has a playable five-activity Python lesson; four later islands are upcoming. Guest progress saves in the same browser/origin. The existing Supabase email authentication and signed-in progress bridge are retained. Google OAuth still needs provider configuration; it is not newly enabled here.
 

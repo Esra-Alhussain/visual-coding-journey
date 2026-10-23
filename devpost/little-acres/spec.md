@@ -1,3 +1,9 @@
+# Current planning reference — 2026-10-23
+
+Read [the consolidated spec](../spec.md) first. The active decision is the original farm plus the existing lesson and a visual-only square grid; movement is deferred, and publishing is manual-only. Older dated entries below are historical, not active instructions when contradicted by the current reference.
+
+---
+
 
 ## Restoration island map ? 2026-10-19
 
