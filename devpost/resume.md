@@ -684,3 +684,6 @@ Owner's live screenshot showed Mochi by the bridge rather than the cottage door.
 
 ### Phone square grid — 2026-10-23
 Added owner-requested phone farm grid: subtle square lines plus gold current doorway cell, aligned to the image-relative Mochi anchor and scaled with the art. Pointer events disabled so the grid cannot obstruct lesson controls. No movement/curriculum behavior changes. Source/public build updated; Chromium 320×667,390×720,430×844 completes all five programs and feedback, desktop1440×1000 pixel-identical, public assets and diff whitespace checks pass. Publishing grid update. Previous doorway placement deployment fee5dd4 succeeded in Pages run39946033275.
+
+### Manual publishing only — 2026-10-23 — LATEST
+Owner explicitly requested continuing to commit/push edits on the same branch without publishing until told. Removed the push-to-main deployment trigger from .github/workflows/pages.yml, retaining workflow_dispatch for explicit future publication. Recorded the standing instruction in AGENTS.md. Pushes now save code without starting Pages deployment. Existing live version stays at grid release a6fb0e5 until a manual deployment is requested.
