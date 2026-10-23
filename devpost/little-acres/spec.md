@@ -202,3 +202,6 @@ Owner selected the right-rail option over the bottom dock. Desktop lesson now us
 
 ### Lesson scene asset weight — 2026-10-22
 The approved right-rail lesson was still black on a cold live load because the scene used a 3.2 MB background PNG and a 1.4 MB Mochi PNG. Switched the scene to a 321 KB WebP background and 32 KB Mochi WebP; the layout is unchanged and the live lesson can render promptly.
+
+### Approved phone Lesson 1 — 2026-10-23
+Phone widths <=680px use a fixed farm/Mochi scene over a separately scrolling task/editor workspace, with visible speech/variable/area results and sticky Run/Clear. Reuses the existing notes disclosure, optimized WebP art and desktop right rail; no lesson/progress/auth changes. VisualViewport height adapts to available screen area. The phone tour targets the visible character and task. Included via lesson-phone.css in the public allowlist.

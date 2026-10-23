@@ -279,3 +279,10 @@ Owner selected the right-rail option over the bottom dock. Desktop lesson now us
 
 ### Lesson scene asset weight — 2026-10-22
 The approved right-rail lesson was still black on a cold live load because the scene used a 3.2 MB background PNG and a 1.4 MB Mochi PNG. Switched the scene to a 321 KB WebP background and 32 KB Mochi WebP; the layout is unchanged and the live lesson can render promptly.
+
+### Phone lesson publication — 2026-10-23
+- [x] Preserve latest main's dedicated phone homepage, optimized artwork and approved desktop rail.
+- [x] Apply approved farm-first phone lesson to source/public build.
+- [x] Chromium 320×667, 390×720, 430×844: all five programs, visible speech/variable/area feedback and completion, no horizontal overflow or JS errors.
+- [x] Desktop 1440×1000 screenshot pixel-identical; public asset check passes.
+- [ ] Confirm deployed live lesson contains the new stylesheet after push.

@@ -256,6 +256,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   body.focus-mode .mochi{left:50%}
 }
 </style>
+<link rel="stylesheet" href="lesson-phone.css?v=20261023">
 </head>
 <body>
 <div class="world" aria-hidden="true">
@@ -819,9 +820,10 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 
   function positionTour() {
     if (tourIndex < 0) return;
-    const targetSelector = tourIndex === 0 && innerWidth <= 1100 ? '.phone-hero' : tourSteps[tourIndex].target;
+    const targetSelector = innerWidth <= 680 && tourIndex === 1 ? '.task' : tourIndex === 0 && innerWidth <= 680 ? '.mochi' : tourIndex === 0 && innerWidth <= 1100 ? '.phone-hero' : tourSteps[tourIndex].target;
     const target = document.querySelector(targetSelector);
     if (!target) return;
+    if (innerWidth <= 680 && target.closest('.hud')) target.scrollIntoView({block:'nearest'});
     const r = target.getBoundingClientRect();
     const w = Math.min(342, innerWidth - 24);
     tourCard.style.width = w + 'px';
@@ -993,6 +995,23 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   restoreProgress()
     .catch(err => console.warn('Progress restore failed', err))
     .finally(() => setTimeout(beginTour, 500));
+})();
+</script>
+<script>
+// Keep the farm visible when the phone keyboard changes the available height.
+(() => {
+ const phone = matchMedia('(max-width:680px)');
+ function fit() {
+  if(phone.matches) document.documentElement.style.setProperty('--lesson-height', `${window.visualViewport?.height || innerHeight}px`);
+  else document.documentElement.style.removeProperty('--lesson-height');
+ }
+ window.visualViewport?.addEventListener('resize', fit);
+ window.addEventListener('resize', fit);
+ phone.addEventListener('change', fit);
+ document.getElementById('run').addEventListener('click', () => {
+  if(phone.matches) document.getElementById('code').blur();
+ });
+ fit();
 })();
 </script>
 </body>

@@ -1,0 +1,65 @@
+/* Approved phone scene layout; preserve the existing desktop right rail. */
+@media(max-width:680px){
+ :root{--lesson-height:100dvh;--farm-height:clamp(150px,calc(var(--lesson-height) * .46),410px)}
+ html,body{height:var(--lesson-height);min-height:0;overflow:hidden}
+ body{background:#10261e}
+ .world{position:fixed;inset:0 0 auto;height:var(--farm-height);width:100%;min-width:0;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;margin:0;opacity:1}
+ .world>img{object-fit:cover;object-position:center 58%}
+ .world:after{background:linear-gradient(#07170d65,transparent 25%,transparent 80%,#10261e55);box-shadow:none}
+ .mochi{display:block;position:fixed;left:52%;top:calc(var(--farm-height) - 14px);width:clamp(86px,25vw,118px);z-index:3}
+ .mochi .bubble{max-width:min(280px,78vw);max-height:100px;overflow:auto;padding:9px 12px;font-size:13px;line-height:1.4;bottom:calc(100% + 6px)}
+ .variable-tag,.area-card{display:block!important;position:fixed;z-index:4;left:17%;top:calc(var(--farm-height) - 65px);max-width:32vw;font-size:10px;padding:7px 9px;transform:translate(-30%,-50%)}
+ .variable-tag[hidden],.area-card[hidden]{display:none!important}
+ .variable-tag span{max-height:70px;overflow:auto}
+ .area-card b{font-size:21px}
+ .hud{position:fixed;inset:var(--farm-height) 0 auto;height:calc(var(--lesson-height) - var(--farm-height));min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px 14px max(18px,env(safe-area-inset-bottom));overflow:auto;overscroll-behavior:contain;background:#10261e;border-top:1px solid #d4dfb946;border-radius:20px 20px 0 0;z-index:5;scroll-padding:12px}
+ .phone-hero,.mini-mochi{display:none}
+ .lesson-panel,.code-panel{width:100%;max-width:none;max-height:none;flex:none;margin:0}
+ .lesson-panel{padding:0;border:0;box-shadow:none;background:none;backdrop-filter:none;overflow:visible}
+ .lesson-top{position:fixed;top:8px;left:12px;right:12px;z-index:6;justify-content:space-between;gap:8px;min-height:44px}
+ .lesson-top>.eyebrow{padding:8px 10px;border:1px solid #ffffff25;border-radius:20px;background:#0e291ee8;backdrop-filter:blur(12px);font-size:8px;letter-spacing:.4px;max-width:48%}
+ .lesson-tools{gap:6px}
+ .chapters-link,.lang-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:8px 12px;background:#0e291ee8;font-size:11px;letter-spacing:0;backdrop-filter:blur(12px)}
+ .step-line{margin:0 0 10px;min-height:24px}
+ .step-badge{font-size:10px}.dots{gap:7px}.dots button{width:24px;height:24px;font-size:10px}
+ h1{font-size:23px;margin:0 0 10px}
+ .task{padding:10px 12px}.task p{font-size:13px;line-height:1.5}.task>span{font-size:9px}
+ .notes{margin:0 0 10px}
+ .notes>summary{display:list-item;cursor:pointer;color:#ddc78c;font-size:12px;padding:6px 0;min-height:32px}
+ .notes:not([open])>.idea{display:none}
+ .notes .idea{font-size:13px;line-height:1.6;margin:7px 0 0}
+ .example{margin:8px 0 0;padding-top:8px;font-size:12px}.example summary{min-height:32px}
+ .lesson-actions{margin-top:7px}.lesson-actions button{min-height:44px;font-size:11px}
+ .code-panel{border-radius:16px;background:#0a1c15;box-shadow:none}
+ .code-head{padding:8px 11px;font-size:9px}
+ .code-body{padding:10px}
+ #code{min-height:100px;height:112px;max-height:200px;font-size:16px;line-height:1.45;padding:10px;resize:vertical}
+ .code-body>label{font-size:10px}
+ #run,#clear{min-height:44px;font-size:13px}
+ .output-head{margin-top:10px;font-size:10px}
+ #output{min-height:40px;max-height:85px;font-size:13px;padding:8px 10px}
+ .code-foot{display:none}.save-state{font-size:10px;line-height:1.5}
+ .success{padding:10px;margin-top:10px}.success p{font-size:12px}.success button{min-height:44px;font-size:13px}
+ .hint,.feedback,.error{font-size:12px}
+ .complete-card{max-height:calc(var(--lesson-height) - 30px);overflow:auto}
+ #tour-card{max-height:calc(var(--lesson-height) - 24px)}
+}
+@media(max-width:680px){
+ /* Keep the task and editor together; supporting material follows below. */
+ .lesson-panel{display:contents}
+ .lesson-top{order:0}
+ .step-line{order:1;margin:0}
+ #stepTitle{order:2;margin:0}
+ .task{order:3}
+ .success{order:4;margin:0}
+ .code-panel{order:5}
+ .notes{order:6;margin:0}
+ .example{order:7;margin:0}
+ .lesson-actions{order:8;margin:0}
+ .hint{order:9;margin:0}
+ .feedback{order:4;margin:0}
+}
+@media(max-width:680px){
+ .code-panel,.code-body{overflow:visible}
+ .code-actions{position:sticky;bottom:0;z-index:2;margin-top:0;padding:8px 0;background:#0a1c15}
+}
