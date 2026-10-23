@@ -687,3 +687,6 @@ Added owner-requested phone farm grid: subtle square lines plus gold current doo
 
 ### Manual publishing only — 2026-10-23 — LATEST
 Owner explicitly requested continuing to commit/push edits on the same branch without publishing until told. Removed the push-to-main deployment trigger from .github/workflows/pages.yml, retaining workflow_dispatch for explicit future publication. Recorded the standing instruction in AGENTS.md. Pushes now save code without starting Pages deployment. Existing live version stays at grid release a6fb0e5 until a manual deployment is requested.
+
+### Colorful countable farm squares — 2026-10-23 — LATEST
+Owner requested real colorful squares so learners can count steps. Replaced thin phone lattice with 3×4 distinct colored tiles, highlighted starting square 0 and center-column distance labels 1–3, plus English/Arabic 1 square = 1 step legend. Ground patch remains anchored to the cottage/Mochi position; no movement behavior added. Browser 320×667,390×720,430×844: five programs, feedback and completion pass; desktop1440×1000 pixel-identical. Public asset/diff checks pass. Commit and push only; no manual workflow dispatched and Pages remains workflow_dispatch-only. Live version stays unchanged until owner asks to publish.

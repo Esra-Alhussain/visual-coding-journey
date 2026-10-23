@@ -211,3 +211,6 @@ Phone Mochi is anchored to the path immediately in front of the cottage door usi
 
 ### Phone farm square grid — 2026-10-23
 Owner requested a square grid to make character positioning clear. Phone scene now has a subtle, noninteractive square lattice scaled with the artwork and a gold doorway/current-position cell around Mochi's feet. The grid aligns with the same image-relative placement anchor and resizes with the scene. Desktop remains unchanged. This is position guidance; no movement commands, clickable destinations or lesson validation changes are introduced.
+
+### Countable colored phone tiles — 2026-10-23
+Replace faint full-scene lattice with a 3-column × 4-row patch of separate sage, sand, aqua and clay square tiles, with bright edges and inset depth. Gold doorway tile is the current reference (0); center-column 1–3 labels demonstrate square distances. English/Arabic legend: 1 square = 1 step. Tiles remain decorative position guidance; no movement commands or new lesson validation. Desktop unchanged. Owner requested commit/push only; manual publishing policy remains in force.
