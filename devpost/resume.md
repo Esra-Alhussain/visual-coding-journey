@@ -681,3 +681,6 @@ Pushed c5acc4e to main. GitHub Actions workflow “Deploy prototype to GitHub Pa
 
 ### Correct phone Mochi position — 2026-10-23
 Owner's live screenshot showed Mochi by the bridge rather than the cottage door. Replaced screen-relative phone positioning with art-relative door/path coordinates, accounting for cover scaling and horizontal crop on load/resize. Reduced character size to match the cottage and placed speech beside the character. Scene uses top-centered crop to retain doorway visibility at short viewport heights. Chromium 320×667, 390×720, 430×844: all five activities and visual feedback pass; 1440×1000 desktop pixel-identical. Source/public rebuilt; public asset/diff checks pass. Publishing position correction; deployment result pending.
+
+### Phone square grid — 2026-10-23
+Added owner-requested phone farm grid: subtle square lines plus gold current doorway cell, aligned to the image-relative Mochi anchor and scaled with the art. Pointer events disabled so the grid cannot obstruct lesson controls. No movement/curriculum behavior changes. Source/public build updated; Chromium 320×667,390×720,430×844 completes all five programs and feedback, desktop1440×1000 pixel-identical, public assets and diff whitespace checks pass. Publishing grid update. Previous doorway placement deployment fee5dd4 succeeded in Pages run39946033275.

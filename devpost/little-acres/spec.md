@@ -208,3 +208,6 @@ Phone widths <=680px use a fixed farm/Mochi scene over a separately scrolling ta
 
 ### Phone Mochi doorway anchor — 2026-10-23
 Phone Mochi is anchored to the path immediately in front of the cottage door using source-art coordinates and the actual object-fit:cover scale/crop, instead of a fixed screen-center/bottom position. Recomputed on image load and scene resize, including visible-viewport changes. Speech appears beside Mochi so it does not cover the top tools. Desktop unchanged.
+
+### Phone farm square grid — 2026-10-23
+Owner requested a square grid to make character positioning clear. Phone scene now has a subtle, noninteractive square lattice scaled with the artwork and a gold doorway/current-position cell around Mochi's feet. The grid aligns with the same image-relative placement anchor and resizes with the scene. Desktop remains unchanged. This is position guidance; no movement commands, clickable destinations or lesson validation changes are introduced.

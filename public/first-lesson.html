@@ -256,11 +256,12 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   body.focus-mode .mochi{left:50%}
 }
 </style>
-<link rel="stylesheet" href="lesson-phone.css?v=20261023-door">
+<link rel="stylesheet" href="lesson-phone.css?v=20261023-grid">
 </head>
 <body>
 <div class="world" aria-hidden="true">
   <img src="art/restoration-shell-1600.webp" alt="">
+  <div class="farm-square-grid"><div class="farm-position-cell"></div></div>
 </div>
 <div class="mochi" aria-hidden="true">
   <div class="bubble hidden" id="bubble"></div>
@@ -1006,7 +1007,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
  function placeMochi() {
   const root = document.documentElement.style;
   if (!phone.matches) {
-   ['--mochi-x','--mochi-y','--mochi-size'].forEach(name => root.removeProperty(name));
+   ['--mochi-x','--mochi-y','--mochi-size','--farm-grid-size'].forEach(name => root.removeProperty(name));
    return;
   }
   if (!artwork.naturalWidth || !artwork.naturalHeight) return;
@@ -1017,6 +1018,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   // Feet on the path immediately in front of the cottage door, in image coordinates.
   root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .63}px`);
   root.setProperty('--mochi-y', `${r.top + drawnHeight * .42}px`);
+  root.setProperty('--farm-grid-size', `${160 * scale}px`);
   root.setProperty('--mochi-size', `${Math.max(52, Math.min(84, r.height * .22))}px`);
  }
  artwork.addEventListener('load', placeMochi);

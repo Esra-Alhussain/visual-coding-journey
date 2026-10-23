@@ -69,3 +69,10 @@
  .mochi .bubble{left:auto;right:calc(100% + 8px);bottom:15%;transform:none;max-width:min(210px,calc(var(--mochi-x) - var(--mochi-size) / 2 - 18px));max-height:100px}
  .mochi .bubble:after{left:auto;right:-6px;bottom:20px;transform:rotate(-45deg)}
 }
+
+/* Grid uses the artwork scale, with Mochi's doorway cell as its reference. */
+.farm-square-grid{display:none}
+@media(max-width:680px){
+ .farm-square-grid{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;--grid-origin-x:calc(var(--mochi-x) - var(--farm-grid-size) / 2);--grid-origin-y:calc(var(--mochi-y) - var(--farm-grid-size) / 2);background-image:linear-gradient(to right,#fff4cf55 1px,transparent 1px),linear-gradient(to bottom,#fff4cf55 1px,transparent 1px);background-size:var(--farm-grid-size) var(--farm-grid-size);background-position:var(--grid-origin-x) var(--grid-origin-y)}
+ .farm-position-cell{position:absolute;left:var(--grid-origin-x);top:var(--grid-origin-y);width:var(--farm-grid-size);height:var(--farm-grid-size);border:2px solid #ffe294;background:#f5d37638;box-shadow:0 0 0 1px #354b3399,0 0 18px #ffdf7a45}
+}
