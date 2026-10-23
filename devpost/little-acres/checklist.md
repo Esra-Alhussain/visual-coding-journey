@@ -285,4 +285,4 @@ The approved right-rail lesson was still black on a cold live load because the s
 - [x] Apply approved farm-first phone lesson to source/public build.
 - [x] Chromium 320×667, 390×720, 430×844: all five programs, visible speech/variable/area feedback and completion, no horizontal overflow or JS errors.
 - [x] Desktop 1440×1000 screenshot pixel-identical; public asset check passes.
-- [ ] Confirm deployed live lesson contains the new stylesheet after push.
+- [x] GitHub Pages deployment for c5acc4e succeeded (run 39944639359). Direct live-page inspection remains blocked by cloud network HTTP 403.
