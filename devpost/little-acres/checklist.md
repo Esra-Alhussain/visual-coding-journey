@@ -286,3 +286,13 @@ The approved right-rail lesson was still black on a cold live load because the s
 - [x] Chromium 320×667, 390×720, 430×844: all five programs, visible speech/variable/area feedback and completion, no horizontal overflow or JS errors.
 - [x] Desktop 1440×1000 screenshot pixel-identical; public asset check passes.
 - [x] GitHub Pages deployment for c5acc4e succeeded (run 39944639359). Direct live-page inspection remains blocked by cloud network HTTP 403.
+
+### Real bridge-to-door movement — 2026-10-23
+- [x] Restore original dirt/grass image; remove rejected colorful ground asset.
+- [x] Bridge start, eight countable steps, door destination; actual code-driven movement.
+- [x] Safe bounded command parser; no eval or arbitrary Python execution.
+- [x] Partial moves, invalid/overshoot rejection, stop, reset cancellation and arrival handoff.
+- [x] English/Arabic UI and reduced 390×320 viewport positioning.
+- [x] Browser320×667/390×720/430×844: movement then all five original lesson activities complete without JS errors.
+- [x] Desktop1440×1000 pixel-identical; public asset check and parser checks pass.
+- [x] Keep publishing manual-only; commit/push without deployment.

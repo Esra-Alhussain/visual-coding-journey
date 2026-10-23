@@ -5,7 +5,7 @@
  html,body{height:var(--lesson-height);min-height:0;overflow:hidden}
  body{background:#10261e}
  .world{position:fixed;inset:0 0 auto;height:var(--farm-height);width:100%;min-width:0;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;margin:0;opacity:1}
- .world img{object-fit:cover;object-position:center top}
+ .world img{object-fit:cover;object-position:center var(--farm-art-top,0px)}
  .world:after{background:linear-gradient(#07170d65,transparent 25%,transparent 80%,#10261e55);box-shadow:none}
  .mochi{display:block;position:fixed;left:var(--mochi-x,65%);top:var(--mochi-y,42%);width:var(--mochi-size,70px);z-index:3}
  .mochi .bubble{max-width:min(280px,78vw);max-height:100px;overflow:auto;padding:9px 12px;font-size:13px;line-height:1.4;bottom:calc(100% + 6px)}
@@ -70,3 +70,35 @@
  .mochi .bubble{left:auto;right:calc(100% + 8px);bottom:15%;transform:none;max-width:min(210px,calc(var(--mochi-x) - var(--mochi-size) / 2 - 18px));max-height:100px}
  .mochi .bubble:after{left:auto;right:-6px;bottom:20px;transform:rotate(-45deg)}
 }
+
+/* A movement guide above the untouched dirt/grass, not new ground artwork. */
+.walk-workspace,.walk-grid{display:none}
+@media(max-width:680px){
+ .walk-active .hud{visibility:hidden;pointer-events:none}
+ .walk-active .walk-workspace{display:flex;position:fixed;inset:var(--farm-height) 0 auto;height:calc(var(--lesson-height) - var(--farm-height));z-index:7;overflow:auto;flex-direction:column;gap:11px;padding:16px 14px max(20px,env(safe-area-inset-bottom));border-radius:20px 20px 0 0;background:#10261e;border-top:1px solid #f0dca84d}
+ .walk-workspace[hidden]{display:none}
+ .walk-tools{position:fixed;right:12px;top:8px;display:flex;gap:6px}
+ .walk-tools a{color:inherit;text-decoration:none}
+ .walk-heading{display:flex;justify-content:space-between;gap:12px;color:#d9c38d;font-size:10px;font-weight:750;letter-spacing:.5px}
+ #walkCount{direction:ltr;white-space:nowrap}
+ .walk-workspace h1{margin:0;font-size:24px}
+ #walkTask,#walkFeedback,.walk-help p{font-size:13px;line-height:1.55;margin:0;color:#c8d8be}
+ .walk-workspace label{font-size:11px;font-weight:750;color:#d7e6ce}
+ #walkCode{width:100%;height:90px;min-height:90px;resize:vertical;flex:none;border:1px solid #527b5b;border-radius:12px;background:#091910;color:#e7f2df;padding:10px;font:16px/1.5 var(--mono);tab-size:2}
+ .walk-help{color:#e6cd92;font-size:12px}.walk-help summary{min-height:32px;cursor:pointer}.walk-help code{display:block;direction:ltr;margin-top:8px;color:#ffe6a9}
+ .walk-actions{display:flex;gap:8px;position:sticky;bottom:0;background:#10261e;padding:5px 0}
+ .walk-actions button,#walkContinue{min-height:44px;border:1px solid #ffffff35;border-radius:11px;padding:10px 14px;background:#ffffff0b;font-size:12px;font-weight:700}
+ #walkRun,#walkContinue{background:#edc373;color:#273020;flex:1;border-color:#f6dda6}
+ #walkContinue[hidden]{display:none}
+ .walk-actions button:disabled{opacity:.45;cursor:default}
+ #walkFeedback.walk-error{color:#ffc6b2}
+ .walk-active .walk-grid{display:block;position:absolute;z-index:3;pointer-events:none;left:var(--farm-art-left);top:var(--farm-art-top,0px);width:var(--farm-art-width);height:var(--farm-art-height)}
+ .walk-grid polygon{fill:#fff9de0f;stroke:#fff0cb;stroke-width:3;stroke-linejoin:round}
+ .walk-grid text{fill:#fffae6;font:700 27px var(--font);text-anchor:middle;paint-order:stroke;stroke:#2d3f32;stroke-width:4}
+ .walk-grid .goal polygon{fill:#bada762e;stroke:#cceba3;stroke-width:4}
+ .walk-grid .visited polygon{fill:#b5d8a22e;stroke:#bfd9a5}
+ .walk-grid .current polygon{fill:#edc36c36;stroke:#ffe5a1;stroke-width:5}
+ .walk-active .mochi{width:calc(var(--mochi-size) * .8)}
+ .walk-running .mochi{transition:left .42s ease,top .42s ease}
+}
+@media(prefers-reduced-motion:reduce){.walk-running .mochi{transition:none}}

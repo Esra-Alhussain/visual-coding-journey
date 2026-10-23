@@ -1,0 +1,15 @@
+const assert = require('node:assert/strict');
+const {parse,route} = require('./phone-walk.js');
+assert.equal(route.length,9);
+assert.equal(new Set(route.map(p=>p.join(','))).size,9);
+assert.deepEqual(parse('move(2)\nmove(6)'),{steps:8});
+assert.deepEqual(parse('# walk\r\nmove( 3 ) # three\nmove(1)',2),{steps:4});
+assert.deepEqual(parse('move(3)',6),{error:'bounds',remaining:2});
+assert.deepEqual(parse('move(2)\nalert(1)'),{error:'syntax',line:2});
+for(const code of ['move(0)','move(-1)','move(9)','move(1.5)','move("2")','Move(2)','move(1); alert(1)','while True:','__proto__(1)','move(1)\nmove(8)'])assert.ok(parse(code).error,code);
+assert.equal(parse('').error,'empty');
+assert.equal(parse('# comment').error,'empty');
+assert.equal(parse('move(1)\n'.repeat(17)).error,'long');
+assert.deepEqual(parse('move(1)',7),{steps:1});
+assert.deepEqual(parse('move(1)',8),{error:'bounds',remaining:0});
+console.log('PASS: bridge/door route, multi-line moves, comments, remaining-distance bounds and atomic rejection of unsafe/invalid code.');
