@@ -217,3 +217,6 @@ Replace faint full-scene lattice with a 3-column × 4-row patch of separate sage
 
 ### Ground-integrated paving — 2026-10-23
 Owner rejected the flat tile-board overlay and clarified squares must be inside the farm. Replace it with muted colored paving polygons on the courtyard/path plane, with perspective, narrow mortar, highlights and shallow edge shadows. Geometry is in the illustration's 1600×1067 coordinate space and uses the same cover scale/crop as the scene; foreground gate pieces mask the paving. Remove the floating grid badge/board. Keep small distance markings on the center paving stones. Decorative guidance only; no movement rules or curriculum changes. Commit/push only.
+
+### Whole-ground integrated squares — 2026-10-23
+Owner clarified paving must fit the whole farm ground. Replace the vector patch with edited background artwork whose continuous colored square paving follows courtyard/paths, perspective, ground boundaries and object occlusion. Water, bridge, raised-bed soil, cottage and fences retain their functions/placement. Phone picture source uses art/farm-ground-squares.webp; original art remains the desktop fallback. Removed SVG overlay and its unused positioning variables. Existing Mochi image-relative doorway anchor remains. Tiles are visual guidance; movement commands remain unimplemented. Publish only on explicit owner request.

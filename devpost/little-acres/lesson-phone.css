@@ -1,10 +1,11 @@
+.farm-artwork{display:contents}
 /* Approved phone scene layout; preserve the existing desktop right rail. */
 @media(max-width:680px){
  :root{--lesson-height:100dvh;--farm-height:clamp(150px,calc(var(--lesson-height) * .46),410px)}
  html,body{height:var(--lesson-height);min-height:0;overflow:hidden}
  body{background:#10261e}
  .world{position:fixed;inset:0 0 auto;height:var(--farm-height);width:100%;min-width:0;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;margin:0;opacity:1}
- .world>img{object-fit:cover;object-position:center top}
+ .world img{object-fit:cover;object-position:center top}
  .world:after{background:linear-gradient(#07170d65,transparent 25%,transparent 80%,#10261e55);box-shadow:none}
  .mochi{display:block;position:fixed;left:var(--mochi-x,65%);top:var(--mochi-y,42%);width:var(--mochi-size,70px);z-index:3}
  .mochi .bubble{max-width:min(280px,78vw);max-height:100px;overflow:auto;padding:9px 12px;font-size:13px;line-height:1.4;bottom:calc(100% + 6px)}
@@ -68,11 +69,4 @@
  /* Keep the speech beside Mochi so it does not cover the phone header. */
  .mochi .bubble{left:auto;right:calc(100% + 8px);bottom:15%;transform:none;max-width:min(210px,calc(var(--mochi-x) - var(--mochi-size) / 2 - 18px));max-height:100px}
  .mochi .bubble:after{left:auto;right:-6px;bottom:20px;transform:rotate(-45deg)}
-}
-
-/* Paving stones follow the illustrated ground plane and image crop. */
-.farm-square-grid{display:none}
-@media(max-width:680px){
- .farm-square-grid{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:multiply}
- .farm-ground-tiles{position:absolute;left:var(--farm-art-left);top:0;width:var(--farm-art-width);height:var(--farm-art-height);opacity:.9}
 }

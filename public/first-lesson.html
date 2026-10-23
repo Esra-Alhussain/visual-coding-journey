@@ -23,7 +23,7 @@ body{margin:0;background:#071009;color:var(--ink);font-family:var(--font);-webki
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid #ffe6a6;outline-offset:2px}
 .world{position:fixed;inset:0;overflow:hidden;z-index:0}
-.world>img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.world img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .world:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 30%,rgba(3,9,6,.66) 100%),linear-gradient(180deg,rgba(3,9,6,.7),transparent 30%,transparent 70%,rgba(3,9,6,.8))}
 .mochi{position:absolute;left:50%;top:76%;width:clamp(105px,12vw,170px);transform:translate(-50%,-100%);z-index:2;pointer-events:none}
 .mochi img{width:100%;height:auto;filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));animation:bob 3.2s ease-in-out infinite}
@@ -227,7 +227,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   :root{--dock-h:300px}
   .world{top:12px;right:12px;bottom:calc(var(--dock-h,300px) + 24px);left:12px;border-radius:18px;overflow:hidden;background:#071009;transition:bottom .2s ease}
   .world:before{content:"";position:absolute;inset:-24px;z-index:0;background:url("art/restoration-shell-1600.webp") center/cover;filter:blur(14px) brightness(.44) saturate(.8);transform:scale(1.04)}
-  .world>img{position:relative;z-index:1;object-fit:contain}
+  .world img{position:relative;z-index:1;object-fit:contain}
   .world:after{z-index:2}
   body.focus-mode .world{bottom:12px}
   body.focus-mode .mochi{top:calc(50% + 24px)}
@@ -237,7 +237,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 <style id="lesson-rail-layout">
 @media(min-width:1101px){
   .world{top:12px;left:12px;right:404px;bottom:12px;border-radius:18px;overflow:hidden}
-  .world>img{object-fit:contain}
+  .world img{object-fit:contain}
   .world:before{filter:blur(12px) brightness(.45)}
   .lesson-dock{position:fixed;z-index:6;top:12px;right:12px;bottom:12px;left:auto;width:380px;height:auto;display:flex;flex-direction:column;gap:10px}
   .dock-resize{display:none}
@@ -256,12 +256,12 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   body.focus-mode .mochi{left:50%}
 }
 </style>
-<link rel="stylesheet" href="lesson-phone.css?v=20261023-ground">
+<link rel="stylesheet" href="lesson-phone.css?v=20261023-fullground">
 </head>
 <body>
 <div class="world" aria-hidden="true">
-  <img src="art/restoration-shell-1600.webp" alt="">
-  <div class="farm-square-grid"><svg class="farm-ground-tiles" viewBox="0 0 1600 1067" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><mask id="paving-ground-only"><rect width="1600" height="1067" fill="white"/><path d="M742 432 L830 422 1015 476 1002 502 832 449 752 460Z M718 485 L771 495 784 639 723 648Z M958 540 L1013 551 1029 718 970 705Z" fill="black"/></mask></defs><g mask="url(#paving-ground-only)"><polygon points="871.4,398.2 971.0,417.0 939.6,460.6 833.8,438.4" fill="#4a4230" opacity=".48"/><polygon points="871.4,393.2 971.0,412.0 939.6,455.6 833.8,433.4" fill="#a7ac78" stroke="#eee1ba" stroke-width="2.5"/><path d="M 880.4 398.2 L 963.0 417.0" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="978.5,418.4 1078.1,437.2 1053.4,484.6 947.6,462.3" fill="#4a4230" opacity=".48"/><polygon points="978.5,413.4 1078.1,432.2 1053.4,479.6 947.6,457.3" fill="#e0bd75" stroke="#eee1ba" stroke-width="2.5"/><path d="M 987.5 418.4 L 1070.1 437.2" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="1085.6,438.6 1185.2,457.5 1167.1,508.5 1061.3,486.2" fill="#4a4230" opacity=".48"/><polygon points="1085.6,433.6 1185.2,452.5 1167.1,503.5 1061.3,481.2" fill="#8ca9a1" stroke="#eee1ba" stroke-width="2.5"/><path d="M 1094.6 438.6 L 1177.2 457.5" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="829.2,443.3 935.7,466.0 904.3,509.6 791.6,483.5" fill="#4a4230" opacity=".48"/><polygon points="829.2,438.3 935.7,461.0 904.3,504.6 791.6,478.5" fill="#d1ae73" stroke="#eee1ba" stroke-width="2.5"/><path d="M 838.2 443.3 L 927.7 466.0" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="943.8,467.7 1050.3,490.4 1025.6,537.7 912.8,511.6" fill="#4a4230" opacity=".48"/><polygon points="943.8,462.7 1050.3,485.4 1025.6,532.7 912.8,506.6" fill="#8ca9a1" stroke="#eee1ba" stroke-width="2.5"/><path d="M 952.8 467.7 L 1042.3 490.4" stroke="#f8ebce" stroke-width="3" opacity=".45"/><text x="983.1" y="503.9" text-anchor="middle" fill="#4b5038" font-size="24" font-weight="700" transform="rotate(15 983.1 496.9)">1</text><polygon points="1058.3,492.1 1164.9,514.8 1146.9,565.9 1034.1,539.7" fill="#4a4230" opacity=".48"/><polygon points="1058.3,487.1 1164.9,509.8 1146.9,560.9 1034.1,534.7" fill="#c39476" stroke="#eee1ba" stroke-width="2.5"/><path d="M 1067.3 492.1 L 1156.9 514.8" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="786.9,488.5 900.5,515.0 869.1,558.7 749.3,528.7" fill="#4a4230" opacity=".48"/><polygon points="786.9,483.5 900.5,510.0 869.1,553.7 749.3,523.7" fill="#8ca9a1" stroke="#eee1ba" stroke-width="2.5"/><path d="M 795.9 488.5 L 892.5 515.0" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="909.0,517.0 1022.5,543.6 997.8,590.9 878.1,560.9" fill="#4a4230" opacity=".48"/><polygon points="909.0,512.0 1022.5,538.6 997.8,585.9 878.1,555.9" fill="#c39476" stroke="#eee1ba" stroke-width="2.5"/><path d="M 918.0 517.0 L 1014.5 543.6" stroke="#f8ebce" stroke-width="3" opacity=".45"/><text x="951.9" y="555.1" text-anchor="middle" fill="#4b5038" font-size="24" font-weight="700" transform="rotate(15 951.9 548.1)">2</text><polygon points="1031.1,545.6 1144.6,572.2 1126.6,623.2 1006.9,593.2" fill="#4a4230" opacity=".48"/><polygon points="1031.1,540.6 1144.6,567.2 1126.6,618.2 1006.9,588.2" fill="#a7ac78" stroke="#eee1ba" stroke-width="2.5"/><path d="M 1040.1 545.6 L 1136.6 572.2" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="744.7,533.6 865.2,564.1 833.8,607.7 707.1,573.8" fill="#4a4230" opacity=".48"/><polygon points="744.7,528.6 865.2,559.1 833.8,602.7 707.1,568.8" fill="#c39476" stroke="#eee1ba" stroke-width="2.5"/><path d="M 753.7 533.6 L 857.2 564.1" stroke="#f8ebce" stroke-width="3" opacity=".45"/><polygon points="874.3,566.3 994.8,596.8 970.1,644.1 843.4,610.2" fill="#4a4230" opacity=".48"/><polygon points="874.3,561.3 994.8,591.8 970.1,639.1 843.4,605.2" fill="#a7ac78" stroke="#eee1ba" stroke-width="2.5"/><path d="M 883.3 566.3 L 986.8 596.8" stroke="#f8ebce" stroke-width="3" opacity=".45"/><text x="920.6" y="606.4" text-anchor="middle" fill="#4b5038" font-size="24" font-weight="700" transform="rotate(15 920.6 599.4)">3</text><polygon points="1003.9,599.1 1124.4,629.5 1106.3,680.6 979.6,646.7" fill="#4a4230" opacity=".48"/><polygon points="1003.9,594.1 1124.4,624.5 1106.3,675.6 979.6,641.7" fill="#d1ae73" stroke="#eee1ba" stroke-width="2.5"/><path d="M 1012.9 599.1 L 1116.4 629.5" stroke="#f8ebce" stroke-width="3" opacity=".45"/></g></svg></div>
+  <picture class="farm-artwork"><source media="(max-width:680px)" srcset="art/farm-ground-squares.webp"><img src="art/restoration-shell-1600.webp" alt=""></picture>
+
 </div>
 <div class="mochi" aria-hidden="true">
   <div class="bubble hidden" id="bubble"></div>
@@ -1007,7 +1007,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
  function placeMochi() {
   const root = document.documentElement.style;
   if (!phone.matches) {
-   ['--mochi-x','--mochi-y','--mochi-size','--farm-grid-size','--farm-art-width','--farm-art-height','--farm-art-left'].forEach(name => root.removeProperty(name));
+   ['--mochi-x','--mochi-y','--mochi-size'].forEach(name => root.removeProperty(name));
    return;
   }
   if (!artwork.naturalWidth || !artwork.naturalHeight) return;
@@ -1018,10 +1018,6 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   // Feet on the path immediately in front of the cottage door, in image coordinates.
   root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .63}px`);
   root.setProperty('--mochi-y', `${r.top + drawnHeight * .42}px`);
-  root.setProperty('--farm-art-width', `${drawnWidth}px`);
-  root.setProperty('--farm-art-height', `${drawnHeight}px`);
-  root.setProperty('--farm-art-left', `${(r.width - drawnWidth) / 2}px`);
-  root.setProperty('--farm-grid-size', `${160 * scale}px`);
   root.setProperty('--mochi-size', `${Math.max(52, Math.min(84, r.height * .22))}px`);
  }
  artwork.addEventListener('load', placeMochi);
