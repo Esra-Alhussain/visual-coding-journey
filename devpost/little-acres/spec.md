@@ -214,3 +214,6 @@ Owner requested a square grid to make character positioning clear. Phone scene n
 
 ### Countable colored phone tiles — 2026-10-23
 Replace faint full-scene lattice with a 3-column × 4-row patch of separate sage, sand, aqua and clay square tiles, with bright edges and inset depth. Gold doorway tile is the current reference (0); center-column 1–3 labels demonstrate square distances. English/Arabic legend: 1 square = 1 step. Tiles remain decorative position guidance; no movement commands or new lesson validation. Desktop unchanged. Owner requested commit/push only; manual publishing policy remains in force.
+
+### Ground-integrated paving — 2026-10-23
+Owner rejected the flat tile-board overlay and clarified squares must be inside the farm. Replace it with muted colored paving polygons on the courtyard/path plane, with perspective, narrow mortar, highlights and shallow edge shadows. Geometry is in the illustration's 1600×1067 coordinate space and uses the same cover scale/crop as the scene; foreground gate pieces mask the paving. Remove the floating grid badge/board. Keep small distance markings on the center paving stones. Decorative guidance only; no movement rules or curriculum changes. Commit/push only.

@@ -70,14 +70,9 @@
  .mochi .bubble:after{left:auto;right:-6px;bottom:20px;transform:rotate(-45deg)}
 }
 
-/* Countable colored ground tiles; anchored to Mochi's doorway square. */
+/* Paving stones follow the illustrated ground plane and image crop. */
 .farm-square-grid{display:none}
 @media(max-width:680px){
- .farm-square-grid{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;--tile:var(--farm-grid-size);--grid-origin-x:calc(var(--mochi-x) - var(--tile) * 1.5);--grid-origin-y:calc(var(--mochi-y) - var(--tile) / 2)}
- .farm-tiles{position:absolute;left:var(--grid-origin-x);top:var(--grid-origin-y);display:grid;grid-template-columns:repeat(3,var(--tile));grid-template-rows:repeat(4,var(--tile));gap:0}
- .farm-tile{position:relative;display:flex;align-items:center;justify-content:center;border:2px solid #fff5d985;border-radius:6px;box-shadow:inset 0 3px 0 #ffffff45,inset 0 -4px 0 #19372d55,0 2px 3px #102d3038;font-size:clamp(13px,4vw,20px);font-weight:850;color:#fffbe8;text-shadow:0 1px 4px #12352c;line-height:1;backdrop-filter:saturate(1.15)}
- .farm-tile.sage{background:#6eaa64a6}.farm-tile.sand{background:#e4b357a6}.farm-tile.aqua{background:#4daaa5a6}.farm-tile.clay{background:#d48669a6}
- .farm-tile.current{background:#f8d66dcc;border:3px solid #fff2ac;box-shadow:inset 0 -4px 0 #ac7f3780,0 0 16px #ffe39499;align-items:flex-end;padding-bottom:4px;color:#3c391c;text-shadow:none}
- .farm-grid-legend{position:absolute;left:12px;bottom:12px;z-index:1;padding:7px 11px;border:1px solid #f3dc9c77;border-radius:10px;background:#163a2fe8;color:#ffe8a6;font-size:11px;font-weight:750;box-shadow:0 3px 10px #10231d33}
- .grid-ar{display:none}html[lang=ar] .grid-en{display:none}html[lang=ar] .grid-ar{display:inline}
+ .farm-square-grid{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:multiply}
+ .farm-ground-tiles{position:absolute;left:var(--farm-art-left);top:0;width:var(--farm-art-width);height:var(--farm-art-height);opacity:.9}
 }
