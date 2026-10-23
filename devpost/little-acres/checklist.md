@@ -296,3 +296,6 @@ The approved right-rail lesson was still black on a cold live load because the s
 - [x] Browser320×667/390×720/430×844: movement then all five original lesson activities complete without JS errors.
 - [x] Desktop1440×1000 pixel-identical; public asset check and parser checks pass.
 - [x] Keep publishing manual-only; commit/push without deployment.
+
+### Owner correction: grid only — 2026-10-23
+The earlier movement checklist is superseded. Removed all arrival/movement functionality; retained only visible square lines over original farm. Existing five-step lesson verified at 320×667/390×720/430×844 and desktop1440×1000; source/public match and public asset checks pass. Publication remains manual-only.

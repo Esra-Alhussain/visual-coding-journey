@@ -23,7 +23,7 @@ body{margin:0;background:#071009;color:var(--ink);font-family:var(--font);-webki
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid #ffe6a6;outline-offset:2px}
 .world{position:fixed;inset:0;overflow:hidden;z-index:0}
-.world img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.world>img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .world:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 30%,rgba(3,9,6,.66) 100%),linear-gradient(180deg,rgba(3,9,6,.7),transparent 30%,transparent 70%,rgba(3,9,6,.8))}
 .mochi{position:absolute;left:50%;top:76%;width:clamp(105px,12vw,170px);transform:translate(-50%,-100%);z-index:2;pointer-events:none}
 .mochi img{width:100%;height:auto;filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));animation:bob 3.2s ease-in-out infinite}
@@ -227,7 +227,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   :root{--dock-h:300px}
   .world{top:12px;right:12px;bottom:calc(var(--dock-h,300px) + 24px);left:12px;border-radius:18px;overflow:hidden;background:#071009;transition:bottom .2s ease}
   .world:before{content:"";position:absolute;inset:-24px;z-index:0;background:url("art/restoration-shell-1600.webp") center/cover;filter:blur(14px) brightness(.44) saturate(.8);transform:scale(1.04)}
-  .world img{position:relative;z-index:1;object-fit:contain}
+  .world>img{position:relative;z-index:1;object-fit:contain}
   .world:after{z-index:2}
   body.focus-mode .world{bottom:12px}
   body.focus-mode .mochi{top:calc(50% + 24px)}
@@ -237,7 +237,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 <style id="lesson-rail-layout">
 @media(min-width:1101px){
   .world{top:12px;left:12px;right:404px;bottom:12px;border-radius:18px;overflow:hidden}
-  .world img{object-fit:contain}
+  .world>img{object-fit:contain}
   .world:before{filter:blur(12px) brightness(.45)}
   .lesson-dock{position:fixed;z-index:6;top:12px;right:12px;bottom:12px;left:auto;width:380px;height:auto;display:flex;flex-direction:column;gap:10px}
   .dock-resize{display:none}
@@ -256,12 +256,12 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   body.focus-mode .mochi{left:50%}
 }
 </style>
-<link rel="stylesheet" href="lesson-phone.css?v=20261023-walk">
+<link rel="stylesheet" href="lesson-phone.css?v=20261023-gridonly">
 </head>
 <body>
 <div class="world" aria-hidden="true">
   <img src="art/restoration-shell-1600.webp" alt="">
-
+  <div class="farm-square-grid"></div>
 </div>
 <div class="mochi" aria-hidden="true">
   <div class="bubble hidden" id="bubble"></div>
@@ -340,19 +340,6 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   </section>
 </div>
 
-<section class="walk-workspace" id="walkWorkspace" aria-labelledby="walkTitle" hidden>
- <nav class="walk-tools"><a class="chapters-link" href="index.html">Map</a><button type="button" class="lang-btn" id="walkLanguage">العربية</button></nav>
- <div class="walk-heading"><span id="walkEyebrow">BEFORE LESSON 1</span><span id="walkCount" role="status">0 / 8 steps</span></div>
- <h1 id="walkTitle">Walk to the farmhouse</h1>
- <p id="walkTask">Mochi starts at the bridge. Count the outlined squares to the door. One square is one step.</p>
- <label for="walkCode" id="walkLabel">Write your movement code</label>
- <textarea id="walkCode" dir="ltr" spellcheck="false" placeholder="Type your code here…"></textarea>
- <details class="walk-help"><summary id="walkHelp">How to move</summary><p id="walkHint">Use move(1) to advance one square along the path. Change the number to move more steps.</p><code dir="ltr">move(1)</code></details>
- <div class="walk-actions"><button id="walkRun" type="button">Run ▶</button><button id="walkStop" type="button" disabled>Stop</button><button id="walkReset" type="button">Reset</button></div>
- <p id="walkFeedback" role="status"></p>
- <button id="walkContinue" type="button" hidden>Enter the farm · Start Lesson 1 →</button>
-</section>
-<script src="phone-walk.js"></script>
 <script src="supabase-js.js"></script>
 <script src="auth-client.js"></script>
 <script src="chapter-engine.js"></script>
@@ -1008,10 +995,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   loadStep(0);
   restoreProgress()
     .catch(err => console.warn('Progress restore failed', err))
-    .finally(() => {
-      if (window.MochiWalk?.active) window.addEventListener('mochi-walk-finished', () => setTimeout(beginTour, 200), { once: true });
-      else setTimeout(beginTour, 500);
-    });
+    .finally(() => setTimeout(beginTour, 500));
 })();
 </script>
 <script>
@@ -1023,7 +1007,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
  function placeMochi() {
   const root = document.documentElement.style;
   if (!phone.matches) {
-   ['--mochi-x','--mochi-y','--mochi-size','--farm-art-width','--farm-art-height','--farm-art-left','--farm-art-top'].forEach(name => root.removeProperty(name));
+   ['--mochi-x','--mochi-y','--mochi-size','--farm-grid-size'].forEach(name => root.removeProperty(name));
    return;
   }
   if (!artwork.naturalWidth || !artwork.naturalHeight) return;
@@ -1032,17 +1016,11 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   const drawnWidth = artwork.naturalWidth * scale;
   const drawnHeight = artwork.naturalHeight * scale;
   // Feet on the path immediately in front of the cottage door, in image coordinates.
-  const position = window.MochiWalk?.position || { x: .63, y: .36 };
-  const cameraY = window.MochiWalk?.active ? Math.min(0, Math.max(r.height - drawnHeight, r.height - drawnHeight * position.y - 12)) : 0;
-  root.setProperty('--farm-art-top', `${cameraY}px`);
-  root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * position.x}px`);
-  root.setProperty('--mochi-y', `${r.top + cameraY + drawnHeight * position.y}px`);
-  root.setProperty('--farm-art-width', `${drawnWidth}px`);
-  root.setProperty('--farm-art-height', `${drawnHeight}px`);
-  root.setProperty('--farm-art-left', `${(r.width - drawnWidth) / 2}px`);
+  root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .63}px`);
+  root.setProperty('--mochi-y', `${r.top + drawnHeight * .42}px`);
+  root.setProperty('--farm-grid-size', `${160 * scale}px`);
   root.setProperty('--mochi-size', `${Math.max(52, Math.min(84, r.height * .22))}px`);
  }
- window.addEventListener('mochi-walk-position', placeMochi);
  artwork.addEventListener('load', placeMochi);
  new ResizeObserver(placeMochi).observe(scene);
  function fit() {
