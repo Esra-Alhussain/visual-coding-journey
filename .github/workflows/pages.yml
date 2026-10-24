@@ -1,6 +1,8 @@
 name: Deploy prototype to GitHub Pages
 
 on:
+  push:
+    tags: ['publish-20261024-07aab81']
   workflow_dispatch:
 
 permissions:
