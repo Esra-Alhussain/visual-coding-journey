@@ -67,3 +67,11 @@ Last confirmed application deployment: 2cb486a on 2026-10-24, GitHub Pages run 4
 - [x] Chromium gesture-required: first Sound press starts audio; mute/resume works without duplicate loops on both pages.
 - [x] Existing nature regression and public asset checks pass.
 - [ ] Real browser policy may still require a first tap; do not promise universal forced autoplay.
+
+## Outside-gate character placement — 2026-10-24
+- [x] Character on dirt outside the farm entrance gate, not inside the cottage or over water.
+- [x] Correct cover/contain image mapping for phone/desktop and grounded visible feet.
+- [x] Remove floating bob; retain a small ground contact shadow.
+- [x] Browser320×667/390×720/430×844/1440×1000 runs all five lesson activities through completion without JS errors; preview screenshots inspected.
+- [x] Public asset and diff checks pass; scope/PRD/spec updated.
+- [ ] Publish this position change only when explicitly requested.

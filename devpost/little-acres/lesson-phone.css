@@ -75,3 +75,8 @@
 @media(max-width:680px){
  .farm-square-grid{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;--grid-origin-x:calc(var(--mochi-x) - var(--farm-grid-size) / 2);--grid-origin-y:calc(var(--mochi-y) - var(--farm-grid-size) / 2);background-image:linear-gradient(to right,#fff4cf99 1px,transparent 1px),linear-gradient(to bottom,#fff4cf99 1px,transparent 1px);background-size:var(--farm-grid-size) var(--farm-grid-size);background-position:var(--grid-origin-x) var(--grid-origin-y)}
 }
+
+/* Keep Mochi's visible feet on the outside path on desktop and phone. */
+body .mochi,body.focus-mode .mochi{position:fixed;left:var(--mochi-x,50%);top:calc(var(--mochi-y,70%) + var(--mochi-foot-padding,0px));width:var(--mochi-size,100px)}
+body .mochi img{display:block;animation:none;filter:drop-shadow(0 3px 3px #172b2538)}
+body .mochi:after{content:"";position:absolute;left:50%;bottom:calc(var(--mochi-foot-padding,0px) - 3px);transform:translateX(-50%);width:52%;height:8%;border-radius:50%;background:#44341c55;filter:blur(2px);z-index:-1}

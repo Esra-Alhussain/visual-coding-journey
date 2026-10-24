@@ -16,7 +16,7 @@ This current-state summary is reconciled from source, tests and owner decisions.
 - first-lesson.html owns the existing five-activity lesson and bilingual UI; chapter-engine.js is a bounded print/assignment/arithmetic/comment interpreter, not general Python.
 
 ## Phone lesson and grid
-lesson-phone.css supplies the approved farm-first phone split. The original optimized restoration-shell-1600.webp and play-mochi-512.webp remain in use. Image-relative coordinates and ResizeObserver/VisualViewport handling keep Mochi at the doorway as the scene scales. The farm-square-grid is decorative, noninteractive and phone-scoped; its size follows artwork scale. There is no arrival controller, phone-walk.js, route/step parser, numbered movement path or generated paving asset in the active build.
+lesson-phone.css supplies the approved farm-first phone split. The original optimized restoration-shell-1600.webp and play-mochi-512.webp remain in use. Image-relative coordinates and ResizeObserver/VisualViewport handling keep Mochi on the dirt path outside the entrance gate as the scene scales. The farm-square-grid is decorative, noninteractive and phone-scoped; its size follows artwork scale. There is no arrival controller, phone-walk.js, route/step parser, numbered movement path or generated paving asset in the active build.
 
 ## State and services
 Existing lesson state and draft handling remain intact. Guest progress uses browser storage; auth-client.js provides the existing Supabase account/progress bridge with browser-safe public configuration. Do not add private credentials to repository files. OAuth/provider and real-account verification remain separate pending work.
@@ -43,3 +43,6 @@ world-map-living.js now composites animated water only over the static original 
 
 ## Map audio startup — 2026-10-24
 Both map pages attempt playback immediately on load. Desktop retains its preloaded recording bundle; phone player asynchronously fetches the existing bundle at startup, rather than waiting for a gesture. Map controls are mounted first and remain usable while audio decodes. world-map-nature.js v5 tries AudioContext.resume immediately; browsers may require user activation, so trusted pointer/click/key and Sound presses retry then. First press when suspended/pending/failed enables playback rather than muting. Explicit mute, visibility suspend/resume and duplicate-loop prevention remain intact. Phone HUD exposes actual playback state. No browser-policy bypass or claim of guaranteed unprompted sound on every browser.
+
+## Grounded outside-gate character — 2026-10-24
+Use the same image-space ground point (54% across,70% down) on phone and desktop. Placement respects object-fit cover on phones, contain/letterboxing on desktop, and focus-mode scene resizing. Apply the sprite’s 13px bottom transparency correction at rendered scale, disable idle vertical bobbing on the scene character and add a small contact shadow. Preserve original image, square grid, lesson controls and logic. Tablet layout remains unchanged. Commit/push only.

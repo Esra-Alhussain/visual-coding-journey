@@ -16,7 +16,7 @@ Help beginner learners connect small pieces of Python code with visible results 
 - One five-activity introductory Python lesson, with learner-written code, Run, visible output, optional help and English/Arabic presentation.
 - Activities: print a greeting; assign and print a greeting variable; calculate and print area; use a comment; combine a name variable, output, arithmetic and a comment.
 - Phone lesson: farm and Mochi remain visible above the scrolling task/editor. Desktop keeps the approved right-side workspace.
-- Original natural dirt/grass artwork and a simple noninteractive square grid. Keep Mochi at the cottage door in the current lesson.
+- Original natural dirt/grass artwork and a simple noninteractive square grid. Keep Mochi standing on the dirt path outside the farm entrance gate in the current lesson.
 - Preserve existing guest progress, account bridge and map-return behavior; do not treat an unverified signed-in flow as tested.
 
 ## Latest owner decisions

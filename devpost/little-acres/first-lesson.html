@@ -256,7 +256,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   body.focus-mode .mochi{left:50%}
 }
 </style>
-<link rel="stylesheet" href="lesson-phone.css?v=20261023-gridonly">
+<link rel="stylesheet" href="lesson-phone.css?v=20261024-outside-gate">
 </head>
 <body>
 <div class="world" aria-hidden="true">
@@ -1006,20 +1006,26 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
  const artwork = scene.querySelector('img');
  function placeMochi() {
   const root = document.documentElement.style;
-  if (!phone.matches) {
-   ['--mochi-x','--mochi-y','--mochi-size','--farm-grid-size'].forEach(name => root.removeProperty(name));
+  const desktop = innerWidth > 1100;
+  if (!phone.matches && !desktop) {
+   ['--mochi-x','--mochi-y','--mochi-size','--mochi-foot-padding','--farm-grid-size'].forEach(name => root.removeProperty(name));
    return;
   }
   if (!artwork.naturalWidth || !artwork.naturalHeight) return;
   const r = scene.getBoundingClientRect();
-  const scale = Math.max(r.width / artwork.naturalWidth, r.height / artwork.naturalHeight);
+  const fit = getComputedStyle(artwork).objectFit;
+  const scale = (fit === 'contain' ? Math.min : Math.max)(r.width / artwork.naturalWidth, r.height / artwork.naturalHeight);
   const drawnWidth = artwork.naturalWidth * scale;
   const drawnHeight = artwork.naturalHeight * scale;
-  // Feet on the path immediately in front of the cottage door, in image coordinates.
-  root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .63}px`);
-  root.setProperty('--mochi-y', `${r.top + drawnHeight * .42}px`);
+  const offsetY = phone.matches ? 0 : (r.height - drawnHeight) / 2;
+  const size = phone.matches ? Math.max(52, Math.min(84, r.height * .22)) : Math.max(90, Math.min(160, drawnWidth * .14));
+  // Ground contact on the dirt path OUTSIDE the entrance gate, not the cottage door or river.
+  root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .54}px`);
+  root.setProperty('--mochi-y', `${r.top + offsetY + drawnHeight * .70}px`);
   root.setProperty('--farm-grid-size', `${160 * scale}px`);
-  root.setProperty('--mochi-size', `${Math.max(52, Math.min(84, r.height * .22))}px`);
+  root.setProperty('--mochi-size', `${size}px`);
+  // The source sprite has 13 transparent pixels below its feet (512px wide).
+  root.setProperty('--mochi-foot-padding', `${size * 13 / 512}px`);
  }
  artwork.addEventListener('load', placeMochi);
  new ResizeObserver(placeMochi).observe(scene);

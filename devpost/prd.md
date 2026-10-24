@@ -30,7 +30,7 @@ Preserve the implemented concept checks, manual Next/Finish progression, indepen
 - Keep the natural farm image, cottage, garden, bridge, water and Mochi; rejected paving artwork is removed.
 - Phone: fixed visible farm/Mochi scene above a separately scrolling task/editor; compact controls; Run remains usable; explanations are available on demand.
 - Desktop: preserve the approved right-side lesson/editor rail and focus mode.
-- Mochi is currently positioned at the cottage door using image-relative placement that respects scaling/cropping.
+- Mochi stands on the dirt path outside the farm entrance gate using image-relative placement that respects scaling/cropping on both phone and desktop. Its feet contact the ground; remove floating bobbing and account for transparent sprite padding.
 - Show only a noninteractive square-line grid over the farm. Its current purpose is a visual reference, not a working movement system.
 
 ## 5. Explicitly deferred or rejected
