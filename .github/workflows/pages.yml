@@ -2,7 +2,7 @@ name: Deploy prototype to GitHub Pages
 
 on:
   push:
-    tags: ['publish-20261024-07aab81']
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Deploy approved site snapshot 07aab81'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
