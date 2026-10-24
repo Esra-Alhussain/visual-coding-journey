@@ -24,11 +24,8 @@ void main(){
  float ripple=sin(p.x*290.+p.y*210.-time*1.5)*sin(p.y*170.-p.x*120.+time*.8);
  float shallows=smoothstep(.28,.7,original.g)*smoothstep(.10,.4,original.g-original.r);
  color+=vec3(.04,.075,.08)*ripple*wet*(.4+shallows);
- // Very small movement of surviving green foliage; buildings/ruins remain fixed.
- float leaf=smoothstep(.065,.15,original.g-original.r)*smoothstep(.04,.15,original.g-original.b)*(1.-wet);
- vec2 sway=vec2(sin(time*.75+p.y*95.)*.0007,0.)*leaf;
- color=mix(color,texture2D(artwork,clamp(p+sway,vec2(.001),vec2(.999))).rgb,leaf*.65);
- gl_FragColor=vec4(color,1.);
+ // Leave dry ground transparent so the original image retains its detail.
+ gl_FragColor=vec4(color,wet);
 }`;
   function shader(type, source) {
     const item=gl.createShader(type);gl.shaderSource(item,source);gl.compileShader(item);
@@ -67,7 +64,7 @@ void main(){
     image.onload=()=>{
       try {
         const replacement=document.createElement('canvas');replacement.id=canvas.id;replacement.className=canvas.className;replacement.setAttribute('aria-hidden','true');
-        replacement.width=960;replacement.height=Math.round(960*image.height/image.width);
+        replacement.width=Math.min(image.width,1536);replacement.height=Math.round(replacement.width*image.height/image.width);
         const ctx=replacement.getContext('2d');if(!ctx)throw Error('Canvas unavailable');
         canvas.replaceWith(replacement);canvas=replacement;
         const w=canvas.width,h=canvas.height;
@@ -85,7 +82,7 @@ void main(){
         cutContext.putImageData(pixels,0,0);
         const warped=document.createElement('canvas');warped.width=w;warped.height=h;const effect=warped.getContext('2d');
         paint2D=time=>{
-          ctx.drawImage(image,0,0,w,h);effect.clearRect(0,0,w,h);
+          ctx.clearRect(0,0,w,h);effect.clearRect(0,0,w,h);
           for(let y=0;y<h;y+=3){
             const dx=Math.sin(y*.027+time*1.1)*4.5+Math.sin(y*.061-time*.65)*2;
             effect.drawImage(cut,0,y,w,Math.min(3,h-y),dx,y,w,Math.min(3,h-y));
@@ -99,7 +96,7 @@ void main(){
     image.src=textureSource;
   }
   try {
-    gl=canvas.getContext('webgl',{alpha:false,antialias:false,powerPreference:'low-power'});
+    gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false,powerPreference:'low-power'});
     if(!gl) throw Error('WebGL unavailable');
     program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vertex));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(program);
     if(!gl.getProgramParameter(program,gl.LINK_STATUS)) throw Error('Animation unavailable');

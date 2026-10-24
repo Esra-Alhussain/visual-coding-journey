@@ -1,7 +1,7 @@
 ---
 doc: spec
 status: draft
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 # Mochi — current technical plan
@@ -36,4 +36,7 @@ Serve public/ with python3 -m http.server 8080 --bind 127.0.0.1 --directory publ
 Keep using the existing branch and push changes to main. .github/workflows/pages.yml has workflow_dispatch only. A commit or push must not publish the site. Run that workflow only after the owner explicitly requests publication. Preserve other concurrent repository changes; never force-push to work around them.
 
 ## Current limitations and next work
-Design editing is paused. Grid use/movement remains deferred; no movement implementation is authorized by the presence of the grid. Native phone keyboard/touch/accessibility review remains pending. Real account/provider checks are not claimed passed. Later islands/finale, curriculum expansion and a general Python runtime are outside the current proof-of-concept.
+Lesson/grid design editing is paused; the desktop map sharpness correction is authorized. Grid use/movement remains deferred; no movement implementation is authorized by the presence of the grid. Native phone keyboard/touch/accessibility review remains pending. Real account/provider checks are not claimed passed. Later islands/finale, curriculum expansion and a general Python runtime are outside the current proof-of-concept.
+
+## Desktop map sharpness — 2026-10-24
+world-map-living.js now composites animated water only over the static original map. WebGL requests an alpha canvas with straight alpha and outputs the conservative water mask as alpha; dry land is transparent rather than resampled/repainted. The subtle foliage warp is removed from this canvas pass. Canvas2D clears to transparency each frame and draws only masked displaced water; fallback resolution increases from 960×640 to source 1536×1024. Existing visibility/pause/reduced-motion/vision behavior remains. Homepage script version v4 refreshes cached renderer code. No new/generated/upscaled art or phone/lesson design changes.

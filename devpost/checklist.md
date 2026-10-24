@@ -1,7 +1,7 @@
 ---
 doc: checklist
 status: draft
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 # Mochi — current progress and remaining work
@@ -42,3 +42,12 @@ This is the consolidated current checklist. Older dated checklists are history a
 
 ## Current release distinction
 Last confirmed application deployment in this session: grid release a6fb0e5. Later design iterations and the current grid-only reset are commit/push-only changes, not a newly verified live release. See resume.md for deployment evidence and limits.
+
+## Desktop sharpness correction — 2026-10-24
+- [x] Original sharp island art stays visible beneath water-only animation.
+- [x] Canvas2D fallback uses 1536×1024 rather than 960×640.
+- [x] Real Chromium 1440×1000 at 2× pixel density: WebGL and forced Canvas2D rendering; fallback dry-land pixel alpha is zero.
+- [x] Both renderers: map assets, Island 1 entry/future-island restrictions, restoration view and pause behavior pass without JS errors.
+- [x] Existing water-fallback, map-island and public asset checks pass.
+- [x] Phone map and lesson source remain unchanged.
+- [ ] Publication: not authorized for this update; commit/push only.

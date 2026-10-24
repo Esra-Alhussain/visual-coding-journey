@@ -1,6 +1,6 @@
-# Current checkpoint — 2026-10-23
+# Current checkpoint — 2026-10-24
 
-Read scope.md, prd.md, spec.md and checklist.md as the current plan. Current app: natural farm, existing five-activity Lesson 1, visible square grid only; no movement activity. Design editing paused. Same branch commit/push, manual publication only. Practical work is Phase 5 Build; Phase 6 Ship remains outstanding. Formal planning sign-off is not inferred from file presence. The history below includes rejected/superseded experiments and is not a list of current requirements.
+Read scope.md, prd.md, spec.md and checklist.md as the current plan. Current app: natural farm, existing five-activity Lesson 1, visible square grid only; no movement activity. Lesson/grid design editing paused; desktop map sharpness fix authorized on 2026-10-24. Same branch commit/push, manual publication only. Practical work is Phase 5 Build; Phase 6 Ship remains outstanding. Formal planning sign-off is not inferred from file presence. The history below includes rejected/superseded experiments and is not a list of current requirements.
 
 ---
 
@@ -713,3 +713,6 @@ Owner rejected the new walking activity. Asked “only a visible square grid acr
 
 ### Planning reconciled — 2026-10-23
 Owner correctly identified stale central planning. Archived the previous scope, PRD and visual copies under devpost/archive/planning-before-sync-2026-10-23/. Reconciled canonical scope/PRD, added root technical plan/checklist, synchronized scope.html/prd.html and current component pointers, corrected manual publication instructions and recorded the ongoing synchronization rule in AGENTS.md. Current decisions, deferred movement, rejected experiments, recorded checks and outstanding delivery tasks are explicit. No application behavior changed and no deployment requested.
+
+### Desktop map sharpness fix — 2026-10-24 — LATEST
+Owner reported poor desktop homepage image quality. Diagnosed full-scene animation replacing original map with a 960×640 fallback canvas, stretched over the 1536px artwork. Changed WebGL to transparent water-mask compositing over original map; Canvas2D now clears and draws masked water only at source1536×1024. Removed tiny canvas foliage warp to retain dry-land detail. Existing map art/layout retained; no image generation, upscaling, phone map or lesson edits. Renderer JS cache version v4 in source/public index. Browser1440×1000, DPR 2 verified WebGL and forced Canvas2D, transparent dry-land pixel, island restrictions, vision toggle and pause without JS errors. Existing fallback/island/public checks pass. Planning PRD/spec/checklist updated. Preview /tmp/mochi-desktop-map-after-True.png. Commit/push only; no deployment.

@@ -1,12 +1,12 @@
 ---
 doc: prd
 status: draft
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 # Mochi — current product requirements
 
-Current record as of 2026-10-23. This replaces the cosmic-egg document as the active requirements reference. Confirmed decisions, implemented behavior and pending choices are distinguished below; the consolidated document has not been given blanket phase approval.
+Current record as of 2026-10-24. This replaces the cosmic-egg document as the active requirements reference. Confirmed decisions, implemented behavior and pending choices are distinguished below; the consolidated document has not been given blanket phase approval.
 
 ## 1. Learning experience
 For beginners, keep each task small and let learners write every line themselves. Run should show the result in Output and Mochi’s speech or existing scene feedback. Examples and hints support learning; they must not insert or repair learner code automatically. Do not imply that every print statement reconstructs the farm or that this bounded interpreter runs arbitrary Python.
@@ -49,6 +49,9 @@ Guest progress remains browser-local. The existing Supabase integration supports
 - No deployment occurs during commit/push-only editing.
 
 ## 8. Review and delivery state
-The owner has paused design editing. Latest implementation is committed/pushed; the latest grid-only editing state is not newly published. Manual deployment is permitted only after an explicit owner request. Continue Phase 5 build/review, then Phase 6 demo/repository/submission work. Planning reconciliation does not imply all requirements or submission tasks are complete.
+The owner has paused lesson/grid redesign; on 2026-10-24 they authorized a focused desktop map sharpness fix. Latest implementation is committed/pushed; the latest grid-only editing state is not newly published. Manual deployment is permitted only after an explicit owner request. Continue Phase 5 build/review, then Phase 6 demo/repository/submission work. Planning reconciliation does not imply all requirements or submission tasks are complete.
 
 See [scope](scope.md), [technical plan](spec.md), [checklist](checklist.md) and [historical PRD](archive/planning-before-sync-2026-10-23/prd.md).
+
+## Desktop map sharpness — 2026-10-24
+Keep the original island artwork and layout. Animated water must not replace dry land with a lower-resolution full-scene canvas. Preserve source-resolution land detail; retain moving water, pause/reduced-motion behavior, restoration view and island entry restrictions. Phone map and lesson are outside this change. Commit/push only; do not publish.
