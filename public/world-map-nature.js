@@ -3,7 +3,6 @@
  const sound=document.getElementById('soundToggle'),status=document.getElementById('ambienceStatus');
  let wanted=true,context=null,master=null,buffers=null,loading=null,started=false,timer=0,firstCall=0,failed=false;
  const sources=[];
- let unlocked=Boolean(window.MOCHI_NATURE_AUDIO);
  let assetsLoading=null;
  function audioAssets(){
    if(window.MOCHI_NATURE_AUDIO)return Promise.resolve(window.MOCHI_NATURE_AUDIO);
@@ -38,7 +37,7 @@
      if(!started){loop(buffers.ocean,.42);loop(buffers.breeze,.17);started=true;}
      master.gain.cancelScheduledValues(context.currentTime);master.gain.setTargetAtTime(.65,context.currentTime,.3);
      status.textContent='Ocean waves · gentle breeze · distant birds';firstCall=setTimeout(bird,6500);timer=setInterval(bird,24000);
-   }else status.textContent='Sound is on · starts with your first tap.';
+   }else status.textContent=loading&&!buffers?'Loading nature sounds…':'Tap the map or Sound to start the ambience.';
  }
  function prepare(){
    if(loading)return loading;
@@ -49,22 +48,21 @@
    return loading;
  }
  function activate(){
-   if(!unlocked||!wanted||document.hidden)return;
+   if(!wanted||document.hidden)return;
    prepare();
    if(context)context.resume().then(sync).catch(()=>{status.textContent='Tap Sound to start the coastal ambience.';});
  }
  sound.addEventListener('click',()=>{
-   unlocked=true;
    // A blocked/pending first play is an enable request, not a mute request.
    if(wanted && (failed || !buffers || context?.state!=='running')){failed=false;activate();return;}
    wanted=!wanted;label();if(wanted)activate();else sync();
  });
- function firstInteraction(event){if(event.isTrusted && !sound.contains(event.target)){unlocked=true;activate();}}
+ function firstInteraction(event){if(event.isTrusted && !sound.contains(event.target)){activate();}}
  document.addEventListener('pointerdown',firstInteraction,{passive:true});
  document.addEventListener('keydown',firstInteraction);
  document.addEventListener('click',firstInteraction);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&wanted)activate();else sync();});
  window.addEventListener('pagehide',()=>{clearTimeout(firstCall);clearInterval(timer);context?.suspend().catch(()=>{});});
  window.addEventListener('pageshow',()=>{if(wanted)activate();});
- label();if(window.MOCHI_NATURE_AUDIO)activate();else status.textContent='Tap the map or Sound to hear the coastal ambience.';
+ label();activate();
 })();
