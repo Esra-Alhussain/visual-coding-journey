@@ -1,176 +1,64 @@
-# Product Requirements Document (PRD)
-## Project Name: Mochi's Home Lab
-## Category: Build With AI: Basics Hackathon Submission
-
+---
+doc: prd
+status: draft
+updated: 2026-10-24
 ---
 
-## 1. Product Vision & Layout Architecture
-Mochi's Home Lab is an immersive, additive coding sandbox built for absolute beginners using a framework-free frontend stack (HTML, CSS, Vanilla JS). 
-- **The Top Stage:** Starts as a completely dark, empty canvas patch. All structural elements, character traits, and environment assets materialize line-by-line out of the user's direct code commands and stay permanently visible.
-- **The Bottom Terminal HUD:** A frozen, high-contrast 'COSMIC_TERMINAL.EXE' editor layout backed by gray telemetry rows ("MATRIX MODE", "COMPUTE EFF", "ENERGY GLOW") and interactive hardware configuration sliders.
+# Mochi — current product requirements
 
----
+Current record as of 2026-10-24. This replaces the cosmic-egg document as the active requirements reference. Confirmed decisions, implemented behavior and pending choices are distinguished below; the consolidated document has not been given blanket phase approval.
 
-## 2. Core User Experience & 5-Lesson Sequence Blueprint
+## 1. Learning experience
+For beginners, keep each task small and let learners write every line themselves. Run should show the result in Output and Mochi’s speech or existing scene feedback. Examples and hints support learning; they must not insert or repair learner code automatically. Do not imply that every print statement reconstructs the farm or that this bounded interpreter runs arbitrary Python.
 
-###  Lesson 1: Variables & Character Genesis (The Cosmic Egg)
-- **Concept Taught:** Key-value attribution and string assignments.
-- **Initial Visual State:** The top canvas is completely empty except for a large, vibrating cosmic egg in the center. The egg shakes, cracks open, and reveals a completely featureless pink Mochi shell (no eyes, no mouth, no headphones).
-- **Line-by-Line Progression:**
-  1. `mochi.eyes = "cute"` (Options guided via input hint box: "happy", "cute", "starry"). The second it executes, sharp anime eyes pop onto the face. Mochi jumps and triggers a cheerful bubble: *"Wow! I can see you! Give me a mouth next so I can laugh! Type: mochi.mouth ="*
-  2. `mochi.mouth = "smile"` (Options: "smile", "cat_face"). A blushing smile line snaps onto the mesh. Mochi spins and cheers: *"Yay, I can talk! Let's lock down my name and greeting text!"*
-  3. `mochi.name = "Pixel"` and `mochi.greeting = "Hello, World!"`. 
-- **The Payoff:** A neon text name plate drives into the dirt above its head, and a persistent text speech bubble locks onto the layout screen permanently displaying their custom text string.
+## 2. Entry and map
+- Desktop uses the existing living world map. Phones use the existing lean phone map, entered through the current mobile redirect.
+- Island 1 enters first-lesson.html. Islands 2–5 stay upcoming and unavailable for lesson entry.
+- Keep guest entry and map-return links. Account entry is optional; preserve the existing bridge without expanding authentication scope.
+- The longer restoration story connects five islands and the beacon; later lessons and the finale are future work.
 
-###  Lesson 2: House Fundamentals (The Hard Way Foundation)
-- **Concept Taught:** Functional statements and object activation.
-- **Initial Visual State:** Mochi stands completed on the empty dark terrain patch.
-- **Line-by-Line Progression:**
-  1. `house.material = "wood"` (Options: "wood", "stone"). A heavy, flat modern floor platform slams into place right underneath Mochi. Mochi drops down to stand firmly on it.
-  2. `house.add_brick()`. Exactly ONE small brick drops onto the platform grid. 
-- **The Puzzle Pivot:** The coding console input locks down temporarily. Mochi's speech bubble pops open displaying an active HTML text response field reading: *"Umm, 1 brick won't build my house walls! What can we do to make enough numbers to build a whole first wall?"* The user must type an answer ("loop" or "repeat") inside the bubble's layout text area to unlock the next terminal page.
+## 3. Existing Lesson 1 sequence
+1. Say hello: learner writes print(...) with a nonempty string.
+2. Give it a name: assign greeting and print that variable’s value.
+3. Numbers and arithmetic: assign lengths, calculate area by multiplication and print it.
+4. Leave a note: include a comment and a printed message.
+5. Put it together: combine a name variable, output, arithmetic and a comment.
 
-### ️ Lesson 3: Sequences (The Chronological Wall & Roof Blueprint)
-- **Concept Taught:** Sequential execution order without shortcuts.
-- **Initial Visual State:** The wooden floor slab and a single brick remain visible from the previous step.
-- **Line-by-Line Progression:** The user must manually type separate chronological lines to stack a structural row, experiencing the tedious nature of brute-forced script files:
-  `house.add_brick(position=1)`
-  `house.add_brick(position=2)`
-  `house.add_brick(position=3)`
-  `house.add_window()`
-- **The Payoff:** Bricks drop down piece-by-piece to stack walls behind Mochi. When `add_window()` runs, a large arched viewing frame cuts into the bricks, revealing the sparkling cosmic stars outside the window for the first time.
+Preserve the implemented concept checks, manual Next/Finish progression, independent drafts, error handling, language switching, completion and saved progress. Code stays left-to-right in both languages. Do not conflate these five activities with five finished islands.
 
-###  Lesson 4: Loops & Refactoring (The Shorter Code Superpower)
-- **Concept Taught:** Code compression and shortcuts using For-Loops.
-- **Initial Visual State:** The house structure, window frame, and character remain completely active.
-- **Line-by-Line Progression:** The game interface guides the user: *"Writing all those lines is exhausting! Let's supercharge our workspace and make our codes shorter using a Loop superpower!"*
-  `for i in range(12):`
-  `  window.add_plant()`
-- **The Payoff:** A combo counter dial (`x12`) spins above, and 12 glowing neon potted plants rapidly sprout one-by-one right along the window sill in a fast cascade animation. The interface demonstrates how 2 lines of text just replaced a massive block of manual input entries.
+## 4. Scene and layout
+- Keep the natural farm image, cottage, garden, bridge, water and Mochi; rejected paving artwork is removed.
+- Phone: fixed visible farm/Mochi scene above a separately scrolling task/editor; compact controls; Run remains usable; explanations are available on demand.
+- Desktop: preserve the approved right-side lesson/editor rail and focus mode.
+- Mochi stands on the dirt path outside the farm entrance gate using image-relative placement that respects scaling/cropping on both phone and desktop. Its feet contact the ground; remove floating bobbing and account for transparent sprite padding.
+- Show only a noninteractive square-line grid over the farm. Its current purpose is a visual reference, not a working movement system.
 
-### ️ Lesson 5: Lists (Furnishing the Finished Space)
-- **Concept Taught:** Storing values inside array indices.
-- **Initial Visual State:** The house structure, window frame, and plants are complete.
-- **Line-by-Line Progression:** The user populates the room index array:
-  `room.furniture.append("cozy_armchair")`
-  `room.furniture.append("woven_rug")`
-- **The Payoff:** The 3D-shaded armchair and rug fall gracefully from the top margin layout, landing on the wooden floors with squash-and-stretch physics right next to Mochi.
+## 5. Explicitly deferred or rejected
+Movement commands, bridge-start gameplay, exact movement counts, path/destination selection and any movement lesson remain undecided/deferred. The added arrival activity was rejected and removed. Do not add movement behavior merely because a grid is visible. Decorative colored square boards, the small paving patch and the repainted playground-like ground were rejected.
 
----
+## 6. Progress, accounts and feedback
+Guest progress remains browser-local. The existing Supabase integration supports account/progress behavior where configured; real signed-in cross-session validation and Google provider setup are not newly verified. Never create accounts, send reset emails or enter real credentials merely to demonstrate the interface. Preserve current local-save fallback/error behavior.
 
-## 3. The Grand Finale: Cinematic Housewarming
-- **Action:** The 'COSMIC_TERMINAL.EXE' panel and telemetry modules slide smoothly off the bottom margin of the screen. 
-- **The Payoff:** The background drops contrast into theater spotlight mode. The camera executes an un-interrupted cinematic pan across the finished custom house. Mochi sits on the cozy armchair, next to the toy shelf, safe behind the walls, dancing to the loop particles the user engineered from scratch.
+## 7. Acceptance checks
+- Existing five activities run to completion with learner-shaped solutions; invalid input produces useful errors.
+- Mobile farm, character, speech, variable and area feedback remain visible; controls and code editor work at narrow widths.
+- English/Arabic switching preserves code/state; Python stays LTR.
+- Grid is visual-only, original artwork is loaded, and no movement prelude or move command is present.
+- Desktop remains visually unchanged by phone edits.
+- Future islands do not unlock unsupported lessons; returning to the map preserves genuine progress.
+- No deployment occurs during commit/push-only editing.
 
-### Home Lab design update — 2026-10-12
+## 8. Review and delivery state
+The owner has paused lesson/grid redesign; on 2026-10-24 they authorized a focused desktop map sharpness fix. The current map, grid-only lesson and background-audio changes were published at the owner’s explicit request on 2026-10-24. Further edits remain commit/push-only until another explicit publication request. Manual deployment is permitted only after an explicit owner request. Continue Phase 5 build/review, then Phase 6 demo/repository/submission work. Planning reconciliation does not imply all requirements or submission tasks are complete.
 
-User-supplied Home Lab direction supersedes the frozen cosmic visual frame for the active prototype. Active file: prototype-cosmic-live.html; previous version: prototype-before-home-lab.html. Implemented responsive cozy/synthwave/lofi CSS, inline soft teal Mochi SVG, keyboard-accessible egg hatch, five sequential safe command lessons, cumulative bricks/plants/chair, invalid-command feedback and restart with timer cancellation. Lesson 2 is house.add_brick(); Lesson 3 is house.build_walls(), repairing the supplied skipped lesson. Other commands remain mochi.eyes = cute, window.add_plants(), room.add_chair(). Sliders update bounce duration and lighting; telemetry shows theme, completion percentage and selected glow, explicitly simulated rather than measured hardware. No arbitrary code execution. Syntax and DOM simulation checks pass for hatch guard, invalid input, all lessons, completion, themes, sliders and reset. Actual rendered browser review remains pending. Local design review only; no publishing, BubblyCue changes or full-product approval.
+See [scope](scope.md), [technical plan](spec.md), [checklist](checklist.md) and [historical PRD](archive/planning-before-sync-2026-10-23/prd.md).
 
+## Desktop map sharpness — 2026-10-24
+Keep the original island artwork and layout. Animated water must not replace dry land with a lower-resolution full-scene canvas. Preserve source-resolution land detail; retain moving water, pause/reduced-motion behavior, restoration view and island entry restrictions. Phone map and lesson are outside this change. Commit/push only; do not publish.
 
-### Plush reference prototype — 2026-10-12
+## Map background sound — 2026-10-24
+The phone map must actually initialize the existing coastal audio, not only show a music icon. Attempt background playback immediately when either map opens. Resume after the first trusted tap or Sound press only when browser policy blocks autoplay. A blocked first play must not be interpreted as mute. Explicit mute persists through later interactions; show the true playing/waiting/error state in accessible sound controls. Fetch the phone recordings asynchronously at startup so autoplay can begin as soon as decoding finishes; keep map controls usable while audio loads. Existing licensed wave, breeze and bird recordings/credits remain unchanged. Commit/push only; do not publish.
 
-User approved prototype1.jpg as the visual reference and authorized building the egg-to-personalized-Mochi opening. Active local entries: sites/mochi-design/dist/index.html and devpost/prototype-cosmic-live.html. Previous versions preserved as index-before-plush.html and prototype-before-plush.html. Warm linen/oak background and blank teal plush character generated with the built-in image tool, using prototype1.jpg as style/identity guidance. Original Home Lab cream radial-shaded egg and teal jagged crack retained in a larger footprint with click/keyboard-triggered shake/reveal. Variables lesson: eyes (cat/happy/starry), nose (button/heart/tiny), mouth (smile/cat/little), free-text name and greeting. Choices show hints without inserting code. Learner types quoted assignments and applies with Bring to life or Ctrl+Enter; valid changed values update facial overlays/nameplate/greeting, with optional synthesized chime and celebration. Safe bounded parser executes no learner code; errors preserve state. Earlier values remain editable; reset cancels hatch timer. Background has no house walls; house, conditions, loops and final project remain future curriculum proposals, with functions deferred after hackathon. Syntax and parser sequence/error/edit checks pass. No browser is connected, so rendered desktop/mobile review and browser interaction checks remain pending. Local prototype only; no publishing or BubblyCue changes.
 
-
-### Meadow journey revision — 2026-10-12
-
-User authorized fixing the prototype after visual review: preserve the plush character exactly, add attention-grabbing idle egg movement, a longer multi-crack hatch, sound/voice welcome, name-first personalization, non-overlapping guidance, grassy ground with sunlight from the right, colorful modern game/study HUD, introductory walkthrough, lesson map, clear completion and next-lesson progression. All operations in this revision stayed within the sandbox; no elevated execution, external file access, publication or generated outside-workspace assets.
-
-Implemented four-page introduction; egg rocks while idle and hatches through top/side/bottom crack stages plus separating shell halves over 7.6 seconds (reduced motion shortens it); sound effects default on following user interaction; optional speech uses installed local English browser voices only and falls back to text. Bubble is left of Mochi on desktop and above it on mobile. Unchanged blank plush PNG and facial overlays retained. Name → eyes → nose → mouth → greeting; greeting shown in bubble and completion. Grass meadow, hills, drifting clouds, sunlight rays and small spark motion are code-native decorations. Prior wooden presentation and upper-right slogan removed.
-
-Journey map: 1 companion variables; 2 house variables practice (walls/roof/door); 3 conditions (night/day and conditional lights); 4 loops (garden.plant(spot), range 3–8, five flowers completes guided goal); 5 final project (change roof variable, working night condition, bounded garden loop). Chapter completion celebrates with sound/confetti, unlocks next, offers next or continued experiment. Earlier scenes/drafts persist in page session; no permanent saving or arbitrary Python execution. Functions, interior rooms, richer kitchen/bedroom/garden curriculum remain later scope.
-
-Verification: check-meadow.cjs passes syntax/unique IDs, walkthrough, full staged hatch timing, blank face/name-first gate, celebrations/unlocks, house creation, true/false conditions, indentation errors, bounded loop, combined final project, invalid-input state preservation and restart timer cancellation. Character asset byte-for-byte unchanged. Active entries synchronized: sites/mochi-design/dist/index.html and devpost/prototype-cosmic-live.html. Backups: index-before-meadow.html / prototype-before-meadow.html. Browser rendering, actual speech/audio and mobile visual review remain pending; no connected browser used.
-
-
-### Action walkthrough and local saving — 2026-10-12
-
-User authorized browser progress saving and requested a modern in-scene walkthrough that advances after each performed action, plus more realistic grass matching the plush character. Added welcome Sign in / Log in panel with explicit preview limitation: no real account or cross-device backend connected, no password collection. LocalStorage auto-saves accepted Mochi/house/world state, current chapter, completion unlocks, five code drafts and final-project goals. Welcome offers Continue saved adventure or explicitly Start a new adventure. Validated restoration rejects malformed saves and unsupported values; unavailable storage falls back to session-only status. Restart clears local progress and cancels hatch timers. Same browser and entry URL required for local saving.
-
-Walkthrough now spotlights the actual moving egg and bubble, then the coding panel; typing a valid current assignment changes its instruction to apply the code; successful application advances to next feature; completion points to chapter progression. It follows actual learner actions, with optional Hide tips. No explanation-only Next slideshow. Detailed code-native meadow-grass.svg (23,000 shaded blade paths, grain, soft distant vegetation, warm right-side sunlight) replaces flat hill/stripe ground. Grounding shadow strengthened; Mochi PNG unchanged.
-
-Checks: check-guided-saving.cjs passes action-triggered name-to-eyes guidance, browser save/restore of completed world and drafts, corrupted save fallback, restart storage removal, full prior hatch/lesson/condition/loop/final-project regressions. Active local entry points synchronized. Backups index-before-guided-saving.html and prototype-before-guided-saving.html. Actual browser rendering/audio/storage persistence on the user browser pending visual review. All tools and files for this revision stayed in sandbox; no elevated commands, external asset access or hosted publication. Real sign-in needs a user-selected authentication/storage service and future authorized connection work.
-
-
-### Single guidance bubble — 2026-10-12
-
-User requested hiding the character bubble until the walkthrough finishes. The introductory walkthrough now covers tapping/hatching the egg, typing a name and applying the first assignment. Only the walkthrough coach is visible during these actions, with its own name-code hint. Successful name assignment automatically completes the walkthrough, restores Mochi’s bubble and hands off to eyes/nose/mouth/greeting guidance. Hide tips also restores the character bubble immediately. Existing saved walkthrough state is reconciled on restore; a named character does not resume onboarding. No changes to character, lesson logic, sounds, layout background or publication. Backed up index-before-single-guide.html. Updated guidance/persistence regression verifies exclusive bubble visibility, embedded name hint and automatic handoff, alongside all existing checks. Browser visual review still pending. Sandbox only.
-
-
-### Softer local voice selection — 2026-10-12
-
-User found the first-default browser voice too robotic and requested a soft youthful human-sounding character voice. Replaced first-voice selection with ranked local English voices: natural/neural/enhanced/premium descriptors preferred, suitable named voices preferred over generic Desktop/compact engines, with no remote voice use. Speech settings now rate 1.02, pitch 1.02 (less artificial pitch shift) and volume 0.65. Header Voice opens a local voice selector, short character greeting preview and voice toggle. Explicit voice preference persists on this browser; unsupported or unavailable voices fall back to ranked local selection. Voice quality remains limited to installed browser voices; no new voice recording or external TTS service generated. Local selection/settings and all walkthrough/save/journey regression checks pass in check-soft-voice.cjs. Actual audible review requires user browser. Character unchanged; local sandbox-only update, no publication. Backup index-before-soft-voice.html.
-
-
-### Mochi creature voice — 2026-10-12
-
-User rejected all adult browser voices and requested a cute childlike animal character voice. Removed browser adult text-to-speech entirely. Added short Web Audio triangle-wave syllables with soft attack/release, gentle pitch contours and low-pass filtering: default soft babbles, optional playful chirps and sleepy coos. These are nonverbal expressive sounds; bubble text carries all words and instructions. Voice preview/options now describe creature sounds, not human voices. Brief body bob synchronized with babbles; character asset unchanged. Muting, closing preview and restarting cancel scheduled sounds and motion. Preference saved locally. check-creature-voice.cjs verifies bounded syllable generation, mute/cancellation, absence of adult speech APIs and full prior walkthrough/persistence/journey regressions. Actual sound quality still needs user listening. Local sandbox only, no external audio generation or hosted publication. Backup index-before-creature-voice.html.
-
-
-### Pitched real-time character speech — 2026-10-12
-
-User explicitly requested restoring browser text-to-speech with raised pitch and slightly faster speech, retaining intelligible real-time sentences. Removed creature babbles and restored exact text speech using installed local English voices, preferring suitable character bases. Default pitch 1.60, rate 1.08, volume 0.80. Voice dialog includes local voice selection, pitch 1.00–2.00 and speed 0.85–1.30 sliders, full welcome preview, mute and saved browser-local preferences. No external TTS calls. Naturalness still depends on browser voice and pitch support; actual listening review pending. check-character-speech.cjs passes exact sentence, preset, slider persistence, cancellation/mute and local voice exclusion plus full prior journey/save regressions. Character unchanged. Sandbox only; no publishing. Backup index-before-pitched-speech.html.
-
-
-### Outdoor ambience and sunshine — 2026-10-12
-
-User requested a gentle breeze, soft birdsong, open sky and sunshine for Mochi’s outdoor scene after the egg cracks. Added quiet looped filtered-noise wind with slow gust modulation, plus sparse short sine-wave bird chirps every 9–16 seconds after an initial 1.8-second delay. These are locally synthesized ambient effects, not downloaded field recordings. Starts only after hatch or restoring a hatched saved scene; Sound off, restart and page hiding stop audio/timers. Daytime birds stop at night while breeze remains. Existing character speech is unchanged. Strengthened warm right-side sunlight rays and sun glow with reduced-motion support. No name Anna introduced; learner chooses Mochi’s name as before. check-nature-audio.cjs verifies hatch gate, duplicate prevention, wind loop, birds, mute/cancel and night suppression; existing character-speech and journey/save regressions pass. Browser listening and visual review pending. Sandbox only; no publication or outside assets. Backup index-before-nature-audio.html.
-
-
-### Recorded Lesson 1 voices — 2026-10-13
-User authorized integration of six locally supplied recordings. Hi sound.mp3 now present alongside five PCM WAVs. Active prototype plays welcome then naming choice after hatch; quote prompt on name-choice click or first typed name assignment; success on applied name change; hint on Help; first-creation line on Chapter 1 completion. Talking animation follows playback. Lesson 1 unmapped guidance remains text; other chapters retain prior voice behavior. Stop/mute/restart/chapter change/page hiding cancels recordings and queued welcome continuation. Walkthrough action instructions and next eyes guidance preserved. External SFX files absent: existing synthesized chimes remain, Mixkit mapping is pending. Backups saved; both local entry points synchronized with correct relative audio paths. check-recorded-lesson1.cjs passes six audio sources/cancellation plus existing journey/save/nature regressions. Browser visual/listening approval pending; no generation or publication.
-
-
-### Three-tap interactive hatch — 2026-10-13
-User requested active repeated taps and synchronized egg effects. Egg now requires three click/touch/keyboard activations: first and second add cracks with finite shake feedback and wait indefinitely; third performs final shake, full split and reveal. Sound-on locally synthesized rustle/rattle/crack/shell-break effects accompany movement, tap shakes, crack increments and full split, without paid generation. Removed rectangular egg button/tour outline and shadow; oval keyboard-focus glow retained. Restart resets tap counter and label. Both local entries synchronized; backup index-before-three-tap-hatch.html retained. Updated recorded lesson regression passes three-tap waiting, reset, clips, progression/save and ambience checks. Actual browser visual/listening review pending.
-
-
-### Full Lesson 1 recorded dialogue + dry shell sounds — 2026-10-13
-User rejected hissing egg sounds and uploaded eleven additional WAV recordings. All sixteen WAV files have valid PCM headers/durations, plus existing welcome MP3. Seventeen clips now routed: feature introductions, first-choice exploration, nose/mouth success then next feature, alternating short/full help, invalid-code retry, and completion with real applause. Existing synthesized tap, success and hint-open effects reused; no additional external SFX files supplied. Replaced sustained egg noise with damped triangle shell rattles, 22ms transient crack buffers (2.5ms decay), and clustered final shell snaps. Stops on mute/restart/page hiding; three-tap hatch retained. Recorded feature reactions use blink/small turn/bounce where browser animation is available. No paid generation/download/publication. Backed up index-before-full-lesson1-audio.html. check-recorded-lesson1.cjs passes full feature event routing, seventeen recordings, help/retry, actual applause trigger/cancellation and existing journey/save regressions. Sound quality and visual review remain user-browser checks. Detailed mapping: dist/audio/lesson1-audio-map.json.
-
-
-### Live typing and left companion walkthrough — 2026-10-13
-User requested immediate visual code application and a left-side conversational walkthrough bubble. Native input now parses complete valid code and applies changed state immediately without a button; incomplete/invalid drafts preserve accepted world. Manual apply control hidden from display and keyboard focus. Speech and success chime wait 450ms after last valid edit; finished invalid value gets gentle retry after 850ms rather than errors on every keystroke. IME composition defers application until compositionend. Guide/help/welcome copy updated for automatic application. Walkthrough anchored left with rounded bubble and tail, responsive upper-left placement on narrower screens. User asked about blank face: suggested tiny sleepy starter eyes but did not change character pending direction. Backup index-before-live-typing.html retained; both local entries synchronized. Recorded regression passes immediate native input for name/face/house/conditions/loops, incomplete-code preservation, debounce, previous routing/save/progression checks. Actual responsive rendering and listening review pending. No publication or external generation.
-
-
-### Journey engagement and profile — 2026-10-13
-User authorized progress/profile and clearer, more engaging onboarding. Added persistent header journey bar and five available/locked chapter stops. Overall progress derives from nineteen accepted creation steps (hatch, five companion values, three home parts, two condition steps, five garden positions, three final goals); completed milestone credit is retained on experimentation. My journey opens local profile with editable saved explorer name, actual progress/completed chapter count, five earned/locked badges and next chapter. No real account backend added. Opening now previews egg→companion→world and includes an animated isolated See the magic demo: a completed eyes assignment visibly changes sample eyes without writing learner code or awarding progress. Short local opening melody plays after Start with Sound on. Walkthrough has three-tap visual feedback and expected-result card; normal Mochi bubble shows next visible outcome and five feature milestones. Removed forced walkthrough auto-scroll during typing. Existing recordings, real applause, three-tap hatch and immediate code application preserved. Backup index-before-engagement.html retained; both local entry points synchronized. check-recorded-lesson1.cjs passes profile nickname persistence, honest progress, badge/lock derivation, isolated demo and all live-input/audio/journey/save regressions. Local static HTTP check returned 200 with new controls. Browser rendering unavailable (no connected browsers); preview server stopped. Local review only, no publishing or paid generation; BubblyCue untouched.
-
-### Chapter completion moment and interactive progress - 2026-10-19
-After owner feedback that completing the first lesson felt flat and the progress bar looked dated, the current Chapter 1 slice now opens a compact celebration dialog on each activity's first completion. It plays the supplied local applause asset (`art/crowd-clapping-.wav`) once, shows Mochi celebrating, and presents exactly two choices: more practice or the next activity. Those are the existing progression actions moved into the dialog; practice prompts and manual next-step gating remain unchanged. The last activity's next action opens the journey overview.
-
-Replaced the thin native meter with five colorful, raised clickable activity segments. Only the current and completed activities can be opened; the Mochi marker travels to the current step, completion fills each segment, and the active lesson icons remain available for navigation. Added narrow-screen and reduced-motion styling. No sound download, network dependency, progress persistence, or course expansion. Bilingual static copy catalog and generated English-default page rebuilt (170 text entries). Browser rendering, pointer review and audio listening remain unverified; no tests run in this edit. Open `devpost/little-acres/colorful-scene.html` and refresh with Ctrl+F5 to review.
-### Simpler Chapter 1 task instructions - 2026-10-19
-Owner asked for the code instructions to be as simple as the existing index experience. The five activity task prompts are now short action statements: write a greeting; assign and print it; name and print the farm; calculate and print bed area; add/remove a comment and compare. Identifier rules stay in the separate Idea card. Expected results and optional hints still supply explanation when needed; no starter code was inserted. Restored the six English UI strings needed for the bilingual authoring count and rebuilt the English-default page. Browser review remains pending.
-### Walkthrough visibility on short laptop viewports - 2026-10-19
-Owner reported that the tour bubble and spotlight could fall outside the laptop viewport while page scrolling was locked, leaving no way to bring them back into view. Replaced side/below placement with viewport-clamped positioning: keep bubble beside the target when space permits, otherwise place it above/below, and constrain the bubble to the visible height so its text scrolls inside it. Raised explicit spotlight and card stacking order and repositions on browser and visual-viewport resize. Page scrolling remains locked only during the walkthrough. Build regenerated successfully; laptop/browser visual review remains pending.
-
-### Progress trail correction - 2026-10-19
-The five illustrated activity icons already were the chapter progress control. A duplicate numbered control row was mistakenly added and has now been removed. The original icon trail is the sole interactive progress navigation: its current Mochi marker, clickable unlocked icons, completion checks, connected fill and activity count are being polished in place. Browser review remains pending.
-
-### iPad lesson sidebar ? 2026-10-24
-Owner requested instructions beside the visuals on iPad/big screens. Extended the approved right rail to viewports at least 760 CSS px wide; rail width scales from 300 to 380px. Farm remains fully contained in its own unobstructed area; phones below 760px retain the stacked hero layout. Tour scene targeting follows the same breakpoint. Source and public lesson copies updated. Headless Chrome screenshots reviewed at 768x1024 and 1024x768; 390x844 phone check has no horizontal overflow. Inline scripts parse. Native iPad/keyboard review remains pending. Local update only; not published.
-
-
-### Medium-screen sidebar refinement - 2026-10-24
-Owner reported medium screens still hide too much illustration. Supersedes the 760px/300px-minimum rail: side-by-side starts at 600px, sidebar scales from 250px to 380px at 29vw; medium-width lesson header wraps and instructions use 38% of rail height. Full farm remains contained beside the rail. Tour breakpoint matches. Source/public copies updated. Screenshots reviewed at 820x1180 and 640x900, with no horizontal overflow; inline scripts parse. Exact owner device/page clarification pending. Local only, not published.
-
-
-### Restore phone layout boundary - 2026-10-24
-Owner rejected extending the sidebar into phone widths. Restored stacked phone layout below 760px and matching tour/resizer boundaries; retained slimmer sidebar only at 760px and above. Supersedes the 600px breakpoint in the previous checkpoint. Source/public lesson copies match and inline scripts parse. No publishing. Preserve approved phone layout in future tablet adjustments.
-
-
-### Restore owner phone screenshot layout - 2026-10-24
-Owner supplied sites/mochi-design/dist/phone screen size.png, clarifying that the approved phone view was a fixed illustrated/grid scene with overlaid header controls and an independently scrolling lesson/editor sheet below. Earlier stacked-hero restoration was the wrong layout. Added scoped below-760px scene/sheet CSS, readable task/progress controls, persistent Mochi and overlaid Map/language controls. Tablet sidebar remains separate. Tour now targets visible Mochi; exit preserves the sheet top rather than scrolling to editor. Source/public copies match. Chrome phone 466x790 and tablet 820x1180 checked for overflow; owner comparison pending. No publication.
-
-
-### Compact phone character and controls - 2026-10-24
-Owner requested smaller character and controls below it. Phone-only CSS reduces Mochi from 90px to 64px, progress circles from 34px to 26px, heading from 32px to 25px, task text from 18px to 14px, and button/header sizes and panel spacing. Fixed scene plus scrolling lower sheet retained; tablet/sidebar CSS unchanged. Source/public match; 466x790 Chrome screenshot reviewed without horizontal overflow. Local only, not published.
-
-
-### Phone character final size - 2026-10-24
-Owner approved the compact phone layout and requested Mochi slightly smaller. Changed only phone character width from 64px to 56px in source/public lesson; controls and tablet layout retained. Verified both copies match. Local only.
-
-
-### Layout approved for publication - 2026-10-24
-Owner approved current phone scene/sheet with compact controls and 56px Mochi, plus separate tablet/desktop sidebar, and explicitly requested commit, push and publication. Public-site asset/script/progress checks pass. Commit includes only lesson source/public and planning records; unrelated map experiments, screenshots and TikTok assets excluded. GitHub Pages deployment verification follows push.
+### Approved responsive lesson release - 2026-10-24
+Owner approved tablet/desktop sidebar with full contained farm, and the screenshot-led phone layout: fixed farm scene above independent scrolling lesson/editor sheet, compact controls, 56px Mochi. Sidebar begins at 760px with 250-380px rail; below 760px uses phone scene/sheet. Supersedes older phone styling sizing in this release. Owner explicitly authorized commit, push and publish. Local Chrome reviewed at phone 466x790 and tablet 820x1180; public asset/script/progress checks pass. Remote manual-only Pages policy and other map/audio changes preserved during integration. Release verification pending deployment.

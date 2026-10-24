@@ -1,3 +1,9 @@
+# Current planning reference — 2026-10-23
+
+Read [the consolidated spec](../spec.md) first. The active decision is the original farm plus the existing lesson and a visual-only square grid; movement is deferred, and publishing is manual-only. Older dated entries below are historical, not active instructions when contradicted by the current reference.
+
+---
+
 
 ## Restoration island map ? 2026-10-19
 
@@ -203,30 +209,32 @@ Owner selected the right-rail option over the bottom dock. Desktop lesson now us
 ### Lesson scene asset weight — 2026-10-22
 The approved right-rail lesson was still black on a cold live load because the scene used a 3.2 MB background PNG and a 1.4 MB Mochi PNG. Switched the scene to a 321 KB WebP background and 32 KB Mochi WebP; the layout is unchanged and the live lesson can render promptly.
 
+### Approved phone Lesson 1 — 2026-10-23
+Phone widths <=680px use a fixed farm/Mochi scene over a separately scrolling task/editor workspace, with visible speech/variable/area results and sticky Run/Clear. Reuses the existing notes disclosure, optimized WebP art and desktop right rail; no lesson/progress/auth changes. VisualViewport height adapts to available screen area. The phone tour targets the visible character and task. Included via lesson-phone.css in the public allowlist.
 
-### iPad lesson sidebar ? 2026-10-24
-Owner requested instructions beside the visuals on iPad/big screens. Extended the approved right rail to viewports at least 760 CSS px wide; rail width scales from 300 to 380px. Farm remains fully contained in its own unobstructed area; phones below 760px retain the stacked hero layout. Tour scene targeting follows the same breakpoint. Source and public lesson copies updated. Headless Chrome screenshots reviewed at 768x1024 and 1024x768; 390x844 phone check has no horizontal overflow. Inline scripts parse. Native iPad/keyboard review remains pending. Local update only; not published.
+### Phone Mochi doorway anchor — 2026-10-23
+Phone Mochi is anchored to the path immediately in front of the cottage door using source-art coordinates and the actual object-fit:cover scale/crop, instead of a fixed screen-center/bottom position. Recomputed on image load and scene resize, including visible-viewport changes. Speech appears beside Mochi so it does not cover the top tools. Desktop unchanged.
+
+### Phone farm square grid — 2026-10-23
+Owner requested a square grid to make character positioning clear. Phone scene now has a subtle, noninteractive square lattice scaled with the artwork and a gold doorway/current-position cell around Mochi's feet. The grid aligns with the same image-relative placement anchor and resizes with the scene. Desktop remains unchanged. This is position guidance; no movement commands, clickable destinations or lesson validation changes are introduced.
+
+### Countable colored phone tiles — 2026-10-23
+Replace faint full-scene lattice with a 3-column × 4-row patch of separate sage, sand, aqua and clay square tiles, with bright edges and inset depth. Gold doorway tile is the current reference (0); center-column 1–3 labels demonstrate square distances. English/Arabic legend: 1 square = 1 step. Tiles remain decorative position guidance; no movement commands or new lesson validation. Desktop unchanged. Owner requested commit/push only; manual publishing policy remains in force.
+
+### Ground-integrated paving — 2026-10-23
+Owner rejected the flat tile-board overlay and clarified squares must be inside the farm. Replace it with muted colored paving polygons on the courtyard/path plane, with perspective, narrow mortar, highlights and shallow edge shadows. Geometry is in the illustration's 1600×1067 coordinate space and uses the same cover scale/crop as the scene; foreground gate pieces mask the paving. Remove the floating grid badge/board. Keep small distance markings on the center paving stones. Decorative guidance only; no movement rules or curriculum changes. Commit/push only.
+
+### Whole-ground integrated squares — 2026-10-23
+Owner clarified paving must fit the whole farm ground. Replace the vector patch with edited background artwork whose continuous colored square paving follows courtyard/paths, perspective, ground boundaries and object occlusion. Water, bridge, raised-bed soil, cottage and fences retain their functions/placement. Phone picture source uses art/farm-ground-squares.webp; original art remains the desktop fallback. Removed SVG overlay and its unused positioning variables. Existing Mochi image-relative doorway anchor remains. Tiles are visual guidance; movement commands remain unimplemented. Publish only on explicit owner request.
+
+### Bridge-to-door movement grid — 2026-10-23 (supersedes decorative paving)
+Owner clarified the squares are a movement/counting guide and approved starting at the bridge and walking to the farmhouse. Restore the untouched natural farm image and remove the rejected colored-background asset. Phone arrival task appears before existing Lesson 1, with 9 outlined image-relative cells: start 0, eight counted steps to the doorway. The route follows bridge landing/path/gate/cottage; no ground repainting. `move(n)` is explicitly a bounded game command following that route, not arbitrary Python execution. Accept integers 1–8, multiple lines and comments; validate all commands and remaining distance before animating. Keep current/visited/goal feedback, remaining-step count, Stop/Reset and manual entry into the existing five-activity Python lesson. No changes to account progress or existing lesson validation.
+
+Phone-only movement controller/route/parser is phone-walk.js, included by the public build. Scene positioning follows current route cell; resize/camera offset keeps Mochi visible when the keyboard reduces scene height. English/Arabic movement UI uses existing language switch, and tour waits until arrival ends. Desktop retains the original lesson. Checks: check-phone-walk.cjs plus real-browser run/reset/stop/overshoot/arrival/handoff and original five lessons; native-device gesture review pending. Commit/push only, manual publication remains required.
+
+### Grid only; lesson unchanged — 2026-10-23 — CURRENT
+Owner rejected the movement activity and confirmed: only a visible square grid across the original farm, with movement decisions deferred. Removed the arrival task, route, movement commands/controller, associated tests, and tour gating. Restored the approved phone lesson directly at Say hello with the original five activities and natural farm artwork. A noninteractive square-line overlay is the only grid feature; no route, goal cell, numbered steps, painted tiles or movement logic. Desktop unchanged. This supersedes the bridge-to-door movement specification above. Commit/push only; do not publish.
 
 
-### Medium-screen sidebar refinement - 2026-10-24
-Owner reported medium screens still hide too much illustration. Supersedes the 760px/300px-minimum rail: side-by-side starts at 600px, sidebar scales from 250px to 380px at 29vw; medium-width lesson header wraps and instructions use 38% of rail height. Full farm remains contained beside the rail. Tour breakpoint matches. Source/public copies updated. Screenshots reviewed at 820x1180 and 640x900, with no horizontal overflow; inline scripts parse. Exact owner device/page clarification pending. Local only, not published.
-
-
-### Restore phone layout boundary - 2026-10-24
-Owner rejected extending the sidebar into phone widths. Restored stacked phone layout below 760px and matching tour/resizer boundaries; retained slimmer sidebar only at 760px and above. Supersedes the 600px breakpoint in the previous checkpoint. Source/public lesson copies match and inline scripts parse. No publishing. Preserve approved phone layout in future tablet adjustments.
-
-
-### Restore owner phone screenshot layout - 2026-10-24
-Owner supplied sites/mochi-design/dist/phone screen size.png, clarifying that the approved phone view was a fixed illustrated/grid scene with overlaid header controls and an independently scrolling lesson/editor sheet below. Earlier stacked-hero restoration was the wrong layout. Added scoped below-760px scene/sheet CSS, readable task/progress controls, persistent Mochi and overlaid Map/language controls. Tablet sidebar remains separate. Tour now targets visible Mochi; exit preserves the sheet top rather than scrolling to editor. Source/public copies match. Chrome phone 466x790 and tablet 820x1180 checked for overflow; owner comparison pending. No publication.
-
-
-### Compact phone character and controls - 2026-10-24
-Owner requested smaller character and controls below it. Phone-only CSS reduces Mochi from 90px to 64px, progress circles from 34px to 26px, heading from 32px to 25px, task text from 18px to 14px, and button/header sizes and panel spacing. Fixed scene plus scrolling lower sheet retained; tablet/sidebar CSS unchanged. Source/public match; 466x790 Chrome screenshot reviewed without horizontal overflow. Local only, not published.
-
-
-### Phone character final size - 2026-10-24
-Owner approved the compact phone layout and requested Mochi slightly smaller. Changed only phone character width from 64px to 56px in source/public lesson; controls and tablet layout retained. Verified both copies match. Local only.
-
-
-### Layout approved for publication - 2026-10-24
-Owner approved current phone scene/sheet with compact controls and 56px Mochi, plus separate tablet/desktop sidebar, and explicitly requested commit, push and publication. Public-site asset/script/progress checks pass. Commit includes only lesson source/public and planning records; unrelated map experiments, screenshots and TikTok assets excluded. GitHub Pages deployment verification follows push.
+### Approved responsive lesson release - 2026-10-24
+Owner approved tablet/desktop sidebar with full contained farm, and the screenshot-led phone layout: fixed farm scene above independent scrolling lesson/editor sheet, compact controls, 56px Mochi. Sidebar begins at 760px with 250-380px rail; below 760px uses phone scene/sheet. Supersedes older phone styling sizing in this release. Owner explicitly authorized commit, push and publish. Local Chrome reviewed at phone 466x790 and tablet 820x1180; public asset/script/progress checks pass. Remote manual-only Pages policy and other map/audio changes preserved during integration. Release verification pending deployment.

@@ -3,7 +3,19 @@
  const sound=document.getElementById('soundToggle'),status=document.getElementById('ambienceStatus');
  let wanted=true,context=null,master=null,buffers=null,loading=null,started=false,timer=0,firstCall=0,failed=false;
  const sources=[];
- function label(){sound.setAttribute('aria-pressed',String(wanted));sound.textContent=wanted?'Sound on · mute':'Sound off · listen';}
+ let assetsLoading=null;
+ function audioAssets(){
+   if(window.MOCHI_NATURE_AUDIO)return Promise.resolve(window.MOCHI_NATURE_AUDIO);
+   if(assetsLoading)return assetsLoading;
+   assetsLoading=new Promise((resolve,reject)=>{
+     const script=document.createElement('script');script.src='world-map-nature-audio.js';
+     script.onload=()=>window.MOCHI_NATURE_AUDIO?resolve(window.MOCHI_NATURE_AUDIO):reject(Error('Audio assets unavailable'));
+     script.onerror=()=>{script.remove();reject(Error('Audio assets unavailable'));};
+     document.head.append(script);
+   }).catch(error=>{assetsLoading=null;throw error;});
+   return assetsLoading;
+ }
+ function label(){sound.setAttribute('data-audio-state',failed?'error':!wanted?'muted':context?.state==='running'&&buffers?'playing':loading&&!buffers?'loading':'waiting');sound.setAttribute('aria-pressed',String(wanted));sound.textContent=wanted?(context?.state==='running'&&buffers?'Sound on · mute':'Tap to start sound'):'Sound off · listen';}
  function decode(data){const bytes=Uint8Array.from(atob(data.slice(data.indexOf(',')+1)),c=>c.charCodeAt(0));return context.decodeAudioData(bytes.buffer);}
  function bird(){if(!wanted||document.hidden||context?.state!=='running'||!buffers)return;const node=context.createBufferSource(),gain=context.createGain();node.buffer=buffers.gull;gain.gain.value=.11;node.connect(gain).connect(master);node.start();node.onended=()=>{node.disconnect();gain.disconnect();};}
  function loop(buffer,volume){
@@ -25,15 +37,14 @@
      if(!started){loop(buffers.ocean,.42);loop(buffers.breeze,.17);started=true;}
      master.gain.cancelScheduledValues(context.currentTime);master.gain.setTargetAtTime(.65,context.currentTime,.3);
      status.textContent='Ocean waves · gentle breeze · distant birds';firstCall=setTimeout(bird,6500);timer=setInterval(bird,24000);
-   }else status.textContent='Sound is on · starts with your first tap.';
+   }else status.textContent=loading&&!buffers?'Loading nature sounds…':'Tap the map or Sound to start the ambience.';
  }
  function prepare(){
    if(loading)return loading;
    const Audio=window.AudioContext||window.webkitAudioContext;
    if(!Audio){failed=true;sync();return Promise.resolve();}
    if(!context){context=new Audio();master=context.createGain();master.gain.value=0;master.connect(context.destination);context.addEventListener('statechange',sync);}
-   const assets=window.MOCHI_NATURE_AUDIO;
-   loading=Promise.all([decode(assets.ocean),decode(assets.breeze),decode(assets.gull)]).then(([ocean,breeze,gull])=>{buffers={ocean,breeze,gull};failed=false;sync();}).catch(()=>{failed=true;loading=null;sync();});
+   loading=audioAssets().then(assets=>Promise.all([decode(assets.ocean),decode(assets.breeze),decode(assets.gull)])).then(([ocean,breeze,gull])=>{buffers={ocean,breeze,gull};failed=false;sync();}).catch(()=>{failed=true;loading=null;sync();});
    return loading;
  }
  function activate(){
@@ -41,10 +52,15 @@
    prepare();
    if(context)context.resume().then(sync).catch(()=>{status.textContent='Tap Sound to start the coastal ambience.';});
  }
- sound.addEventListener('click',()=>{wanted=!wanted;label();if(wanted)activate();else sync();});
- function firstInteraction(event){if(event.isTrusted && !sound.contains(event.target))activate();}
+ sound.addEventListener('click',()=>{
+   // A blocked/pending first play is an enable request, not a mute request.
+   if(wanted && (failed || !buffers || context?.state!=='running')){failed=false;activate();return;}
+   wanted=!wanted;label();if(wanted)activate();else sync();
+ });
+ function firstInteraction(event){if(event.isTrusted && !sound.contains(event.target)){activate();}}
  document.addEventListener('pointerdown',firstInteraction,{passive:true});
  document.addEventListener('keydown',firstInteraction);
+ document.addEventListener('click',firstInteraction);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&wanted)activate();else sync();});
  window.addEventListener('pagehide',()=>{clearTimeout(firstCall);clearInterval(timer);context?.suspend().catch(()=>{});});
  window.addEventListener('pageshow',()=>{if(wanted)activate();});

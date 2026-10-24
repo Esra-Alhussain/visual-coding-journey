@@ -314,10 +314,12 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   .step-line{gap:10px}.dots{gap:7px}.dots button{width:26px;height:26px}
 }
 </style>
+<link rel="stylesheet" href="lesson-phone.css?v=20261024-outside-gate" media="(min-width:1101px)">
 </head>
 <body>
 <div class="world" aria-hidden="true">
   <img src="art/restoration-shell-1600.webp" alt="">
+  <div class="farm-square-grid"></div>
 </div>
 <div class="mochi" aria-hidden="true">
   <div class="bubble hidden" id="bubble"></div>
@@ -877,9 +879,10 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 
   function positionTour() {
     if (tourIndex < 0) return;
-    const targetSelector = tourSteps[tourIndex].target;
+    const targetSelector = innerWidth < 760 && tourIndex === 1 ? '.task' : tourSteps[tourIndex].target;
     const target = document.querySelector(targetSelector);
     if (!target) return;
+    if (innerWidth <= 680 && target.closest('.hud')) target.scrollIntoView({block:'nearest'});
     const r = target.getBoundingClientRect();
     const w = Math.min(342, innerWidth - 24);
     tourCard.style.width = w + 'px';
@@ -1052,6 +1055,51 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   restoreProgress()
     .catch(err => console.warn('Progress restore failed', err))
     .finally(() => setTimeout(beginTour, 500));
+})();
+</script>
+<script>
+// Keep the farm visible when the phone keyboard changes the available height.
+(() => {
+ const phone = matchMedia('(max-width:680px)');
+ const scene = document.querySelector('.world');
+ const artwork = scene.querySelector('img');
+ function placeMochi() {
+  const root = document.documentElement.style;
+  const desktop = innerWidth > 1100;
+  if (!phone.matches && !desktop) {
+   ['--mochi-x','--mochi-y','--mochi-size','--mochi-foot-padding','--farm-grid-size'].forEach(name => root.removeProperty(name));
+   return;
+  }
+  if (!artwork.naturalWidth || !artwork.naturalHeight) return;
+  const r = scene.getBoundingClientRect();
+  const fit = getComputedStyle(artwork).objectFit;
+  const scale = (fit === 'contain' ? Math.min : Math.max)(r.width / artwork.naturalWidth, r.height / artwork.naturalHeight);
+  const drawnWidth = artwork.naturalWidth * scale;
+  const drawnHeight = artwork.naturalHeight * scale;
+  const offsetY = phone.matches ? 0 : (r.height - drawnHeight) / 2;
+  const size = phone.matches ? Math.max(52, Math.min(84, r.height * .22)) : Math.max(90, Math.min(160, drawnWidth * .14));
+  // Ground contact on the dirt path OUTSIDE the entrance gate, not the cottage door or river.
+  root.setProperty('--mochi-x', `${r.left + (r.width - drawnWidth) / 2 + drawnWidth * .54}px`);
+  root.setProperty('--mochi-y', `${r.top + offsetY + drawnHeight * .70}px`);
+  root.setProperty('--farm-grid-size', `${160 * scale}px`);
+  root.setProperty('--mochi-size', `${size}px`);
+  // The source sprite has 13 transparent pixels below its feet (512px wide).
+  root.setProperty('--mochi-foot-padding', `${size * 13 / 512}px`);
+ }
+ artwork.addEventListener('load', placeMochi);
+ new ResizeObserver(placeMochi).observe(scene);
+ function fit() {
+  if(phone.matches) document.documentElement.style.setProperty('--lesson-height', `${window.visualViewport?.height || innerHeight}px`);
+  else document.documentElement.style.removeProperty('--lesson-height');
+  requestAnimationFrame(placeMochi);
+ }
+ window.visualViewport?.addEventListener('resize', fit);
+ window.addEventListener('resize', fit);
+ phone.addEventListener('change', fit);
+ document.getElementById('run').addEventListener('click', () => {
+  if(phone.matches) document.getElementById('code').blur();
+ });
+ fit();
 })();
 </script>
 </body>

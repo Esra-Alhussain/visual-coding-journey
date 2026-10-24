@@ -1,3 +1,9 @@
+# Current map/lesson reference — updated 2026-10-23
+
+Current requirements are consolidated in [../prd.md](../prd.md), [../scope.md](../scope.md), [../spec.md](../spec.md) and [../checklist.md](../checklist.md). Desktop keeps the living map; phones use the existing lean phone.html entry. Only Island 1 has the five-activity lesson. Phone lesson uses natural farm art and a visual-only square grid; movement tasks and decorative paving were removed. Editing is paused; commit/push does not publish, and deployment is manual-only. Dated material below preserves prior decisions and must not override the current plan.
+
+---
+
 # Approved public map and first playable island — 2026-10-21
 
 Owner explicitly approved the map, replacing the homepage and public publication. This scoped amendment governs the current public island entry; historical main PRD preserved.
