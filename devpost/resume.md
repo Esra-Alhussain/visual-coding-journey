@@ -735,3 +735,7 @@ Owner explicitly said “publish it now”. Published approved application chang
 
 ### Approved responsive lesson release - 2026-10-24
 Owner approved tablet/desktop sidebar with full contained farm, and the screenshot-led phone layout: fixed farm scene above independent scrolling lesson/editor sheet, compact controls, 56px Mochi. Sidebar begins at 760px with 250-380px rail; below 760px uses phone scene/sheet. Supersedes older phone styling sizing in this release. Owner explicitly authorized commit, push and publish. Local Chrome reviewed at phone 466x790 and tablet 820x1180; public asset/script/progress checks pass. Remote manual-only Pages policy and other map/audio changes preserved during integration. Release verification pending deployment.
+
+
+### Responsive lesson published - 2026-10-24
+Owner-approved release committed and pushed to main: 80d3b820dc18ded59b0a1c8dd1a309f4e6af4e7d (integrates local layout commit 63d5599 and newer remote work). Manual Pages run 40095257989 completed successfully: https://github.com/Esra-Alhussain/visual-coding-journey/actions/runs/40095257989 . Live first-lesson.html returned HTTP 200 and contains the approved 56px phone character, phone scene/sheet and tablet sidebar. Local merged phone 466x790 and tablet 820x1180 screenshots reviewed; public assets/progress, nature audio, water fallback and island checks pass. Manual-only publishing policy retained. Unrelated untracked experiments/assets excluded.

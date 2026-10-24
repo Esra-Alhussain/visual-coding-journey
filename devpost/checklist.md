@@ -79,3 +79,10 @@ Last confirmed application deployment: 9d2685e on 2026-10-24, GitHub Pages run 4
 
 ### Approved responsive lesson release - 2026-10-24
 Owner resumed layout editing and approved the current phone scene/sheet with compact controls and 56px Mochi, plus a separate sidebar from 760px upward (250-380px wide). This supersedes the previous design pause for these changes. Phone scene uses the owner screenshot reference; desktop image-grounded character remains. Existing manual-only publication policy, map/audio changes and lesson behavior retained. Owner explicitly requested commit, push and publish. Public checks pass; release verification pending.
+
+
+### Approved responsive release verification - 2026-10-24
+- [x] Commit/push approved layout and integrate latest main.
+- [x] Manual Pages deployment 40095257989 succeeded for 80d3b82.
+- [x] Live HTTP 200 and approved phone/tablet styling confirmed.
+- [x] Public asset/progress, audio, water fallback and island checks pass.
