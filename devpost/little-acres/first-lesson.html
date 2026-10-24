@@ -134,7 +134,7 @@ html[dir=rtl] #tour-card small{padding-right:0;padding-left:70px}
 html[dir=rtl] .tour-actions #tourSkip{margin-left:0;margin-right:auto}
 .mini-mochi{display:none}
 .phone-hero{display:none}
-@media(max-width:1100px){
+@media(max-width:759px){
   .focus-float{display:none}
   body{overflow:auto}
   .hud{position:relative;display:block;min-height:100vh;padding:12px;pointer-events:auto}
@@ -173,7 +173,7 @@ body.focus-mode .focus-float{display:none}
 .focus-restore[hidden]{display:none}
 body.focus-mode .lesson-panel,body.focus-mode .code-panel{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px) scale(.985)}
 .lesson-panel,.code-panel{transition:opacity .2s ease,transform .2s ease}
-@media(min-width:1101px){
+@media(min-width:760px){
   .lesson-panel{width:min(340px,calc(100vw - 28px));padding:14px 15px 15px}
   .code-panel{width:min(370px,calc(100vw - 28px))}
   .lesson-panel h1{font-size:25px}
@@ -192,7 +192,7 @@ body.focus-mode .lesson-panel,body.focus-mode .code-panel{opacity:0;visibility:h
 .code-main,.code-side{display:contents}
 body.focus-mode .lesson-dock{opacity:0;visibility:hidden;pointer-events:none}
 body.dock-resizing{cursor:ns-resize;user-select:none}
-@media(min-width:1101px){
+@media(min-width:760px){
   .hud{padding:0;display:block}
   .lesson-dock{position:fixed;z-index:6;left:12px;right:12px;bottom:12px;height:var(--dock-h,300px);display:flex;align-items:stretch;gap:10px;pointer-events:auto;transition:opacity .2s ease}
   .dock-resize{display:flex;position:absolute;z-index:9;top:-11px;left:50%;width:92px;height:20px;transform:translateX(-50%);align-items:center;justify-content:center;cursor:ns-resize;touch-action:none;border:1px solid rgba(234,181,91,.4);border-radius:10px;background:rgba(8,20,13,.88);box-shadow:0 3px 12px rgba(0,0,0,.35)}
@@ -217,13 +217,13 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   .error{max-height:52px;overflow:auto;margin-top:0}
   .mochi{top:58%}
 }
-@media(max-width:1100px){
+@media(max-width:759px){
   .lesson-dock{display:contents}
   .dock-resize{display:none}
   .code-main,.code-side{display:contents}
 }
 
-@media(min-width:1101px){
+@media(min-width:760px){
   :root{--dock-h:300px}
   .world{top:12px;right:12px;bottom:calc(var(--dock-h,300px) + 24px);left:12px;border-radius:18px;overflow:hidden;background:#071009;transition:bottom .2s ease}
   .world:before{content:"";position:absolute;inset:-24px;z-index:0;background:url("art/restoration-shell-1600.webp") center/cover;filter:blur(14px) brightness(.44) saturate(.8);transform:scale(1.04)}
@@ -235,11 +235,14 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 </style>
 <link rel="stylesheet" href="world-map-home.css">
 <style id="lesson-rail-layout">
-@media(min-width:1101px){
-  .world{top:12px;left:12px;right:404px;bottom:12px;border-radius:18px;overflow:hidden}
+@media(min-width:760px){
+  :root{--lesson-rail-width:clamp(250px,29vw,380px)}
+  .phone-hero,.mini-mochi{display:none}
+  body{overflow:hidden}
+  .world{top:12px;left:12px;right:calc(var(--lesson-rail-width) + 24px);bottom:12px;border-radius:18px;overflow:hidden}
   .world>img{object-fit:contain}
   .world:before{filter:blur(12px) brightness(.45)}
-  .lesson-dock{position:fixed;z-index:6;top:12px;right:12px;bottom:12px;left:auto;width:380px;height:auto;display:flex;flex-direction:column;gap:10px}
+  .lesson-dock{position:fixed;z-index:6;top:12px;right:12px;bottom:12px;left:auto;width:var(--lesson-rail-width);height:auto;display:flex;flex-direction:column;gap:10px}
   .dock-resize{display:none}
   .lesson-panel{width:100%;height:auto;flex:0 0 43%;max-height:43%;overflow:auto;padding:13px 14px}
   .code-panel{width:100%;height:auto;flex:1;min-height:0}
@@ -249,11 +252,66 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
   #code{min-height:120px;max-height:180px;flex:1}
   #output{min-height:54px;max-height:82px;flex:1}
   .code-foot,.save-state{display:none}
-  .mochi{left:calc(50% - 190px);top:58%}
-  .focus-float{left:calc(50% - 190px)}
+  .mochi{left:calc((100% - var(--lesson-rail-width) - 12px)/2);top:58%}
+  .focus-float{left:calc((100% - var(--lesson-rail-width) - 12px)/2)}
   .lesson-panel .notes{margin-bottom:8px}
   body.focus-mode .world{right:12px}
   body.focus-mode .mochi{left:50%}
+}
+@media(min-width:760px) and (max-width:1100px){
+  .lesson-panel{padding:10px;flex-basis:38%;max-height:38%}
+  .lesson-panel h1{font-size:22px}
+  .lesson-top{flex-wrap:wrap;gap:6px}
+  .lesson-tools{margin-left:auto;flex-wrap:wrap}
+  .lesson-panel .task p{font-size:12px}
+  .code-body{padding:8px}
+  .mochi{width:clamp(80px,11vw,120px)}
+}
+</style>
+
+<style id="phone-scene-sheet-layout">
+/* Phone reference: persistent scene above an independently scrolling workspace. */
+@media(max-width:759px){
+  :root{--phone-scene-height:46dvh}
+  html,body{height:100%;overflow:hidden}
+  .world{inset:0 0 auto;height:var(--phone-scene-height);opacity:1}
+  .world>img{object-fit:cover;object-position:center}
+  .world:after{background:linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px);background-size:54px 54px}
+  .hud{position:fixed;inset:0;padding:0;min-height:0;pointer-events:none}
+  .phone-hero,.mini-mochi{display:none}
+  .mochi{display:block;position:fixed;left:53%;top:calc(var(--phone-scene-height)*.73);width:56px;z-index:3}
+  .mochi .bubble{max-width:min(280px,75vw);font-size:12px}
+  .lesson-dock{position:fixed;display:block;top:var(--phone-scene-height);bottom:0;left:0;right:0;overflow:auto;overscroll-behavior:contain;background:#102c20;border-radius:18px 18px 0 0;pointer-events:auto;padding:0 6px 14px;scrollbar-width:auto}
+  .lesson-panel,.code-panel{width:100%;max-height:none;margin:0 0 12px;border-radius:0;border:0;background:#102c20;box-shadow:none;backdrop-filter:none}
+  .lesson-panel{padding:14px 12px}
+  .lesson-top{position:fixed;top:16px;left:6px;right:18px;z-index:8;gap:12px;pointer-events:auto}
+  .eyebrow{max-width:49%;min-height:46px;padding:12px 14px;border:1px solid #83986c;border-radius:40px;background:#163425;font-size:11px;letter-spacing:.04em}
+  .lesson-tools{gap:10px}
+  .chapters-link,.lang-btn{display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px 13px;border:1px solid #83986c;border-radius:40px;background:#163425;font-size:13px;letter-spacing:0}
+  .step-line{margin:0 0 12px;justify-content:flex-start;gap:10px}
+  .step-badge{font-size:11px;white-space:nowrap}
+  .dots{gap:7px}
+  .dots button{width:26px;height:26px;background:#9bd0a8;color:#102c20;border:0;font:700 11px var(--font);opacity:1}
+  .dots button.current{outline:2px solid var(--gold);outline-offset:3px}
+  .lesson-panel h1{font-size:25px;margin:0 0 12px}
+  .task{padding:11px 12px;border-radius:12px}
+  .task>span{font-size:10px;margin-bottom:5px}
+  .task p{font-size:14px;line-height:1.6}
+  .notes{margin-bottom:14px}
+  .notes summary,.example summary{font-size:12px}
+  .lesson-actions button{font-size:11px;min-height:34px}
+  .success{padding:14px;border-radius:16px}
+  .success p{font-size:13px;line-height:1.6}
+  .success button{font-size:14px;min-height:42px;border-radius:14px}
+  .code-panel{border-top:1px solid var(--line)}
+  .code-body{padding:14px}
+}
+@media(max-width:380px){
+  .lesson-top{gap:6px;right:8px}
+  .eyebrow{font-size:9px;padding:10px;min-height:44px}
+  .chapters-link,.lang-btn{font-size:13px;padding:10px 12px;min-height:44px}
+  .lesson-tools{gap:6px}
+  .step-line{gap:10px}.dots{gap:7px}.dots button{width:26px;height:26px}
 }
 </style>
 </head>
@@ -819,7 +877,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
 
   function positionTour() {
     if (tourIndex < 0) return;
-    const targetSelector = tourIndex === 0 && innerWidth <= 1100 ? '.phone-hero' : tourSteps[tourIndex].target;
+    const targetSelector = tourSteps[tourIndex].target;
     const target = document.querySelector(targetSelector);
     if (!target) return;
     const r = target.getBoundingClientRect();
@@ -859,7 +917,8 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
     tourIndex = -1;
     tourLayer.hidden = true;
     hud.inert = false;
-    code.focus();
+    code.focus({preventScroll:true});
+    if (innerWidth < 760) document.getElementById("lessonDock").scrollTop = 0;
   }
 
   $('#run').addEventListener('click', run);
@@ -928,7 +987,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
       localStorage.setItem('mochi.lessonDockHeight', String(Math.round(next)));
     };
     dockResize.addEventListener('pointerdown', event => {
-      if (matchMedia('(max-width:1100px)').matches) return;
+      if (matchMedia('(max-width:759px)').matches) return;
       dragging = true; startY = event.clientY; startH = lessonDock.getBoundingClientRect().height;
       document.body.classList.add('dock-resizing'); dockResize.setPointerCapture(event.pointerId);
     });
@@ -943,7 +1002,7 @@ body.dock-resizing{cursor:ns-resize;user-select:none}
     });
     window.addEventListener('resize', () => {
       const h = lessonDock.getBoundingClientRect().height;
-      if (!matchMedia('(max-width:1100px)').matches) apply(h);
+      if (!matchMedia('(max-width:759px)').matches) apply(h);
     });
   }
 

@@ -672,3 +672,31 @@ Owner selected the right-rail option over the bottom dock. Desktop lesson now us
 
 ### Lesson scene asset weight — 2026-10-22
 The approved right-rail lesson was still black on a cold live load because the scene used a 3.2 MB background PNG and a 1.4 MB Mochi PNG. Switched the scene to a 321 KB WebP background and 32 KB Mochi WebP; the layout is unchanged and the live lesson can render promptly.
+
+
+### iPad lesson sidebar ? 2026-10-24
+Owner requested instructions beside the visuals on iPad/big screens. Extended the approved right rail to viewports at least 760 CSS px wide; rail width scales from 300 to 380px. Farm remains fully contained in its own unobstructed area; phones below 760px retain the stacked hero layout. Tour scene targeting follows the same breakpoint. Source and public lesson copies updated. Headless Chrome screenshots reviewed at 768x1024 and 1024x768; 390x844 phone check has no horizontal overflow. Inline scripts parse. Native iPad/keyboard review remains pending. Local update only; not published.
+
+
+### Medium-screen sidebar refinement - 2026-10-24
+Owner reported medium screens still hide too much illustration. Supersedes the 760px/300px-minimum rail: side-by-side starts at 600px, sidebar scales from 250px to 380px at 29vw; medium-width lesson header wraps and instructions use 38% of rail height. Full farm remains contained beside the rail. Tour breakpoint matches. Source/public copies updated. Screenshots reviewed at 820x1180 and 640x900, with no horizontal overflow; inline scripts parse. Exact owner device/page clarification pending. Local only, not published.
+
+
+### Restore phone layout boundary - 2026-10-24
+Owner rejected extending the sidebar into phone widths. Restored stacked phone layout below 760px and matching tour/resizer boundaries; retained slimmer sidebar only at 760px and above. Supersedes the 600px breakpoint in the previous checkpoint. Source/public lesson copies match and inline scripts parse. No publishing. Preserve approved phone layout in future tablet adjustments.
+
+
+### Restore owner phone screenshot layout - 2026-10-24
+Owner supplied sites/mochi-design/dist/phone screen size.png, clarifying that the approved phone view was a fixed illustrated/grid scene with overlaid header controls and an independently scrolling lesson/editor sheet below. Earlier stacked-hero restoration was the wrong layout. Added scoped below-760px scene/sheet CSS, readable task/progress controls, persistent Mochi and overlaid Map/language controls. Tablet sidebar remains separate. Tour now targets visible Mochi; exit preserves the sheet top rather than scrolling to editor. Source/public copies match. Chrome phone 466x790 and tablet 820x1180 checked for overflow; owner comparison pending. No publication.
+
+
+### Compact phone character and controls - 2026-10-24
+Owner requested smaller character and controls below it. Phone-only CSS reduces Mochi from 90px to 64px, progress circles from 34px to 26px, heading from 32px to 25px, task text from 18px to 14px, and button/header sizes and panel spacing. Fixed scene plus scrolling lower sheet retained; tablet/sidebar CSS unchanged. Source/public match; 466x790 Chrome screenshot reviewed without horizontal overflow. Local only, not published.
+
+
+### Phone character final size - 2026-10-24
+Owner approved the compact phone layout and requested Mochi slightly smaller. Changed only phone character width from 64px to 56px in source/public lesson; controls and tablet layout retained. Verified both copies match. Local only.
+
+
+### Layout approved for publication - 2026-10-24
+Owner approved current phone scene/sheet with compact controls and 56px Mochi, plus separate tablet/desktop sidebar, and explicitly requested commit, push and publication. Public-site asset/script/progress checks pass. Commit includes only lesson source/public and planning records; unrelated map experiments, screenshots and TikTok assets excluded. GitHub Pages deployment verification follows push.
