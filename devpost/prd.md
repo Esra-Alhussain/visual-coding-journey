@@ -55,3 +55,6 @@ See [scope](scope.md), [technical plan](spec.md), [checklist](checklist.md) and 
 
 ## Desktop map sharpness — 2026-10-24
 Keep the original island artwork and layout. Animated water must not replace dry land with a lower-resolution full-scene canvas. Preserve source-resolution land detail; retain moving water, pause/reduced-motion behavior, restoration view and island entry restrictions. Phone map and lesson are outside this change. Commit/push only; do not publish.
+
+## Map background sound — 2026-10-24
+The phone map must actually initialize the existing coastal audio, not only show a music icon. Start/resume after the first trusted tap or Sound press when browser policy blocks autoplay. A blocked first play must not be interpreted as mute. Explicit mute persists through later interactions; show the true playing/waiting/error state in accessible sound controls. Keep phone startup lean by fetching recordings after the first interaction. Existing licensed wave, breeze and bird recordings/credits remain unchanged. Commit/push only; do not publish.

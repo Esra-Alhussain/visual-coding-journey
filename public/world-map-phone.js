@@ -100,9 +100,11 @@
     const on = soundEl?.getAttribute('aria-pressed') === 'true';
     const button = document.getElementById('phoneSound');
     if (!button) return;
-    button.setAttribute('aria-pressed', String(on));
-    button.setAttribute('aria-label', on ? 'Sound on. Tap to mute.' : 'Sound off. Tap to enable.');
-    button.textContent = on ? '♪' : '♪';
+    const state = soundEl?.getAttribute('data-audio-state');
+    const playing = state ? state === 'playing' : on;
+    button.setAttribute('aria-pressed', String(playing));
+    button.setAttribute('aria-label', state === 'error' ? 'Retry background sound' : playing ? 'Sound on. Tap to mute.' : 'Tap to start background sound');
+    button.textContent = '♪';
   }
 
   function syncProgress() {
@@ -193,7 +195,7 @@
   pins.forEach(pin => pinObserver.observe(pin, { attributes: true, attributeFilter: ['aria-pressed', 'class'] }));
 
   if (soundEl) {
-    new MutationObserver(syncSound).observe(soundEl, { attributes: true, attributeFilter: ['aria-pressed'] });
+    new MutationObserver(syncSound).observe(soundEl, { attributes: true, attributeFilter: ['aria-pressed','data-audio-state'] });
   }
 
   syncProgress();

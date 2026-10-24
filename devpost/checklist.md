@@ -51,3 +51,12 @@ Last confirmed application deployment in this session: grid release a6fb0e5. Lat
 - [x] Existing water-fallback, map-island and public asset checks pass.
 - [x] Phone map and lesson source remain unchanged.
 - [ ] Publication: not authorized for this update; commit/push only.
+
+## Background sound correction — 2026-10-24
+- [x] Restore missing player on dedicated phone map without preloading the recording bundle.
+- [x] Fix first Sound press enabling blocked audio rather than muting.
+- [x] Real Chromium phone/desktop: actual AudioContext running, existing recordings decoded, two loop sources started, mute/resume without duplicate loops, no JS errors.
+- [x] Phone network check: no recording-bundle request before interaction.
+- [x] Existing audio check includes first-press regression plus mute retention/visibility; public assets pass.
+- [ ] Actual phone speaker/Safari listening remains unverified; browser playback checks do not establish physical device volume.
+- [ ] Publish only when the owner requests it.

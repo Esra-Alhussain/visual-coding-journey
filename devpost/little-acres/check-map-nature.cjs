@@ -12,7 +12,7 @@ const doc={hidden:false,getElementById:id=>id==='soundToggle'?sound:status,addEv
 const env={window:{AudioContext,addEventListener(){}},document:doc,Uint8Array,atob:s=>Buffer.from(s,'base64').toString('binary'),setInterval:()=>1,clearInterval(){},setTimeout:()=>2,clearTimeout(){}};
 vm.createContext(env);vm.runInContext(fs.readFileSync(base+'world-map-nature-audio.js','utf8'),env);vm.runInContext(fs.readFileSync(base+'world-map-nature.js','utf8'),env);
 const settle=()=>new Promise(r=>setImmediate(r));await settle();assert.equal(sound['aria-pressed'],'true');assert.equal(audio.state,'suspended');
-allowed=true;events.pointerdown({isTrusted:true,target:{}});await settle();assert.equal(audio.state,'running');assert.equal(sourceCount,2,'two nature ambience loops');
+allowed=true;events['sound:click']();await settle();assert.equal(sound['aria-pressed'],'true','first press enables blocked audio instead of muting');events.pointerdown({isTrusted:true,target:{}});await settle();assert.equal(audio.state,'running');assert.equal(sourceCount,2,'two nature ambience loops');
 events['sound:click']();await settle();assert.equal(sound['aria-pressed'],'false');assert.equal(audio.state,'suspended');
 events.pointerdown({isTrusted:true,target:{}});await settle();assert.equal(audio.state,'suspended','mute survives later interactions');
 events['sound:click']();await settle();assert.equal(audio.state,'running');assert.equal(sourceCount,2,'resume does not duplicate loops');
