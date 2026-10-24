@@ -41,7 +41,7 @@ This is the consolidated current checklist. Older dated checklists are history a
 - [ ] Confirm submission is complete. Do not infer submission from having a live website.
 
 ## Current release distinction
-Last confirmed application deployment: 2cb486a on 2026-10-24, GitHub Pages run 40091902792 succeeded. Includes the current natural-farm/grid-only lesson, sharper desktop map and immediate audio startup attempts. Manual-only publishing restored for future changes. See resume.md for deployment evidence and limits.
+Last confirmed application deployment: 9d2685e on 2026-10-24, GitHub Pages run 40092748325 succeeded. Includes the natural-farm/grid-only lesson with Mochi grounded outside the entrance gate, sharper desktop map and immediate audio startup attempts. Manual-only publishing restored for future changes. See resume.md for deployment evidence and limits.
 
 ## Desktop sharpness correction — 2026-10-24
 - [x] Original sharp island art stays visible beneath water-only animation.
@@ -74,4 +74,4 @@ Last confirmed application deployment: 2cb486a on 2026-10-24, GitHub Pages run 4
 - [x] Remove floating bob; retain a small ground contact shadow.
 - [x] Browser320×667/390×720/430×844/1440×1000 runs all five lesson activities through completion without JS errors; preview screenshots inspected.
 - [x] Public asset and diff checks pass; scope/PRD/spec updated.
-- [ ] Publish this position change only when explicitly requested.
+- [x] Owner requested publication; Pages run 40092748325 succeeded on 2026-10-24. Manual-only publishing restored for future edits.
