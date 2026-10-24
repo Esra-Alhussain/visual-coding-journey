@@ -41,7 +41,7 @@ This is the consolidated current checklist. Older dated checklists are history a
 - [ ] Confirm submission is complete. Do not infer submission from having a live website.
 
 ## Current release distinction
-Last confirmed application deployment in this session: grid release a6fb0e5. Later design iterations and the current grid-only reset are commit/push-only changes, not a newly verified live release. See resume.md for deployment evidence and limits.
+Last confirmed application deployment: 2cb486a on 2026-10-24, GitHub Pages run 40091902792 succeeded. Includes the current natural-farm/grid-only lesson, sharper desktop map and immediate audio startup attempts. Manual-only publishing restored for future changes. See resume.md for deployment evidence and limits.
 
 ## Desktop sharpness correction — 2026-10-24
 - [x] Original sharp island art stays visible beneath water-only animation.
@@ -50,7 +50,7 @@ Last confirmed application deployment in this session: grid release a6fb0e5. Lat
 - [x] Both renderers: map assets, Island 1 entry/future-island restrictions, restoration view and pause behavior pass without JS errors.
 - [x] Existing water-fallback, map-island and public asset checks pass.
 - [x] Phone map and lesson source remain unchanged.
-- [ ] Publication: not authorized for this update; commit/push only.
+- [x] Published with explicit owner approval on 2026-10-24; Pages run 40091902792 succeeded.
 
 ## Background sound correction — 2026-10-24
 - [x] Restore the missing player on the dedicated phone map.
@@ -59,7 +59,7 @@ Last confirmed application deployment in this session: grid release a6fb0e5. Lat
 - [x] Updated startup behavior: recordings are requested before interaction; Chromium autoplay-allowed mode starts two ambience loops before any tap on phone and desktop.
 - [x] Existing audio check includes first-press regression plus mute retention/visibility; public assets pass.
 - [ ] Actual phone speaker/Safari listening remains unverified; browser playback checks do not establish physical device volume.
-- [ ] Publish only when the owner requests it.
+- [x] Owner requested publication on 2026-10-24; verified the successful Pages workflow. Future publishing still requires a new explicit request.
 
 ## Immediate map audio — 2026-10-24
 - [x] Both screen sizes attempt background audio at startup, with asynchronous phone recording load.

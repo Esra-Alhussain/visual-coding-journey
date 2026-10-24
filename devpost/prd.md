@@ -49,7 +49,7 @@ Guest progress remains browser-local. The existing Supabase integration supports
 - No deployment occurs during commit/push-only editing.
 
 ## 8. Review and delivery state
-The owner has paused lesson/grid redesign; on 2026-10-24 they authorized a focused desktop map sharpness fix. Latest implementation is committed/pushed; the latest grid-only editing state is not newly published. Manual deployment is permitted only after an explicit owner request. Continue Phase 5 build/review, then Phase 6 demo/repository/submission work. Planning reconciliation does not imply all requirements or submission tasks are complete.
+The owner has paused lesson/grid redesign; on 2026-10-24 they authorized a focused desktop map sharpness fix. The current map, grid-only lesson and background-audio changes were published at the owner’s explicit request on 2026-10-24. Further edits remain commit/push-only until another explicit publication request. Manual deployment is permitted only after an explicit owner request. Continue Phase 5 build/review, then Phase 6 demo/repository/submission work. Planning reconciliation does not imply all requirements or submission tasks are complete.
 
 See [scope](scope.md), [technical plan](spec.md), [checklist](checklist.md) and [historical PRD](archive/planning-before-sync-2026-10-23/prd.md).
 
